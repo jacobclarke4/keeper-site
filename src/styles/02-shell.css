@@ -1,0 +1,86 @@
+/* =========================================================
+   SHELL — masthead (running head + progress rule) + colophon
+   ========================================================= */
+.mast { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(251,248,243,0); transition: background .3s, backdrop-filter .3s; }
+.mast.is-condensed { background: rgba(251,248,243,.86); backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px); }
+.mast__bar { max-width: var(--maxw); margin: 0 auto; height: 74px; padding: 0 var(--gutter); display: flex; align-items: center; gap: 28px; }
+.mast__brand { display: flex; align-items: center; gap: 14px; flex: none; }
+.mast__wordmark { height: 34px; width: auto; transition: opacity .3s; }
+.mast__monogram { height: 30px; width: 30px; display: none; }
+.mast.is-condensed .mast__wordmark { display: none; }
+.mast.is-condensed .mast__monogram { display: block; }
+.mast__running { display: none; font-size: 10.5px; letter-spacing: .14em; color: var(--ink-fine); }
+.mast.is-condensed .mast__running { display: inline; }
+
+.mast__links { display: flex; gap: 30px; margin-left: 18px; flex: 1; }
+.mast__link { font-size: 14px; color: var(--ink-mute); position: relative; padding: 6px 0; display: inline-flex; align-items: baseline; gap: 7px; transition: color .2s; }
+.mast__tick { font-size: 9.5px; color: var(--ink-fine); letter-spacing: .1em; }
+.mast__link:hover { color: var(--ink); }
+.mast__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--current); border-radius: 2px; transform: scaleX(0); transform-origin: left; transition: transform .3s var(--paper-ease); }
+.mast__link:hover::after, .mast__link.is-active::after { transform: scaleX(1); }
+.mast__link.is-active { color: var(--ink); }
+.mast__cta { flex: none; }
+/* ≥44px hit target (WCAG 2.5.5) without growing the visual bars — negative
+   margin keeps the glyph optically aligned. */
+.mast__burger { display: none; flex-direction: column; align-items: flex-end; justify-content: center; gap: 5px; margin-left: auto; margin-right: -10px; padding: 11px 10px; min-width: 44px; min-height: 44px; }
+.mast__burger span { width: 24px; height: 2px; background: var(--ink); display: block; transition: transform .26s var(--paper-ease), opacity .26s; }
+.mast__burger span.is-open:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mast__burger span.is-open:nth-child(2) { opacity: 0; }
+.mast__burger span.is-open:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mast__rule { max-width: var(--maxw); margin: 0 auto; height: 1px; background: var(--hair); position: relative; opacity: 0; transition: opacity .3s; }
+.mast.is-condensed .mast__rule { opacity: 1; }
+.mast__progress { position: absolute; inset: 0; background: var(--current); transform-origin: left; }
+
+/* mobile CONTENTS index */
+.contents { position: fixed; inset: 0; background: var(--paper); z-index: 99; padding: 92px var(--gutter) 32px; display: none; flex-direction: column; overflow-y: auto; }
+.contents__head { font-size: 11px; letter-spacing: .2em; color: var(--ink-fine); padding-bottom: 18px; border-bottom: 1px solid var(--hair); }
+.contents__list { display: flex; flex-direction: column; }
+.contents__entry { display: flex; align-items: baseline; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--hair); }
+.contents__entry.is-active .contents__title { color: var(--ocean); }
+.contents__body { display: flex; flex-direction: column; gap: 3px; flex: none; }
+.contents__title { font-family: var(--f-display); font-size: 25px; color: var(--ink); line-height: 1; }
+.contents__sub { font-family: var(--f-garamond); font-style: italic; font-size: 14px; color: var(--ink-fine); }
+.contents__dots { flex: 1; border-bottom: 1.5px dotted var(--hair-strong); transform: translateY(-8px); }
+.contents__folio { font-size: 12px; color: var(--ink-fine); flex: none; }
+.contents__cta { margin-top: auto; padding-top: 28px; }
+.contents__imprint { text-align: center; font-size: 10px; letter-spacing: .14em; color: var(--ink-fine); margin-top: 18px; }
+.mast.is-open .contents { display: flex; }
+.mast.is-open { background: var(--paper); }
+
+/* colophon */
+.colophon { background: var(--navy); color: var(--on-dark); padding: 0 var(--gutter) 40px; }
+.ribbon { margin: 0 calc(var(--gutter) * -1) 48px; padding: 18px 0; border-bottom: 1px solid rgba(237,231,218,.1); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 90px, #000 calc(100% - 90px), transparent); mask-image: linear-gradient(90deg, transparent, #000 90px, #000 calc(100% - 90px), transparent); }
+.ribbon__track { display: inline-flex; gap: 44px; white-space: nowrap; animation: marquee 64s linear infinite; }
+.ribbon:hover .ribbon__track { animation-play-state: paused; }
+/* Garamond (the brand's true italic face) — Fraunces Variable ships normal-only,
+   so font-style:italic on it would be a faux/synthesized slant. */
+.ribbon__item { display: inline-flex; align-items: center; gap: 18px; font-family: var(--f-garamond); font-style: italic; font-size: 22px; color: var(--on-dark); }
+.ribbon__star { color: var(--current); font-style: normal; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ribbon__track { animation: none; } }
+
+.colophon__top { display: grid; grid-template-columns: 1.1fr 3fr; gap: 64px; padding-top: 8px; }
+.colophon__brand-home { display: inline-block; margin-bottom: 18px; }
+.colophon__brand-home img { height: 46px; width: auto; }
+.colophon__brand p { font-size: 14px; line-height: 1.7; color: var(--on-dark-mute); max-width: 280px; }
+.colophon__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.colophon__col h5 { font-size: 10px; font-weight: 500; color: var(--on-dark-fine); text-transform: uppercase; letter-spacing: .16em; margin-bottom: 16px; }
+.colophon__col ul { list-style: none; }
+.colophon__col li { font-size: 13.5px; line-height: 2.05; }
+.colophon__col button { color: var(--on-dark-mute); transition: color .2s; text-align: left; }
+.colophon__col button:hover { color: var(--seafoam); }
+.colophon__rule { height: 1px; background: rgba(237,231,218,.12); margin: 44px auto 24px; }
+.colophon__credo { display: flex; align-items: center; gap: 20px; }
+.colophon__seal { flex: none; }
+.colophon__credo p { font-size: 13px; color: var(--on-dark-fine); max-width: 760px; line-height: 1.7; }
+.colophon__inline-link { color: var(--seafoam); text-decoration: underline; text-underline-offset: 2px; }
+.colophon__imprint { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; font-size: 10.5px; letter-spacing: .14em; color: var(--on-dark-fine); }
+.colophon__fin { font-family: var(--f-garamond); font-style: italic; font-size: 18px; color: var(--seafoam); letter-spacing: 0; }
+
+/* edition section front (inner pages) */
+.edition-front { padding: 132px var(--gutter) 64px; }
+.edition-front__h1 { font-size: clamp(40px, 6vw, 80px); line-height: 1; letter-spacing: -0.032em; color: var(--ink); margin: 20px 0 24px; text-wrap: balance; font-variation-settings: "opsz" 144, "SOFT" 18; max-width: 16ch; }
+.edition-front__lede { max-width: 62ch; margin-bottom: 32px; }
+.edition-front__ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.edition-front--split .edition-front__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }

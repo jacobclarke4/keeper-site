@@ -1,0 +1,57 @@
+/* =========================================================
+   CHARTER — the engrossed signature page, the site's peak
+   ========================================================= */
+.charter { padding: 128px var(--gutter) 0; }
+.charter__frame {
+  max-width: 880px; margin: 0 auto; text-align: center;
+  border: 1px solid var(--hair-strong); padding: clamp(36px, 6vw, 76px) clamp(28px, 6vw, 84px);
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    repeating-linear-gradient(90deg, var(--hair-strong) 0 1px, transparent 1px 4px) border-box;
+  position: relative;
+  box-shadow: var(--sh-rest);
+}
+/* inner double rule */
+.charter__frame::before { content: ""; position: absolute; inset: 12px; border: 1px solid var(--hair); pointer-events: none; }
+/* gentle one-time fade on load — NOT a transform/clip (would break the sticky
+   oath inside); opacity-only keeps the ancestor chain clean. */
+.charter__frame { animation: charter-fade .8s var(--paper-ease) both; }
+@keyframes charter-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .charter__frame { animation: none; } }
+.charter__head { font-size: 11px; letter-spacing: .22em; color: var(--ink-fine); margin-bottom: 38px; }
+.charter__preamble { font-family: var(--f-display); font-size: clamp(19px, 2.1vw, 26px); line-height: 1.4; color: var(--ink-mute); max-width: 32ch; margin: 0 auto; text-wrap: balance; font-variation-settings: "opsz" 80, "SOFT" 30; }
+.charter__preamble em { font-size: 1.05em; }
+
+/* the oath — pinned, reader-paced */
+.oath { height: 180vh; margin: 30px 0; position: relative; }
+.oath.is-static { height: auto; }
+.oath__pin { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.oath.is-static .oath__pin { position: static; height: auto; padding: 30px 0; }
+.oath__vow { font-size: clamp(38px, 6.4vw, 88px); line-height: 1; letter-spacing: -0.03em; color: var(--ink); max-width: 14ch; font-variation-settings: "opsz" 144, "SOFT" 12; }
+.oath__evers { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: .1em .4em; margin-top: 18px; min-height: 1.4em; }
+.oath__ever { font-family: var(--f-garamond); font-style: italic; color: var(--current); line-height: 1; opacity: 0; transform: translateY(10px); transition: opacity .5s var(--paper-ease), transform .5s var(--paper-ease), text-shadow .5s var(--paper-ease); }
+.oath__ever.is-pressed { opacity: 1; transform: translateY(0); text-shadow: 0 1px 0 rgba(13,27,42,.18), 0 2px 1px rgba(13,27,42,.10); }
+.oath__ever:nth-child(2).is-pressed { text-shadow: 0 1px 0 rgba(13,27,42,.24), 0 3px 2px rgba(13,27,42,.14); }
+.oath__ever:nth-child(3).is-pressed { text-shadow: 0 2px 0 rgba(13,27,42,.30), 0 4px 3px rgba(13,27,42,.18); }
+.oath__ever:nth-child(4).is-pressed { text-shadow: 0 2px 0 rgba(13,27,42,.36), 0 5px 4px rgba(13,27,42,.22); }
+.oath__hint { margin-top: 26px; font-size: 10.5px; letter-spacing: .18em; color: var(--ink-fine); transition: opacity .4s; }
+.oath__hint.is-done { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .oath { height: auto; }
+  .oath__pin { position: static; height: auto; padding: 24px 0; }
+  .oath__ever { opacity: 1; transform: none; }
+}
+
+.charter__seal-row { display: flex; justify-content: center; margin: 8px 0 0; }
+.charter__rule { width: 80px; margin: 44px auto; height: 2px; background: var(--seafoam); }
+.charter__reinvest { font-size: clamp(25px, 3.4vw, 44px); line-height: 1.2; color: var(--ink); max-width: 24ch; margin: 0 auto; letter-spacing: -0.02em; text-wrap: balance; font-variation-settings: "opsz" 110, "SOFT" 18; }
+.charter__cents { font-size: 1.15em; }
+
+.charter__signing { margin: 52px auto 0; max-width: 360px; display: flex; flex-direction: column; align-items: center; }
+.charter__signature { color: var(--ocean); margin-bottom: 6px; }
+.charter__sign-rule { width: 100%; height: 1px; background: var(--ink); }
+.charter__record { margin-top: 12px; font-size: 10px; letter-spacing: .14em; color: var(--ink-fine); }
+.charter__coda { margin-top: 40px; font-size: 11px; letter-spacing: .2em; color: var(--ink-fine); }
+.charter .footnotes { margin: 44px auto 0; text-align: left; }
+
+.charter__publisher { display: flex; gap: 16px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }

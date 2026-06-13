@@ -1,0 +1,11 @@
+/* =========================================================
+   THE OUTCOME COMPANY — "OF RECORD" broadsheet redesign.
+   Partials are bundled in order by Vite/PostCSS at build.
+   ========================================================= */
+@import "./styles/01-base.css";
+@import "./styles/02-shell.css";
+@import "./styles/03-home.css";
+@import "./styles/04-pages.css";
+@import "./styles/05-charter.css";
+@import "./styles/06-forms.css";
+@import "./styles/07-responsive.css";
