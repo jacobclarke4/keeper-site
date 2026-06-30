@@ -10,6 +10,9 @@ export const LINKS = {
   // the Commonwealth welcome flow (built separately). PLACEHOLDER — swap in
   // the real flow URL in this one place.
   getStarted: "https://app.theoutcome.ai/get-started", // TBD
+  // The "Log in" button → the app's login slug. Not wired to a live app yet —
+  // swap the host when the app exists.
+  login: "https://app.theoutcome.ai/login", // TBD
 } as const;
 
 /** Navigate the whole window to another Commonwealth site. */

@@ -89,6 +89,7 @@ export function Masthead() {
         </nav>
 
         <div className="mast__cta">
+          <a className="mast__login" href={LINKS.login}>Log in</a>
           <a className="btn btn--accent btn--sm" href={LINKS.getStarted}>
             <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
           </a>
@@ -133,6 +134,9 @@ export function Masthead() {
           <div className="contents__cta">
             <a className="btn btn--accent btn--lg btn--block" href={LINKS.getStarted}>
               <span className="btn__label">Get started — $14/mo <span className="arrow" aria-hidden="true">→</span></span>
+            </a>
+            <a className="btn btn--ghost btn--lg btn--block contents__login" href={LINKS.login}>
+              <span className="btn__label">Log in</span>
             </a>
             <p className="contents__imprint mono">THE OUTCOME COMPANY · A COMMONWEALTH COMPANY</p>
           </div>
