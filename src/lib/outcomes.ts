@@ -9,16 +9,16 @@ import type { ReactNode } from "react";
 /** The live "delivered" wire — short, plain, finished things. Also feeds the
  *  colophon ribbon, so keep the voice everyday and warm. */
 export const OUTCOMES_TICKER = [
-  "A weekend trip — planned to the dollar.",
-  "That confusing bill — explained in plain words.",
-  "The form you've been dreading — filled out and filed.",
-  "A month of dinners — planned and shopped for.",
-  "A warranty claim — sorted and sent.",
-  "The best phone plan — found, and switched to.",
-  "A birthday party — handled start to finish.",
-  "Your subscriptions — trimmed and tidied.",
-  "A heartfelt letter — written, the way you meant it.",
-  "A pile of paperwork — sorted and organized.",
+  "A weekend trip, planned to the dollar.",
+  "That confusing bill, explained in plain words.",
+  "The form you've been dreading: filled out and filed.",
+  "A month of dinners, planned and shopped for.",
+  "A warranty claim, sorted and sent.",
+  "The best phone plan: found, and switched to.",
+  "A birthday party, handled start to finish.",
+  "Your subscriptions, trimmed and tidied.",
+  "A heartfelt letter: written, the way you meant it.",
+  "A pile of paperwork, sorted and organized.",
 ];
 
 /* ── the catalog ─────────────────────────────────────────── */
@@ -43,13 +43,13 @@ export const CATALOG: Outcome[] = [
     group: "Trips & plans",
     title: "Plan a weekend trip on a budget",
     ask: "Tell us where you'd like to go and what you can spend.",
-    deliver: "A day-by-day plan, places to stay, and what it'll cost — ready to go.",
+    deliver: "A day-by-day plan, places to stay, and what it'll cost. Ready to go.",
   },
   {
     group: "Money & bills",
     title: "Make sense of a confusing bill",
     ask: "Send us the bill that doesn't add up.",
-    deliver: "A plain-words breakdown of every line — and what, if anything, to do next.",
+    deliver: "A plain-words breakdown of every line, and what, if anything, to do next.",
   },
   {
     group: "Money & bills",
@@ -66,7 +66,7 @@ export const CATALOG: Outcome[] = [
   {
     group: "Paperwork",
     title: "Sort and organize your important documents",
-    ask: "Hand us the pile — digital or photos of paper.",
+    ask: "Hand us the pile: digital or photos of paper.",
     deliver: "Everything named, sorted, and easy to find when you need it.",
   },
   {
@@ -91,19 +91,19 @@ export const CATALOG: Outcome[] = [
     group: "Writing",
     title: "Write a heartfelt letter or speech",
     ask: "Tell us the occasion and what's in your heart.",
-    deliver: "Words that sound like you — ready to read or send.",
+    deliver: "Words that sound like you, ready to read or send.",
   },
   {
     group: "Decisions",
     title: "Compare two big choices",
     ask: "Tell us the two options you're weighing.",
-    deliver: "A clear, honest side-by-side — and a straight recommendation.",
+    deliver: "A clear, honest side-by-side. And a straight recommendation.",
   },
   {
     group: "Tech, handled",
     title: "Find the right phone or internet plan",
     ask: "Tell us what you use and what you pay now.",
-    deliver: "The best plan for you — and the switch done for you.",
+    deliver: "The best plan for you, and the switch done for you.",
   },
   {
     group: "Tech, handled",
@@ -128,14 +128,14 @@ export const TIERS: Tier[] = [
     name: "Base",
     price: "$14",
     per: "/mo",
-    blurb: "Everyday outcomes, as many as you need — plus your Wallet.",
+    blurb: "Everyday outcomes, as many as you need. Plus your Wallet.",
   },
   {
     name: "Premium",
     price: "$39",
     per: "/mo",
     blurb:
-      "Everything in Base, plus a generous personal concierge — and a real person on call for the moments that need one.",
+      "Everything in Base, plus a generous personal concierge, and a real person on call for the moments that need one.",
   },
   {
     name: "Apps",
@@ -165,7 +165,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Will I get charged extra without knowing?",
-    a: "Never. A few heavy requests may cost more to run — but we'll always show you the price and wait for your yes before we begin. If you don't accept, you don't pay.",
+    a: "Never. A few heavy requests may cost more to run, but we'll always show you the price and wait for your yes before we begin. If you don't accept, you don't pay.",
   },
   {
     q: "Can I cancel?",

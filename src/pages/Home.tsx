@@ -32,7 +32,7 @@ function DispatchPanel() {
     <Ink as="aside" fx="wash" delay={420} className="dispatchcard">
       <div className="dispatchcard__head mono">
         <span className="dispatchcard__fleuron" aria-hidden="true">✦</span>
-        TODAY&apos;S WIRE — DELIVERED
+        TODAY&apos;S WIRE · DELIVERED
       </div>
       <div className="dispatchcard__wire">
         {/* skip the first 3 — they're the pinned DONE rows below, so the wire never repeats them */}
@@ -64,7 +64,7 @@ function CapMeter() {
     <div ref={ref} className={`capmeter${inView ? " is-filled" : ""}`}>
       <div className="capmeter__labels mono">
         <span>THIS MONTH&apos;S SPEND</span>
-        <span className="capmeter__cap-label">YOUR BALANCE — THE ONLY LIMIT</span>
+        <span className="capmeter__cap-label">YOUR BALANCE · THE ONLY LIMIT</span>
       </div>
       <div className="capmeter__track">
         <span className="capmeter__fill" />
@@ -105,7 +105,7 @@ export function HomePage() {
             </Ink>
 
             <Ink as="p" fx="rise" delay={320} className="hero__say">
-              You ask — we do it, and hand you the finished thing. <strong>No apps to learn. No
+              You ask, we do it, and hand you the finished thing. <strong>No apps to learn. No
               tech to figure out.</strong>
             </Ink>
 
@@ -135,11 +135,11 @@ export function HomePage() {
           <SectionHead
             folio="01"
             kicker="Who this is for"
-            title={<>Finally, technology built for you — <em>not against you.</em></>}
+            title={<>Finally, technology built for you, <em>not against you.</em></>}
           />
           <div className="bridge">
             <Ink as="p" fx="rise" className="bridge__lede lede-cap">
-              For a long time, the best new tools were never made with you in mind. Or worse — they
+              For a long time, the best new tools were never made with you in mind. Or worse, they
               were made to take advantage of you.
             </Ink>
             <Ink as="p" fx="rise" delay={80} className="bridge__turn display">
@@ -152,7 +152,7 @@ export function HomePage() {
             </Ink>
             <Ink as="p" fx="rise" delay={200} className="bridge__p">
               That&apos;s the whole idea. We meet you exactly where you are, and we bring the good
-              parts of this new technology to you — without the noise, the confusion, or the catch.
+              parts of this new technology to you, without the noise, the confusion, or the catch.
             </Ink>
           </div>
         </div>
@@ -177,7 +177,7 @@ export function HomePage() {
             ))}
           </div>
           <Ink as="p" fx="rise" delay={120} className="how__support">
-            And if you ever get stuck, our support line is open whenever you need it — <em>with help
+            And if you ever get stuck, our support line is open whenever you need it, <em>with help
             in your language.</em>
           </Ink>
           <Ink as="div" fx="rise" delay={180} className="section__cta-row">
@@ -195,7 +195,7 @@ export function HomePage() {
             folio="03"
             kicker="What we can do"
             title={<>Real things, <em>done for you.</em></>}
-            sub="An outcome is just that — a real, finished result. Not a tool you have to learn. Not a tab you have to keep open. The actual thing you wanted, done. Here are some of the things people ask us for — open any one to see exactly how it works."
+            sub="An outcome is just that: a real, finished result. Not a tool you have to learn. Not a tab you have to keep open. The actual thing you wanted, done. Here are some of the things people ask us for. Open any one to see exactly how it works."
           />
           <div className="catalog">
             {CATALOG.map((o, i) => (
@@ -219,7 +219,7 @@ export function HomePage() {
           </div>
           <Ink as="div" fx="rise" className="catalog__foot">
             <p className="catalog__count display">
-              Over <em>100 things</em> we can do for you today — and more every week.
+              Over <em>100 things</em> we can do for you today, and more every week.
             </p>
             <Btn variant="ghost" href={LINKS.getStarted}>
               Browse what we can do <Arrow />
@@ -234,7 +234,7 @@ export function HomePage() {
           <SectionHead folio="04" kicker="Pricing" title={<>Simple pricing. <em>No surprises.</em></>} />
 
           <EditorNote
-            lead={<>We&apos;re just getting started — and so are <em>you.</em></>}
+            lead={<>We&apos;re just getting started, and so are <em>you.</em></>}
             foot="A BETA PROMISE · WE TELL YOU BEFORE ANYTHING CHANGES"
           >
             <p className="editor-note__body">
@@ -264,11 +264,11 @@ export function HomePage() {
 
           <Ink as="aside" fx="rise" className="heavy">
             <h3 className="heavy__h display">
-              Heavy jobs — only if you choose them, <em>only at cost.</em>
+              Heavy jobs: only if you choose them, <em>only at cost.</em>
             </h3>
             <p className="heavy__p">
               Once in a while, a request takes a lot of computing power to finish. When that happens,
-              we&apos;ll show you exactly what it costs <em>before</em> we start — and we&apos;ll
+              we&apos;ll show you exactly what it costs <em>before</em> we start, and we&apos;ll
               never charge you more than 14% on top, just enough to keep the lights on. Nothing gets
               built and billed behind your back. You always say yes first.
             </p>
@@ -279,12 +279,12 @@ export function HomePage() {
 
           <Ink as="div" fx="rise" delay={120} className="section__cta-row">
             <Btn variant="solid" href={LINKS.getStarted}>
-              Get started — $14/mo<Sup>¹</Sup> <Arrow />
+              Get started: $14/mo<Sup>¹</Sup> <Arrow />
             </Btn>
           </Ink>
 
           <FootNotes
-            notes={[["¹", <>One membership, $14/month. A few heavy requests may cost more to run — always shown and agreed before we begin. Cancel anytime — one button, no retention loops.</>]]}
+            notes={[["¹", <>One membership, $14/month. A few heavy requests may cost more to run, always shown and agreed before we begin. Cancel anytime. One button, no retention loops.</>]]}
           />
         </div>
       </section>
@@ -295,7 +295,7 @@ export function HomePage() {
           <SectionHead folio="05" kicker="The human side" title="Help whenever you need it." />
           <div className="support">
             <Ink as="p" fx="rise" className="support__p">
-              Not everyone wants to hand everything to a machine — and you shouldn&apos;t have to.
+              Not everyone wants to hand everything to a machine, and you shouldn&apos;t have to.
             </Ink>
             <Ink as="p" fx="rise" delay={80} className="support__p">
               That&apos;s why there&apos;s always a way to reach someone. Our support line is open
@@ -317,7 +317,7 @@ export function HomePage() {
             folio="06"
             kicker="The Wallet"
             title={<>Your money <em>stays yours.</em></>}
-            sub="Everything you spend comes from your own balance — money you've put in, nothing more. There's no credit, no hidden fees, and no way for a bill to quietly grow while you're not looking. You'll always know what something costs before it happens. Always."
+            sub="Everything you spend comes from your own balance: money you've put in, nothing more. There's no credit, no hidden fees, and no way for a bill to quietly grow while you're not looking. You'll always know what something costs before it happens. Always."
           />
           <CapMeter />
         </div>
@@ -332,7 +332,7 @@ export function HomePage() {
               One part of <em>Commonwealth.</em>
             </Ink>
             <Ink as="p" fx="rise" delay={140} className="commonwealth__p">
-              The Outcome Company is one part of Commonwealth — a community built on a simple
+              The Outcome Company is one part of Commonwealth, a community built on a simple
               promise: bring everyone into this new world together, and leave no one behind.
             </Ink>
             <Ink as="p" fx="rise" delay={200} className="commonwealth__p">

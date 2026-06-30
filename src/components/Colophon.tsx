@@ -73,7 +73,7 @@ export function Colophon() {
         <Seal size={72} animate={false} className="colophon__seal" />
         <p>
           Half of every dollar of profit goes back to the community. That promise can never be
-          sold or taken away — it's written down, and it's binding.{" "}
+          sold or taken away. It's written down, and it's binding.{" "}
           <button type="button" className="colophon__inline-link" onClick={goExternal(`${LINKS.commonwealth}charter`)}>Read the Charter →</button>
         </p>
       </div>
