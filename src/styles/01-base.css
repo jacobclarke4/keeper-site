@@ -4,11 +4,9 @@
    Brand tokens unchanged; everything else is new.
    ========================================================= */
 
-/* Switzer self-hosted from public/fonts — body + UI text. */
-@font-face { font-family: "Switzer"; src: url("/fonts/switzer-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Switzer"; src: url("/fonts/switzer-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: "Switzer"; src: url("/fonts/switzer-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Switzer"; src: url("/fonts/switzer-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+/* Type is normalized to ONE family — EB Garamond — for display, body, UI, and
+   the italic accent (loaded via @fontsource in main.tsx). The mono labels are
+   the only other face. */
 
 :root {
   /* brand — unchanged */
@@ -29,10 +27,11 @@
   --on-dark-mute: #a9b7c4;
   --on-dark-fine: #7a8996;
 
-  --f-serif: "Fraunces Variable", "Fraunces", "Iowan Old Style", Georgia, serif;
-  --f-sans: "Switzer", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  /* one family, everywhere — EB Garamond. (was Fraunces display + Switzer body) */
+  --f-serif: "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --f-sans: "EB Garamond", "Iowan Old Style", Georgia, serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --f-garamond: "Garamond Premier Pro", "EB Garamond", "Adobe Garamond Pro", Garamond, serif;
+  --f-garamond: "EB Garamond", "Adobe Garamond Pro", Garamond, serif;
   --f-display: var(--f-serif);
 
   --r-sm: 6px;

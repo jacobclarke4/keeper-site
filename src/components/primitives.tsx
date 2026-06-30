@@ -61,6 +61,7 @@ export function Btn({
   onClick,
   className = "",
   href,
+  newTab = false,
   type,
   disabled,
 }: {
@@ -70,13 +71,16 @@ export function Btn({
   onClick?: () => void;
   className?: string;
   href?: string;
+  /** Open the link in a new tab. Default is same-tab (right for the sign-up flow). */
+  newTab?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
 }) {
   const cls = `btn btn--${variant} btn--${size} ${className}`.trim();
   if (href) {
+    const ext = newTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
     return (
-      <a className={cls} href={href} target="_blank" rel="noopener noreferrer">
+      <a className={cls} href={href} {...ext}>
         <span className="btn__label">{children}</span>
       </a>
     );
@@ -246,25 +250,6 @@ function RuleSpan() {
 
 export function Sup({ children }: { children: ReactNode }) {
   return <sup className="fn-ref mono">{children}</sup>;
-}
-
-/** Form field caption with a positive required marker (or optional tag). */
-export function Cap({
-  children,
-  required = false,
-  optional = false,
-}: {
-  children: ReactNode;
-  required?: boolean;
-  optional?: boolean;
-}) {
-  return (
-    <span className="sheet-form__cap mono">
-      {children}
-      {required && <span className="sheet-form__req" aria-hidden="true"> *</span>}
-      {optional && <em className="sheet-form__opt"> (optional)</em>}
-    </span>
-  );
 }
 
 /** A bordered figure plate with an engraver's cutline. */

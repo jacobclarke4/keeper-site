@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, EDITIONS, PAGES, type NavFn, type PageId } from "../lib/nav";
+import { BASE_URL, NAV_SECTIONS, scrollToId, scrollTop } from "../lib/nav";
+import { LINKS } from "../lib/links";
+import { Wordmark, WORDMARK } from "./Wordmark";
 
-const LOGO_LIGHT = `${BASE_URL}TOC%203.svg`;
 const MONOGRAM = `${BASE_URL}toc-icon.svg`;
 
-// Every edition listed in the mobile CONTENTS index.
-const CONTENTS: PageId[] = ["home", "users", "concierges"];
-const CONTENTS_TITLES: Record<string, string> = {
-  home: "Home",
-  users: "Membership",
-  concierges: "For Concierges",
-};
-
-export function Masthead({ page, nav }: { page: PageId; nav: NavFn }) {
+export function Masthead() {
   const [condensed, setCondensed] = useState(false);
   const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
@@ -60,49 +53,51 @@ export function Masthead({ page, nav }: { page: PageId; nav: NavFn }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const go = (p: Parameters<NavFn>[0]) => {
+  const goSection = (id: string) => {
     setOpen(false);
-    nav(p);
+    scrollToId(id);
   };
 
-  const ed = EDITIONS[page];
+  const goHome = () => {
+    setOpen(false);
+    scrollTop();
+  };
 
   return (
     <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
       <div className="mast__bar">
-        <button type="button" className="mast__brand" onClick={() => go("home")} aria-label="The Outcome Company — home">
-          <img className="mast__wordmark" src={LOGO_LIGHT} alt="" />
+        <button type="button" className="mast__brand" onClick={goHome} aria-label="The Outcome Company — home">
+          <Wordmark {...WORDMARK} className="mast__wordmark" />
           <img className="mast__monogram" src={MONOGRAM} alt="" />
           <span className="mast__running mono" aria-hidden="true">
-            — {ed.head} · FOLIO {ed.folio}
+            — THE OUTCOME COMPANY
           </span>
         </button>
 
         <nav className="mast__links" aria-label="Primary">
-          {PAGES.map((p, i) => (
+          {NAV_SECTIONS.map((item, i) => (
             <button
               type="button"
-              key={p.id}
-              onClick={() => go(p.id)}
-              className={`mast__link${page === p.id ? " is-active" : ""}`}
-              aria-current={page === p.id ? "page" : undefined}
+              key={item.id}
+              onClick={() => goSection(item.id)}
+              className="mast__link"
             >
               <span className="mast__tick mono">{String(i + 1).padStart(2, "0")}</span>
-              {p.label}
+              {item.label}
             </button>
           ))}
         </nav>
 
         <div className="mast__cta">
-          <button className="btn btn--accent btn--sm" onClick={() => go("waitlist")}>
-            <span className="btn__label">Join Waitlist <span className="arrow" aria-hidden="true">→</span></span>
-          </button>
+          <a className="btn btn--accent btn--sm" href={LINKS.getStarted}>
+            <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
+          </a>
         </div>
 
         <button
           className="mast__burger"
           onClick={() => setOpen(!open)}
-          aria-label={open ? "Close contents" : "Open contents"}
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
           <span className={open ? "is-open" : ""} />
@@ -117,30 +112,28 @@ export function Masthead({ page, nav }: { page: PageId; nav: NavFn }) {
       </div>
 
       {open && (
-        <div className="contents" role="dialog" aria-label="Contents">
-          <div className="contents__head mono">CONTENTS — INDEX OF EDITIONS</div>
-          <nav className="contents__list" aria-label="All pages">
-            {CONTENTS.map((id) => (
+        <div className="contents" role="dialog" aria-label="Menu">
+          <div className="contents__head mono">CONTENTS — THE OUTCOME COMPANY</div>
+          <nav className="contents__list" aria-label="Sections">
+            {NAV_SECTIONS.map((item, i) => (
               <button
                 type="button"
-                key={id}
-                className={`contents__entry${page === id ? " is-active" : ""}`}
-                onClick={() => go(id)}
-                aria-current={page === id ? "page" : undefined}
+                key={item.id}
+                className="contents__entry"
+                onClick={() => goSection(item.id)}
               >
                 <span className="contents__body">
-                  <span className="contents__title display">{CONTENTS_TITLES[id]}</span>
-                  <span className="contents__sub">— {EDITIONS[id].subtitle}</span>
+                  <span className="contents__title display">{item.label}</span>
                 </span>
                 <span className="contents__dots" aria-hidden="true" />
-                <span className="contents__folio mono">{EDITIONS[id].folio}</span>
+                <span className="contents__folio mono">{String(i + 1).padStart(2, "0")}</span>
               </button>
             ))}
           </nav>
           <div className="contents__cta">
-            <button className="btn btn--accent btn--lg btn--block" onClick={() => go("waitlist")}>
-              <span className="btn__label">Join the Waitlist <span className="arrow" aria-hidden="true">→</span></span>
-            </button>
+            <a className="btn btn--accent btn--lg btn--block" href={LINKS.getStarted}>
+              <span className="btn__label">Get started — $14/mo <span className="arrow" aria-hidden="true">→</span></span>
+            </a>
             <p className="contents__imprint mono">THE OUTCOME COMPANY · A COMMONWEALTH COMPANY</p>
           </div>
         </div>

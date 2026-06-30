@@ -5,7 +5,7 @@
 .mast.is-condensed { background: rgba(251,248,243,.86); backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px); }
 .mast__bar { max-width: var(--maxw); margin: 0 auto; height: 74px; padding: 0 var(--gutter); display: flex; align-items: center; gap: 28px; }
 .mast__brand { display: flex; align-items: center; gap: 14px; flex: none; }
-.mast__wordmark { height: 34px; width: auto; transition: opacity .3s; }
+.mast__brand .mast__wordmark { font-size: 23px; transition: opacity .3s; }
 .mast__monogram { height: 30px; width: 30px; display: none; }
 .mast.is-condensed .mast__wordmark { display: none; }
 .mast.is-condensed .mast__monogram { display: block; }
@@ -62,14 +62,17 @@
 
 .colophon__top { display: grid; grid-template-columns: 1.1fr 3fr; gap: 64px; padding-top: 8px; }
 .colophon__brand-home { display: inline-block; margin-bottom: 18px; }
-.colophon__brand-home img { height: 46px; width: auto; }
-.colophon__brand p { font-size: 14px; line-height: 1.7; color: var(--on-dark-mute); max-width: 280px; }
+.colophon__brand-home .wordmark { font-size: 30px; }
+.colophon__brand p { font-size: 15px; line-height: 1.7; color: var(--on-dark-mute); max-width: 280px; }
+.colophon__cta { margin-top: 18px; }
 .colophon__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
 .colophon__col h5 { font-size: 10px; font-weight: 500; color: var(--on-dark-fine); text-transform: uppercase; letter-spacing: .16em; margin-bottom: 16px; }
 .colophon__col ul { list-style: none; }
 .colophon__col li { font-size: 13.5px; line-height: 2.05; }
 .colophon__col button { color: var(--on-dark-mute); transition: color .2s; text-align: left; }
 .colophon__col button:hover { color: var(--seafoam); }
+/* non-interactive items (e.g. Privacy/Terms before their pages exist) read as muted, never brighter than the live links */
+.colophon__col li span { color: var(--on-dark-fine); }
 .colophon__rule { height: 1px; background: rgba(237,231,218,.12); margin: 44px auto 24px; }
 .colophon__credo { display: flex; align-items: center; gap: 20px; }
 .colophon__seal { flex: none; }
@@ -84,3 +87,13 @@
 .edition-front__lede { max-width: 62ch; margin-bottom: 32px; }
 .edition-front__ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 .edition-front--split .edition-front__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
+
+/* ── typographic wordmark (the shared house identity) ──── */
+.wordmark { display: inline-flex; flex-direction: column; gap: 4px; line-height: 1; vertical-align: middle; }
+.wordmark__lock { display: inline-flex; align-items: baseline; gap: 0.2em; font-family: var(--f-garamond); font-style: italic; color: var(--ink); white-space: nowrap; }
+.wordmark__lead, .wordmark__trail { font-size: 0.5em; font-weight: 500; color: var(--ink-mute); letter-spacing: 0.01em; }
+.wordmark__strong { font-size: 1em; font-weight: 600; letter-spacing: -0.005em; }
+.wordmark__rule { display: block; height: 2px; width: 100%; background: var(--current); border-radius: 2px; }
+.wordmark--dark .wordmark__lock { color: var(--on-dark); }
+.wordmark--dark .wordmark__lead, .wordmark--dark .wordmark__trail { color: var(--on-dark-mute); }
+.wordmark--dark .wordmark__rule { background: var(--current); }

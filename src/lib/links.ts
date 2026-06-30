@@ -6,6 +6,10 @@ export const LINKS = {
   maker: "https://maker.theoutcome.ai/", // TBD
   learning: "https://learning.theoutcome.ai/", // TBD
   audit: "https://audit.theoutcome.ai/", // TBD
+  // Every "Get started" button points here: account creation → payment →
+  // the Commonwealth welcome flow (built separately). PLACEHOLDER — swap in
+  // the real flow URL in this one place.
+  getStarted: "https://app.theoutcome.ai/get-started", // TBD
 } as const;
 
 /** Navigate the whole window to another Commonwealth site. */
