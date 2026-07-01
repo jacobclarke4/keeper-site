@@ -4,9 +4,9 @@
    Brand tokens unchanged; everything else is new.
    ========================================================= */
 
-/* Ledger sets the display headings; EB Garamond carries body, UI, and the
-   italic accent (both loaded via @fontsource in main.tsx). The mono labels are
-   the only other face. */
+/* Type is normalized to ONE family — Ledger — for display, body, UI, and the
+   italic accent (loaded via @fontsource in main.tsx). The mono labels are the
+   only other face. */
 
 :root {
   /* brand — unchanged */
@@ -27,13 +27,13 @@
   --on-dark-mute: #a9b7c4;
   --on-dark-fine: #7a8996;
 
-  /* Ledger sets the display type; EB Garamond carries body, UI, and the italic
+  /* one family, everywhere — Ledger — for display, body, UI, and the italic
      accent. (was one-family EB Garamond; before that Fraunces + Switzer) */
-  --f-serif: "EB Garamond", "Iowan Old Style", Georgia, serif;
-  --f-sans: "EB Garamond", "Iowan Old Style", Georgia, serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --f-garamond: "EB Garamond", "Adobe Garamond Pro", Garamond, serif;
   --f-ledger: "Ledger", "Iowan Old Style", Georgia, serif;
+  --f-serif: var(--f-ledger);
+  --f-sans: var(--f-ledger);
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-garamond: var(--f-ledger); /* kept for the italic-accent selectors; now Ledger */
   --f-display: var(--f-ledger);
 
   --r-sm: 6px;
