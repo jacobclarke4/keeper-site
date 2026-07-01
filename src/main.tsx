@@ -1,9 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-// EB Garamond is the whole type system now — display, body, and the italic
-// accent, normalized to one family. Upright weights for headings/body/UI,
-// italics for the signature accent words.
+// Ledger is the display face — the big broadsheet headings. EB Garamond
+// carries body, UI, and the signature italic accent (Ledger ships upright-only,
+// weight 400, so the true italic stays Garamond).
+import '@fontsource/ledger/400.css'
 import '@fontsource/eb-garamond/400.css'
 import '@fontsource/eb-garamond/500.css'
 import '@fontsource/eb-garamond/600.css'

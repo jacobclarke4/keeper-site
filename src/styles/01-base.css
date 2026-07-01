@@ -4,8 +4,8 @@
    Brand tokens unchanged; everything else is new.
    ========================================================= */
 
-/* Type is normalized to ONE family — EB Garamond — for display, body, UI, and
-   the italic accent (loaded via @fontsource in main.tsx). The mono labels are
+/* Ledger sets the display headings; EB Garamond carries body, UI, and the
+   italic accent (both loaded via @fontsource in main.tsx). The mono labels are
    the only other face. */
 
 :root {
@@ -27,12 +27,14 @@
   --on-dark-mute: #a9b7c4;
   --on-dark-fine: #7a8996;
 
-  /* one family, everywhere — EB Garamond. (was Fraunces display + Switzer body) */
+  /* Ledger sets the display type; EB Garamond carries body, UI, and the italic
+     accent. (was one-family EB Garamond; before that Fraunces + Switzer) */
   --f-serif: "EB Garamond", "Iowan Old Style", Georgia, serif;
   --f-sans: "EB Garamond", "Iowan Old Style", Georgia, serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   --f-garamond: "EB Garamond", "Adobe Garamond Pro", Garamond, serif;
-  --f-display: var(--f-serif);
+  --f-ledger: "Ledger", "Iowan Old Style", Georgia, serif;
+  --f-display: var(--f-ledger);
 
   --r-sm: 6px;
   --r-md: 12px;
@@ -72,10 +74,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 /* ── type system ───────────────────────────────────────── */
 .display {
   font-family: var(--f-display);
-  font-weight: 380;
-  letter-spacing: -0.022em;
-  line-height: 1.02;
-  font-variation-settings: "opsz" 92, "SOFT" 28, "WONK" 0;
+  font-weight: 400;
+  letter-spacing: -0.014em;
+  line-height: 1.1;
 }
 h1, h2, h3, h4, h5 { margin: 0; font-weight: 400; }
 
