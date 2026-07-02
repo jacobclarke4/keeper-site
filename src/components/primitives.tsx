@@ -1,54 +1,36 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
-import { Ink, useInView, usePrefersReducedMotion } from "../lib/motion";
-import { LINKS, goExternal } from "../lib/links";
+import type { CSSProperties, ReactNode } from "react";
+import { useInView } from "../lib/motion";
 
 /* ──────────────────────────────────────────────────────────
-   Print primitives — every edition composes from these.
+   Sunlit Stationery primitives.
+   Warm, rounded, human. Every device is sliced from the brand's
+   calligraphic O (reused verbatim from public/toc-icon.svg — the
+   exact same path data, never redrawn).
    ────────────────────────────────────────────────────────── */
 
-/** Mono kicker with a leading hairline; optionally carries a § folio tag. */
-export function Kicker({
-  children,
-  folio,
-  onDark = false,
-  center = false,
-}: {
-  children: ReactNode;
-  folio?: string;
-  onDark?: boolean;
-  center?: boolean;
-}) {
-  return (
-    <span className={`kicker${onDark ? " on-dark" : ""}${center ? " is-center" : ""}`}>
-      {folio && <span className="kicker__folio">§ {folio}</span>}
-      {children}
-    </span>
-  );
-}
+/** The calligraphic O, reused verbatim from toc-icon.svg (cls-2 path).
+ *  Rendered at any size / colour / opacity: the sunrise, the footer
+ *  watermark, and the geometry every panel is cut from. */
+const O_PATH =
+  "M270.95,157.72c0,43.97-21.98,84.79-49.46,112.27-28.66,28.26-61.63,38.86-87.15,38.86-21.2,0-46.71-11.38-61.63-31.8-13.35-17.67-19.24-37.69-19.24-65.95,0-35.72,14.92-74.98,38.08-102.46,26.69-32.58,62.02-51.43,96.96-51.43,49.07,0,82.44,43.97,82.44,100.5ZM122.96,110.22c-20.02,27.09-38.86,81.65-38.86,126.41,0,48.68,20.81,63.6,45.15,63.6,20.81,0,43.18-8.24,66.74-37.69,23.16-29.05,44.75-88.72,44.75-127.19,0-32.58-8.24-70.66-46.72-70.66-26.3,0-49.46,15.7-71.05,45.54Z";
 
-export function SectionHead({
-  kicker,
-  title,
-  sub,
-  onDark = false,
-  align = "left",
+export function OMark({
+  className = "",
+  style,
 }: {
-  kicker?: string;
-  title: ReactNode;
-  sub?: ReactNode;
-  onDark?: boolean;
-  align?: "left" | "center";
+  className?: string;
+  style?: CSSProperties;
 }) {
   return (
-    <header className={`sec-head${onDark ? " on-dark" : ""} align-${align}`}>
-      {kicker && (
-        <Ink as="div" fx="rise">
-          <Kicker onDark={onDark} center={align === "center"}>{kicker}</Kicker>
-        </Ink>
-      )}
-      <Ink as="h2" fx="rise" delay={70} className="sec-head__title display">{title}</Ink>
-      {sub && <Ink as="p" fx="rise" delay={140} className="sec-head__sub">{sub}</Ink>}
-    </header>
+    <svg
+      className={`omark ${className}`.trim()}
+      viewBox="0 0 395.84 395.84"
+      style={style}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={O_PATH} fill="currentColor" fillRule="evenodd" />
+    </svg>
   );
 }
 
@@ -69,7 +51,6 @@ export function Btn({
   onClick?: () => void;
   className?: string;
   href?: string;
-  /** Open the link in a new tab. Default is same-tab (right for the sign-up flow). */
   newTab?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
@@ -90,44 +71,71 @@ export function Btn({
   );
 }
 
-/** Trailing arrow that advances on button hover. */
+/** Trailing arrow that slides on button hover. */
 export function Arrow() {
   return <span className="arrow" aria-hidden="true">→</span>;
 }
 
-/** A mono stamp that thunks down when scrolled into view. */
-export function Stamp({
+/** A small seafoam sentence-case label — the warm replacement for every
+ *  mono all-caps kicker. */
+export function TabPill({ children, onDark = false }: { children: ReactNode; onDark?: boolean }) {
+  return <span className={`tab-pill${onDark ? " tab-pill--dark" : ""}`}>{children}</span>;
+}
+
+/** The brand's recurring smile: a plump seafoam pill whose checkmark
+ *  springs in when it enters view. The DONE-stamp re-expression. Always
+ *  paired with a visually-hidden "Done" and shown pre-checked under
+ *  reduced motion. */
+export function CheckChip({
   children,
   delay = 0,
-  tone = "ink",
   className = "",
-  tilt = -2,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   delay?: number;
-  tone?: "ink" | "ocean" | "current" | "seafoam" | "fine";
   className?: string;
-  tilt?: number;
 }) {
   const { ref, inView } = useInView<HTMLSpanElement>();
   return (
     <span
       ref={ref}
-      className={`stamp stamp--${tone}${inView ? " is-stamped" : ""} ${className}`.trim()}
-      style={{ "--d": `${delay}ms`, "--tilt": `${tilt}deg` } as CSSProperties}
+      className={`check-chip${inView ? " is-checked" : ""} ${className}`.trim()}
+      style={{ "--d": `${delay}ms` } as CSSProperties}
     >
-      {children}
+      <span className="check-chip__mark" aria-hidden="true">
+        <svg viewBox="0 0 16 16" focusable="false">
+          <path
+            d="M3.5 8.5 L6.5 11.5 L12.5 4.5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+      <span className="visually-hidden">Done. </span>
+      {children && <span className="check-chip__label">{children}</span>}
     </span>
   );
 }
 
-/** The chartered wax-seal medallion, engraved in hairlines. Stamps on enter. */
-export function Seal({ size = 132, animate = true, className = "" }: { size?: number; animate?: boolean; className?: string }) {
+/** The chartered member seal — the O engraved in hairlines, gently glowing.
+ *  Used large behind Commonwealth and small in the footer credo. */
+export function Seal({
+  size = 160,
+  animate = true,
+  className = "",
+}: {
+  size?: number;
+  animate?: boolean;
+  className?: string;
+}) {
   const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <div
       ref={ref}
-      className={`seal${animate ? " seal--animate" : ""}${inView ? " is-stamped" : ""} ${className}`.trim()}
+      className={`seal${animate ? " seal--animate" : ""}${inView ? " is-in" : ""} ${className}`.trim()}
       style={{ width: size, height: size }}
       aria-hidden="true"
     >
@@ -148,221 +156,5 @@ export function Seal({ size = 132, animate = true, className = "" }: { size?: nu
         <path d="M 52,42 h 28" stroke="currentColor" strokeWidth="0.8" />
       </svg>
     </div>
-  );
-}
-
-/** An abstract signature flourish that writes itself on enter. */
-export function SignatureWrite({ className = "" }: { className?: string }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
-  return (
-    <div ref={ref} className={`signature${inView ? " is-writing" : ""} ${className}`.trim()} aria-hidden="true">
-      <svg viewBox="0 0 320 84" width="100%" preserveAspectRatio="xMidYMid meet">
-        <path
-          className="signature__path"
-          pathLength={1}
-          d="M14,56 C30,18 44,14 50,30 C56,46 40,66 32,62 C24,58 52,30 78,34 C96,37 88,58 76,58 C66,58 84,38 108,42 C126,45 118,60 132,52 C146,44 150,34 166,40 C180,45 172,58 188,50 C200,44 208,36 224,42 C238,47 240,56 258,46 C270,39 282,40 306,44"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-        />
-        <path
-          className="signature__under"
-          pathLength={1}
-          d="M40,72 C110,66 220,68 296,64"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
-  );
-}
-
-/** Index entry with leader dots running to a folio reference. */
-export function LeaderRow({
-  numeral,
-  title,
-  desc,
-  cta,
-  refMark,
-  onClick,
-  delay = 0,
-}: {
-  numeral: string;
-  title: ReactNode;
-  desc?: string;
-  cta?: string;
-  refMark: string;
-  onClick?: () => void;
-  delay?: number;
-}) {
-  return (
-    <Ink
-      as={onClick ? "button" : "div"}
-      fx="rise"
-      delay={delay}
-      className={`leader${onClick ? " is-link" : ""}`}
-      onClick={onClick}
-      type={onClick ? "button" : undefined}
-    >
-      <span className="leader__numeral">{numeral}</span>
-      <span className="leader__body">
-        <span className="leader__line">
-          <span className="leader__title display">{title}</span>
-          <span className="leader__dots" aria-hidden="true" />
-          <span className="leader__ref mono">{refMark}</span>
-        </span>
-        {desc && <span className="leader__desc">{desc}</span>}
-        {cta && (
-          <span className="leader__cta">
-            {cta} <Arrow />
-          </span>
-        )}
-      </span>
-    </Ink>
-  );
-}
-
-/** Footnote apparatus at a section's foot. */
-export function FootNotes({ notes, onDark = false }: { notes: Array<[string, ReactNode]>; onDark?: boolean }) {
-  return (
-    <Ink as="div" fx="rise" className={`footnotes${onDark ? " on-dark" : ""}`}>
-      <RuleSpan />
-      <ol>
-        {notes.map(([mark, body]) => (
-          <li key={mark}>
-            <span className="footnotes__mark">{mark}</span>
-            <span className="footnotes__body">{body}</span>
-          </li>
-        ))}
-      </ol>
-    </Ink>
-  );
-}
-
-function RuleSpan() {
-  return <span className="footnotes__rule" aria-hidden="true" />;
-}
-
-export function Sup({ children }: { children: ReactNode }) {
-  return <sup className="fn-ref mono">{children}</sup>;
-}
-
-/** A bordered figure plate with an engraver's cutline. */
-export function Plate({
-  children,
-  cutline,
-  delay = 0,
-  className = "",
-  tilt = 0,
-}: {
-  children: ReactNode;
-  cutline: string;
-  delay?: number;
-  className?: string;
-  tilt?: number;
-}) {
-  return (
-    <Ink as="figure" fx="wash" delay={delay} className={`plate ${className}`.trim()} style={tilt ? { rotate: `${tilt}deg` } : undefined}>
-      <div className="plate__body">{children}</div>
-      <figcaption className="plate__cutline mono">{cutline}</figcaption>
-    </Ink>
-  );
-}
-
-/** The page-foot folio ornament: — 2 — */
-export function PageFolio({ n }: { n: string }) {
-  return (
-    <div className="page-folio mono" aria-hidden="true">
-      — {n} —
-    </div>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────
-   Shared composed pieces
-   ────────────────────────────────────────────────────────── */
-
-/** The $100/day guarantee plate — deliberately identical on Makers & Concierges. */
-export function GuaranteePlate({
-  role,
-  ctaLabel,
-  onCta,
-}: {
-  role: "Maker" | "Concierge";
-  ctaLabel: string;
-  onCta: () => void;
-}) {
-  return (
-    <Ink as="div" fx="rise" className="guarantee">
-      <div className="guarantee__inner">
-        <div className="guarantee__copy">
-          <Kicker onDark>The floor we hold ourselves to</Kicker>
-          <h3 className="display guarantee__h">
-            Every {role} on the platform can earn at least <em>$100 a day</em>.<Sup>†</Sup>
-          </h3>
-          <p className="guarantee__foot mono">† A COMMONWEALTH GUARANTEE · WE CAP ACCEPTANCE AGAINST DEMAND SO THE FLOOR HOLDS · SEE “SUPPLY, ON PURPOSE”</p>
-        </div>
-        <div className="guarantee__side">
-          <Seal size={108} />
-          <Btn variant="ghost-dark" onClick={onCta}>
-            {ctaLabel} <Arrow />
-          </Btn>
-        </div>
-      </div>
-    </Ink>
-  );
-}
-
-/** Editor's-note box (paper-dim, Garamond lead). */
-export function EditorNote({
-  lead,
-  children,
-  foot,
-}: {
-  lead: ReactNode;
-  children?: ReactNode;
-  foot?: string;
-}) {
-  return (
-    <Ink as="aside" fx="rise" className="editor-note">
-      <span className="editor-note__head mono">Editor’s note</span>
-      <p className="editor-note__lead">{lead}</p>
-      {children}
-      {foot && <p className="editor-note__foot mono">{foot}</p>}
-    </Ink>
-  );
-}
-
-/** Standfirst strap before the colophon (replaces FooterBumper). */
-export function Standfirst({ line }: { line: ReactNode }) {
-  return (
-    <section className="standfirst">
-      <div className="wrap standfirst__inner">
-        <Ink as="p" fx="rise" className="standfirst__line display">{line}</Ink>
-        <Btn variant="ghost" onClick={goExternal(LINKS.commonwealth)}>
-          Read the Charter <Arrow />
-        </Btn>
-      </div>
-    </section>
-  );
-}
-
-/** Rotating wire bulletin (crossfading outcome items). */
-export function Rotator({ items, interval = 2600 }: { items: string[]; interval?: number }) {
-  const [i, setI] = useState(0);
-  const reduced = usePrefersReducedMotion();
-  const count = items.length;
-  useEffect(() => {
-    if (reduced || count <= 1) return;
-    const id = window.setInterval(() => setI((v) => (v + 1) % count), interval);
-    return () => window.clearInterval(id);
-  }, [interval, count, reduced]);
-  return (
-    <span className="rotator" key={i}>
-      {items[i % count]}
-    </span>
   );
 }

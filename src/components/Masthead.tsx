@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { ALL_SECTIONS, BASE_URL, NAV_SECTIONS, SECTION_IDS, scrollToId, scrollTop } from "../lib/nav";
+import { ALL_SECTIONS, NAV_SECTIONS, SECTION_IDS, scrollToId, scrollTop } from "../lib/nav";
 import { LINKS } from "../lib/links";
 import { useScrollSpy } from "../lib/motion";
 import { Wordmark, WORDMARK } from "./Wordmark";
-
-const MONOGRAM = `${BASE_URL}toc-icon.svg`;
+import { OMark } from "./primitives";
 
 export function Masthead() {
   const [condensed, setCondensed] = useState(false);
@@ -12,7 +11,7 @@ export function Masthead() {
   const [open, setOpen] = useState(false);
   const active = useScrollSpy(SECTION_IDS);
 
-  // Scroll: condense the masthead + fill the brand rule with reading progress.
+  // Scroll: condense the nav capsule + trace the progress ring around the O.
   useEffect(() => {
     let raf = 0;
     const measure = () => {
@@ -36,7 +35,7 @@ export function Masthead() {
     };
   }, []);
 
-  // Lock the page while the CONTENTS index is open.
+  // Lock the page while the mobile sheet is open.
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -65,14 +64,27 @@ export function Masthead() {
     scrollTop();
   };
 
+  // Progress ring geometry (r = 15, circumference ≈ 94.25).
+  const RING = 2 * Math.PI * 15;
+
   return (
     <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
-      <div className="mast__bar">
+      <div className="mast__capsule">
         <button type="button" className="mast__brand" onClick={goHome} aria-label="The Outcome Company — home">
           <Wordmark {...WORDMARK} className="mast__wordmark" />
-          <img className="mast__monogram" src={MONOGRAM} alt="" />
-          <span className="mast__running mono" aria-hidden="true">
-            — THE OUTCOME COMPANY
+          <span className="mast__monogram" aria-hidden="true">
+            <svg className="mast__ring" viewBox="0 0 36 36">
+              <circle className="mast__ring-track" cx="18" cy="18" r="15" />
+              <circle
+                className="mast__ring-fill"
+                cx="18"
+                cy="18"
+                r="15"
+                strokeDasharray={RING}
+                strokeDashoffset={RING * (1 - progress)}
+              />
+            </svg>
+            <OMark className="mast__monogram-o" />
           </span>
         </button>
 
@@ -109,37 +121,29 @@ export function Masthead() {
         </button>
       </div>
 
-      {/* the brand rule: hairline that doubles as reading progress */}
-      <div className="mast__rule" aria-hidden="true">
-        <span className="mast__progress" style={{ transform: `scaleX(${progress})` }} />
-      </div>
-
       {open && (
-        <div className="contents" role="dialog" aria-label="Menu">
-          <div className="contents__head mono">CONTENTS — THE OUTCOME COMPANY</div>
-          <nav className="contents__list" aria-label="Sections">
+        <div className="sheet" role="dialog" aria-label="Menu">
+          <nav className="sheet__list" aria-label="Sections">
             {ALL_SECTIONS.map((item) => (
               <button
                 type="button"
                 key={item.id}
-                className={`contents__entry${active === item.id ? " is-active" : ""}`}
+                className={`sheet__row${active === item.id ? " is-active" : ""}`}
                 aria-current={active === item.id ? "true" : undefined}
                 onClick={() => goSection(item.id)}
               >
-                <span className="contents__body">
-                  <span className="contents__title display">{item.label}</span>
-                </span>
+                {item.label}
               </button>
             ))}
           </nav>
-          <div className="contents__cta">
+          <div className="sheet__cta">
             <a className="btn btn--accent btn--lg btn--block" href={LINKS.getStarted}>
-              <span className="btn__label">Get started — $14/mo <span className="arrow" aria-hidden="true">→</span></span>
+              <span className="btn__label">Get started: $14/mo <span className="arrow" aria-hidden="true">→</span></span>
             </a>
-            <a className="btn btn--ghost btn--lg btn--block contents__login" href={LINKS.login}>
+            <a className="btn btn--ghost btn--lg btn--block sheet__login" href={LINKS.login}>
               <span className="btn__label">Log in</span>
             </a>
-            <p className="contents__imprint mono">THE OUTCOME COMPANY · A COMMONWEALTH COMPANY</p>
+            <p className="sheet__imprint">A Commonwealth Company</p>
           </div>
         </div>
       )}
