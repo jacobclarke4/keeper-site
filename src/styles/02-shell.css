@@ -13,8 +13,7 @@
 .mast.is-condensed .mast__running { display: inline; }
 
 .mast__links { display: flex; gap: 30px; margin-left: 18px; flex: 1; }
-.mast__link { font-size: 14px; color: var(--ink-mute); position: relative; padding: 6px 0; display: inline-flex; align-items: baseline; gap: 7px; transition: color .2s; }
-.mast__tick { font-size: 9.5px; color: var(--ink-fine); letter-spacing: .1em; }
+.mast__link { font-size: 14px; color: var(--ink-mute); position: relative; padding: 6px 0; display: inline-flex; align-items: baseline; transition: color .2s; }
 .mast__link:hover { color: var(--ink); }
 .mast__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--current); border-radius: 2px; transform: scaleX(0); transform-origin: left; transition: transform .3s var(--paper-ease); }
 .mast__link:hover::after, .mast__link.is-active::after { transform: scaleX(1); }
@@ -81,8 +80,6 @@
 .colophon__seal { flex: none; }
 .colophon__credo p { font-size: 13px; color: var(--on-dark-fine); max-width: 760px; line-height: 1.7; }
 .colophon__inline-link { color: var(--seafoam); text-decoration: underline; text-underline-offset: 2px; }
-.colophon__imprint { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; font-size: 10.5px; letter-spacing: .14em; color: var(--on-dark-fine); }
-.colophon__fin { font-family: var(--f-garamond); font-style: italic; font-size: 18px; color: var(--seafoam); letter-spacing: 0; }
 
 /* edition section front (inner pages) */
 .edition-front { padding: 132px var(--gutter) 64px; }

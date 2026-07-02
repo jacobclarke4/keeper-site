@@ -12,6 +12,21 @@ export const NAV_SECTIONS = [
   { id: "support", label: "Support" },
 ] as const;
 
+/** Every real section on the page — the CONTENTS index + scrollspy source. */
+export const ALL_SECTIONS = [
+  { id: "bridge", label: "Who it's for" },
+  { id: "how", label: "How it works" },
+  { id: "catalog", label: "What we can do" },
+  { id: "pricing", label: "Pricing" },
+  { id: "support", label: "Support" },
+  { id: "wallet", label: "The Wallet" },
+  { id: "commonwealth", label: "Commonwealth" },
+  { id: "faq", label: "Questions" },
+] as const;
+
+/** Stable id list for the scrollspy observer. */
+export const SECTION_IDS = ALL_SECTIONS.map((s) => s.id);
+
 declare global {
   interface Window {
     __lenis?: { scrollTo: (t: HTMLElement | number, o?: Record<string, unknown>) => void; stop: () => void; start: () => void };

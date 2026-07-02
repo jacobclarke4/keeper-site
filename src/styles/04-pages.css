@@ -41,16 +41,16 @@
 .ledger__tick { color: var(--seafoam); }
 .ledger__tick--soon { color: var(--current); }
 
-/* hard-cap meter */
-.capmeter { margin-top: 44px; border: 1px solid rgba(237,231,218,.18); border-radius: var(--r-md); padding: 26px 28px; }
-.capmeter__labels { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: .1em; color: var(--on-dark-fine); margin-bottom: 12px; }
-.capmeter__cap-label { color: var(--seafoam); }
-.capmeter__track { position: relative; height: 16px; background: rgba(255,255,255,.05); border-radius: 3px; overflow: hidden; }
-.capmeter__fill { position: absolute; inset: 0 38% 0 0; background: linear-gradient(90deg, var(--ocean), var(--current)); transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--paper-ease); }
+/* hard-cap meter — light paper */
+.capmeter { margin-top: 44px; background: var(--paper); border: 1px solid var(--hair-strong); border-radius: var(--r-md); padding: 26px 28px; box-shadow: var(--sh-rest); }
+.capmeter__labels { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: .1em; color: var(--ink-fine); margin-bottom: 12px; }
+.capmeter__cap-label { color: var(--ocean); }
+.capmeter__track { position: relative; height: 16px; background: var(--hair); border-radius: 3px; overflow: hidden; }
+.capmeter__fill { position: absolute; inset: 0 38% 0 0; background: var(--current); transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--paper-ease); }
 .capmeter.is-filled .capmeter__fill { transform: scaleX(1); }
-.capmeter__tick { position: absolute; top: -4px; bottom: -4px; left: 62%; width: 2px; background: var(--seafoam); }
-.capmeter__beyond { position: absolute; top: 0; bottom: 0; left: 62%; right: 0; background: repeating-linear-gradient(45deg, rgba(237,231,218,.05) 0 5px, transparent 5px 10px); }
-.capmeter__foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 9.5px; letter-spacing: .1em; color: var(--on-dark-fine); }
+.capmeter__tick { position: absolute; top: -4px; bottom: -4px; left: 62%; width: 2px; background: var(--ocean); }
+.capmeter__beyond { position: absolute; top: 0; bottom: 0; left: 62%; right: 0; background: repeating-linear-gradient(45deg, rgba(13,27,42,.05) 0 5px, transparent 5px 10px); }
+.capmeter__foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 9.5px; letter-spacing: .1em; color: var(--ink-fine); }
 @media (prefers-reduced-motion: reduce) { .capmeter__fill { transform: scaleX(1); } }
 
 /* =========================================================

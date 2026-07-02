@@ -9,7 +9,7 @@ export default function App() {
   // Fully disabled under prefers-reduced-motion.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ lerp: 0.09 });
+    const lenis = new Lenis({ lerp: 0.12 });
     window.__lenis = lenis as unknown as Window["__lenis"];
     let raf = requestAnimationFrame(function loop(t) {
       lenis.raf(t);

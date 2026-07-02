@@ -119,7 +119,6 @@
 
   .colophon__cols { grid-template-columns: repeat(2, 1fr); }
   .colophon__credo { flex-direction: column; align-items: flex-start; }
-  .colophon__imprint { flex-direction: column; align-items: flex-start; }
 
   .slip { padding: 32px 24px 28px; }
 

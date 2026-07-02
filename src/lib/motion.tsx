@@ -200,5 +200,32 @@ export function useScrollProgress<T extends HTMLElement>() {
   return { ref, progress };
 }
 
+/**
+ * Scrollspy — reports the id of the section currently crossing the viewport
+ * midband. The -45%/-45% rootMargin narrows the active zone to a horizontal
+ * band through the middle, so exactly one section reads as active.
+ */
+export function useScrollSpy(ids: readonly string[]): string | null {
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (!els.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ids]);
+  return active;
+}
+
 /** Deterministic placed-paper jitter — stable per index, no Math.random. */
 export const paperTilt = (index: number): number => (((index * 7) % 5) - 2) * 0.4;

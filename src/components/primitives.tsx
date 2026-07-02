@@ -27,14 +27,12 @@ export function Kicker({
 }
 
 export function SectionHead({
-  folio,
   kicker,
   title,
   sub,
   onDark = false,
   align = "left",
 }: {
-  folio?: string;
   kicker?: string;
   title: ReactNode;
   sub?: ReactNode;
@@ -45,7 +43,7 @@ export function SectionHead({
     <header className={`sec-head${onDark ? " on-dark" : ""} align-${align}`}>
       {kicker && (
         <Ink as="div" fx="rise">
-          <Kicker folio={folio} onDark={onDark} center={align === "center"}>{kicker}</Kicker>
+          <Kicker onDark={onDark} center={align === "center"}>{kicker}</Kicker>
         </Ink>
       )}
       <Ink as="h2" fx="rise" delay={70} className="sec-head__title display">{title}</Ink>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, NAV_SECTIONS, scrollToId, scrollTop } from "../lib/nav";
+import { ALL_SECTIONS, BASE_URL, NAV_SECTIONS, SECTION_IDS, scrollToId, scrollTop } from "../lib/nav";
 import { LINKS } from "../lib/links";
+import { useScrollSpy } from "../lib/motion";
 import { Wordmark, WORDMARK } from "./Wordmark";
 
 const MONOGRAM = `${BASE_URL}toc-icon.svg`;
@@ -9,6 +10,7 @@ export function Masthead() {
   const [condensed, setCondensed] = useState(false);
   const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
+  const active = useScrollSpy(SECTION_IDS);
 
   // Scroll: condense the masthead + fill the brand rule with reading progress.
   useEffect(() => {
@@ -16,7 +18,7 @@ export function Masthead() {
     const measure = () => {
       raf = 0;
       const y = window.scrollY;
-      setCondensed(y > 56);
+      setCondensed(y > 40);
       const doc = document.documentElement;
       const total = doc.scrollHeight - window.innerHeight;
       setProgress(total > 0 ? Math.min(1, y / total) : 0);
@@ -75,14 +77,14 @@ export function Masthead() {
         </button>
 
         <nav className="mast__links" aria-label="Primary">
-          {NAV_SECTIONS.map((item, i) => (
+          {NAV_SECTIONS.map((item) => (
             <button
               type="button"
               key={item.id}
               onClick={() => goSection(item.id)}
-              className="mast__link"
+              className={`mast__link${active === item.id ? " is-active" : ""}`}
+              aria-current={active === item.id ? "true" : undefined}
             >
-              <span className="mast__tick mono">{String(i + 1).padStart(2, "0")}</span>
               {item.label}
             </button>
           ))}
@@ -116,18 +118,17 @@ export function Masthead() {
         <div className="contents" role="dialog" aria-label="Menu">
           <div className="contents__head mono">CONTENTS — THE OUTCOME COMPANY</div>
           <nav className="contents__list" aria-label="Sections">
-            {NAV_SECTIONS.map((item, i) => (
+            {ALL_SECTIONS.map((item) => (
               <button
                 type="button"
                 key={item.id}
-                className="contents__entry"
+                className={`contents__entry${active === item.id ? " is-active" : ""}`}
+                aria-current={active === item.id ? "true" : undefined}
                 onClick={() => goSection(item.id)}
               >
                 <span className="contents__body">
                   <span className="contents__title display">{item.label}</span>
                 </span>
-                <span className="contents__dots" aria-hidden="true" />
-                <span className="contents__folio mono">{String(i + 1).padStart(2, "0")}</span>
               </button>
             ))}
           </nav>

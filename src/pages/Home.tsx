@@ -8,7 +8,6 @@ import {
   EditorNote,
   FootNotes,
   Kicker,
-  PageFolio,
   Rotator,
   Seal,
   SectionHead,
@@ -44,7 +43,7 @@ function DispatchPanel() {
             <span className="dispatchcard__what">
               {what}, <em>{how}</em>.
             </span>
-            <Stamp tone="ocean" delay={700 + i * 120} tilt={i % 2 === 0 ? -2.5 : 1.5}>
+            <Stamp tone="current" delay={380 + i * 90} tilt={i % 2 === 0 ? -2.5 : 1.5}>
               DONE
             </Stamp>
           </li>
@@ -91,36 +90,36 @@ export function HomePage() {
         <div className="wrap hero__grid">
           <div className="hero__lead">
             <div className="hero__dateline mono">
-              <Teletype text={`A COMMONWEALTH COMPANY · ${datelineToday()} · $14/MO`} startDelay={300} />
+              <Teletype text={`${datelineToday()} · $14/MO · DELIVERED`} startDelay={300} />
             </div>
             <RuleDraw className="hero__rule" />
 
-            <Ink as="h1" fx="rise" delay={120} className="hero__h1 display">
+            <Ink as="h1" fx="rise" delay={60} className="hero__h1 display">
               Tell us what you need done. <em>Consider it handled.</em>
             </Ink>
 
-            <Ink as="p" fx="rise" delay={240} className="hero__lede">
+            <Ink as="p" fx="rise" delay={105} className="hero__lede">
               Planning the trip. Making sense of a confusing bill. Filling out the form you&apos;ve
               been dreading.
             </Ink>
 
-            <Ink as="p" fx="rise" delay={320} className="hero__say">
+            <Ink as="p" fx="rise" delay={150} className="hero__say">
               You ask, we do it, and hand you the finished thing. <strong>No apps to learn. No
               tech to figure out.</strong>
             </Ink>
 
-            <Ink as="div" fx="rise" delay={420} className="hero__price">
+            <Ink as="div" fx="rise" delay={180} className="hero__price">
               <span className="hero__price-amt display">$14</span>
               <span className="hero__price-per">a month</span>
             </Ink>
 
-            <Ink as="div" fx="rise" delay={500} className="hero__ctas">
-              <Btn variant="solid" size="lg" href={LINKS.getStarted}>
+            <Ink as="div" fx="rise" delay={225} className="hero__ctas">
+              <Btn variant="accent" size="lg" href={LINKS.getStarted}>
                 Get started <Arrow />
               </Btn>
             </Ink>
 
-            <Ink as="p" fx="rise" delay={580} className="hero__micro">
+            <Ink as="p" fx="rise" delay={270} className="hero__micro">
               Cancel anytime. We&apos;ll never charge you for anything you didn&apos;t say yes to.
             </Ink>
           </div>
@@ -133,7 +132,6 @@ export function HomePage() {
       <section className="section sec-dim" id="bridge">
         <div className="wrap">
           <SectionHead
-            folio="01"
             kicker="Who this is for"
             title={<>Finally, technology built for you, <em>not against you.</em></>}
           />
@@ -142,15 +140,15 @@ export function HomePage() {
               For a long time, the best new tools were never made with you in mind. Or worse, they
               were made to take advantage of you.
             </Ink>
-            <Ink as="p" fx="rise" delay={80} className="bridge__turn display">
+            <Ink as="p" fx="rise" delay={45} className="bridge__turn display">
               We&apos;re here to <em>change that.</em>
             </Ink>
-            <Ink as="p" fx="rise" delay={140} className="bridge__p">
+            <Ink as="p" fx="rise" delay={90} className="bridge__p">
               It doesn&apos;t matter where you&apos;re starting from, how old you are, what language
               you speak, or how much you know about any of this. You tell us what you need. We take
               care of it.
             </Ink>
-            <Ink as="p" fx="rise" delay={200} className="bridge__p">
+            <Ink as="p" fx="rise" delay={135} className="bridge__p">
               That&apos;s the whole idea. We meet you exactly where you are, and we bring the good
               parts of this new technology to you, without the noise, the confusion, or the catch.
             </Ink>
@@ -161,7 +159,7 @@ export function HomePage() {
       {/* ── §02 how it works ───────────────────────────── */}
       <section className="section" id="how">
         <div className="wrap">
-          <SectionHead folio="02" kicker="How it works" title="Three steps. That's it." />
+          <SectionHead kicker="How it works" title="Three steps. That's it." />
           <div className="steps steps--3">
             <RuleDraw className="steps__spine" />
             {[
@@ -169,18 +167,23 @@ export function HomePage() {
               { n: "2", t: "We do the work.", d: "The looking-up, the figuring-out, the back-and-forth. All of it, on our side." },
               { n: "3", t: "You get the finished thing.", d: "A real result you can use. Done, and handed to you." },
             ].map((s, i) => (
-              <Ink key={s.n} as="div" fx="rise" delay={i * 90} className="steps__item">
+              <Ink key={s.n} as="div" fx="rise" delay={i * 45} className="steps__item">
                 <span className="steps__n display">{s.n}</span>
                 <h3 className="steps__t">{s.t}</h3>
                 <p className="steps__d">{s.d}</p>
+                {s.n === "3" && (
+                  <Stamp tone="current" delay={90} tilt={-2.5} className="steps__stamp">
+                    DONE
+                  </Stamp>
+                )}
               </Ink>
             ))}
           </div>
-          <Ink as="p" fx="rise" delay={120} className="how__support">
+          <Ink as="p" fx="rise" delay={90} className="how__support">
             And if you ever get stuck, our support line is open whenever you need it, <em>with help
             in your language.</em>
           </Ink>
-          <Ink as="div" fx="rise" delay={180} className="section__cta-row">
+          <Ink as="div" fx="rise" delay={135} className="section__cta-row">
             <Btn variant="solid" href={LINKS.getStarted}>
               Get started <Arrow />
             </Btn>
@@ -192,26 +195,27 @@ export function HomePage() {
       <section className="section sec-dim" id="catalog">
         <div className="wrap">
           <SectionHead
-            folio="03"
             kicker="What we can do"
             title={<>Real things, <em>done for you.</em></>}
             sub="An outcome is just that: a real, finished result. Not a tool you have to learn. Not a tab you have to keep open. The actual thing you wanted, done. Here are some of the things people ask us for. Open any one to see exactly how it works."
           />
           <div className="catalog">
             {CATALOG.map((o, i) => (
-              <Ink as="div" fx="rise" delay={(i % 2) * 70} key={o.title}>
+              <Ink as="div" fx="rise" delay={(i % 2) * 45} key={o.title}>
                 <details className="cat">
                   <summary className="cat__sum">
                     <span className="cat__group mono">{o.group}</span>
                     <span className="cat__title display">{o.title}</span>
                     <span className="cat__more mono">See how it works <span className="cat__chev" aria-hidden="true">→</span></span>
                   </summary>
-                  <div className="cat__detail">
-                    <p className="cat__line"><span className="cat__k mono">YOU TELL US</span> {o.ask}</p>
-                    <p className="cat__line"><span className="cat__k mono">WE HAND YOU</span> {o.deliver}</p>
-                    <a className="btn btn--link cat__cta" href={LINKS.getStarted}>
-                      <span className="btn__label">Get this done <span className="arrow" aria-hidden="true">→</span></span>
-                    </a>
+                  <div className="cat__wash">
+                    <div className="cat__detail">
+                      <p className="cat__line"><span className="cat__k mono">YOU TELL US</span> {o.ask}</p>
+                      <p className="cat__line"><span className="cat__k mono">WE HAND YOU</span> {o.deliver}</p>
+                      <a className="btn btn--link cat__cta" href={LINKS.getStarted}>
+                        <span className="btn__label">Get this done <span className="arrow" aria-hidden="true">→</span></span>
+                      </a>
+                    </div>
                   </div>
                 </details>
               </Ink>
@@ -231,7 +235,7 @@ export function HomePage() {
       {/* ── §04 pricing ────────────────────────────────── */}
       <section className="section" id="pricing">
         <div className="wrap">
-          <SectionHead folio="04" kicker="Pricing" title={<>Simple pricing. <em>No surprises.</em></>} />
+          <SectionHead kicker="Pricing" title={<>Simple pricing. <em>No surprises.</em></>} />
 
           <EditorNote
             lead={<>We&apos;re just getting started, and so are <em>you.</em></>}
@@ -247,7 +251,7 @@ export function HomePage() {
 
           <div className="plans">
             {TIERS.map((t, i) => (
-              <Ink as="div" fx="rise" delay={i * 100} key={t.name} className={`plan${t.soon ? " plan--soon" : ""}`}>
+              <Ink as="div" fx="rise" delay={i * 45} key={t.name} className={`plan${t.soon ? " plan--soon" : ""}${i === 0 ? " plan--feature" : ""}`}>
                 <span className="plan__tag mono">{t.name}</span>
                 <span className="plan__price display">
                   {t.price}{t.per && <span className="plan__per mono">{t.per}</span>}
@@ -277,7 +281,7 @@ export function HomePage() {
             </p>
           </Ink>
 
-          <Ink as="div" fx="rise" delay={120} className="section__cta-row">
+          <Ink as="div" fx="rise" delay={90} className="section__cta-row">
             <Btn variant="solid" href={LINKS.getStarted}>
               Get started: $14/mo<Sup>¹</Sup> <Arrow />
             </Btn>
@@ -292,17 +296,17 @@ export function HomePage() {
       {/* ── §05 support ────────────────────────────────── */}
       <section className="section sec-dim" id="support">
         <div className="wrap">
-          <SectionHead folio="05" kicker="The human side" title="Help whenever you need it." />
+          <SectionHead kicker="The human side" title="Help whenever you need it." />
           <div className="support">
             <Ink as="p" fx="rise" className="support__p">
               Not everyone wants to hand everything to a machine, and you shouldn&apos;t have to.
             </Ink>
-            <Ink as="p" fx="rise" delay={80} className="support__p">
+            <Ink as="p" fx="rise" delay={45} className="support__p">
               That&apos;s why there&apos;s always a way to reach someone. Our support line is open
               around the clock, in your language, ready to take your request in plain words and get
               it done. And when something really needs a person, a real one steps in.
             </Ink>
-            <Ink as="blockquote" fx="rise" delay={140} className="pullquote support__quote">
+            <Ink as="blockquote" fx="rise" delay={90} className="pullquote support__quote">
               You&apos;re never stuck. You&apos;re <em>never alone</em> with it.
             </Ink>
           </div>
@@ -310,11 +314,9 @@ export function HomePage() {
       </section>
 
       {/* ── §06 the wallet ─────────────────────────────── */}
-      <section className="section sec-navy" id="wallet">
+      <section className="section" id="wallet">
         <div className="wrap">
           <SectionHead
-            onDark
-            folio="06"
             kicker="The Wallet"
             title={<>Your money <em>stays yours.</em></>}
             sub="Everything you spend comes from your own balance: money you've put in, nothing more. There's no credit, no hidden fees, and no way for a bill to quietly grow while you're not looking. You'll always know what something costs before it happens. Always."
@@ -328,18 +330,18 @@ export function HomePage() {
         <div className="wrap commonwealth__inner">
           <div className="commonwealth__copy">
             <Kicker onDark>Part of something bigger</Kicker>
-            <Ink as="h2" fx="rise" delay={70} className="commonwealth__h display">
+            <Ink as="h2" fx="rise" delay={45} className="commonwealth__h display">
               One part of <em>Commonwealth.</em>
             </Ink>
-            <Ink as="p" fx="rise" delay={140} className="commonwealth__p">
+            <Ink as="p" fx="rise" delay={90} className="commonwealth__p">
               The Outcome Company is one part of Commonwealth, a community built on a simple
               promise: bring everyone into this new world together, and leave no one behind.
             </Ink>
-            <Ink as="p" fx="rise" delay={200} className="commonwealth__p">
+            <Ink as="p" fx="rise" delay={135} className="commonwealth__p">
               Half of every dollar of profit goes back to the community. And that promise can never
               be sold or taken away. It&apos;s written down, and it&apos;s binding.
             </Ink>
-            <Ink as="div" fx="rise" delay={260} className="commonwealth__cta">
+            <Ink as="div" fx="rise" delay={180} className="commonwealth__cta">
               <Btn variant="ghost-dark" onClick={goExternal(`${LINKS.commonwealth}charter`)}>
                 Read the Charter <Arrow />
               </Btn>
@@ -354,7 +356,7 @@ export function HomePage() {
       {/* ── §08 FAQ ────────────────────────────────────── */}
       <section className="section" id="faq">
         <div className="wrap">
-          <SectionHead folio="07" kicker="Questions" title="Good questions, straight answers." />
+          <SectionHead kicker="Questions" title="Good questions, straight answers." />
           <div className="faq">
             {FAQ.map((f) => (
               <details className="faq__item" key={f.q}>
@@ -362,14 +364,14 @@ export function HomePage() {
                   <span className="faq__q-text">{f.q}</span>
                   <span className="faq__sign" aria-hidden="true" />
                 </summary>
-                <div className="faq__a">{f.a}</div>
+                <div className="faq__wash">
+                  <div className="faq__a">{f.a}</div>
+                </div>
               </details>
             ))}
           </div>
         </div>
       </section>
-
-      <PageFolio n="1" />
     </div>
   );
 }

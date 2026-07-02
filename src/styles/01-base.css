@@ -40,11 +40,17 @@
 
   --maxw: 1280px;
   --gutter: 40px;
-  --pad-section-y: 110px;
+  --pad-section-y: 96px;
 
   /* ink & letterpress easings */
   --paper-ease: cubic-bezier(.22,.61,.36,1);
   --ink-press: cubic-bezier(.34,1.4,.64,1);
+
+  /* motion tempo — lighter, quicker reveals */
+  --t-rise-y: 9px;
+  --t-rise-dur: .34s;
+  --t-rise-ease: cubic-bezier(.2,.85,.25,1);
+  --t-stamp-dur: .3s;
 
   /* placed-paper shadows */
   --sh-rest: 0 1px 0 rgba(13,27,42,.04), 0 14px 34px -22px rgba(13,27,42,.20);
@@ -56,7 +62,8 @@ html, body, #root { background: var(--paper); color: var(--ink); }
 * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin: 0; padding: 0; }
 body {
   font-family: var(--f-sans);
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.68;
   overflow-x: hidden;
   /* faint paper-fiber texture */
   background-color: var(--paper);
@@ -199,7 +206,7 @@ main:focus { outline: none; }
 /* No blanket will-change: at this element count it bloats compositing, and any
    will-change/transform/clip ancestor breaks position:sticky (the Charter oath). */
 
-.ink--rise { opacity: 0; transform: translateY(14px); transition: opacity .56s var(--paper-ease) var(--d, 0ms), transform .56s var(--paper-ease) var(--d, 0ms); }
+.ink--rise { opacity: 0; transform: translateY(var(--t-rise-y)); transition: opacity var(--t-rise-dur) var(--t-rise-ease) var(--d, 0ms), transform var(--t-rise-dur) var(--t-rise-ease) var(--d, 0ms); }
 .ink--rise.is-in { opacity: 1; transform: translateY(0); }
 
 .ink--wash { opacity: 0; clip-path: inset(0 0 100% 0); transition: opacity .5s var(--paper-ease) var(--d, 0ms), clip-path .7s var(--paper-ease) var(--d, 0ms); }
@@ -243,7 +250,7 @@ main:focus { outline: none; }
 
 .btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .btn--solid:hover { color: var(--paper); border-color: var(--ocean); transform: translateY(-1px); box-shadow: 0 14px 32px -14px rgba(13,27,42,.42); }
-.btn--accent { background: var(--current); color: #fff; border-color: var(--current); }
+.btn--accent { background: var(--current); color: var(--navy); border-color: var(--current); }
 .btn--accent:hover { color: #fff; border-color: var(--ocean); transform: translateY(-1px); box-shadow: 0 14px 32px -14px rgba(27,73,101,.5); }
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--hair-strong); }
 .btn--ghost::after { background: var(--ink); }
@@ -269,7 +276,7 @@ main:focus { outline: none; }
   border-radius: 3px; text-transform: uppercase;
   opacity: 0; transform: scale(1.55) rotate(0deg);
 }
-.stamp.is-stamped { animation: thunk .42s var(--paper-ease) var(--d, 0ms) forwards; }
+.stamp.is-stamped { animation: thunk var(--t-stamp-dur) var(--paper-ease) var(--d, 0ms) forwards; }
 @keyframes thunk {
   0% { opacity: 0; transform: scale(1.55) rotate(0deg); }
   55% { opacity: 1; transform: scale(.93) rotate(var(--tilt, -2deg)); }
@@ -398,6 +405,7 @@ main:focus { outline: none; }
 .steps__n { font-family: var(--f-garamond); font-style: italic; font-size: 40px; color: var(--current); line-height: 1; display: block; margin-bottom: 18px; }
 .steps__t { font-size: 16px; color: var(--ink); font-weight: 600; margin: 0 0 8px; }
 .steps__d { font-size: 13.5px; color: var(--ink-mute); line-height: 1.6; }
+.steps__stamp { margin-top: 16px; }
 
 /* ── guarantee plate (navy, shared Makers/Concierges) ──── */
 .guarantee { margin-top: 52px; }

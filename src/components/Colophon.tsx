@@ -72,15 +72,9 @@ export function Colophon() {
       <div className="colophon__credo wrap">
         <Seal size={72} animate={false} className="colophon__seal" />
         <p>
-          Half of every dollar of profit goes back to the community. That promise can never be
-          sold or taken away. It's written down, and it's binding.{" "}
-          <button type="button" className="colophon__inline-link" onClick={goExternal(`${LINKS.commonwealth}charter`)}>Read the Charter →</button>
+          © {year} The Outcome Company ·{" "}
+          <button type="button" className="colophon__inline-link" onClick={goExternal(LINKS.commonwealth)}>A Commonwealth Company</button>
         </p>
-      </div>
-
-      <div className="colophon__imprint wrap mono">
-        <span>PRINTED {year} · THE OUTCOME COMPANY · A COMMONWEALTH COMPANY</span>
-        <span className="colophon__fin display">— fin —</span>
       </div>
     </footer>
   );
