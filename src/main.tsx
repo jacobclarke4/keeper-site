@@ -1,16 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-// EB Garamond is the whole type system now — display, body, and the italic
-// accent, normalized to one family. Upright weights for headings/body/UI,
-// italics for the signature accent words.
-import '@fontsource/eb-garamond/400.css'
-import '@fontsource/eb-garamond/500.css'
-import '@fontsource/eb-garamond/600.css'
-import '@fontsource/eb-garamond/700.css'
-import '@fontsource/eb-garamond/400-italic.css'
-import '@fontsource/eb-garamond/500-italic.css'
-import '@fontsource/eb-garamond/600-italic.css'
+// Ledger is the whole prose type system now — display, body, UI, and the
+// italic accent, normalized to one family. It ships upright-only at weight 400,
+// so heavier weights and italics render synthesized by the browser.
+import '@fontsource/ledger/400.css'
 // IBM Plex Mono stays for the small kicker/dateline/folio labels — a functional
 // label face, not part of the normalized prose type.
 import '@fontsource/ibm-plex-mono/400.css'

@@ -102,7 +102,7 @@
 .dispatchcard { border: 1px solid var(--hair-strong); background: var(--paper); box-shadow: var(--sh-rest); padding: 24px 26px; display: flex; flex-direction: column; }
 .dispatchcard__head { font-size: 10px; letter-spacing: .16em; color: var(--ocean); display: flex; align-items: center; gap: 9px; padding-bottom: 16px; border-bottom: 1px solid var(--hair); }
 .dispatchcard__fleuron { color: var(--current); }
-.dispatchcard__wire { min-height: 96px; display: flex; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--hair); font-family: var(--f-display); font-style: italic; font-size: clamp(22px, 2.3vw, 28px); line-height: 1.22; color: var(--ink); }
+.dispatchcard__wire { min-height: 96px; display: flex; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--hair); font-family: var(--f-garamond); font-style: italic; font-size: clamp(22px, 2.3vw, 28px); line-height: 1.22; color: var(--ink); }
 .dispatchcard__rows { list-style: none; display: flex; flex-direction: column; }
 .dispatchcard__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--hair); }
 .dispatchcard__what { font-size: 15px; color: var(--ink-mute); }
