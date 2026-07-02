@@ -5,7 +5,7 @@
    ========================================================= */
 
 /* Type is normalized to ONE family — Ledger — for display, body, UI, and the
-   italic accent (loaded via @fontsource in main.tsx). The mono labels are the
+   accent (loaded via @fontsource in main.tsx). The mono labels are the
    only other face. */
 
 :root {
@@ -87,11 +87,11 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 h1, h2, h3, h4, h5 { margin: 0; font-weight: 400; }
 
-/* Garamond italic accent — the signature move. */
+/* Garamond accent — the signature move (upright on blue text). */
 .display em, h1 em, h2 em, h3 em, h4 em, h5 em,
 blockquote em, .lede-cap em {
   font-family: var(--f-garamond);
-  font-style: italic;
+  font-style: normal;
   font-weight: 500;
   color: var(--current);
   font-variation-settings: normal;
@@ -99,7 +99,7 @@ blockquote em, .lede-cap em {
 }
 p em, li em, span em, a em {
   font-family: var(--f-garamond);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--current);
 }
@@ -339,7 +339,7 @@ main:focus { outline: none; }
 .leader.is-link { cursor: pointer; }
 .leader.is-link:hover { padding-left: 14px; background: linear-gradient(90deg, rgba(95,168,211,.06), transparent 70%); }
 .leader__numeral {
-  font-family: var(--f-garamond); font-style: italic;
+  font-family: var(--f-garamond); font-style: normal;
   font-size: 30px; color: var(--ocean); line-height: 1; padding-top: 4px;
 }
 .leader__line { display: flex; align-items: baseline; gap: 14px; }
@@ -377,7 +377,7 @@ main:focus { outline: none; }
 .plate__body { position: relative; overflow: hidden; border: 1px solid var(--hair); }
 .plate__body img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 5 / 4; }
 .plate__cutline { margin-top: 10px; padding: 0 4px 4px; font-size: 10.5px; letter-spacing: .14em; color: var(--ink-fine); display: flex; justify-content: center; gap: 8px; }
-.plate__cutline em { font-family: var(--f-garamond); font-style: italic; color: var(--ocean); letter-spacing: 0; }
+.plate__cutline em { font-family: var(--f-garamond); font-style: normal; color: var(--ocean); letter-spacing: 0; }
 
 /* ── page folio ────────────────────────────────────────── */
 .page-folio { text-align: center; padding: 40px 0 64px; font-size: 13px; letter-spacing: .3em; color: var(--ink-fine); }
@@ -403,7 +403,7 @@ main:focus { outline: none; }
 .sec-dim .steps__item { background: var(--paper-dim); }
 .steps__item:hover { background: var(--paper); }
 .sec-dim .steps__item:hover { background: var(--paper); }
-.steps__n { font-family: var(--f-garamond); font-style: italic; font-size: 40px; color: var(--current); line-height: 1; display: block; margin-bottom: 18px; }
+.steps__n { font-family: var(--f-garamond); font-style: normal; font-size: 40px; color: var(--current); line-height: 1; display: block; margin-bottom: 18px; }
 .steps__t { font-size: 16px; color: var(--ink); font-weight: 600; margin: 0 0 8px; }
 .steps__d { font-size: 13.5px; color: var(--ink-mute); line-height: 1.6; }
 .steps__stamp { margin-top: 16px; }

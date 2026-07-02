@@ -61,8 +61,8 @@ export function Colophon() {
           ])}
           {col("The Companies", [
             { label: "Commonwealth", onClick: goExternal(LINKS.commonwealth) },
-            { label: "The Maker Company", onClick: goExternal(LINKS.maker) },
-            { label: "The Learning Company", onClick: goExternal(LINKS.learning) },
+            { label: "The Maker Company" },
+            { label: "The Learning Company" },
           ])}
         </div>
       </div>

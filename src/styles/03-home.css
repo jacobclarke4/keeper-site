@@ -33,7 +33,7 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .fly__rotor { animation: none; } }
 .fly-cut__cutline { margin-top: 12px; text-align: center; font-size: 10px; letter-spacing: .16em; color: var(--ink-fine); }
-.fly-cut__cutline em { font-family: var(--f-garamond); font-style: italic; color: var(--ocean); letter-spacing: 0; }
+.fly-cut__cutline em { font-family: var(--f-garamond); font-style: normal; color: var(--ocean); letter-spacing: 0; }
 
 /* the wire */
 .wire { border: 1px solid var(--hair-strong); padding: 22px 24px; background: var(--paper); }
@@ -106,7 +106,7 @@
 .dispatchcard__rows { list-style: none; display: flex; flex-direction: column; }
 .dispatchcard__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--hair); }
 .dispatchcard__what { font-size: 15px; color: var(--ink-mute); }
-.dispatchcard__what em { font-family: var(--f-garamond); font-style: italic; color: var(--ocean); }
+.dispatchcard__what em { font-family: var(--f-garamond); font-style: normal; color: var(--ocean); }
 .dispatchcard__foot { font-size: 9.5px; letter-spacing: .12em; color: var(--ink-fine); padding-top: 16px; line-height: 1.6; }
 
 /* ── bridge ─────────────────────────────────────────────── */
@@ -118,7 +118,7 @@
 
 /* ── how it works — support line under the steps ────────── */
 .how__support { margin-top: 34px; font-size: 17px; color: var(--ink-mute); line-height: 1.62; max-width: 62ch; }
-.how__support em { font-family: var(--f-garamond); font-style: italic; color: var(--ocean); }
+.how__support em { font-family: var(--f-garamond); font-style: normal; color: var(--ocean); }
 
 /* ── catalog — expandable outcome cards ─────────────────── */
 .catalog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
