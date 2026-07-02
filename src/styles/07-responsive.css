@@ -28,9 +28,10 @@
   .step--0, .step--1, .step--2 { transform: none; }
   .how__arc { display: none; }
 
-  /* catalog single column, feature no longer spans */
+  /* catalog single column, feature no longer spans (so its title normalizes) */
   .catalog { grid-template-columns: 1fr; }
   .catalog__cell--feature { grid-column: auto; }
+  .catalog__cell--feature .cat__title { font-size: 22px; }
 
   /* pricing stacks, Base first and prominent, no tilt */
   .plans { grid-template-columns: 1fr; }
@@ -54,6 +55,10 @@
   :root { --gutter: 20px; --pad-section-y: 60px; }
   body { line-height: 1.62; }
 
+  /* clear the floating "Your balance" pill (top -52px over the track)
+     from the spend label, which reaches under it at narrow widths */
+  .balance__label { margin-bottom: 58px; }
+
   .hero { padding: 100px 0 60px; }
   .hero__h1 { font-size: clamp(38px, 11vw, 54px); }
   .hero__medallion { display: flex; justify-content: center; }
@@ -75,7 +80,12 @@
   .btn--lg { padding: 16px 30px; }
 }
 
+/* narrow phones: footer collapses to one column so company names stop
+   wrapping mid-name in a too-narrow second column */
+@media (max-width: 480px) {
+  .foot__cols { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 380px) {
   .hero__h1 { font-size: clamp(34px, 12vw, 46px); }
-  .foot__cols { grid-template-columns: 1fr; }
 }

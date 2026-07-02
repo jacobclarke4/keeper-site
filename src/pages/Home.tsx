@@ -46,7 +46,7 @@ function StepArc() {
           stroke="var(--current)"
           strokeWidth="2.5"
           strokeLinecap="round"
-          strokeDasharray="2 12"
+          strokeDasharray="0.004 0.02"
           pathLength={1}
         />
       </svg>
@@ -380,12 +380,12 @@ export function HomePage() {
 
           <Ink as="div" fx="rise" delay={90} className="cta-row">
             <Btn variant="accent" size="lg" href={LINKS.getStarted}>
-              Get started: $14/mo<sup className="fn-ref">¹</sup> <Arrow />
+              Get started: $14/mo<sup className="fn-ref">1</sup><Arrow />
             </Btn>
           </Ink>
 
           <Ink as="p" fx="rise" className="fineprint">
-            <sup className="fn-ref">¹</sup> One membership, $14/month. A few heavy requests may cost
+            <sup className="fn-ref">1</sup> One membership, $14/month. A few heavy requests may cost
             more to run, always shown and agreed before we begin. Cancel anytime. One button, no
             retention loops.
           </Ink>
