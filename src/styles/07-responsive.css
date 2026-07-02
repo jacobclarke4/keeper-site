@@ -10,7 +10,7 @@
 
 /* ── tablet / small laptop ─────────────────────────────── */
 @media (max-width: 920px) {
-  :root { --pad-section-y: 76px; }
+  :root { --pad-section-y: 40px; }
 
   /* nav → capsule with a burger + full-screen sheet */
   .mast__links, .mast__cta { display: none; }
@@ -19,7 +19,7 @@
   .mast.is-condensed .mast__monogram { display: none; }
 
   /* hero stacks; the joyful $14 survives */
-  .hero { padding-top: 118px; }
+  .hero { padding-top: 96px; }
   .hero__grid { grid-template-columns: 1fr; gap: 44px; }
   .hero__lede, .hero__say { max-width: none; }
 
@@ -52,14 +52,14 @@
 
 /* ── phone ─────────────────────────────────────────────── */
 @media (max-width: 560px) {
-  :root { --gutter: 20px; --pad-section-y: 60px; }
+  :root { --gutter: 20px; --pad-section-y: 32px; }
   body { line-height: 1.62; }
 
   /* clear the floating "Your balance" pill (top -52px over the track)
      from the spend label, which reaches under it at narrow widths */
   .balance__label { margin-bottom: 58px; }
 
-  .hero { padding: 100px 0 60px; }
+  .hero { padding: 88px 0 32px; }
   .hero__h1 { font-size: clamp(38px, 11vw, 54px); }
   .hero__medallion { display: flex; justify-content: center; }
   .medallion { transform: rotate(-2deg); }

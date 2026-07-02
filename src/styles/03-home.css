@@ -3,7 +3,7 @@
    ========================================================= */
 
 /* ── hero ───────────────────────────────────────────────── */
-.hero { position: relative; padding: 150px 0 96px; overflow: hidden; }
+.hero { position: relative; padding: 112px 0 48px; overflow: hidden; }
 .hero__sun { position: absolute; top: -14%; right: -8%; width: min(760px, 82vw); aspect-ratio: 1; background: var(--wash-sun); pointer-events: none; z-index: 0; transform-origin: 80% 20%; animation: sun-breathe 12s ease-in-out infinite alternate; }
 .hero__o { position: absolute; top: 6%; right: 6%; width: min(440px, 46vw); height: auto; color: var(--current); opacity: .16; transform: rotate(8deg); transform-origin: center; animation: o-drift 40s ease-in-out infinite alternate; }
 
