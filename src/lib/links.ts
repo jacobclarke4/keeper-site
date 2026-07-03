@@ -2,7 +2,7 @@
 // repo/deploy, so cross-site navigation is a real hyperlink, not an in-app route.
 // PLACEHOLDERS until domains are registered — swap these in one place.
 export const LINKS = {
-  commonwealth: "https://commonwealth.theoutcome.ai/", // TBD
+  commonwealth: "https://mycommonwealth.co/",
   maker: "https://maker.theoutcome.ai/", // TBD
   learning: "https://learning.theoutcome.ai/", // TBD
   audit: "https://audit.theoutcome.ai/", // TBD
