@@ -2,10 +2,10 @@ import type { CSSProperties, ReactNode } from "react";
 import { useInView } from "../lib/motion";
 
 /* ──────────────────────────────────────────────────────────
-   Sunlit Stationery primitives.
-   Warm, rounded, human. Every device is sliced from the brand's
-   calligraphic O (reused verbatim from public/toc-icon.svg — the
-   exact same path data, never redrawn).
+   The Current Editorial primitives — the app's devices, reused:
+   the mono eyebrow, the ocean pill button, the done chip, the
+   flow line, and the brand's calligraphic O (verbatim from
+   public/toc-icon.svg — the exact same path data, never redrawn).
    ────────────────────────────────────────────────────────── */
 
 /** The calligraphic O, reused verbatim from toc-icon.svg (cls-2 path).
@@ -76,10 +76,43 @@ export function Arrow() {
   return <span className="arrow" aria-hidden="true">→</span>;
 }
 
-/** A small seafoam sentence-case label — the warm replacement for every
- *  mono all-caps kicker. */
-export function TabPill({ children, onDark = false }: { children: ReactNode; onDark?: boolean }) {
-  return <span className={`tab-pill${onDark ? " tab-pill--dark" : ""}`}>{children}</span>;
+/** The app's eyebrow — a mono all-caps kicker with its leading rule.
+ *  tone: "ocean" on open paper, "deep" on tinted washes (readable),
+ *  "on-dark" on navy. */
+export function Eyebrow({
+  children,
+  tone = "ocean",
+}: {
+  children: ReactNode;
+  tone?: "ocean" | "deep" | "on-dark";
+}) {
+  const mod = tone === "ocean" ? "" : ` eyebrow--${tone}`;
+  return <span className={`eyebrow${mod}`}>{children}</span>;
+}
+
+/** The Current — the app's single animated flow line (Current.tsx),
+ *  used here as the hero's quiet undercurrent. Pure CSS animation,
+ *  respects prefers-reduced-motion. */
+export function CurrentLine({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 600 72"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      <path
+        className="current-line"
+        d="M-20 42 C 150 28 340 54 620 34"
+        stroke="var(--current)"
+        strokeWidth="1.6"
+        fill="none"
+        opacity="0.45"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 }
 
 /** The brand's recurring smile: a plump seafoam pill whose checkmark

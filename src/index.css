@@ -1,6 +1,8 @@
 /* =========================================================
-   THE OUTCOME COMPANY — "Sunlit Stationery".
-   Partials are bundled in order by Vite/PostCSS at build.
+   THE OUTCOME COMPANY — "The Current Editorial".
+   The app's design system (the-outcome-company-app/apps/web)
+   applied to the marketing site. Partials are bundled in
+   order by Vite/PostCSS at build.
    ========================================================= */
 @import "./styles/01-base.css";
 @import "./styles/02-shell.css";

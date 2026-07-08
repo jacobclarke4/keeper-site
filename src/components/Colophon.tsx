@@ -54,7 +54,7 @@ export function Colophon() {
             { label: "How it works", onClick: () => scrollToId("how") },
             { label: "What we can do", onClick: () => scrollToId("catalog") },
             { label: "Pricing", onClick: () => scrollToId("pricing") },
-            { label: "Support", onClick: () => scrollToId("support") },
+            { label: "Questions", onClick: () => scrollToId("faq") },
           ])}
           {col("Commonwealth", [
             { label: "The Charter", onClick: goExternal(`${LINKS.commonwealth}charter`) },

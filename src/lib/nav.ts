@@ -1,6 +1,6 @@
-// The Outcome Company is a single long edition — one front page, read top to
-// bottom. Navigation is in-page: the masthead links jump to section anchors,
-// every "Get started" is a real hyperlink to the sign-up flow.
+// The Outcome Company is a single page, read top to bottom. Navigation is
+// in-page: the masthead links jump to section anchors, every "Get started"
+// is a real hyperlink to the sign-up flow.
 
 export const BASE_URL = import.meta.env.BASE_URL;
 
@@ -9,18 +9,16 @@ export const NAV_SECTIONS = [
   { id: "how", label: "How it works" },
   { id: "catalog", label: "What we can do" },
   { id: "pricing", label: "Pricing" },
-  { id: "support", label: "Support" },
+  { id: "faq", label: "Questions" },
 ] as const;
 
-/** Every real section on the page — the CONTENTS index + scrollspy source. */
+/** Every real section on the page — the mobile-sheet index + scrollspy
+ *  source. Wallet and Commonwealth live inside Questions now. */
 export const ALL_SECTIONS = [
-  { id: "bridge", label: "Who it's for" },
   { id: "how", label: "How it works" },
   { id: "catalog", label: "What we can do" },
+  { id: "bridge", label: "Who it's for" },
   { id: "pricing", label: "Pricing" },
-  { id: "support", label: "Support" },
-  { id: "wallet", label: "The Wallet" },
-  { id: "commonwealth", label: "Commonwealth" },
   { id: "faq", label: "Questions" },
 ] as const;
 
@@ -49,11 +47,3 @@ export const scrollTop = () => {
   else window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-const MONTHS = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
-const DAYS = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
-
-/** Today, typeset like a dateline: "WEDNESDAY, JUNE 11, 2026". */
-export function datelineToday(): string {
-  const d = new Date();
-  return `${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
-}
