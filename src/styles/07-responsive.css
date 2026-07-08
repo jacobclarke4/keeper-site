@@ -1,50 +1,83 @@
 /* =========================================================
-   RESPONSIVE — The Current Editorial
+   RESPONSIVE — Sunlit Stationery
    ========================================================= */
 
 @media (max-width: 1080px) {
   :root { --gutter: 32px; }
+  .hero__grid { grid-template-columns: 1.1fr 1fr; gap: 40px; }
   .foot__top { grid-template-columns: 1fr; gap: 36px; }
-  .catalog { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── tablet / small laptop ─────────────────────────────── */
 @media (max-width: 920px) {
-  :root { --pad-section-y: 48px; }
+  :root { --pad-section-y: 40px; }
 
-  /* nav → bar with a burger + full-screen sheet */
+  /* nav → capsule with a burger + full-screen sheet */
   .mast__links, .mast__cta { display: none; }
   .mast__burger { display: flex; }
+  .mast.is-condensed .mast__wordmark { display: block; }
+  .mast.is-condensed .mast__monogram { display: none; }
 
-  .hero { padding-top: 116px; }
+  /* hero stacks; the joyful $14 survives */
+  .hero { padding-top: 96px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 44px; }
+  .hero__lede, .hero__say { max-width: none; }
 
-  .how__cards { grid-template-columns: 1fr; gap: 14px; }
+  /* how: cards straight, arc becomes a vertical dotted line */
+  .how__cards { grid-template-columns: 1fr; gap: 18px; }
+  .step--0, .step--1, .step--2 { transform: none; }
+  .how__arc { display: none; }
 
-  .wire__notes { grid-template-columns: 1fr; gap: 12px; }
+  /* catalog single column, feature no longer spans (so its title normalizes) */
+  .catalog { grid-template-columns: 1fr; }
+  .catalog__cell--feature { grid-column: auto; }
+  .catalog__cell--feature .cat__title { font-size: 22px; }
 
+  /* pricing stacks, Base first and prominent, no tilt */
   .plans { grid-template-columns: 1fr; }
+  .plan--feature { transform: none; }
+
+  .commonwealth { grid-template-columns: 1fr; gap: 32px; }
+  .commonwealth__seal { justify-content: flex-start; }
+  .commonwealth__halo { display: none; }
+}
+
+/* ── tablet portrait ───────────────────────────────────── */
+@media (max-width: 760px) {
+  /* delivered stack: straight vertical, no overlap/rotation */
+  .note { transform: translateY(16px); }
+  .note.is-in { transform: none; }
+  .note--0, .note--1, .note--2 { --rot: 0deg; margin: 0 0 14px 0; }
 }
 
 /* ── phone ─────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .catalog { grid-template-columns: 1fr; }
-}
-
 @media (max-width: 560px) {
-  :root { --gutter: 20px; --pad-section-y: 40px; }
+  :root { --gutter: 20px; --pad-section-y: 32px; }
+  body { line-height: 1.62; }
 
-  .hero { padding-top: 104px; }
-  .hero__h1 { font-size: clamp(32px, 9.5vw, 44px); }
-  .hero__ctas { flex-direction: column; gap: 14px; }
+  /* clear the floating "Your balance" pill (top -52px over the track)
+     from the spend label, which reaches under it at narrow widths */
+  .balance__label { margin-bottom: 58px; }
 
-  .panel { padding: 24px 20px; border-radius: var(--r-card); }
+  .hero { padding: 88px 0 32px; }
+  .hero__h1 { font-size: clamp(38px, 11vw, 54px); }
+  .hero__medallion { display: flex; justify-content: center; }
+  .medallion { transform: rotate(-2deg); }
+  .medallion__amt { font-size: clamp(64px, 22vw, 96px); }
 
-  .section-head__title, .bridge__title { font-size: clamp(26px, 7.5vw, 36px); }
+  .panel { padding: 26px 22px; border-radius: var(--r-card); }
+  .panel--ocorner { border-radius: var(--r-card); }
+
+  .section-head__title, .bridge__title, .support__title { font-size: clamp(28px, 8vw, 40px); }
+
+  .catalog__foot { padding: 28px 22px; }
+  .support__quote { padding-left: 0; padding-top: 78px; }
+  .support__bubble { top: 0; }
 
   .foot__cols { grid-template-columns: 1fr 1fr; }
   .foot__credo { flex-direction: column; align-items: flex-start; }
 
-  .btn--lg { padding: 14px 28px; }
+  .btn--lg { padding: 16px 30px; }
 }
 
 /* narrow phones: footer collapses to one column so company names stop
@@ -54,5 +87,5 @@
 }
 
 @media (max-width: 380px) {
-  .hero__h1 { font-size: clamp(30px, 11vw, 40px); }
+  .hero__h1 { font-size: clamp(34px, 12vw, 46px); }
 }

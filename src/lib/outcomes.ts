@@ -175,12 +175,4 @@ export const FAQ: Faq[] = [
     q: "Is a real person ever involved?",
     a: "Yes. Our support line is always open, and on Premium, a real person is on call for anything that needs one.",
   },
-  {
-    q: "How does the Wallet work?",
-    a: "Everything you spend comes from your own balance: money you've put in, nothing more. There's no credit, no hidden fees, and no way for a bill to quietly grow while you're not looking. You'll always know what something costs before it happens.",
-  },
-  {
-    q: "What is Commonwealth?",
-    a: "The Outcome Company is one part of Commonwealth, a community built on a simple promise: bring everyone into this new world together, and leave no one behind. Half of every dollar of profit goes back to the community — and that promise can never be sold or taken away. It's written down, and it's binding.",
-  },
 ];
