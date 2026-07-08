@@ -14,7 +14,7 @@
   transition: background .3s, border-color .3s, backdrop-filter .3s;
 }
 .mast.is-condensed .mast__capsule {
-  background: rgba(247, 249, 251, .88);
+  background: var(--mast-glass);
   backdrop-filter: saturate(150%) blur(14px);
   -webkit-backdrop-filter: saturate(150%) blur(14px);
   border-bottom-color: var(--hair);
@@ -64,6 +64,11 @@
 
 /* ── footer — deep brand navy (the app's dark surface) ──── */
 .foot { position: relative; background: var(--navy); color: var(--on-dark); padding: 0 var(--gutter) 44px; overflow: hidden; }
+/* in dark the page itself is near-navy — a hairline keeps the footer read
+   as its own surface */
+@media (prefers-color-scheme: dark) {
+  .foot { border-top: 1px solid var(--hair); }
+}
 .foot > * { position: relative; z-index: 1; }
 .foot .foot__watermark { position: absolute; left: -80px; bottom: -120px; width: 420px; height: 420px; color: var(--seafoam); opacity: .05; pointer-events: none; z-index: 0; }
 

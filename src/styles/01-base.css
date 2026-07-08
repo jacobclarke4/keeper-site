@@ -87,6 +87,9 @@
   --sh-float: 0 20px 44px -20px rgba(13, 27, 42, 0.24), 0 4px 12px -7px rgba(13, 27, 42, 0.12);
   --sh-send: 0 8px 18px -8px rgba(95, 168, 211, 0.55);
 
+  /* the condensed masthead's frosted glass */
+  --mast-glass: rgba(247, 249, 251, 0.88);
+
   /* type scale */
   --fs-hero: clamp(40px, 6vw, 72px);
   --fs-h2: clamp(30px, 4.2vw, 46px);
@@ -97,6 +100,38 @@
   --pad-section-y: 64px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── dark theme — the app's deep brand navy, driven purely by the
+   system setting (no on-page toggle). Semantic tokens flip; component
+   code never branches. Values from apps/web [data-theme="dark"]. ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --paper: #0b141f;
+    --paper-dim: #121e2b;
+    --surface: #172634;
+    --ink: #e8eef4;
+    --ink-mute: #a3b2c0;
+    --ink-fine: #71818f;
+    --hair: #1f2d3c;
+    --hair-strong: #2e4154;
+
+    --wash: #101c22;
+    --wash-ocean: #12283c;
+    --current-soft: #1b3a52;
+
+    /* the readable accent lightens so body italics, eyebrows, and
+       group labels keep their contrast on the deep ground */
+    --ocean-deep: #6fb1d8;
+
+    /* navy shadows vanish on the navy page — lean on black */
+    --sh-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 24px -18px rgba(0, 0, 0, 0.5);
+    --sh-float: 0 20px 44px -20px rgba(0, 0, 0, 0.5), 0 4px 12px -7px rgba(0, 0, 0, 0.3);
+
+    --mast-glass: rgba(11, 20, 31, 0.85);
+  }
 }
 
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -112,7 +147,7 @@ body {
 img { max-width: 100%; display: block; }
 a { color: inherit; cursor: pointer; text-decoration: none; }
 button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
-::selection { background: var(--current-soft); color: var(--navy); }
+::selection { background: var(--current-soft); color: var(--ink); }
 
 /* display voice — Ledger, weight 400, tight leading (the app's .display) */
 h1, h2, h3, h4, h5 {
