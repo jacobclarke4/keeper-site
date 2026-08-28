@@ -21,6 +21,59 @@
     <meta name="twitter:description" content="Real, finished results. No apps to learn, no tech to figure out. $14 a month. A Commonwealth company." />
     <meta name="twitter:image" content="https://outcomeco.ai/og.png" />
 
+    <!-- Structured data: declares the entity and its short-form names so Search
+         and AI systems associate "Outcome Co" / "Outcome Company" with this site.
+         Add real profile URLs (LinkedIn, Crunchbase, X, etc.) to sameAs to
+         strengthen the entity — that is one of the strongest signals Google uses. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://outcomeco.ai/#org",
+          "name": "The Outcome Company",
+          "alternateName": ["Outcome Co", "Outcome Company", "The Outcome Co", "Outcome Co."],
+          "url": "https://outcomeco.ai/",
+          "logo": "https://outcomeco.ai/toc-icon.svg",
+          "image": "https://outcomeco.ai/og.png",
+          "description": "Tell us what you need done. Consider it handled. Real, finished results, delivered by a personal concierge for $14 a month. A Commonwealth company.",
+          "slogan": "Tell us what you need done. Consider it handled.",
+          "parentOrganization": {
+            "@type": "Organization",
+            "name": "Commonwealth",
+            "url": "https://mycommonwealth.co/"
+          },
+          "makesOffer": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "14",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "14",
+              "priceCurrency": "USD",
+              "unitCode": "MON"
+            },
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Personal outcome concierge",
+              "description": "You describe what you need done; a real person plus AI deliver the finished result. No apps to learn, no tech to figure out."
+            }
+          },
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://outcomeco.ai/#website",
+          "name": "The Outcome Company",
+          "alternateName": ["Outcome Co", "Outcome Company"],
+          "url": "https://outcomeco.ai/",
+          "publisher": { "@id": "https://outcomeco.ai/#org" }
+        }
+      ]
+    }
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLGP2Z4EGR"></script>
     <script>
@@ -29,6 +82,9 @@
       gtag('js', new Date());
       gtag('config', 'G-TLGP2Z4EGR');
     </script>
+
+    <!-- Google Preferred Sources: powers the "add to preferred sources" button in the footer -->
+    <script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
   </head>
   <body>
     <div id="root"></div>

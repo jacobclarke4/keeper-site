@@ -486,6 +486,24 @@ export function HomePage() {
               Good questions, <em>straight answers.</em>
             </h2>
           </Ink>
+          {/* FAQPage structured data, generated from the same FAQ source that
+             renders below so the markup can never drift from the visible text
+             (Google requires an exact match). Baked into the static HTML by the
+             prerender step, so crawlers and AI systems read it without JS. */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: FAQ.map((f) => ({
+                  "@type": "Question",
+                  name: f.q,
+                  acceptedAnswer: { "@type": "Answer", text: f.a },
+                })),
+              }),
+            }}
+          />
           <div className="faq">
             {FAQ.map((f) => (
               <details className="faq__item" key={f.q}>

@@ -40,6 +40,15 @@ try {
     viewport: { width: 1280, height: 900 },
     reducedMotion: "reduce",
   });
+  // Third-party widgets (e.g. the Google Preferred Sources button) open
+  // long-lived connections that never let the page reach "networkidle",
+  // which would starve the snapshot. Drop those requests during prerender —
+  // the <script> tag stays in the baked HTML, so real users still load it.
+  await page.route("**/*", (route) => {
+    const host = new URL(route.request().url()).hostname;
+    if (host === "news.google.com") return route.abort();
+    return route.continue();
+  });
   await page.goto(url, { waitUntil: "networkidle" });
   await page.waitForTimeout(800);
   const html = await page.content();

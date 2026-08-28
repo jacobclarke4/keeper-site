@@ -84,10 +84,11 @@ h1, h2, h3, h4, h5 { margin: 0; font-weight: 400; letter-spacing: -0.018em; line
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* ── the signature accent: current italic on large display, ocean in
+/* ── the signature accent: current on large display, ocean in
    body, seafoam on navy. current fails AA at small sizes, so it is held
-   to large/decorative text only. ─────────────────────────────────────── */
-em { font-style: italic; }
+   to large/decorative text only. Accent words carry color + weight, not
+   italics. ──────────────────────────────────────────────────────────── */
+em { font-style: normal; }
 .hero__h1 em, .section-head__title em, .bridge__title em, .bridge__turn em,
 .promise__lead em, .heavy__h em, .catalog__count em, .support__quote em {
   color: var(--current); font-weight: 500;

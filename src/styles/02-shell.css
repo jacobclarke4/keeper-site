@@ -85,6 +85,8 @@
 .foot__brand-home .wordmark { font-size: 30px; }
 .foot__brand p { font-size: 16px; line-height: 1.7; color: var(--on-dark-mute); max-width: 280px; }
 .foot__cta { margin-top: 20px; }
+.foot__gnews { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.foot__gnews-label { font-size: 13px; color: var(--on-dark-fine); }
 .foot__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .foot__col-h { font-size: 14px; color: var(--seafoam); margin-bottom: 16px; font-style: italic; }
 .foot__col ul { list-style: none; }

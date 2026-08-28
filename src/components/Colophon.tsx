@@ -48,6 +48,11 @@ export function Colophon() {
           <Btn className="foot__cta" variant="ghost-dark" href={LINKS.getStarted}>
             Get started <Arrow />
           </Btn>
+          <div className="foot__gnews">
+            <span className="foot__gnews-label">Follow us in Google Search</span>
+            {/* Google Preferred Sources button — hydrated by publisher.js (index.html) */}
+            <div {...{ "google-add-preferred-source-btn": "" }} />
+          </div>
         </div>
         <div className="foot__cols">
           {col("The Outcome Company", [
