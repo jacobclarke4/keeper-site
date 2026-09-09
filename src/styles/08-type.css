@@ -20,9 +20,6 @@ p em, li em, .accent-ocean, .how__support em, .panel--navy em, .foot em { color:
 .medallion__per, .plan__per, .plan__tag, .hero__stack-cap, .bubble__who, .heavy__note, .promise__foot, .balance__label, .fn-ref, .btn--link { color: var(--ink-mute); }
 .mast__link:hover, .mast__link.is-active, .mast__login:hover, .sheet__row.is-active, .faq__item[open] .faq__q-text { color: var(--ink); }
 .medallion__amt, .plan__price { font-weight: 700; letter-spacing: -0.03em; }
-.note__line { font-family: var(--f-sans); }
 
-/* names and labels in the journal are quiet, not accent-coloured */
-.journal__entry--keeper .journal__who, .journal__entry--next .journal__who, .journal__who { color: var(--ink-mute); }
-.journal__entry--you .journal__text { color: var(--ink-mute); }
-.deck__peek-status { color: var(--ink-mute); }
+/* inside the app screen, only the section titles and the assistant's name are Ledger */
+.app h3, .app .deckcard__h { font-family: var(--f-sans); font-weight: 600; }

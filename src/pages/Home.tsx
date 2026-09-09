@@ -10,34 +10,13 @@ import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
    on phones too, so the copy stays short and the layouts compact.
    ────────────────────────────────────────────────────────── */
 
-/* The hero's example case: one workers' comp claim, told as a
-   conversation with a Keeper assistant and recorded in the case journal.
-   Illustrative, not live data. */
-type Entry = { date: string; who: "you" | "keeper"; text: string };
+/* The hero's example: Keeper's member home, as the app draws it (the
+   rebuild-ui branch of the-outcome-company-app): the assistant's pill at
+   the top where her replies appear, the case deck, the mail tracking, and
+   the member's capsule at the bottom. Illustrative, not live data. */
 
-const CASE = {
-  title: "Workers' comp claim",
-  statusBefore: "Opened Mar 3",
-  statusAfter: "Insurer decides by Mar 19",
-  said: "Slipped on the loading dock. Right knee. Told my foreman before end of shift.",
-  reply: "Got it. I've reported the injury to your employer and filed the claim. The certified receipt is in your file.",
-  entries: [
-    { date: "Mar 3", who: "you", text: "Slipped on the loading dock. Right knee. Told my foreman before end of shift." },
-    { date: "Mar 5", who: "keeper", text: "Claim filed with the insurer. Certified-mail receipt attached." },
-    { date: "Mar 6", who: "you", text: "Doctor says six weeks light duty. Photo of the note attached." },
-  ] as Entry[],
-  next: "Accepted: checks start. Denied: we file the appeal that week.",
-};
-
-/* The other cases in the stack, peeking out beneath the open one. */
-const PEEKS = [
-  { title: "ERISA appeal", status: "Plan decides · 31 days" },
-  { title: "Grievance · Art. 12", status: "Step 1 · Tuesday" },
-];
-
-/* The assistants. Each has a portrait in public/portraits/<id>.webp and two
-   neighbouring accents; every coloured surface is a gradient between them
-   (the same scheme as the Pal Company portraits). */
+/* The assistants. Portraits in public/portraits/<id>.webp; two neighbouring
+   accents each, the same scheme as the Pal Company portraits. */
 type Pal = { id: string; name: string; colors: [string, string] };
 const PALS: Pal[] = [
   { id: "nora", name: "Nora", colors: ["#f59e0b", "#ef4444"] },
@@ -51,35 +30,53 @@ const PALS: Pal[] = [
 ];
 const BASE_URL = import.meta.env.BASE_URL;
 
-/* Portrait on its gradient circle. Falls back to the initial if the image is missing. */
-function Portrait({ pal, size = 44, speaking = false }: { pal: Pal; size?: number; speaking?: boolean }) {
+const CASE = {
+  said: "Slipped on the loading dock. Right knee. Told my foreman before end of shift.",
+  welcome: "Hi Sam. Nothing is due today. Tell me what happened and I'll take it from there.",
+  thinking: "One moment.",
+  reply: "That sounds like a workers' comp claim. I've reported the injury to your employer and filed the claim with the insurer.",
+  headline: "Workers' comp claim",
+  steps: [
+    { n: 1, label: "Injury reported to your employer" },
+    { n: 2, label: "Claim filed with the insurer" },
+    { n: 3, label: "Insurer reviewing your claim" },
+  ],
+  total: 5,
+  daysLeft: 9,
+  mail: { title: "Claim to the insurer", kind: "Certified mail", steps: [["Assembled", "Mar 5"], ["Sent", "Mar 5"], ["Delivered", "Mar 8"]] as [string, string][], signed: "Signed for" },
+};
+
+/* The loop, in milliseconds from the start.
+   0 you talk (the mic is live, your words arrive in the text bar) ·
+   1 she thinks · 2 she answers and the case appears, step 1 ·
+   3 the claim is filed, step 2, tracking appears · 4 the insurer has it,
+   step 3, the road shows the fork · 5 hold, then fade and start again
+   with the next assistant. */
+const TIMELINE = [0, 3600, 4400, 8400, 10400, 14500];
+const RESTART_FADE = 500;
+const TYPE_MS = 34;
+
+/* The portrait with the voice badge: the app's NoraPortrait, on the
+   assistant's own gradient. Badge: speaker while ready, bars while speaking. */
+function Portrait({ pal, size, voice }: { pal: Pal; size: number; voice: "on" | "speaking" }) {
   const [a, b] = pal.colors;
   return (
     <span
-      className={`portrait${speaking ? " is-speaking" : ""}`}
-      style={{ width: size, height: size, ["--pal-grad" as string]: `linear-gradient(135deg, ${a}, ${b}, ${a})` }}
+      className={`pw pw--${voice}`}
+      style={{ width: size, height: size, ["--pal-a" as string]: a, ["--pal-grad" as string]: `linear-gradient(165deg, ${a}, ${b} 62%, ${a})` }}
       aria-label={pal.name}
     >
-      <span className="portrait__initial" aria-hidden="true">{pal.name[0]}</span>
-      <img
-        src={`${BASE_URL}portraits/${pal.id}.webp`}
-        alt=""
-        width={size}
-        height={size}
-        draggable={false}
-        onError={(e) => { e.currentTarget.style.display = "none"; }}
-      />
+      <img src={`${BASE_URL}portraits/${pal.id}.webp`} alt="" width={size} height={size} draggable={false} />
+      {voice === "speaking" ? (
+        <span className="pw-badge pw-badge--speaking" aria-hidden="true"><i /><i /><i /></span>
+      ) : (
+        <span className="pw-badge pw-badge--on" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M4 9v6h4l5 4V5L8 9z" /><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" /></svg>
+        </span>
+      )}
     </span>
   );
 }
-
-/* The loop, in milliseconds from the start.
-   0 you speak (transcript types in) · 1 your words land in the journal ·
-   2 the assistant answers and files; status flips · 3 doctor's note ·
-   4 what's next · 5 hold, then fade and restart with the next assistant. */
-const TIMELINE = [0, 3600, 4400, 8200, 9600, 13500];
-const RESTART_FADE = 500;
-const TYPE_MS = 34;
 
 /* The dotted arc that links the three step bubbles, drawn on enter. */
 function StepArc() {
@@ -103,7 +100,7 @@ function StepArc() {
 }
 
 /* Steps the loop; resolves to the finished state when motion is reduced.
-   Each pass hands the case to the next assistant. */
+   Each pass hands the member to the next assistant. */
 function useCaseLoop(reduced: boolean) {
   const [step, setStep] = useState(reduced ? 4 : 0);
   const [fading, setFading] = useState(false);
@@ -142,80 +139,105 @@ function useTyped(text: string, active: boolean) {
   return active ? text.slice(0, n) : "";
 }
 
-/* The phone: Keeper on a handset. You talk to an assistant through the
-   dock at the bottom; the case journal above records what happens. */
+const MicIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 3.5a2.75 2.75 0 0 1 2.75 2.75v5.25a2.75 2.75 0 0 1-5.5 0V6.25A2.75 2.75 0 0 1 12 3.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    <path d="M6 11.25a6 6 0 0 0 12 0M12 17.25v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+);
+const KeyboardIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="2" y="6" width="20" height="12" rx="2" /><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6" />
+  </svg>
+);
+const Check = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
+
+/* The phone: the member home, as the app draws it. */
 function PhoneMock() {
   const reduced = usePrefersReducedMotion();
   const { step, fading, pass } = useCaseLoop(reduced);
   const pal = PALS[pass % PALS.length];
   const listening = !reduced && step === 0;
+  const thinking = !reduced && step === 1;
   const speaking = !reduced && step === 2;
   const said = useTyped(CASE.said, listening);
-  const filed = step >= 2;
+  const caseStep = step >= 4 ? 3 : step >= 3 ? 2 : step >= 2 ? 1 : 0;
+  const phase = caseStep > 0 ? CASE.steps[caseStep - 1] : null;
+  const pct = Math.round((caseStep / CASE.total) * 100);
   return (
     <div className="hero__stack" aria-label="Keeper on your phone, example">
       <Ink as="div" fx="none" delay={640} className="phone">
-        <div className="phone__screen">
+        <div className={`phone__screen app${fading ? " is-fading" : ""}`}>
           <div className="phone__island" aria-hidden="true" />
           <div className="phone__status" aria-hidden="true">
             <span>9:41</span>
             <span className="phone__signal" />
           </div>
-          <div className="phone__bar">
-            <span className="phone__brand">Keeper</span>
-            <span className="phone__title">Your cases</span>
-          </div>
-          <div className="deck">
-            <article className={`deck__card deck__card--open${fading ? " is-fading" : ""}`}>
-              <header className="journal__head">
-                <p className="note__line">{CASE.title}</p>
-                <span className={`note__status${filed ? " note__status--live" : ""}`} key={filed ? "after" : "before"}>
-                  {filed ? CASE.statusAfter : CASE.statusBefore}
+          <header className="app__bar">
+            <span className="app__brand">Keeper</span>
+            <span className="app__bar-title">Home</span>
+          </header>
+
+          <div className="app__body">
+            <section className="npill">
+              <Portrait pal={pal} size={56} voice={speaking ? "speaking" : "on"} />
+              <div className="npill__copy">
+                <span className="npill__name">{pal.name}</span>
+                <p className="npill__line">{thinking ? CASE.thinking : step >= 2 ? CASE.reply : CASE.welcome}</p>
+              </div>
+            </section>
+
+            <section className={`cases${caseStep > 0 ? " is-in" : ""}`}>
+              <div className="cases__head">
+                <h2 className="cases__title">Your cases</h2>
+                <span className="cases__count">1 / 3</span>
+              </div>
+              <article className="deckcard">
+                <span className="badge badge--solid badge--info">In progress</span>
+                <h3 className="deckcard__h">{CASE.headline}</h3>
+                <div className="deckcard__chips">
+                  {caseStep >= 2 ? (
+                    <span className="badge badge--solid badge--warning">{CASE.daysLeft} days left</span>
+                  ) : (
+                    <span className="badge badge--neutral">No rush</span>
+                  )}
+                </div>
+                <div className="deckcard__track">
+                  <span className="deckcard__step">Step {caseStep || 1} of {CASE.total}</span>
+                  <span className="deckcard__phase">{phase ? phase.label : CASE.steps[0].label}</span>
+                  <span className="bar"><span className="bar__fill" style={{ width: `${Math.max(pct, 20)}%` }} /></span>
+                </div>
+                <span className={`deckcard__mail${caseStep >= 2 ? " is-in" : ""}`}>
+                  <span className="timeline__dot is-done"><Check /></span>
+                  <span className="deckcard__mail-text">{CASE.mail.kind} · {caseStep >= 3 ? `Delivered ${CASE.mail.steps[2][1]} · ${CASE.mail.signed}` : `Sent ${CASE.mail.steps[1][1]}`}</span>
                 </span>
-              </header>
-              <ol className="journal__list" aria-live="polite">
-                {CASE.entries.map((e, i) => (
-                  <li key={i} className={`journal__entry journal__entry--${e.who}${step >= i + 1 ? " is-in" : ""}`}>
-                    <span className="journal__rail" aria-hidden="true" />
-                    <span className="journal__date">{e.date}</span>
-                    <span className="journal__who">{e.who === "you" ? "You" : pal.name}</span>
-                    <p className="journal__text">{e.text}</p>
-                  </li>
-                ))}
-                <li className={`journal__entry journal__entry--next${step >= 4 ? " is-in" : ""}`}>
-                  <span className="journal__rail" aria-hidden="true" />
-                  <span className="journal__date">Next</span>
-                  <span className="journal__who">{pal.name}</span>
-                  <p className="journal__text">{CASE.next}</p>
-                </li>
-              </ol>
-            </article>
-            {PEEKS.map((p) => (
-              <article className="deck__card deck__card--peek" key={p.title}>
-                <p className="note__line">{p.title}</p>
-                <span className="deck__peek-status">{p.status}</span>
+                <span className={`road${caseStep >= 3 ? " is-in" : ""}`} aria-hidden="true">
+                  {[1, 2, 3].map((n) => (
+                    <span className="road__seg" key={n}>
+                      <span className={`road__dot${n === caseStep ? " road__dot--here" : n < caseStep ? " road__dot--done" : ""}`} />
+                      <span className={`road__line${n < caseStep ? " road__line--done" : ""}`} />
+                    </span>
+                  ))}
+                  <span className="road__fork" />
+                  <span className="road__branches"><span className="road__pay" /><span className="road__no" /></span>
+                </span>
               </article>
-            ))}
+            </section>
+
           </div>
 
-          {/* live caption: what you're saying, or what the assistant answers */}
-          <div className={`caption${listening || speaking ? " is-on" : ""}${speaking ? " caption--pal" : ""}`} aria-hidden="true">
-            <span className="caption__who">{speaking ? pal.name : "You"}</span>
-            <p className="caption__text">{speaking ? CASE.reply : said}{listening && <span className="caption__caret" />}</p>
-          </div>
-
-          {/* the dock: talk, the assistant, or type */}
-          <div className={`dock${listening ? " is-listening" : ""}`} aria-hidden="true">
-            <span className="dock__mic">
-              <span className="dock__mic-icon" />
-            </span>
-            <span className="dock__pal">
-              <Portrait pal={pal} size={46} speaking={speaking} />
-              <span className={`dock__badge${speaking ? " is-on" : ""}`} />
-            </span>
-            <span className="dock__keys">
-              <span className="dock__keys-icon" />
-            </span>
+          <div className="band" aria-hidden="true">
+            <div className={`textbar${listening ? " is-on" : ""}`}>
+              <span className="textbar__text">{said}{listening && <span className="textbar__caret" />}</span>
+              <span className="textbar__send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h18M13 5l8 7-8 7" /></svg></span>
+            </div>
+            <div className="capsule">
+              <span className={`capsule__mic${listening ? " is-rec" : ""}`}><MicIcon /></span>
+              <Portrait pal={pal} size={40} voice={speaking ? "speaking" : "on"} />
+              <span className="capsule__keys"><KeyboardIcon /></span>
+            </div>
           </div>
         </div>
       </Ink>

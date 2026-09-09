@@ -204,18 +204,16 @@
 }
 @media (max-width: 560px) { .catalog .cat__sum { padding: 8px 12px; } }
 
-/* ── tracker: one case on tablets and phones, kept compact ── */
+/* ── phone sizes on smaller screens ───────────────────────── */
+@media (max-width: 1080px) {
+  .phone { width: 340px; height: 700px; }
+  .hero__stack { --bleed: 176px; }
+}
 @media (max-width: 920px) {
-  .phone { width: 280px; height: 380px; transform: none; }
-  .phone.is-in { transform: none; }
-  .phone__screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(248,247,244,0), var(--paper)); pointer-events: none; z-index: 4; }
+  .hero__stack { --bleed: 120px; align-self: center; }
+  .phone { width: 320px; height: 560px; }
 }
-@media (max-width: 560px) {
-  .hero__stack { display: block; margin-top: 6px; }
-  .note__next { display: none; }
-}
-
-/* ── narrow screens: compact hero so the journal fits beneath it ── */
+/* ── narrow screens: compact hero so the phone's top fits beneath it ── */
 @media (max-width: 640px) {
   .hero { padding-top: 80px; }
   .hero__h1 { font-size: clamp(30px, 9vw, 42px); margin-bottom: 10px; }
@@ -226,32 +224,15 @@
   .hero__lede { font-size: 15px; line-height: 1.45; margin-bottom: 12px; }
   .hero__ctas { margin-bottom: 14px; }
   .hero__ctas .btn--lg { padding: 11px 22px; font-size: 15px; }
-  .hero__stack { margin-top: 0; }
-  .phone { width: 250px; height: 250px; padding: 8px 8px 0; border-radius: 34px 34px 0 0; }
-  .phone__screen { border-radius: 28px 28px 0 0; }
-  .phone__screen::after { height: 70px; }
-}
-
-/* ── phone sizes on smaller screens ───────────────────────── */
-@media (max-width: 1080px) {
-  .phone { width: 340px; height: 700px; }
-  .hero__stack { --bleed: 170px; }
-}
-@media (max-width: 920px) {
-  .hero__stack { --bleed: 120px; align-self: center; }
-  .phone { width: 320px; height: 520px; }
-  .phone__screen::after { display: none; }
-  .journal__list { min-height: 0; }
-}
-@media (max-width: 640px) {
-  .hero__stack { --bleed: 60px; }
-  .phone { width: 270px; height: 300px; padding: 9px 9px 0; border-radius: 38px 38px 0 0; }
+  .hero__stack { --bleed: 0px; margin-top: 0; display: flex; }
+  .phone { width: 270px; height: 288px; padding: 9px 9px 0; border-radius: 38px 38px 0 0; }
   .phone__screen { border-radius: 30px 30px 0 0; }
   .phone__status { padding: 12px 22px 0; font-size: 12px; }
   .phone__island { width: 80px; height: 22px; margin-left: -40px; top: 9px; }
-  .phone__bar { padding: 14px 16px 8px; }
-  .phone__brand { font-size: 18px; }
-  .deck__card--open { padding: 12px 12px 10px; }
-  .journal__text { font-size: 12.5px; }
-  .caption, .dock { display: none; }
+  .app__bar { padding: 14px 14px 6px; }
+  .app__brand { font-size: 18px; }
+  .npill { padding: 12px 14px; gap: 10px; }
+  .npill__name { font-size: 18px; }
+  .npill__line { font-size: 13px; }
+  .band { display: none; }
 }

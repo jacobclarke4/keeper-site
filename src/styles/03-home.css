@@ -240,134 +240,132 @@
 .support__title { margin-bottom: 16px; }
 .support__quote { margin-top: 24px; }
 
-/* ── hero phone: Keeper on a handset, the case deck stacked ── */
-.hero__stack { display: flex; justify-content: center; }
-.phone { position: relative; width: 300px; height: 560px; padding: 11px; border-radius: 46px; background: var(--navy); box-shadow: 0 30px 60px -28px rgba(43,43,43,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-2deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
-.phone.is-in { opacity: 1; transform: rotate(-2deg); }
-.phone__screen { position: relative; height: 100%; border-radius: 36px; background: var(--paper); overflow: hidden; display: flex; flex-direction: column; }
-.phone__island { position: absolute; left: 50%; top: 10px; width: 86px; height: 24px; margin-left: -43px; border-radius: 14px; background: var(--navy); z-index: 3; }
-.phone__status { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px 0; font-size: 12px; font-weight: 600; color: var(--ink); }
-.phone__signal { width: 34px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, var(--ink) 0 55%, var(--paper-dim) 55%); }
-.phone__bar { display: flex; align-items: baseline; justify-content: space-between; padding: 18px 18px 10px; }
-.phone__brand { font-style: italic; font-weight: 600; font-size: 15px; color: var(--ink); border-bottom: 2px solid var(--current); line-height: 1.1; }
-.phone__title { font-size: 12px; color: var(--ink-fine); }
-.deck { position: relative; flex: 1; padding: 0 12px 0; display: flex; flex-direction: column; }
-.deck__card { position: relative; background: var(--paper); border-radius: 20px; box-shadow: var(--sh-soft); border: 1px solid rgba(43,43,43,.06); }
-.deck__card--open { z-index: 3; padding: 12px 12px 10px; }
-.deck__card--peek { margin-top: -10px; padding: 18px 14px 6px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.deck__card--peek:nth-child(2) { z-index: 2; margin-left: 6px; margin-right: 6px; }
-.deck__card--peek:nth-child(3) { z-index: 1; margin-left: 12px; margin-right: 12px; }
-.deck__card--peek .note__line { font-size: 12px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.deck__peek-status { font-size: 10.5px; color: var(--ocean); white-space: nowrap; flex: none; }
-.note__line { font-size: 14px; font-weight: 600; color: var(--ink); margin: 0; line-height: 1.2; }
-.journal__head { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
-.note__status { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: var(--r-pill); background: var(--seafoam); color: var(--ink); font-weight: 600; font-size: 10.5px; white-space: nowrap; }
-.note__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--current); }
-.note__status--live::before { animation: journal-pulse 1.8s ease-in-out infinite; }
-.journal__list { list-style: none; margin: 0; padding: 0; }
-.journal__entry { position: relative; display: grid; grid-template-columns: 34px 1fr; column-gap: 6px; padding: 0 0 8px 16px; }
-.journal__entry:last-child { padding-bottom: 0; }
-.journal__rail { position: absolute; left: 3px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink-fine); box-sizing: border-box; }
-.journal__entry::before { content: ""; position: absolute; left: 6.5px; top: 12px; bottom: -2px; width: 1.5px; background: var(--paper-dim); }
-.journal__entry:last-child::before { display: none; }
-.journal__entry--keeper .journal__rail { background: var(--current); border-color: var(--current); }
-.journal__entry--next .journal__rail { background: var(--paper); border-color: var(--current); box-shadow: 0 0 0 3px rgba(219,54,48,.14); animation: journal-pulse 1.8s ease-in-out infinite; }
-.journal__date { grid-column: 1; font-size: 9.5px; color: var(--ink-fine); font-variant-numeric: tabular-nums; padding-top: 1px; white-space: nowrap; }
-.journal__who { grid-column: 2; font-size: 9.5px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; color: var(--ink-fine); }
-.journal__entry--keeper .journal__who, .journal__entry--next .journal__who { color: var(--ocean); }
-.journal__text { grid-column: 2; margin: 1px 0 0; font-size: 11.5px; line-height: 1.35; color: var(--ink); }
-.journal__entry--you .journal__text { font-style: italic; color: var(--ink-mute); }
-.journal__entry--next .journal__text { font-weight: 500; }
-.journal__add { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding: 6px 6px 6px 12px; border-radius: var(--r-pill); border: 1.5px solid var(--paper-dim); background: var(--paper); font-size: 11px; color: var(--ink-fine); }
-.journal__add-mic { width: 20px; height: 20px; border-radius: 50%; background: var(--current); position: relative; flex: none; }
-.journal__add-mic::before { content: ""; position: absolute; left: 7.5px; top: 4px; width: 5px; height: 8px; border-radius: 3px; background: #fff; }
-.journal__add-mic::after { content: ""; position: absolute; left: 5.5px; top: 7px; width: 7px; height: 7px; border: 1.5px solid #fff; border-top: 0; border-radius: 0 0 6px 6px; box-sizing: content-box; }
-@keyframes journal-pulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(219,54,48,.14); } 50% { box-shadow: 0 0 0 6px rgba(219,54,48,.06); } }
-@media (prefers-reduced-motion: reduce) { .journal__entry--next .journal__rail, .note__status--live::before { animation: none; } .phone { transition: none; } }
-
 /* the price's unit sits upright */
 .medallion__per { font-style: normal; }
 
-/* the journal never widens the hero grid */
+/* ── the phone: a handset, bigger, bleeding off the bottom of the hero ── */
 .hero__grid > * { min-width: 0; }
-.hero__stack { min-width: 0; }
-/* ── the journal writes itself ──────────────────────────── */
-.journal__list { min-height: 168px; }
-.journal__entry { opacity: 0; transform: translateY(8px); transition: opacity .45s var(--paper-ease), transform .5s var(--paper-ease); }
-.journal__entry.is-in { opacity: 1; transform: none; }
-.journal__entry::before { transform-origin: top; transform: scaleY(0); transition: transform .5s var(--paper-ease) .35s; }
-.journal__entry.is-in::before { transform: scaleY(1); }
-.note__status { animation: status-in .4s var(--paper-ease) both; }
-@keyframes status-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.journal__add-text { white-space: nowrap; overflow: hidden; text-overflow: clip; display: inline-block; max-width: 100%; }
-.journal__add.is-typing .journal__add-text { color: var(--ink); font-style: italic; }
-.journal__add-caret { display: inline-block; width: 1.5px; height: 12px; margin-left: 1px; background: var(--current); vertical-align: -2px; animation: caret 1s steps(2, start) infinite; }
-@keyframes caret { to { visibility: hidden; } }
-.journal__add.is-typing .journal__add-mic { animation: journal-pulse 1.2s ease-in-out infinite; }
-.deck__card--open { transition: opacity .5s var(--paper-ease); }
-.deck__card--open.is-fading { opacity: 0; }
-@media (prefers-reduced-motion: reduce) { .journal__entry, .journal__entry::before { transition: none; } .note__status { animation: none; } }
+.hero__stack { --bleed: 186px; min-width: 0; display: flex; justify-content: center; align-self: end; margin-bottom: calc(-1 * var(--bleed)); }
+.phone { position: relative; width: 372px; height: 760px; padding: 13px; border-radius: 54px; background: #0d1b2a; box-shadow: 0 30px 60px -28px rgba(13,27,42,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-1.5deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
+.phone.is-in { opacity: 1; transform: rotate(-1.5deg); }
+.phone__screen { position: relative; height: 100%; border-radius: 42px; overflow: hidden; display: flex; flex-direction: column; transition: opacity .5s var(--paper-ease); }
+.phone__screen.is-fading { opacity: 0; }
+.phone__island { position: absolute; left: 50%; top: 12px; width: 98px; height: 28px; margin-left: -49px; border-radius: 14px; background: #0d1b2a; z-index: 3; }
+.phone__status { display: flex; justify-content: space-between; align-items: center; padding: 18px 28px 0; font-size: 14px; font-weight: 600; }
+.phone__signal { width: 34px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, currentColor 0 55%, rgba(13,27,42,.15) 55%); }
 
-/* ── the phone, bigger, bleeding off the bottom of the hero ── */
-.hero__stack { --bleed: 190px; align-self: end; margin-bottom: calc(-1 * var(--bleed)); }
-.phone { width: 372px; height: 760px; padding: 13px; border-radius: 54px; transform: rotate(-1.5deg); }
-.phone.is-in { transform: rotate(-1.5deg); }
-.phone__screen { border-radius: 42px; }
-.phone__island { width: 98px; height: 28px; margin-left: -49px; top: 12px; }
-.phone__status { padding: 18px 28px 0; font-size: 14px; }
-.phone__bar { padding: 22px 22px 12px; }
-.phone__brand { font-size: 22px; border: 0; }
-.phone__title { font-size: 13px; }
-.deck { padding: 0 14px; }
-.deck__card { border-radius: 22px; }
-.deck__card--open { padding: 16px 16px 14px; }
-.note__line { font-size: 17px; }
-.note__status { font-size: 12px; padding: 4px 11px; }
-.journal__list { min-height: 250px; }
-.journal__entry { grid-template-columns: 44px 1fr; column-gap: 8px; padding: 0 0 12px 20px; }
-.journal__rail { left: 4px; top: 5px; width: 10px; height: 10px; }
-.journal__entry::before { left: 8.25px; top: 15px; }
-.journal__date { font-size: 11px; }
-.journal__who { font-size: 11px; }
-.journal__text { font-size: 14px; line-height: 1.4; }
-.deck__card--peek { padding: 22px 18px 8px; margin-top: -12px; }
-.deck__card--peek .note__line { font-size: 14px; }
-.deck__peek-status { font-size: 12px; color: var(--ink-mute); }
+/* ═══ the app, as the rebuild-ui branch draws it ═══════════════════════
+   Its own tokens, scoped to the screen: the page around it is Keeper's
+   charcoal and red; the product is the product. */
+.app {
+  --navy: #0d1b2a; --ocean: #5fa8d3; --ocean-deep: #3e7ea6; --ocean-ink: #33688a;
+  --btn: #2c79b0; --btn-deep: #245f8a;
+  --paper: #f5f0eb; --paper-dim: #eae8e4; --surface: #ffffff;
+  --ink: #0d1b2a; --ink-mute: #54524d; --ink-fine: #6c6a65;
+  --hair: #e6e4e0; --hair-strong: #cecbc4;
+  --success: #2c7a4e; --warning: #8a6410; --info: #34718f; --stale: #a8431c; --danger: #c0392b;
+  --current-soft: #d7ebf6;
+  --elev-float: 0 20px 44px -20px rgba(13,27,42,.24), 0 4px 12px -7px rgba(13,27,42,.12);
+  --elev-card: 0 8px 24px -12px rgba(13,27,42,.35), 0 1px 3px rgba(13,27,42,.08);
+  --radius-inner: 12px; --radius-float: 20px;
+  background: var(--paper); color: var(--ink); font-family: var(--f-sans);
+}
+.app__bar { display: flex; align-items: baseline; justify-content: space-between; padding: 20px 18px 8px; }
+.app__brand { font-family: var(--f-ledger); font-size: 22px; color: var(--ink); }
+.app__bar-title { font-size: 13px; color: var(--ink-fine); }
+.app__body { flex: 1; padding: 4px 14px 0; display: flex; flex-direction: column; gap: 12px; }
 
-/* ── portrait on its gradient circle ────────────────────── */
-.portrait { position: relative; display: inline-grid; place-items: center; border-radius: 50%; overflow: hidden; background: var(--pal-grad); background-size: 220% 220%; animation: grad-shift 5s ease-in-out infinite alternate; flex: none; }
-.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transform: scale(1.18) translateY(6%); }
-.portrait__initial { font-family: var(--f-ledger); font-size: 1.1em; color: #fff; }
-.portrait.is-speaking { animation-duration: 2s; }
-@keyframes grad-shift { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+/* the assistant's pill: her portrait, her name in Ledger, her one sentence */
+.npill { display: flex; align-items: flex-start; gap: 12px; padding: 13px 15px; border-radius: var(--radius-float); background: var(--surface); box-shadow: var(--elev-float); }
+.npill__copy { min-width: 0; flex: 1; }
+.npill__name { display: block; font-family: var(--f-ledger); font-size: 22px; line-height: 1; color: var(--ink); }
+.npill__line { margin: 6px 0 0; font-size: 13.5px; line-height: 1.38; color: var(--ink-mute); }
 
-/* ── the dock: talk · assistant · type ──────────────────── */
-.dock { position: absolute; left: 50%; bottom: calc(var(--bleed, 0px) + 18px); transform: translateX(-50%); z-index: 6; display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: var(--r-pill); background: #fff; box-shadow: 0 14px 34px -14px rgba(43,43,43,.45), 0 2px 8px -4px rgba(43,43,43,.25); }
-.dock__mic, .dock__keys { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; position: relative; }
-.dock__mic { background: var(--current); }
-.dock__keys { background: var(--seafoam); }
-.dock__mic-icon { position: relative; width: 10px; height: 16px; border-radius: 5px; background: #fff; }
-.dock__mic-icon::after { content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px; height: 12px; border: 2px solid #fff; border-top: 0; border-radius: 0 0 10px 10px; box-sizing: content-box; }
-.dock__mic-icon::before { content: ""; position: absolute; left: 50%; bottom: -12px; width: 2px; height: 6px; margin-left: -1px; background: #fff; }
-.dock__keys-icon { width: 26px; height: 16px; border-radius: 4px; border: 2px solid var(--ink-mute); position: relative; box-sizing: border-box; }
-.dock__keys-icon::before { content: ""; position: absolute; left: 4px; right: 4px; top: 3px; height: 2px; background: var(--ink-mute); box-shadow: 0 4px 0 var(--ink-mute); }
-.dock__pal { position: relative; display: grid; place-items: center; width: 62px; height: 62px; }
-.dock__badge { position: absolute; right: 2px; bottom: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--ink-fine); border: 2.5px solid #fff; box-sizing: border-box; transition: background .3s; }
-.dock__badge::before { content: ""; position: absolute; left: 4px; top: 5px; width: 4px; height: 5px; background: #fff; border-radius: 1px; }
-.dock__badge::after { content: ""; position: absolute; left: 8px; top: 3px; width: 5px; height: 9px; border-right: 2px solid #fff; border-radius: 0 6px 6px 0; }
-.dock__badge.is-on { background: var(--current); animation: badge-pulse 1s ease-in-out infinite; }
-@keyframes badge-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(219,54,48,.35); } 50% { box-shadow: 0 0 0 6px rgba(219,54,48,0); } }
-.dock.is-listening .dock__mic { animation: mic-ring 1.4s ease-out infinite; }
-@keyframes mic-ring { 0% { box-shadow: 0 0 0 0 rgba(219,54,48,.45); } 100% { box-shadow: 0 0 0 16px rgba(219,54,48,0); } }
+/* the portrait with the voice badge (the app's .pw) on the assistant's gradient */
+.pw { position: relative; display: inline-block; flex: none; }
+.pw img { display: block; width: 100%; height: 100%; border-radius: 999px; object-fit: cover; object-position: top; background: var(--pal-grad); box-shadow: 0 0 16px 5px color-mix(in srgb, var(--pal-a) 42%, transparent); }
+.pw--speaking img { box-shadow: 0 0 18px 6px rgba(44,122,78,.45); animation: nora-halo 1.4s ease-in-out infinite; }
+@keyframes nora-halo { 50% { box-shadow: 0 0 30px 12px rgba(44,122,78,.5); } }
+.pw-badge { position: absolute; right: -3px; bottom: -3px; width: 36%; height: 36%; min-width: 20px; min-height: 20px; box-sizing: border-box; border-radius: 999px; border: 2.5px solid #fff; display: flex; align-items: center; justify-content: center; gap: 2px; color: #fff; }
+.pw-badge--on { background: var(--btn); }
+.pw-badge--speaking { background: var(--success); }
+.pw-badge svg { width: 56%; height: 56%; }
+.pw-badge i { display: block; width: 2px; height: 40%; border-radius: 1px; background: #fff; animation: nora-bars 1s ease-in-out infinite; }
+.pw-badge i:nth-child(2) { animation-delay: -0.3s; height: 70%; }
+.pw-badge i:nth-child(3) { animation-delay: -0.6s; height: 50%; }
+@keyframes nora-bars { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
 
-/* ── live caption above the dock ────────────────────────── */
-.caption { position: absolute; left: 16px; right: 16px; bottom: calc(var(--bleed, 0px) + 100px); z-index: 5; padding: 10px 14px 11px; border-radius: 18px; background: rgba(43,43,43,.92); color: #fff; opacity: 0; transform: translateY(8px); transition: opacity .35s var(--paper-ease), transform .4s var(--paper-ease); pointer-events: none; }
-.caption.is-on { opacity: 1; transform: none; }
-.caption--pal { background: var(--paper); color: var(--ink); box-shadow: var(--sh-lift); }
-.caption__who { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; opacity: .7; margin-bottom: 2px; }
-.caption__text { margin: 0; font-size: 13.5px; line-height: 1.4; min-height: 1.4em; }
-.caption__caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; background: var(--current); vertical-align: -2px; animation: caret 1s steps(2, start) infinite; }
-@media (prefers-reduced-motion: reduce) { .portrait, .dock__badge.is-on, .dock.is-listening .dock__mic { animation: none; } .caption { transition: none; } }
-/* the open case keeps its last entry clear of the dock */
-.deck__card--open { padding-bottom: 84px; }
-@media (max-width: 640px) { .deck__card--open { padding-bottom: 10px; } }
+/* sections rise in as the case comes to life */
+.cases, .tracking { opacity: 0; transform: translateY(13px); transition: opacity .6s var(--paper-ease), transform .7s var(--paper-ease); }
+.cases.is-in, .tracking.is-in { opacity: 1; transform: none; }
+.cases__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.cases__title { font-family: var(--f-ledger); font-size: 19px; letter-spacing: -0.01em; color: var(--ink); margin: 0; font-weight: 400; }
+.cases__count { font-size: 12px; color: var(--ink-fine); letter-spacing: .04em; }
+
+/* the deck card: the app's CaseDeck card */
+.deckcard { display: flex; flex-direction: column; gap: 3px; width: 100%; padding: 12px; border-radius: var(--radius-inner); background: var(--surface); box-shadow: var(--elev-card); }
+.deckcard__h { margin: 2px 0 0; font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+.deckcard__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.deckcard__track { margin-top: 6px; }
+.deckcard__step { display: block; font-size: 13px; font-weight: 600; color: var(--ink); }
+.deckcard__phase { display: block; font-size: 13px; color: var(--ocean-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar { display: block; height: 6px; margin-top: 6px; border-radius: 999px; background: var(--paper-dim); overflow: hidden; }
+.bar__fill { display: block; height: 100%; border-radius: 999px; background: var(--btn); transition: width .7s var(--paper-ease); }
+.deckcard__open { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 32px; margin-top: 8px; padding: 0 14px; border-radius: 999px; background: var(--btn); color: #fff; font-size: 13px; font-weight: 600; }
+
+/* the chip: the app's Badge */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; --badge-ink: var(--ink-mute); color: var(--badge-ink); background: color-mix(in srgb, var(--badge-ink) 14%, var(--surface)); align-self: flex-start; }
+.badge--solid { background: var(--badge-ink); color: #fff; font-weight: 600; }
+.badge--info { --badge-ink: var(--info); }
+.badge--warning { --badge-ink: var(--warning); }
+.badge--neutral { --badge-ink: var(--ink-mute); }
+
+/* the road strip: dots to the split, then the two faint roads (the app's CaseRoadStrip) */
+.road { display: flex; align-items: center; gap: 4px; margin-top: 8px; opacity: 0; transition: opacity .5s var(--paper-ease); }
+.road.is-in { opacity: 1; }
+.road__seg { display: contents; }
+.road__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--hair-strong); flex: none; }
+.road__dot--done { background: var(--success); }
+.road__dot--here { width: 10px; height: 10px; background: var(--btn); box-shadow: 0 0 0 3px var(--current-soft); }
+.road__line { height: 2px; flex: 1; background: var(--hair-strong); }
+.road__line--done { background: var(--ocean); }
+.road__fork { width: 8px; height: 8px; transform: rotate(45deg); border: 1.5px solid var(--ink); background: var(--paper); flex: none; }
+.road__branches { display: flex; flex-direction: column; gap: 2px; }
+.road__pay, .road__no { display: block; height: 2px; width: 24px; }
+.road__pay { background: color-mix(in srgb, var(--success) 60%, transparent); }
+.road__no { background: color-mix(in srgb, var(--stale) 60%, transparent); }
+
+/* tracking: what happened to the envelope (the app's TrackingSection) */
+.piece { padding: 12px 14px; border-radius: var(--radius-inner); background: var(--surface); box-shadow: 0 1px 2px rgba(13,27,42,.04); border: 1px solid var(--hair); }
+.piece__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.piece__title { font-size: 14px; font-weight: 600; color: var(--ink); }
+.timeline { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.timeline__step { display: flex; align-items: center; gap: 6px; }
+.timeline__dot { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--hair-strong); background: var(--surface); color: #fff; flex: none; }
+.timeline__dot.is-done { background: var(--ocean-deep); border-color: var(--ocean-deep); }
+.timeline__label { font-size: 12.5px; color: var(--ink); }
+.timeline__label.is-ahead { color: var(--ink-fine); }
+.timeline__date { color: var(--ink-fine); }
+.piece__signed { margin: 8px 0 0; font-size: 12px; font-weight: 500; color: var(--ocean-ink); }
+
+/* the member's capsule (the app's MemberControls): a frosted band, the text bar, the capsule */
+.band { position: absolute; left: 0; right: 0; bottom: var(--bleed, 0px); z-index: 6; display: flex; flex-direction: column; align-items: center; padding: 26px 14px 12px; pointer-events: none; }
+.band::before { content: ""; position: absolute; inset: 0; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); mask-image: linear-gradient(to top, black 30%, transparent 70%); -webkit-mask-image: linear-gradient(to top, black 30%, transparent 70%); }
+.textbar { position: absolute; left: 22px; right: 22px; bottom: calc(100% - 14px); display: flex; align-items: center; gap: 10px; width: 100%; height: 48px; padding: 0 6px 0 16px; border-radius: 999px; background: var(--surface); box-shadow: 0 14px 36px -10px rgba(13,27,42,.35), 0 2px 6px rgba(13,27,42,.10); opacity: 0; transform: translateY(8px); transition: opacity .3s var(--paper-ease), transform .35s var(--paper-ease); }
+.textbar.is-on { opacity: 1; transform: none; }
+.textbar__text { flex: 1; min-width: 0; font-size: 14px; color: var(--ink); white-space: nowrap; overflow: hidden; }
+.textbar__caret { display: inline-block; width: 1.5px; height: 14px; margin-left: 1px; background: var(--ink); vertical-align: -2px; animation: caret 1.5s ease-in-out infinite; }
+@keyframes caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.textbar__send { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--btn); color: #fff; flex: none; }
+.capsule { position: relative; display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 999px; border: 1px solid var(--hair); background: var(--surface); box-shadow: var(--elev-float); }
+.capsule__mic, .capsule__keys { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; }
+.capsule__mic { background: var(--btn); color: #fff; }
+.capsule__mic.is-rec { background: var(--success); animation: rec-pulse 1.4s ease-out infinite; }
+@keyframes rec-pulse { 0% { box-shadow: 0 0 0 0 rgba(44,122,78,.45); } 100% { box-shadow: 0 0 0 14px rgba(44,122,78,0); } }
+.capsule__keys { background: var(--paper-dim); color: var(--ink-mute); }
+@media (prefers-reduced-motion: reduce) { .pw--speaking img, .pw-badge i, .capsule__mic.is-rec { animation: none; } .phone, .cases, .tracking, .textbar, .road { transition: none; } }
+
+/* the envelope, on the card: one line of proof */
+.deckcard__mail { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12.5px; color: var(--ink); opacity: 0; transition: opacity .5s var(--paper-ease); }
+.deckcard__mail.is-in { opacity: 1; }
+.deckcard__mail-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

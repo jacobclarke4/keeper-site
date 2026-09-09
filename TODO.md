@@ -20,7 +20,8 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 
 ## Assets to drop in
 
-- [ ] **Assistant portraits.** `src/pages/Home.tsx` expects `public/portraits/{nora,frankie,lin,ben,camille,hanna,charlie,vivian}.webp` (300px square, transparent). Until they exist the dock shows each assistant's initial on their gradient. Copy them from `~/Documents/outcome-assistant-headshots/` (Camille is the French `Untitled-2.webp`).
+- [x] **Assistant portraits** are in `public/portraits/` (Camille is the French `Untitled-2.webp`).
+- [ ] **The hero phone mirrors the app's rebuild-ui branch** (member pill, case deck card, badge/chip system, road strip, member capsule, `.pw` portrait). When those components change in the-outcome-company-app, this mock will drift; it is hand-copied CSS, not shared code.
 
 ## Ship
 
