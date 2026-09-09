@@ -23,3 +23,8 @@ p em, li em, .accent-ocean, .how__support em, .panel--navy em, .foot em { color:
 
 /* inside the app screen, only the section titles and the assistant's name are Ledger */
 .app h3, .app .deckcard__h { font-family: var(--f-sans); font-weight: 600; }
+
+/* the price sticker is red with white type */
+.medallion { background: var(--current); box-shadow: 0 8px 22px -10px rgba(219,54,48,.55); }
+.medallion__amt, .medallion__per { color: #fff; }
+.medallion__per { opacity: .9; }
