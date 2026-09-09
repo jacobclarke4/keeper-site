@@ -64,7 +64,7 @@
   transition: background .2s, color .2s;
 }
 .sheet__row:hover, .sheet__row:active { background: var(--seafoam); }
-.sheet__row.is-active { color: var(--ocean); background: rgba(241,220,160,.4); }
+.sheet__row.is-active { color: var(--ocean); background: rgba(243,208,203,.4); }
 .sheet__cta { margin-top: auto; padding-top: 28px; display: flex; flex-direction: column; gap: 12px; }
 .sheet__imprint { text-align: center; font-size: 14px; color: var(--ink-fine); margin-top: 12px; font-style: italic; }
 
@@ -95,7 +95,7 @@
 .foot__col button:hover { color: var(--seafoam); }
 .foot__col li span { color: var(--on-dark-fine); }
 
-.foot__credo { display: flex; align-items: center; gap: 20px; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(241,220,160,.12); }
+.foot__credo { display: flex; align-items: center; gap: 20px; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(243,208,203,.12); }
 .foot__seal { flex: none; }
 .foot__credo p { font-size: 14px; color: var(--on-dark-mute); max-width: 760px; line-height: 1.7; }
 .foot__inline-link { color: var(--seafoam); text-decoration: underline; text-underline-offset: 2px; }
