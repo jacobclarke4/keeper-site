@@ -55,7 +55,7 @@ export function Colophon() {
         <div className="foot__cols">
           {col("Keeper", [
             { label: "How it works", onClick: () => scrollToId("how") },
-            { label: "What we can do", onClick: () => scrollToId("catalog") },
+            { label: "What we file", onClick: () => scrollToId("catalog") },
             { label: "Pricing", onClick: () => scrollToId("pricing") },
             { label: "Support", onClick: () => scrollToId("support") },
           ])}
