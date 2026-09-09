@@ -203,3 +203,13 @@
   .fineprint { font-size: 12px; line-height: 1.4; }
 }
 @media (max-width: 560px) { .catalog .cat__sum { padding: 8px 12px; } }
+
+/* ── tracker: one case on tablets and phones, kept compact ── */
+@media (max-width: 920px) {
+  .note { padding: 12px 14px 10px; }
+  .track__label { font-size: 10.5px; }
+}
+@media (max-width: 560px) {
+  .hero__stack { display: block; margin-top: 6px; }
+  .note__next { display: none; }
+}

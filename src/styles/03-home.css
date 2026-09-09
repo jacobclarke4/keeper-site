@@ -239,3 +239,27 @@
 .faq__q { padding: 11px 18px; }
 .support__title { margin-bottom: 16px; }
 .support__quote { margin-top: 24px; }
+
+/* ── hero case tracker ──────────────────────────────────── */
+.note { padding: 14px 18px 12px; }
+.note__line { font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 10px; }
+.track { list-style: none; margin: 0 0 10px; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; position: relative; }
+.track::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 6px; height: 2px; background: var(--paper-dim); }
+.track__step { position: relative; text-align: center; }
+.track__step::before { content: ""; position: absolute; left: 50%; right: -50%; top: 6px; height: 2px; background: var(--paper-dim); }
+.track__step:last-child::before { display: none; }
+.track__step.is-done::before { background: var(--current); }
+.track__dot { position: relative; z-index: 1; display: block; width: 14px; height: 14px; margin: 0 auto 6px; border-radius: 50%; background: var(--paper); border: 2px solid var(--paper-dim); box-sizing: border-box; }
+.track__step.is-done .track__dot { background: var(--current); border-color: var(--current); }
+.track__step.is-now .track__dot { border-color: var(--current); box-shadow: 0 0 0 4px rgba(219,54,48,.16); animation: track-pulse 1.8s ease-in-out infinite; }
+.track__label { display: block; font-size: 11px; line-height: 1.2; color: var(--ink-fine); }
+.track__step.is-done .track__label { color: var(--ink-mute); }
+.track__step.is-now .track__label { color: var(--ink); font-weight: 600; }
+.note__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0; font-size: 13px; line-height: 1.35; }
+.note__status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--r-pill); background: var(--seafoam); color: var(--ink); font-weight: 600; font-size: 12px; white-space: nowrap; }
+.note__status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--current); }
+.note__status--done::before { background: var(--ink); }
+.note__status--live::before { animation: track-pulse 1.8s ease-in-out infinite; }
+.note__next { color: var(--ink-mute); flex: 1 1 14ch; }
+@keyframes track-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+@media (prefers-reduced-motion: reduce) { .track__step.is-now .track__dot, .note__status--live::before { animation: none; } }

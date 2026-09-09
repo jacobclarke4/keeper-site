@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { LINKS, goExternal } from "../lib/links";
-import { OUTCOMES_TICKER, CATALOG, ALSO, TIERS, FAQ } from "../lib/outcomes";
-import { Ink, useInView, usePrefersReducedMotion } from "../lib/motion";
+import { CATALOG, ALSO, TIERS, FAQ } from "../lib/outcomes";
+import { Ink, useInView } from "../lib/motion";
 import { Arrow, Btn, CheckChip, OMark, Seal, TabPill } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
@@ -10,28 +9,45 @@ import { Arrow, Btn, CheckChip, OMark, Seal, TabPill } from "../components/primi
    on phones too, so the copy stays short and the layouts compact.
    ────────────────────────────────────────────────────────── */
 
-/* The hero's delivered outcomes — three received notes, each finished. */
-const DELIVERED = [
-  "A workers' comp claim, filed inside the deadline.",
-  "A denied pension benefit, appealed under ERISA.",
-  "A grievance written to the contract, step one filed.",
-];
+/* The hero's live cases — three filings, each with a tracker: the stages it
+   moves through, where it is right now, and the next thing that happens.
+   One is denied on purpose, so the "if they say no" path is visible. */
+type Case = {
+  title: string;
+  stages: string[];
+  /** 0-based index of the current stage. */
+  at: number;
+  status: string;
+  next: string;
+  tone: "done" | "live" | "watch";
+};
 
-/* A gentle fade rotator (no crossfade machinery — one line at a time). */
-function FadeRotator({ items, interval = 3000 }: { items: string[]; interval?: number }) {
-  const [i, setI] = useState(0);
-  const reduced = usePrefersReducedMotion();
-  useEffect(() => {
-    if (reduced || items.length <= 1) return;
-    const id = window.setInterval(() => setI((v) => (v + 1) % items.length), interval);
-    return () => window.clearInterval(id);
-  }, [items.length, interval, reduced]);
-  return (
-    <span className="fade-rotator" key={i}>
-      {items[i % items.length]}
-    </span>
-  );
-}
+const CASES: Case[] = [
+  {
+    title: "Workers' comp claim",
+    stages: ["Filed", "Reviewed", "Accepted", "Paid"],
+    at: 2,
+    status: "Accepted",
+    next: "First check due in 14 days. We'll confirm it lands.",
+    tone: "done",
+  },
+  {
+    title: "Disability benefit · ERISA appeal",
+    stages: ["Denied", "Appeal drafted", "Out for delivery", "Decision"],
+    at: 2,
+    status: "Certified mail · out for delivery",
+    next: "They have 45 days to answer. We're on the clock.",
+    tone: "live",
+  },
+  {
+    title: "Grievance · Article 12",
+    stages: ["Filed", "Step 1", "Step 2", "Arbitration"],
+    at: 1,
+    status: "Step 1 meeting Tuesday",
+    next: "Your steward has the brief and the timeline.",
+    tone: "watch",
+  },
+];
 
 /* The dotted arc that links the three step bubbles, drawn on enter. */
 function StepArc() {
@@ -54,33 +70,33 @@ function StepArc() {
   );
 }
 
-/* The hero delivered stack — three overlapped received notes. */
-function DeliveredStack() {
+/* The hero case stack — three trackers, overlapped like notes on a desk. */
+function CaseStack() {
   return (
-    <div className="hero__stack" aria-label="Recently delivered">
-      <p className="hero__stack-cap">Today&apos;s wire · Filed</p>
+    <div className="hero__stack" aria-label="Your cases">
+      <p className="hero__stack-cap">Your cases · Live</p>
       <div className="hero__notes">
-        {DELIVERED.map((line, i) => (
-          <Ink
-            as="article"
-            fx="none"
-            delay={640 + i * 90}
-            key={line}
-            className={`note note--${i}`}
-          >
-            {i === 0 && (
-              <span className="note__ticker">
-                <FadeRotator items={OUTCOMES_TICKER.slice(3)} />
-              </span>
-            )}
-            <p className="note__line">{line}</p>
-            <CheckChip delay={820 + i * 90} className="note__chip">
-              Filed
-            </CheckChip>
+        {CASES.map((c, i) => (
+          <Ink as="article" fx="none" delay={640 + i * 90} key={c.title} className={`note note--${i}`}>
+            <p className="note__line">{c.title}</p>
+            <ol className="track" aria-label={`Stage ${c.at + 1} of ${c.stages.length}: ${c.stages[c.at]}`}>
+              {c.stages.map((st, j) => (
+                <li
+                  key={st}
+                  className={`track__step${j < c.at ? " is-done" : ""}${j === c.at ? " is-now" : ""}`}
+                >
+                  <span className="track__dot" aria-hidden="true" />
+                  <span className="track__label">{st}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="note__meta">
+              <span className={`note__status note__status--${c.tone}`}>{c.status}</span>
+              <span className="note__next">{c.next}</span>
+            </p>
           </Ink>
         ))}
       </div>
-      <p className="hero__stack-foot">You tell us · we draft and file · you get the paper trail</p>
     </div>
   );
 }
@@ -157,7 +173,7 @@ export function HomePage() {
             </Ink>
           </div>
 
-          <DeliveredStack />
+          <CaseStack />
         </div>
       </section>
 
