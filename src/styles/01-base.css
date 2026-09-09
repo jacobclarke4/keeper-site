@@ -12,11 +12,14 @@
        --ocean    deep red, text accents and chip text (7.9:1 on paper)
        --current  union red, buttons and solid accents; holds white 4.6:1
                   and black 4.6:1
-       --seafoam  light grey tint for chips and pills; dark text only */
+       --seafoam  light grey tint for chips and pills; dark text only
+       --gold     orange-gold; ink on it 7.0:1, as text on charcoal 7.0:1 */
   --navy: #2B2B2B;
   --ocean: #9E2420;
   --current: #DB3630;
   --seafoam: #E6E6E3;
+  --gold: #E8A33D;       /* orange-gold: fills with dark text, accents on charcoal */
+  --gold-deep: #B8791E;  /* darker gold for large text on paper */
 
   --paper: #F8F7F4;
   --paper-dim: #EFEEEA;
@@ -100,7 +103,7 @@ em { font-style: normal; }
   color: var(--current); font-weight: 500;
 }
 p em, li em, .accent-ocean, .how__support em { color: var(--ocean); font-weight: 500; }
-.panel--navy em, .foot em, .ribbon__item { color: var(--seafoam); }
+.panel--navy em, .foot em, .ribbon__item { color: var(--gold); }
 
 :focus-visible { outline: 2px solid var(--current); outline-offset: 3px; border-radius: 4px; }
 main:focus { outline: none; }
@@ -122,11 +125,11 @@ main:focus { outline: none; }
 .omark { display: block; width: 100%; height: auto; }
 
 /* ── tab-pill: the warm replacement for every mono kicker ── */
-.tab-pill { display: inline-block; background: var(--seafoam); color: var(--ocean); font-size: 15px; padding: 6px 16px; border-radius: var(--r-pill); box-shadow: var(--sh-chip); }
-.tab-pill--dark { background: rgba(230,230,227,.16); color: var(--seafoam); box-shadow: none; }
+.tab-pill { display: inline-block; background: var(--gold); color: var(--ink); font-size: 15px; padding: 6px 16px; border-radius: var(--r-pill); box-shadow: var(--sh-chip); }
+.tab-pill--dark { background: rgba(232,163,61,.18); color: var(--gold); box-shadow: none; }
 
 /* ── check-chip: the DONE re-expression, a recurring smile ── */
-.check-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--seafoam); color: var(--ocean); border-radius: var(--r-chip); padding: 7px 15px 7px 9px; box-shadow: var(--sh-chip); font-size: 15px; line-height: 1.2; }
+.check-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--gold); color: var(--ink); border-radius: var(--r-chip); padding: 7px 15px 7px 9px; box-shadow: var(--sh-chip); font-size: 15px; line-height: 1.2; }
 .check-chip__mark { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--current); color: #fff; display: grid; place-items: center; opacity: 0; transform: scale(.82); }
 .check-chip__mark svg { width: 14px; height: 14px; display: block; }
 .check-chip.is-checked .check-chip__mark { animation: chip-pop .42s var(--spring) var(--d, 0ms) forwards; }
@@ -197,7 +200,7 @@ main:focus { outline: none; }
 .seal--animate { opacity: 0; transform: scale(1.08); }
 .seal--animate.is-in { animation: seal-in .6s var(--spring) forwards; }
 @keyframes seal-in { 0% { opacity: 0; transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); } }
-.panel--navy .seal, .foot .seal { color: var(--seafoam); }
+.panel--navy .seal, .foot .seal { color: var(--gold); }
 
 /* ── scroll-reveal motion (re-languaged ink--rise) ─────── */
 .ink--rise { opacity: 0; transform: translateY(14px); transition: opacity .38s var(--rise-ease) var(--d, 0ms), transform .38s var(--rise-ease) var(--d, 0ms); }
