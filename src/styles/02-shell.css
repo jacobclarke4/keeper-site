@@ -25,7 +25,7 @@
 .mast.is-condensed .mast__monogram { display: grid; }
 .mast__monogram-o { position: absolute; inset: 8px; width: 24px; height: 24px; color: var(--current); }
 .mast__ring { position: absolute; inset: 0; width: 40px; height: 40px; transform: rotate(-90deg); }
-.mast__ring-track { fill: none; stroke: rgba(27,73,101,.14); stroke-width: 2.4; }
+.mast__ring-track { fill: none; stroke: rgba(122,30,44,.14); stroke-width: 2.4; }
 .mast__ring-fill { fill: none; stroke: var(--current); stroke-width: 2.4; stroke-linecap: round; transition: stroke-dashoffset .15s linear; }
 
 .mast__links { display: flex; gap: 6px; margin-left: 8px; flex: 1; }
@@ -64,7 +64,7 @@
   transition: background .2s, color .2s;
 }
 .sheet__row:hover, .sheet__row:active { background: var(--seafoam); }
-.sheet__row.is-active { color: var(--ocean); background: rgba(190,233,232,.4); }
+.sheet__row.is-active { color: var(--ocean); background: rgba(241,220,160,.4); }
 .sheet__cta { margin-top: auto; padding-top: 28px; display: flex; flex-direction: column; gap: 12px; }
 .sheet__imprint { text-align: center; font-size: 14px; color: var(--ink-fine); margin-top: 12px; font-style: italic; }
 
@@ -95,7 +95,7 @@
 .foot__col button:hover { color: var(--seafoam); }
 .foot__col li span { color: var(--on-dark-fine); }
 
-.foot__credo { display: flex; align-items: center; gap: 20px; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(190,233,232,.12); }
+.foot__credo { display: flex; align-items: center; gap: 20px; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(241,220,160,.12); }
 .foot__seal { flex: none; }
 .foot__credo p { font-size: 14px; color: var(--on-dark-mute); max-width: 760px; line-height: 1.7; }
 .foot__inline-link { color: var(--seafoam); text-decoration: underline; text-underline-offset: 2px; }

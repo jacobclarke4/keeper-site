@@ -6,11 +6,12 @@
    ========================================================= */
 
 :root {
-  /* brand — unchanged */
+  /* brand — Union palette: union red, oxblood, pale gold on navy. Token
+     names kept from the original blue scheme so selectors stay stable. */
   --navy: #0D1B2A;
-  --ocean: #1B4965;
-  --current: #5FA8D3;
-  --seafoam: #BEE9E8;
+  --ocean: #7A1E2C;
+  --current: #B8302E;
+  --seafoam: #F1DCA0;
 
   --paper: #FBF8F3;
   --paper-dim: #F2EDE3;
@@ -34,16 +35,16 @@
   --r-pill: 999px;
 
   /* atmosphere — one warm light source, tinted fields, soft washes */
-  --wash-sun: radial-gradient(120% 130% at 80% -12%, rgba(190,233,232,.72), rgba(95,168,211,.26) 32%, rgba(251,248,243,0) 66%);
-  --blob: radial-gradient(circle, rgba(95,168,211,.16), transparent 70%);
-  --tint-seafoam: linear-gradient(155deg, rgba(190,233,232,.55), rgba(190,233,232,.16));
-  --tint-current: linear-gradient(155deg, rgba(95,168,211,.20), rgba(95,168,211,.05));
+  --wash-sun: radial-gradient(120% 130% at 80% -12%, rgba(241,220,160,.72), rgba(184,48,46,.26) 32%, rgba(251,248,243,0) 66%);
+  --blob: radial-gradient(circle, rgba(184,48,46,.16), transparent 70%);
+  --tint-seafoam: linear-gradient(155deg, rgba(241,220,160,.55), rgba(241,220,160,.16));
+  --tint-current: linear-gradient(155deg, rgba(184,48,46,.20), rgba(184,48,46,.05));
 
   /* soft, warm, low, ocean-tinted shadows */
-  --sh-soft: 0 2px 6px -3px rgba(27,73,101,.10), 0 20px 44px -26px rgba(27,73,101,.24);
-  --sh-lift: 0 4px 10px -3px rgba(27,73,101,.14), 0 34px 66px -30px rgba(27,73,101,.32);
-  --sh-chip: inset 0 1px 0 rgba(255,255,255,.55), 0 6px 16px -8px rgba(27,73,101,.28);
-  --sh-pill: 0 8px 22px -10px rgba(27,73,101,.45);
+  --sh-soft: 0 2px 6px -3px rgba(122,30,44,.10), 0 20px 44px -26px rgba(122,30,44,.24);
+  --sh-lift: 0 4px 10px -3px rgba(122,30,44,.14), 0 34px 66px -30px rgba(122,30,44,.32);
+  --sh-chip: inset 0 1px 0 rgba(255,255,255,.55), 0 6px 16px -8px rgba(122,30,44,.28);
+  --sh-pill: 0 8px 22px -10px rgba(122,30,44,.45);
 
   /* type scale */
   --fs-hero: clamp(44px, 7.2vw, 92px);
@@ -117,7 +118,7 @@ main:focus { outline: none; }
 
 /* ── tab-pill: the warm replacement for every mono kicker ── */
 .tab-pill { display: inline-block; background: var(--seafoam); color: var(--ocean); font-size: 15px; padding: 6px 16px; border-radius: var(--r-pill); box-shadow: var(--sh-chip); }
-.tab-pill--dark { background: rgba(190,233,232,.16); color: var(--seafoam); box-shadow: none; }
+.tab-pill--dark { background: rgba(241,220,160,.16); color: var(--seafoam); box-shadow: none; }
 
 /* ── check-chip: the DONE re-expression, a recurring smile ── */
 .check-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--seafoam); color: var(--ocean); border-radius: var(--r-chip); padding: 7px 15px 7px 9px; box-shadow: var(--sh-chip); font-size: 15px; line-height: 1.2; }
@@ -128,8 +129,8 @@ main:focus { outline: none; }
 
 /* ── category chip (tint-cycling catalog groups) ───────── */
 .category-chip { display: inline-block; border-radius: var(--r-pill); padding: 5px 14px; font-size: 14px; align-self: flex-start; }
-.category-chip--seafoam { background: rgba(190,233,232,.55); color: var(--ocean); }
-.category-chip--current { background: rgba(95,168,211,.20); color: var(--ocean); }
+.category-chip--seafoam { background: rgba(241,220,160,.55); color: var(--ocean); }
+.category-chip--current { background: rgba(184,48,46,.20); color: var(--ocean); }
 
 /* small chips */
 .chip-note { display: inline-block; background: var(--seafoam); color: var(--ocean); border-radius: var(--r-pill); padding: 3px 13px; font-size: 13.5px; margin-right: 8px; }
@@ -159,17 +160,17 @@ main:focus { outline: none; }
 .btn--block { width: 100%; }
 
 .btn--accent { background: var(--current); color: #fff; box-shadow: var(--sh-pill); }
-.btn--accent:hover { transform: translateY(-1px); box-shadow: 0 12px 30px -10px rgba(27,73,101,.55); }
-.btn--accent:active { transform: translateY(1px); box-shadow: 0 4px 14px -6px rgba(27,73,101,.5); }
+.btn--accent:hover { transform: translateY(-1px); box-shadow: 0 12px 30px -10px rgba(122,30,44,.55); }
+.btn--accent:active { transform: translateY(1px); box-shadow: 0 4px 14px -6px rgba(122,30,44,.5); }
 .btn--accent .fn-ref { color: #fff; }
 
 .btn--solid { background: var(--ink); color: var(--paper); }
 .btn--solid:hover { transform: translateY(-1px); box-shadow: var(--sh-lift); }
 
-.btn--ghost { background: transparent; color: var(--ink); border-color: rgba(27,73,101,.30); }
-.btn--ghost:hover { background: rgba(190,233,232,.4); border-color: rgba(27,73,101,.15); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: rgba(122,30,44,.30); }
+.btn--ghost:hover { background: rgba(241,220,160,.4); border-color: rgba(122,30,44,.15); }
 
-.btn--ghost-dark { background: transparent; color: var(--on-dark); border-color: rgba(190,233,232,.4); }
+.btn--ghost-dark { background: transparent; color: var(--on-dark); border-color: rgba(241,220,160,.4); }
 .btn--ghost-dark:hover { background: var(--seafoam); color: var(--navy); border-color: var(--seafoam); }
 
 .btn--link { background: transparent; padding: 0; color: var(--ocean); border: none; }
