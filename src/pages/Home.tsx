@@ -153,7 +153,7 @@ export function HomePage() {
             <Ink as="div" fx="none" delay={300} className="hero__medallion">
               <span className="medallion">
                 <span className="medallion__amt">$14</span>
-                <span className="medallion__per">a month</span>
+                <span className="medallion__per">/month</span>
               </span>
             </Ink>
 
