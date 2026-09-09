@@ -1,5 +1,4 @@
 import { scrollToId, scrollTop } from "../lib/nav";
-import { OUTCOMES_TICKER } from "../lib/outcomes";
 import { LINKS, goExternal } from "../lib/links";
 import { Seal, Btn, Arrow } from "./primitives";
 import { Wordmark, WORDMARK } from "./Wordmark";
@@ -25,18 +24,6 @@ export function Colophon() {
 
   return (
     <footer className="foot">
-      {/* the wire ribbon — every outcome, in passing, warm and slow */}
-      <div className="ribbon" aria-hidden="true">
-        <div className="ribbon__track">
-          {[...OUTCOMES_TICKER, ...OUTCOMES_TICKER].map((t, i) => (
-            <span className="ribbon__item" key={i}>
-              <span className="ribbon__dot" />
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-
       <div className="foot__top wrap">
         <div className="foot__brand">
           <button type="button" className="foot__brand-home" onClick={scrollTop} aria-label="Keeper — top">
