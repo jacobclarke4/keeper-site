@@ -14,6 +14,6 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 
 ## Ship
 
-- [ ] Force-push this history over the placeholder commit on `jacobclarke4/keeper-site` (see below).
-- [ ] In the GitHub repo settings, set Pages source to "GitHub Actions".
+- [x] Pushed to `jacobclarke4/keeper-site`.
+- [x] Pages enabled with the GitHub Actions source; live at https://jacobclarke4.github.io/keeper-site/.
 - [ ] Once a Keeper domain exists: add `public/CNAME`, build with `VITE_BASE=/`, and replace `https://jacobclarke4.github.io/keeper-site/` in `index.html`, `public/sitemap.xml`, and `public/robots.txt`.
