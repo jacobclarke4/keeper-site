@@ -248,9 +248,6 @@
 .hero__stack { --bleed: 186px; min-width: 0; display: flex; justify-content: center; align-self: end; margin-bottom: calc(-1 * var(--bleed)); }
 .phone { position: relative; z-index: 1; width: 372px; height: 760px; padding: 13px; border-radius: 54px; background: #0d1b2a; box-shadow: 0 30px 60px -28px rgba(13,27,42,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-1.5deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
 .phone.is-in { opacity: 1; transform: rotate(-1.5deg); }
-/* The phone runs off the bottom of the hero, so its lower part dissolves into the page instead of
-   being cut. The overlay sits above the screen but below the capsule band (z 6), which stays crisp. */
-.phone::after { content: ""; position: absolute; inset: -48px; z-index: 2; pointer-events: none; background: linear-gradient(to bottom, rgba(248,247,244,0) 52%, rgba(248,247,244,.9) 66%, var(--paper) 71%); }
 /* A red aurora behind the phone: three soft lobes of Keeper red drifting slowly at different rates. */
 .hero__stack::before, .hero__stack::after { content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: blur(70px); -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 92%); mask-image: linear-gradient(to bottom, #000 55%, transparent 92%); }
 .hero__stack::before { left: 50%; top: 6%; width: 820px; height: 720px; margin-left: -410px; background:
