@@ -132,7 +132,7 @@ export function HomePage() {
         <div className="wrap hero__grid">
           <div className="hero__lead">
             <Ink as="h1" fx="rise" delay={220} className="hero__h1">
-              Tell us what you need done. <em>Consider it handled.</em>
+              Insurance for <em>your Insurance.</em>
             </Ink>
 
             <Ink as="p" fx="rise" delay={300} className="hero__lede">
