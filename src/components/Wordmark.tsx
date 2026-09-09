@@ -5,7 +5,7 @@
    a thin Current-blue rule beneath. One component, every
    Commonwealth company sets its own name in the same hand:
 
-     The Outcome Company  ·  Commonwealth  ·  The Maker Company
+     Keeper  ·  Commonwealth  ·  The Maker Company
 
    Size is inherited from the parent's font-size; color follows
    the variant (light on paper, dark on navy).
@@ -36,4 +36,4 @@ export function Wordmark({ lead, strong, trail, variant = "light", className = "
 }
 
 /** This site's name, in one place so the masthead + colophon never drift. */
-export const WORDMARK = { lead: "The", strong: "Outcome", trail: "Company" } as const;
+export const WORDMARK = { strong: "Keeper" } as const;

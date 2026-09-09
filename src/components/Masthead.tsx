@@ -70,7 +70,7 @@ export function Masthead() {
   return (
     <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
       <div className="mast__capsule">
-        <button type="button" className="mast__brand" onClick={goHome} aria-label="The Outcome Company — home">
+        <button type="button" className="mast__brand" onClick={goHome} aria-label="Keeper — home">
           <Wordmark {...WORDMARK} className="mast__wordmark" />
           <span className="mast__monogram" aria-hidden="true">
             <svg className="mast__ring" viewBox="0 0 36 36">

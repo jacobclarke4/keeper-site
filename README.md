@@ -1,73 +1,34 @@
-# React + TypeScript + Vite 
+# Keeper site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing site for Keeper. React 19 + TypeScript + Vite 7, Tailwind 4, Lenis
+smooth scroll, with a post-build Playwright prerender so crawlers get full HTML.
 
-Currently, two official plugins are available:
+## Develop
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm install
+npx playwright install chromium   # once, for the prerender step
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm run build     # tsc -b && vite build, then scripts/prerender.mjs bakes dist/index.html + 404.html
+npm run preview
 ```
+
+## Deploy
+
+Pushes to `main` build and publish `dist/` to GitHub Pages via
+`.github/workflows/deploy.yml`. The site is served under `/keeper-site/` by
+default; set `VITE_BASE=/` and add `public/CNAME` when a custom domain is
+attached, and update the absolute URLs in `index.html`, `public/sitemap.xml`,
+and `public/robots.txt`.
+
+## Layout
+
+- `src/pages/Home.tsx`: the single long-scroll front page.
+- `src/components/`: masthead, colophon, wordmark, and shared primitives.
+- `src/lib/links.ts`: absolute URLs to the app and sister sites, in one place.
+- `src/styles/`: design system split by layer (base, shell, home, pages, responsive).

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://outcomeco.ai/sitemap.xml
+Sitemap: https://jacobclarke4.github.io/keeper-site/sitemap.xml

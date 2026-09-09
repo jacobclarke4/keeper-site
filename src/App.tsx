@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.title = "The Outcome Company";
+    document.title = "Keeper";
   }, []);
 
   return (

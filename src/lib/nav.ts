@@ -1,4 +1,4 @@
-// The Outcome Company is a single long edition — one front page, read top to
+// Keeper is a single long edition — one front page, read top to
 // bottom. Navigation is in-page: the masthead links jump to section anchors,
 // every "Get started" is a real hyperlink to the sign-up flow.
 

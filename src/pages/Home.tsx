@@ -5,7 +5,7 @@ import { Ink, useInView, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn, CheckChip, OMark, Seal, TabPill } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
-   The Outcome Company — Sunlit Stationery.
+   Keeper — Sunlit Stationery.
    One continuous sheet of warm morning paper, big rounded tinted
    panels floating with soft shadows, and a giant friendly $14.
    ────────────────────────────────────────────────────────── */
@@ -457,7 +457,7 @@ export function HomePage() {
                 One part of <em>Commonwealth.</em>
               </Ink>
               <Ink as="p" fx="rise" delay={120} className="commonwealth__p">
-                The Outcome Company is one part of Commonwealth, a community built on a simple
+                Keeper is one part of Commonwealth, a community built on a simple
                 promise: bring everyone into this new world together, and leave no one behind.
               </Ink>
               <Ink as="p" fx="rise" delay={160} className="commonwealth__p">

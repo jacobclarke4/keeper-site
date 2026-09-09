@@ -41,7 +41,7 @@ export function Colophon() {
 
       <div className="foot__top wrap">
         <div className="foot__brand">
-          <button type="button" className="foot__brand-home" onClick={scrollTop} aria-label="The Outcome Company — top">
+          <button type="button" className="foot__brand-home" onClick={scrollTop} aria-label="Keeper — top">
             <Wordmark {...WORDMARK} variant="dark" />
           </button>
           <p>Tell us what you need. Consider it handled.</p>
@@ -55,7 +55,7 @@ export function Colophon() {
           </div>
         </div>
         <div className="foot__cols">
-          {col("The Outcome Company", [
+          {col("Keeper", [
             { label: "How it works", onClick: () => scrollToId("how") },
             { label: "What we can do", onClick: () => scrollToId("catalog") },
             { label: "Pricing", onClick: () => scrollToId("pricing") },
@@ -77,7 +77,7 @@ export function Colophon() {
       <div className="foot__credo wrap">
         <Seal size={72} animate={false} className="foot__seal" />
         <p>
-          © {year} The Outcome Company ·{" "}
+          © {year} Keeper ·{" "}
           <button type="button" className="foot__inline-link" onClick={goExternal(LINKS.commonwealth)}>A Commonwealth Company</button>
         </p>
       </div>
