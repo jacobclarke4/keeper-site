@@ -206,25 +206,39 @@
 
 /* ── tracker: one case on tablets and phones, kept compact ── */
 @media (max-width: 920px) {
-  .note { padding: 12px 14px 10px; }
-  .node { font-size: 11px; padding: 3px 8px; }
+  .note { padding: 14px 16px 12px; }
+  .journal__head { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
+  .journal__entry--compact, .journal__add { display: none; }
+  .journal__entry { padding-bottom: 8px; }
 }
 @media (max-width: 560px) {
   .hero__stack { display: block; margin-top: 6px; }
   .note__next { display: none; }
 }
 
-/* ── phone: the flow stacks; root on one line, the fork indented below ── */
+/* ── phone: three journal entries, no add bar ─────────────── */
 @media (max-width: 560px) {
-  .flow { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .flow__fork { margin-left: 10px; padding-left: 12px; }
-  .flow__fork::after { display: none; }
-  .flow__fork::before { top: 0; }
-  .flow__root .node + .node { margin-left: 12px; }
-  .flow__root .node + .node::before { left: -12px; width: 12px; }
+  .journal__text { font-size: 13px; }
+  .note__status { font-size: 11px; padding: 3px 8px; }
 }
-@media (max-width: 560px) {
-  .node { font-size: 10.5px; padding: 2px 7px; }
-  .flow__root .node + .node { margin-left: 10px; }
-  .flow__root .node + .node::before { left: -10px; width: 10px; }
+
+/* ── narrow screens: compact hero so the journal fits beneath it ── */
+@media (max-width: 640px) {
+  .hero { padding-top: 80px; }
+  .hero__h1 { font-size: clamp(30px, 9vw, 42px); margin-bottom: 10px; }
+  .medallion { padding: 6px 16px; gap: 10px; }
+  .medallion__amt { font-size: 46px; }
+  .medallion__per { font-size: 17px; }
+  .hero__medallion { margin-bottom: 10px; }
+  .hero__lede { font-size: 15px; line-height: 1.45; margin-bottom: 12px; }
+  .hero__ctas { margin-bottom: 14px; }
+  .hero__ctas .btn--lg { padding: 11px 22px; font-size: 15px; }
+  .hero__stack { margin-top: 0; }
+  .note { padding: 12px 14px 10px; }
+  .note__line { font-size: 15px; }
+  .journal__meta { display: none; }
+  .journal__head { gap: 4px; margin-bottom: 6px; }
+  .journal__entry { padding-bottom: 6px; grid-template-columns: 38px 1fr; padding-left: 18px; }
+  .journal__text { font-size: 12.5px; line-height: 1.35; }
+  .journal__date, .journal__who { font-size: 10px; }
 }

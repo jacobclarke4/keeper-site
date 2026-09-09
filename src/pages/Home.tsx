@@ -9,88 +9,30 @@ import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
    on phones too, so the copy stays short and the layouts compact.
    ────────────────────────────────────────────────────────── */
 
-/* The hero's live cases — three filings, each drawn as the fork it's
-   actually facing: the path so far, the decision we're waiting on, and
-   what happens on each branch. These are illustrative examples, not
-   live data; the shapes follow the real processes (insurer decision
-   windows, the 45-day ERISA plan decision, grievance steps to
-   arbitration). */
-type NodeState = "done" | "now" | "next" | "alt";
-type FlowNode = { label: string; state: NodeState };
-type Branch = { tag: string; nodes: FlowNode[] };
-type Case = {
-  title: string;
-  root: FlowNode[];
-  branches: [Branch, Branch];
-  status: string;
-  next: string;
-  tone: "done" | "live" | "watch";
+/* The hero's example case: one workers' comp claim, told through its
+   journal. Two voices: the member's own notes, in their words, and
+   Keeper's actions on the case. Illustrative, not live data. */
+type Entry = {
+  date: string;
+  who: "you" | "keeper";
+  text: string;
+  /** Hidden on phones, where the journal shows three entries. */
+  compact?: boolean;
 };
 
-const CASES: Case[] = [
-  {
-    title: "Workers' comp claim",
-    root: [
-      { label: "Injury reported", state: "done" },
-      { label: "Claim filed", state: "done" },
-      { label: "Insurer decision", state: "now" },
-    ],
-    branches: [
-      { tag: "If accepted", nodes: [{ label: "Benefits paid", state: "next" }] },
-      {
-        tag: "If denied",
-        nodes: [
-          { label: "Appeal filed", state: "alt" },
-          { label: "Hearing", state: "alt" },
-        ],
-      },
-    ],
-    status: "Decision due in 9 days",
-    next: "Accepted: checks start. Denied: we file the appeal that week.",
-    tone: "live",
-  },
-  {
-    title: "Disability benefit · ERISA appeal",
-    root: [
-      { label: "Denied", state: "done" },
-      { label: "Appeal sent certified", state: "done" },
-      { label: "Plan decides", state: "now" },
-    ],
-    branches: [
-      { tag: "If approved", nodes: [{ label: "Back pay + benefits", state: "next" }] },
-      {
-        tag: "If denied again",
-        nodes: [
-          { label: "External review", state: "alt" },
-          { label: "Federal court", state: "alt" },
-        ],
-      },
-    ],
-    status: "Plan has 31 days left",
-    next: "Their clock, not yours. We\u2019re counting it down.",
-    tone: "watch",
-  },
-  {
-    title: "Grievance · Article 12",
-    root: [
-      { label: "Filed", state: "done" },
-      { label: "Step 1 meeting", state: "now" },
-    ],
-    branches: [
-      { tag: "If resolved", nodes: [{ label: "Remedy in writing", state: "next" }] },
-      {
-        tag: "If not",
-        nodes: [
-          { label: "Step 2", state: "alt" },
-          { label: "Arbitration", state: "alt" },
-        ],
-      },
-    ],
-    status: "Step 1 meeting Tuesday",
-    next: "Your steward has the brief and the timeline.",
-    tone: "live",
-  },
-];
+const CASE = {
+  title: "Workers' comp claim",
+  meta: "Opened Mar 3 · Local 1245",
+  status: "Insurer decides by Mar 19",
+  entries: [
+    { date: "Mar 3", who: "you", text: "Slipped on the loading dock. Right knee. Told my foreman before end of shift." },
+    { date: "Mar 3", who: "keeper", text: "Injury reported to your employer in writing. Copy saved to this file.", compact: true },
+    { date: "Mar 5", who: "keeper", text: "Claim filed with the insurer. Certified-mail receipt attached." },
+    { date: "Mar 6", who: "you", text: "Doctor says six weeks light duty. Photo of the note attached.", compact: true },
+    { date: "Mar 6", who: "keeper", text: "Doctor's note added to the claim. Wage statement requested from payroll.", compact: true },
+  ] as Entry[],
+  next: "Accepted: checks start. Denied: we file the appeal that week.",
+};
 
 /* The dotted arc that links the three step bubbles, drawn on enter. */
 function StepArc() {
@@ -113,44 +55,39 @@ function StepArc() {
   );
 }
 
-/* One branching flow: root path, then the fork with both outcomes. */
-function Flow({ c }: { c: Case }) {
-  const node = (n: FlowNode) => (
-    <span key={n.label} className={`node node--${n.state}`}>
-      {n.label}
-    </span>
-  );
+/* The case journal card. */
+function CaseJournal() {
   return (
-    <div className="flow" aria-label={`${c.root.map((n) => n.label).join(", ")}; then ${c.branches[0].tag} ${c.branches[0].nodes.map((n) => n.label).join(", ")}, or ${c.branches[1].tag} ${c.branches[1].nodes.map((n) => n.label).join(", ")}`}>
-      <div className="flow__root">{c.root.map(node)}</div>
-      <div className="flow__fork">
-        {c.branches.map((b) => (
-          <div className="flow__branch" key={b.tag}>
-            <span className="flow__tag">{b.tag}</span>
-            {b.nodes.map(node)}
+    <div className="hero__stack" aria-label="Example case journal">
+      <Ink as="article" fx="none" delay={640} className="note note--0 journal">
+        <header className="journal__head">
+          <div>
+            <p className="note__line">{CASE.title}</p>
+            <p className="journal__meta">{CASE.meta}</p>
           </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* The hero case stack — three trackers, overlapped like notes on a desk. */
-function CaseStack() {
-  return (
-    <div className="hero__stack" aria-label="Example cases">
-      <div className="hero__notes">
-        {CASES.map((c, i) => (
-          <Ink as="article" fx="none" delay={640 + i * 90} key={c.title} className={`note note--${i}`}>
-            <p className="note__line">{c.title}</p>
-            <Flow c={c} />
-            <p className="note__meta">
-              <span className={`note__status note__status--${c.tone}`}>{c.status}</span>
-              <span className="note__next">{c.next}</span>
-            </p>
-          </Ink>
-        ))}
-      </div>
+          <span className="note__status note__status--live">{CASE.status}</span>
+        </header>
+        <ol className="journal__list">
+          {CASE.entries.map((e, i) => (
+            <li key={i} className={`journal__entry journal__entry--${e.who}${e.compact ? " journal__entry--compact" : ""}`}>
+              <span className="journal__rail" aria-hidden="true" />
+              <span className="journal__date">{e.date}</span>
+              <span className="journal__who">{e.who === "you" ? "You" : "Keeper"}</span>
+              <p className="journal__text">{e.who === "you" ? `\u201C${e.text}\u201D` : e.text}</p>
+            </li>
+          ))}
+          <li className="journal__entry journal__entry--next">
+            <span className="journal__rail" aria-hidden="true" />
+            <span className="journal__date">Next</span>
+            <span className="journal__who">Keeper</span>
+            <p className="journal__text">{CASE.next}</p>
+          </li>
+        </ol>
+        <div className="journal__add" aria-hidden="true">
+          <span className="journal__add-text">Add a note to this case…</span>
+          <span className="journal__add-mic" />
+        </div>
+      </Ink>
     </div>
   );
 }
@@ -225,7 +162,7 @@ export function HomePage() {
             </Ink>
           </div>
 
-          <CaseStack />
+          <CaseJournal />
         </div>
       </section>
 
