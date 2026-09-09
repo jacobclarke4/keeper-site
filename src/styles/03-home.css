@@ -62,7 +62,7 @@
 .step--2 { transform: rotate(-0.5deg); }
 .step:hover { box-shadow: var(--sh-lift); }
 .step__bubble { display: inline-grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; font-size: 34px; color: var(--navy); margin-bottom: 20px; box-shadow: var(--sh-chip); }
-.step__bubble--seafoam { background: var(--gold); }
+.step__bubble--seafoam { background: var(--seafoam); }
 .step__bubble--current { background: var(--current); }
 .step__t { font-size: 21px; color: var(--ink); font-weight: 600; margin-bottom: 10px; }
 .step__d { font-size: 16px; color: var(--ink-mute); line-height: 1.6; }
@@ -138,7 +138,7 @@
 .balance { padding-top: 42px; }
 .balance__label { font-size: 15px; color: var(--ocean); margin-bottom: 14px; }
 .balance__track { position: relative; height: 20px; border-radius: var(--r-pill); background: var(--paper-dim); }
-.balance__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 62%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--gold), var(--current)); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--paper-ease); }
+.balance__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 62%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--seafoam), var(--current)); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--paper-ease); }
 .balance.is-filled .balance__fill { transform: scaleX(1); }
 .balance__beyond { position: absolute; left: 62%; right: 0; top: 0; bottom: 0; border-radius: 0 var(--r-pill) var(--r-pill) 0; background: repeating-linear-gradient(45deg, rgba(13,27,42,.05) 0 6px, transparent 6px 12px); }
 .balance__cap { position: absolute; left: 62%; top: -52px; transform: translateX(-50%); display: flex; flex-direction: column-reverse; align-items: center; }
@@ -153,7 +153,7 @@
 .commonwealth__h { font-size: clamp(30px, 4vw, 52px); color: var(--on-dark); line-height: 1.06; margin: 20px 0; }
 .commonwealth__p { font-size: 17px; color: var(--on-dark-mute); line-height: 1.66; margin-bottom: 16px; max-width: 56ch; }
 .commonwealth__cta { margin-top: 26px; }
-.commonwealth__seal { display: flex; justify-content: center; color: var(--gold); }
+.commonwealth__seal { display: flex; justify-content: center; color: var(--seafoam); }
 
 /* ── faq ────────────────────────────────────────────────── */
 .faq { display: flex; flex-direction: column; gap: 14px; max-width: 860px; margin: 0 auto; }
