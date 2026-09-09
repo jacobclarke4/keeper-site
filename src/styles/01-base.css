@@ -10,8 +10,8 @@
      scheme so selectors stay stable.
        --navy     charcoal, dark panels and footer
        --ocean    deep red, text accents and chip text (7.9:1 on paper)
-       --current  union red, buttons and solid accents; holds white 4.6:1
-                  and black 4.6:1
+       --current  union red, buttons and solid accents. Red surfaces always
+                  carry WHITE text (4.6:1); charcoal on it is only 3.3:1
        --seafoam  light grey tint for chips and pills; dark text only */
   --navy: #2B2B2B;
   --ocean: #9E2420;
