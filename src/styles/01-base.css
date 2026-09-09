@@ -6,16 +6,16 @@
    ========================================================= */
 
 :root {
-  /* brand — Union palette: union red, oxblood, blush on navy. Token names
+  /* brand — Union palette: union red, oxblood, steel grey on navy. Token names
      kept from the original blue scheme so selectors stay stable.
      Contrast (WCAG): --current holds white 4.6:1 and black 4.6:1, so it
-     works as a fill under either. --seafoam (blush) is a tint for dark
-     text only: ink 11.7:1, oxblood 6.9:1. --ocean (oxblood) is a text
+     works as a fill under either. --seafoam (steel) is a tint for dark
+     text only: ink 12.0:1, oxblood 7.1:1. --ocean (oxblood) is a text
      colour: 9.7:1 on paper. */
   --navy: #0D1B2A;
   --ocean: #7A1E2C;
   --current: #DB3630;
-  --seafoam: #F3D0CB;
+  --seafoam: #CFD6DC;
 
   --paper: #FBF8F3;
   --paper-dim: #F2EDE3;
@@ -39,10 +39,10 @@
   --r-pill: 999px;
 
   /* atmosphere — one warm light source, tinted fields, soft washes */
-  --wash-sun: radial-gradient(120% 130% at 80% -12%, rgba(243,208,203,.72), rgba(219,54,48,.26) 32%, rgba(251,248,243,0) 66%);
-  --blob: radial-gradient(circle, rgba(219,54,48,.16), transparent 70%);
-  --tint-seafoam: linear-gradient(155deg, rgba(243,208,203,.55), rgba(243,208,203,.16));
-  --tint-current: linear-gradient(155deg, rgba(219,54,48,.20), rgba(219,54,48,.05));
+  --wash-sun: radial-gradient(120% 130% at 80% -12%, rgba(207,214,220,.72), rgba(27,42,58,.10) 32%, rgba(251,248,243,0) 66%);
+  --blob: radial-gradient(circle, rgba(27,42,58,.08), transparent 70%);
+  --tint-seafoam: linear-gradient(155deg, rgba(207,214,220,.55), rgba(207,214,220,.16));
+  --tint-current: linear-gradient(155deg, rgba(27,42,58,.10), rgba(27,42,58,.03));
 
   /* soft, warm, low, ocean-tinted shadows */
   --sh-soft: 0 2px 6px -3px rgba(122,30,44,.10), 0 20px 44px -26px rgba(122,30,44,.24);
@@ -122,7 +122,7 @@ main:focus { outline: none; }
 
 /* ── tab-pill: the warm replacement for every mono kicker ── */
 .tab-pill { display: inline-block; background: var(--seafoam); color: var(--ocean); font-size: 15px; padding: 6px 16px; border-radius: var(--r-pill); box-shadow: var(--sh-chip); }
-.tab-pill--dark { background: rgba(243,208,203,.16); color: var(--seafoam); box-shadow: none; }
+.tab-pill--dark { background: rgba(207,214,220,.16); color: var(--seafoam); box-shadow: none; }
 
 /* ── check-chip: the DONE re-expression, a recurring smile ── */
 .check-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--seafoam); color: var(--ocean); border-radius: var(--r-chip); padding: 7px 15px 7px 9px; box-shadow: var(--sh-chip); font-size: 15px; line-height: 1.2; }
@@ -133,8 +133,8 @@ main:focus { outline: none; }
 
 /* ── category chip (tint-cycling catalog groups) ───────── */
 .category-chip { display: inline-block; border-radius: var(--r-pill); padding: 5px 14px; font-size: 14px; align-self: flex-start; }
-.category-chip--seafoam { background: rgba(243,208,203,.55); color: var(--ocean); }
-.category-chip--current { background: rgba(219,54,48,.20); color: var(--ocean); }
+.category-chip--seafoam { background: rgba(207,214,220,.55); color: var(--ocean); }
+.category-chip--current { background: rgba(207,214,220,.7); color: var(--ocean); }
 
 /* small chips */
 .chip-note { display: inline-block; background: var(--seafoam); color: var(--ocean); border-radius: var(--r-pill); padding: 3px 13px; font-size: 13.5px; margin-right: 8px; }
@@ -172,9 +172,9 @@ main:focus { outline: none; }
 .btn--solid:hover { transform: translateY(-1px); box-shadow: var(--sh-lift); }
 
 .btn--ghost { background: transparent; color: var(--ink); border-color: rgba(122,30,44,.30); }
-.btn--ghost:hover { background: rgba(243,208,203,.4); border-color: rgba(122,30,44,.15); }
+.btn--ghost:hover { background: rgba(207,214,220,.4); border-color: rgba(122,30,44,.15); }
 
-.btn--ghost-dark { background: transparent; color: var(--on-dark); border-color: rgba(243,208,203,.4); }
+.btn--ghost-dark { background: transparent; color: var(--on-dark); border-color: rgba(207,214,220,.4); }
 .btn--ghost-dark:hover { background: var(--seafoam); color: var(--navy); border-color: var(--seafoam); }
 
 .btn--link { background: transparent; padding: 0; color: var(--ocean); border: none; }
