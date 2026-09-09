@@ -1,7 +1,7 @@
 import { scrollToId, scrollTop } from "../lib/nav";
 import { OUTCOMES_TICKER } from "../lib/outcomes";
 import { LINKS, goExternal } from "../lib/links";
-import { Seal, Btn, Arrow, OMark } from "./primitives";
+import { Seal, Btn, Arrow } from "./primitives";
 import { Wordmark, WORDMARK } from "./Wordmark";
 
 export function Colophon() {
@@ -25,14 +25,12 @@ export function Colophon() {
 
   return (
     <footer className="foot">
-      <OMark className="foot__watermark" />
-
       {/* the wire ribbon — every outcome, in passing, warm and slow */}
       <div className="ribbon" aria-hidden="true">
         <div className="ribbon__track">
           {[...OUTCOMES_TICKER, ...OUTCOMES_TICKER].map((t, i) => (
             <span className="ribbon__item" key={i}>
-              <span className="ribbon__dot"><OMark /></span>
+              <span className="ribbon__dot" />
               {t}
             </span>
           ))}

@@ -1,7 +1,7 @@
 import { LINKS, goExternal } from "../lib/links";
 import { CATALOG, ALSO, TIERS, FAQ } from "../lib/outcomes";
 import { Ink, useInView } from "../lib/motion";
-import { Arrow, Btn, CheckChip, OMark, Seal, TabPill } from "../components/primitives";
+import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
    Keeper — one viewport per section.
@@ -141,9 +141,7 @@ export function HomePage() {
     <div className="page-home">
       {/* ── hero ────────────────────────────────────────── */}
       <section className="hero" id="top">
-        <div className="hero__sun" aria-hidden="true">
-          <OMark className="hero__o" />
-        </div>
+        <div className="hero__sun" aria-hidden="true" />
         <div className="wrap hero__grid">
           <div className="hero__lead">
             <Ink as="h1" fx="rise" delay={220} className="hero__h1">
@@ -182,8 +180,6 @@ export function HomePage() {
         <div className="wrap">
           <div className="panel panel--seafoam panel--ocorner bridge">
             <span className="blob" aria-hidden="true" />
-            <OMark className="bridge__dot bridge__dot--1" />
-            <OMark className="bridge__dot bridge__dot--2" />
             <Ink as="div" fx="rise" className="bridge__tab">
               <TabPill>Who this is for</TabPill>
             </Ink>
@@ -371,9 +367,6 @@ export function HomePage() {
               on it.
             </Ink>
             <Ink as="blockquote" fx="rise" delay={200} className="support__quote">
-              <span className="support__bubble" aria-hidden="true">
-                <OMark className="support__bubble-o" />
-              </span>
               You&apos;re never stuck. You&apos;re <em>never alone</em> with it.
             </Ink>
           </div>

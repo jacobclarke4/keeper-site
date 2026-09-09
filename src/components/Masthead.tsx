@@ -3,24 +3,19 @@ import { ALL_SECTIONS, NAV_SECTIONS, SECTION_IDS, scrollToId, scrollTop } from "
 import { LINKS } from "../lib/links";
 import { useScrollSpy } from "../lib/motion";
 import { Wordmark, WORDMARK } from "./Wordmark";
-import { OMark } from "./primitives";
 
 export function Masthead() {
   const [condensed, setCondensed] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
   const active = useScrollSpy(SECTION_IDS);
 
-  // Scroll: condense the nav capsule + trace the progress ring around the O.
+  // Scroll: condense the nav capsule once the page has moved.
   useEffect(() => {
     let raf = 0;
     const measure = () => {
       raf = 0;
       const y = window.scrollY;
       setCondensed(y > 40);
-      const doc = document.documentElement;
-      const total = doc.scrollHeight - window.innerHeight;
-      setProgress(total > 0 ? Math.min(1, y / total) : 0);
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(measure);
@@ -64,28 +59,12 @@ export function Masthead() {
     scrollTop();
   };
 
-  // Progress ring geometry (r = 15, circumference ≈ 94.25).
-  const RING = 2 * Math.PI * 15;
 
   return (
     <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
       <div className="mast__capsule">
         <button type="button" className="mast__brand" onClick={goHome} aria-label="Keeper — home">
           <Wordmark {...WORDMARK} className="mast__wordmark" />
-          <span className="mast__monogram" aria-hidden="true">
-            <svg className="mast__ring" viewBox="0 0 36 36">
-              <circle className="mast__ring-track" cx="18" cy="18" r="15" />
-              <circle
-                className="mast__ring-fill"
-                cx="18"
-                cy="18"
-                r="15"
-                strokeDasharray={RING}
-                strokeDashoffset={RING * (1 - progress)}
-              />
-            </svg>
-            <OMark className="mast__monogram-o" />
-          </span>
         </button>
 
         <nav className="mast__links" aria-label="Primary">
