@@ -9,14 +9,19 @@ import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
    on phones too, so the copy stays short and the layouts compact.
    ────────────────────────────────────────────────────────── */
 
-/* The hero's live cases — three filings, each with a tracker: the stages it
-   moves through, where it is right now, and the next thing that happens.
-   One is denied on purpose, so the "if they say no" path is visible. */
+/* The hero's live cases — three filings, each drawn as the fork it's
+   actually facing: the path so far, the decision we're waiting on, and
+   what happens on each branch. These are illustrative examples, not
+   live data; the shapes follow the real processes (insurer decision
+   windows, the 45-day ERISA plan decision, grievance steps to
+   arbitration). */
+type NodeState = "done" | "now" | "next" | "alt";
+type FlowNode = { label: string; state: NodeState };
+type Branch = { tag: string; nodes: FlowNode[] };
 type Case = {
   title: string;
-  stages: string[];
-  /** 0-based index of the current stage. */
-  at: number;
+  root: FlowNode[];
+  branches: [Branch, Branch];
   status: string;
   next: string;
   tone: "done" | "live" | "watch";
@@ -25,27 +30,65 @@ type Case = {
 const CASES: Case[] = [
   {
     title: "Workers' comp claim",
-    stages: ["Filed", "Reviewed", "Accepted", "Paid"],
-    at: 2,
-    status: "Accepted",
-    next: "First check due in 14 days. We'll confirm it lands.",
-    tone: "done",
-  },
-  {
-    title: "Disability benefit · ERISA appeal",
-    stages: ["Denied", "Appeal drafted", "Out for delivery", "Decision"],
-    at: 2,
-    status: "Certified mail · out for delivery",
-    next: "They have 45 days to answer. We're on the clock.",
+    root: [
+      { label: "Injury reported", state: "done" },
+      { label: "Claim filed", state: "done" },
+      { label: "Insurer decision", state: "now" },
+    ],
+    branches: [
+      { tag: "If accepted", nodes: [{ label: "Benefits paid", state: "next" }] },
+      {
+        tag: "If denied",
+        nodes: [
+          { label: "Appeal filed", state: "alt" },
+          { label: "Hearing", state: "alt" },
+        ],
+      },
+    ],
+    status: "Decision due in 9 days",
+    next: "Accepted: checks start. Denied: we file the appeal that week.",
     tone: "live",
   },
   {
+    title: "Disability benefit · ERISA appeal",
+    root: [
+      { label: "Denied", state: "done" },
+      { label: "Appeal sent certified", state: "done" },
+      { label: "Plan decides", state: "now" },
+    ],
+    branches: [
+      { tag: "If approved", nodes: [{ label: "Back pay + benefits", state: "next" }] },
+      {
+        tag: "If denied again",
+        nodes: [
+          { label: "External review", state: "alt" },
+          { label: "Federal court", state: "alt" },
+        ],
+      },
+    ],
+    status: "Plan has 31 days left",
+    next: "Their clock, not yours. We\u2019re counting it down.",
+    tone: "watch",
+  },
+  {
     title: "Grievance · Article 12",
-    stages: ["Filed", "Step 1", "Step 2", "Arbitration"],
-    at: 1,
+    root: [
+      { label: "Filed", state: "done" },
+      { label: "Step 1 meeting", state: "now" },
+    ],
+    branches: [
+      { tag: "If resolved", nodes: [{ label: "Remedy in writing", state: "next" }] },
+      {
+        tag: "If not",
+        nodes: [
+          { label: "Step 2", state: "alt" },
+          { label: "Arbitration", state: "alt" },
+        ],
+      },
+    ],
     status: "Step 1 meeting Tuesday",
     next: "Your steward has the brief and the timeline.",
-    tone: "watch",
+    tone: "live",
   },
 ];
 
@@ -70,26 +113,37 @@ function StepArc() {
   );
 }
 
+/* One branching flow: root path, then the fork with both outcomes. */
+function Flow({ c }: { c: Case }) {
+  const node = (n: FlowNode) => (
+    <span key={n.label} className={`node node--${n.state}`}>
+      {n.label}
+    </span>
+  );
+  return (
+    <div className="flow" aria-label={`${c.root.map((n) => n.label).join(", ")}; then ${c.branches[0].tag} ${c.branches[0].nodes.map((n) => n.label).join(", ")}, or ${c.branches[1].tag} ${c.branches[1].nodes.map((n) => n.label).join(", ")}`}>
+      <div className="flow__root">{c.root.map(node)}</div>
+      <div className="flow__fork">
+        {c.branches.map((b) => (
+          <div className="flow__branch" key={b.tag}>
+            <span className="flow__tag">{b.tag}</span>
+            {b.nodes.map(node)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* The hero case stack — three trackers, overlapped like notes on a desk. */
 function CaseStack() {
   return (
-    <div className="hero__stack" aria-label="Your cases">
-      <p className="hero__stack-cap">Your cases · Live</p>
+    <div className="hero__stack" aria-label="Example cases">
       <div className="hero__notes">
         {CASES.map((c, i) => (
           <Ink as="article" fx="none" delay={640 + i * 90} key={c.title} className={`note note--${i}`}>
             <p className="note__line">{c.title}</p>
-            <ol className="track" aria-label={`Stage ${c.at + 1} of ${c.stages.length}: ${c.stages[c.at]}`}>
-              {c.stages.map((st, j) => (
-                <li
-                  key={st}
-                  className={`track__step${j < c.at ? " is-done" : ""}${j === c.at ? " is-now" : ""}`}
-                >
-                  <span className="track__dot" aria-hidden="true" />
-                  <span className="track__label">{st}</span>
-                </li>
-              ))}
-            </ol>
+            <Flow c={c} />
             <p className="note__meta">
               <span className={`note__status note__status--${c.tone}`}>{c.status}</span>
               <span className="note__next">{c.next}</span>

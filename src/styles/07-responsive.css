@@ -207,9 +207,24 @@
 /* ── tracker: one case on tablets and phones, kept compact ── */
 @media (max-width: 920px) {
   .note { padding: 12px 14px 10px; }
-  .track__label { font-size: 10.5px; }
+  .node { font-size: 11px; padding: 3px 8px; }
 }
 @media (max-width: 560px) {
   .hero__stack { display: block; margin-top: 6px; }
   .note__next { display: none; }
+}
+
+/* ── phone: the flow stacks; root on one line, the fork indented below ── */
+@media (max-width: 560px) {
+  .flow { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .flow__fork { margin-left: 10px; padding-left: 12px; }
+  .flow__fork::after { display: none; }
+  .flow__fork::before { top: 0; }
+  .flow__root .node + .node { margin-left: 12px; }
+  .flow__root .node + .node::before { left: -12px; width: 12px; }
+}
+@media (max-width: 560px) {
+  .node { font-size: 10.5px; padding: 2px 7px; }
+  .flow__root .node + .node { margin-left: 10px; }
+  .flow__root .node + .node::before { left: -10px; width: 10px; }
 }
