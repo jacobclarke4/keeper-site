@@ -246,8 +246,22 @@
 /* ── the phone: a handset, bigger, bleeding off the bottom of the hero ── */
 .hero__grid > * { min-width: 0; }
 .hero__stack { --bleed: 186px; min-width: 0; display: flex; justify-content: center; align-self: end; margin-bottom: calc(-1 * var(--bleed)); }
-.phone { position: relative; width: 372px; height: 760px; padding: 13px; border-radius: 54px; background: #0d1b2a; box-shadow: 0 30px 60px -28px rgba(13,27,42,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-1.5deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
+.phone { position: relative; z-index: 1; width: 372px; height: 760px; padding: 13px; border-radius: 54px; background: #0d1b2a; box-shadow: 0 30px 60px -28px rgba(13,27,42,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-1.5deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
 .phone.is-in { opacity: 1; transform: rotate(-1.5deg); }
+/* The phone runs off the bottom of the hero, so its lower part dissolves into the page instead of
+   being cut. The overlay sits above the screen but below the capsule band (z 6), which stays crisp. */
+.phone::after { content: ""; position: absolute; inset: -48px; z-index: 2; pointer-events: none; background: linear-gradient(to bottom, rgba(248,247,244,0) 52%, rgba(248,247,244,.9) 66%, var(--paper) 71%); }
+/* A red aurora behind the phone: three soft lobes of Keeper red drifting slowly at different rates. */
+.hero__stack::before, .hero__stack::after { content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: blur(70px); -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 92%); mask-image: linear-gradient(to bottom, #000 55%, transparent 92%); }
+.hero__stack::before { left: 50%; top: 6%; width: 820px; height: 720px; margin-left: -410px; background:
+  radial-gradient(closest-side at 38% 40%, rgba(219,54,48,.95), rgba(219,54,48,0) 74%),
+  radial-gradient(closest-side at 70% 65%, rgba(255,110,80,.8), rgba(255,110,80,0) 74%);
+  animation: aurora-a 14s ease-in-out infinite alternate; }
+.hero__stack::after { left: 50%; top: 22%; width: 680px; height: 600px; margin-left: -300px; background:
+  radial-gradient(closest-side at 50% 50%, rgba(205,30,80,.75), rgba(205,30,80,0) 74%);
+  animation: aurora-b 19s ease-in-out infinite alternate; }
+@keyframes aurora-a { 0% { transform: translate(-6%, -4%) rotate(-8deg) scale(1); } 50% { transform: translate(5%, 3%) rotate(4deg) scale(1.08); } 100% { transform: translate(-3%, 6%) rotate(10deg) scale(.96); } }
+@keyframes aurora-b { 0% { transform: translate(8%, 6%) rotate(12deg) scale(1.05); } 50% { transform: translate(-6%, -3%) rotate(-6deg) scale(.94); } 100% { transform: translate(4%, -8%) rotate(3deg) scale(1.1); } }
 .phone__screen { position: relative; height: 100%; border-radius: 42px; overflow: hidden; display: flex; flex-direction: column; transition: opacity .5s var(--paper-ease); }
 .phone__screen.is-fading { opacity: 0; }
 .phone__island { position: absolute; left: 50%; top: 12px; width: 98px; height: 28px; margin-left: -49px; border-radius: 14px; background: #0d1b2a; z-index: 3; }
@@ -363,7 +377,7 @@
 .capsule__mic.is-rec { background: var(--success); animation: rec-pulse 1.4s ease-out infinite; }
 @keyframes rec-pulse { 0% { box-shadow: 0 0 0 0 rgba(44,122,78,.45); } 100% { box-shadow: 0 0 0 14px rgba(44,122,78,0); } }
 .capsule__keys { background: var(--paper-dim); color: var(--ink-mute); }
-@media (prefers-reduced-motion: reduce) { .pw--speaking img, .pw-badge i, .capsule__mic.is-rec { animation: none; } .phone, .cases, .tracking, .textbar, .road { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .pw--speaking img, .pw-badge i, .capsule__mic.is-rec, .hero__stack::before, .hero__stack::after { animation: none; } .phone, .cases, .tracking, .textbar, .road { transition: none; } }
 
 /* the envelope, on the card: one line of proof */
 .deckcard__mail { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12.5px; color: var(--ink); opacity: 0; transition: opacity .5s var(--paper-ease); }
