@@ -120,24 +120,10 @@ export type Tier = {
 
 export const TIERS: Tier[] = [
   {
-    name: "Member",
+    name: "Membership",
     price: "$14",
     per: "/mo",
-    blurb: "Every claim, appeal, and grievance you need, drafted and filed. Plus your Wallet.",
-  },
-  {
-    name: "Member Plus",
-    price: "$39",
-    per: "/mo",
-    blurb:
-      "Everything in Member, plus a real person on call: a concierge who follows your case through the deadlines and the hearing.",
-  },
-  {
-    name: "For your local",
-    price: "Coming soon",
-    blurb:
-      "Keeper for every member of your local, run by your union. We'll let you know the moment it's ready.",
-    soon: true,
+    blurb: "Every claim, appeal, and grievance you need, drafted and filed. A real person when a case needs one. Plus your Wallet.",
   },
 ];
 
@@ -168,6 +154,6 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Is a real person ever involved?",
-    a: "Yes. Our support line is always open, and on Member Plus a real person follows your case. Anything that needs a licensed professional gets routed to one.",
+    a: "Yes. Our support line is always open, and when a case needs a person, a real one steps in and stays on it. Anything that needs a licensed professional gets routed to one.",
   },
 ];

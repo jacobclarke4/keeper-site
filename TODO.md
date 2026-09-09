@@ -15,7 +15,6 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 ## Product gap the site is now ahead of
 
 - [ ] **Workers' comp, ERISA appeals, and grievances do not exist in the app yet.** The site promises all three. the-outcome-company-app has the machinery (plain-language intake, clarifying questions, letter drafting with statute citations, "review before sending" drafts, certified mail via Lob, Sam concierge, human escalation, ten languages) and nearby outcomes (`wage_theft_recovery`, `workplace_issue` with an FMLA path, `appeal_anything`, an ERISA-citing insurance appeal template), but no workers' comp product, no grievance/arbitration/just-cause flow, and no ERISA pension/disability appeal product. Build those before launch, or soften the catalog.
-- [ ] **"For your local" tier** is invented for the site. Confirm the offer exists.
 - [ ] **One viewport per section**: on phones and tablets some copy is hidden to fit (step descriptions on phones, plan blurbs on non-featured tiers, the hero notes, the catalog intro). Confirm that is the intended trade.
 
 ## Assets to drop in
