@@ -18,6 +18,10 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 - [ ] **"For your local" tier** is invented for the site. Confirm the offer exists.
 - [ ] **One viewport per section**: on phones and tablets some copy is hidden to fit (step descriptions on phones, plan blurbs on non-featured tiers, the hero notes, the catalog intro). Confirm that is the intended trade.
 
+## Assets to drop in
+
+- [ ] **Assistant portraits.** `src/pages/Home.tsx` expects `public/portraits/{nora,frankie,lin,ben,camille,hanna,charlie,vivian}.webp` (300px square, transparent). Until they exist the dock shows each assistant's initial on their gradient. Copy them from `~/Documents/outcome-assistant-headshots/` (Camille is the French `Untitled-2.webp`).
+
 ## Ship
 
 - [x] Pushed to `jacobclarke4/keeper-site`.

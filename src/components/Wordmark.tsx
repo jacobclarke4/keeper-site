@@ -30,7 +30,6 @@ export function Wordmark({ lead, strong, trail, variant = "light", className = "
         <span className="wordmark__strong">{strong}</span>
         {trail && <span className="wordmark__trail">{trail}</span>}
       </span>
-      <span className="wordmark__rule" aria-hidden="true" />
     </span>
   );
 }

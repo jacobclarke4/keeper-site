@@ -10,9 +10,8 @@ import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
    on phones too, so the copy stays short and the layouts compact.
    ────────────────────────────────────────────────────────── */
 
-/* The hero's example case: one workers' comp claim, told through its
-   journal. Two voices: the member's own notes, in their words, and
-   Keeper's actions on the case. The phone plays it as a loop.
+/* The hero's example case: one workers' comp claim, told as a
+   conversation with a Keeper assistant and recorded in the case journal.
    Illustrative, not live data. */
 type Entry = { date: string; who: "you" | "keeper"; text: string };
 
@@ -20,6 +19,8 @@ const CASE = {
   title: "Workers' comp claim",
   statusBefore: "Opened Mar 3",
   statusAfter: "Insurer decides by Mar 19",
+  said: "Slipped on the loading dock. Right knee. Told my foreman before end of shift.",
+  reply: "Got it. I've reported the injury to your employer and filed the claim. The certified receipt is in your file.",
   entries: [
     { date: "Mar 3", who: "you", text: "Slipped on the loading dock. Right knee. Told my foreman before end of shift." },
     { date: "Mar 5", who: "keeper", text: "Claim filed with the insurer. Certified-mail receipt attached." },
@@ -28,18 +29,57 @@ const CASE = {
   next: "Accepted: checks start. Denied: we file the appeal that week.",
 };
 
-/* The loop, in milliseconds from the start: when each step lands.
-   0 typing the first note · 1 note becomes an entry · 2 Keeper files ·
-   3 doctor's note · 4 what's next · 5 hold, then fade and restart. */
-const TIMELINE = [0, 3200, 4900, 6600, 8200, 12000];
-const RESTART_FADE = 500;
-const TYPE_MS = 34;
-
 /* The other cases in the stack, peeking out beneath the open one. */
 const PEEKS = [
   { title: "ERISA appeal", status: "Plan decides · 31 days" },
   { title: "Grievance · Art. 12", status: "Step 1 · Tuesday" },
 ];
+
+/* The assistants. Each has a portrait in public/portraits/<id>.webp and two
+   neighbouring accents; every coloured surface is a gradient between them
+   (the same scheme as the Pal Company portraits). */
+type Pal = { id: string; name: string; colors: [string, string] };
+const PALS: Pal[] = [
+  { id: "nora", name: "Nora", colors: ["#f59e0b", "#ef4444"] },
+  { id: "frankie", name: "Frankie", colors: ["#3b82f6", "#a855f7"] },
+  { id: "lin", name: "Lin", colors: ["#ec4899", "#8b5cf6"] },
+  { id: "ben", name: "Ben", colors: ["#10b981", "#22d3ee"] },
+  { id: "camille", name: "Camille", colors: ["#0ea5e9", "#6366f1"] },
+  { id: "hanna", name: "Hanna", colors: ["#f97316", "#e11d48"] },
+  { id: "charlie", name: "Charlie", colors: ["#ff3d8f", "#ffb020"] },
+  { id: "vivian", name: "Vivian", colors: ["#22c55e", "#a3e635"] },
+];
+const BASE_URL = import.meta.env.BASE_URL;
+
+/* Portrait on its gradient circle. Falls back to the initial if the image is missing. */
+function Portrait({ pal, size = 44, speaking = false }: { pal: Pal; size?: number; speaking?: boolean }) {
+  const [a, b] = pal.colors;
+  return (
+    <span
+      className={`portrait${speaking ? " is-speaking" : ""}`}
+      style={{ width: size, height: size, ["--pal-grad" as string]: `linear-gradient(135deg, ${a}, ${b}, ${a})` }}
+      aria-label={pal.name}
+    >
+      <span className="portrait__initial" aria-hidden="true">{pal.name[0]}</span>
+      <img
+        src={`${BASE_URL}portraits/${pal.id}.webp`}
+        alt=""
+        width={size}
+        height={size}
+        draggable={false}
+        onError={(e) => { e.currentTarget.style.display = "none"; }}
+      />
+    </span>
+  );
+}
+
+/* The loop, in milliseconds from the start.
+   0 you speak (transcript types in) · 1 your words land in the journal ·
+   2 the assistant answers and files; status flips · 3 doctor's note ·
+   4 what's next · 5 hold, then fade and restart with the next assistant. */
+const TIMELINE = [0, 3600, 4400, 8200, 9600, 13500];
+const RESTART_FADE = 500;
+const TYPE_MS = 34;
 
 /* The dotted arc that links the three step bubbles, drawn on enter. */
 function StepArc() {
@@ -62,10 +102,12 @@ function StepArc() {
   );
 }
 
-/* Steps the loop; resolves to the finished state when motion is reduced. */
+/* Steps the loop; resolves to the finished state when motion is reduced.
+   Each pass hands the case to the next assistant. */
 function useCaseLoop(reduced: boolean) {
   const [step, setStep] = useState(reduced ? 4 : 0);
   const [fading, setFading] = useState(false);
+  const [pass, setPass] = useState(0);
   useEffect(() => {
     if (reduced) return;
     let timers: number[] = [];
@@ -75,12 +117,12 @@ function useCaseLoop(reduced: boolean) {
       timers = TIMELINE.slice(1).map((at, i) => window.setTimeout(() => setStep(i + 1), at));
       const total = TIMELINE[TIMELINE.length - 1];
       timers.push(window.setTimeout(() => setFading(true), total));
-      timers.push(window.setTimeout(run, total + RESTART_FADE));
+      timers.push(window.setTimeout(() => { setPass((n) => n + 1); run(); }, total + RESTART_FADE));
     };
     const first = window.setTimeout(run, 0);
     return () => { window.clearTimeout(first); timers.forEach((t) => window.clearTimeout(t)); };
   }, [reduced]);
-  return { step, fading };
+  return { step, fading, pass };
 }
 
 /* Reveals text one character at a time while active. */
@@ -100,13 +142,15 @@ function useTyped(text: string, active: boolean) {
   return active ? text.slice(0, n) : "";
 }
 
-/* The phone: Keeper on a handset, the case deck stacked, the journal
-   writing itself in a loop. */
+/* The phone: Keeper on a handset. You talk to an assistant through the
+   dock at the bottom; the case journal above records what happens. */
 function PhoneMock() {
   const reduced = usePrefersReducedMotion();
-  const { step, fading } = useCaseLoop(reduced);
-  const typing = !reduced && step === 0;
-  const typed = useTyped(CASE.entries[0].text, typing);
+  const { step, fading, pass } = useCaseLoop(reduced);
+  const pal = PALS[pass % PALS.length];
+  const listening = !reduced && step === 0;
+  const speaking = !reduced && step === 2;
+  const said = useTyped(CASE.said, listening);
   const filed = step >= 2;
   return (
     <div className="hero__stack" aria-label="Keeper on your phone, example">
@@ -134,24 +178,17 @@ function PhoneMock() {
                   <li key={i} className={`journal__entry journal__entry--${e.who}${step >= i + 1 ? " is-in" : ""}`}>
                     <span className="journal__rail" aria-hidden="true" />
                     <span className="journal__date">{e.date}</span>
-                    <span className="journal__who">{e.who === "you" ? "You" : "Keeper"}</span>
-                    <p className="journal__text">{e.who === "you" ? `\u201C${e.text}\u201D` : e.text}</p>
+                    <span className="journal__who">{e.who === "you" ? "You" : pal.name}</span>
+                    <p className="journal__text">{e.text}</p>
                   </li>
                 ))}
                 <li className={`journal__entry journal__entry--next${step >= 4 ? " is-in" : ""}`}>
                   <span className="journal__rail" aria-hidden="true" />
                   <span className="journal__date">Next</span>
-                  <span className="journal__who">Keeper</span>
+                  <span className="journal__who">{pal.name}</span>
                   <p className="journal__text">{CASE.next}</p>
                 </li>
               </ol>
-              <div className={`journal__add${typing ? " is-typing" : ""}`} aria-hidden="true">
-                <span className="journal__add-text">
-                  {typing ? typed : "Add a note to this case…"}
-                  {typing && <span className="journal__add-caret" />}
-                </span>
-                <span className="journal__add-mic" />
-              </div>
             </article>
             {PEEKS.map((p) => (
               <article className="deck__card deck__card--peek" key={p.title}>
@@ -159,6 +196,26 @@ function PhoneMock() {
                 <span className="deck__peek-status">{p.status}</span>
               </article>
             ))}
+          </div>
+
+          {/* live caption: what you're saying, or what the assistant answers */}
+          <div className={`caption${listening || speaking ? " is-on" : ""}${speaking ? " caption--pal" : ""}`} aria-hidden="true">
+            <span className="caption__who">{speaking ? pal.name : "You"}</span>
+            <p className="caption__text">{speaking ? CASE.reply : said}{listening && <span className="caption__caret" />}</p>
+          </div>
+
+          {/* the dock: talk, the assistant, or type */}
+          <div className={`dock${listening ? " is-listening" : ""}`} aria-hidden="true">
+            <span className="dock__mic">
+              <span className="dock__mic-icon" />
+            </span>
+            <span className="dock__pal">
+              <Portrait pal={pal} size={46} speaking={speaking} />
+              <span className={`dock__badge${speaking ? " is-on" : ""}`} />
+            </span>
+            <span className="dock__keys">
+              <span className="dock__keys-icon" />
+            </span>
           </div>
         </div>
       </Ink>

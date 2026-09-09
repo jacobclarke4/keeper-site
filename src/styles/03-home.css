@@ -307,3 +307,67 @@
 .deck__card--open { transition: opacity .5s var(--paper-ease); }
 .deck__card--open.is-fading { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .journal__entry, .journal__entry::before { transition: none; } .note__status { animation: none; } }
+
+/* ── the phone, bigger, bleeding off the bottom of the hero ── */
+.hero__stack { --bleed: 190px; align-self: end; margin-bottom: calc(-1 * var(--bleed)); }
+.phone { width: 372px; height: 760px; padding: 13px; border-radius: 54px; transform: rotate(-1.5deg); }
+.phone.is-in { transform: rotate(-1.5deg); }
+.phone__screen { border-radius: 42px; }
+.phone__island { width: 98px; height: 28px; margin-left: -49px; top: 12px; }
+.phone__status { padding: 18px 28px 0; font-size: 14px; }
+.phone__bar { padding: 22px 22px 12px; }
+.phone__brand { font-size: 22px; border: 0; }
+.phone__title { font-size: 13px; }
+.deck { padding: 0 14px; }
+.deck__card { border-radius: 22px; }
+.deck__card--open { padding: 16px 16px 14px; }
+.note__line { font-size: 17px; }
+.note__status { font-size: 12px; padding: 4px 11px; }
+.journal__list { min-height: 250px; }
+.journal__entry { grid-template-columns: 44px 1fr; column-gap: 8px; padding: 0 0 12px 20px; }
+.journal__rail { left: 4px; top: 5px; width: 10px; height: 10px; }
+.journal__entry::before { left: 8.25px; top: 15px; }
+.journal__date { font-size: 11px; }
+.journal__who { font-size: 11px; }
+.journal__text { font-size: 14px; line-height: 1.4; }
+.deck__card--peek { padding: 22px 18px 8px; margin-top: -12px; }
+.deck__card--peek .note__line { font-size: 14px; }
+.deck__peek-status { font-size: 12px; color: var(--ink-mute); }
+
+/* ── portrait on its gradient circle ────────────────────── */
+.portrait { position: relative; display: inline-grid; place-items: center; border-radius: 50%; overflow: hidden; background: var(--pal-grad); background-size: 220% 220%; animation: grad-shift 5s ease-in-out infinite alternate; flex: none; }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transform: scale(1.18) translateY(6%); }
+.portrait__initial { font-family: var(--f-ledger); font-size: 1.1em; color: #fff; }
+.portrait.is-speaking { animation-duration: 2s; }
+@keyframes grad-shift { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+/* ── the dock: talk · assistant · type ──────────────────── */
+.dock { position: absolute; left: 50%; bottom: calc(var(--bleed, 0px) + 18px); transform: translateX(-50%); z-index: 6; display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: var(--r-pill); background: #fff; box-shadow: 0 14px 34px -14px rgba(43,43,43,.45), 0 2px 8px -4px rgba(43,43,43,.25); }
+.dock__mic, .dock__keys { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; position: relative; }
+.dock__mic { background: var(--current); }
+.dock__keys { background: var(--seafoam); }
+.dock__mic-icon { position: relative; width: 10px; height: 16px; border-radius: 5px; background: #fff; }
+.dock__mic-icon::after { content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px; height: 12px; border: 2px solid #fff; border-top: 0; border-radius: 0 0 10px 10px; box-sizing: content-box; }
+.dock__mic-icon::before { content: ""; position: absolute; left: 50%; bottom: -12px; width: 2px; height: 6px; margin-left: -1px; background: #fff; }
+.dock__keys-icon { width: 26px; height: 16px; border-radius: 4px; border: 2px solid var(--ink-mute); position: relative; box-sizing: border-box; }
+.dock__keys-icon::before { content: ""; position: absolute; left: 4px; right: 4px; top: 3px; height: 2px; background: var(--ink-mute); box-shadow: 0 4px 0 var(--ink-mute); }
+.dock__pal { position: relative; display: grid; place-items: center; width: 62px; height: 62px; }
+.dock__badge { position: absolute; right: 2px; bottom: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--ink-fine); border: 2.5px solid #fff; box-sizing: border-box; transition: background .3s; }
+.dock__badge::before { content: ""; position: absolute; left: 4px; top: 5px; width: 4px; height: 5px; background: #fff; border-radius: 1px; }
+.dock__badge::after { content: ""; position: absolute; left: 8px; top: 3px; width: 5px; height: 9px; border-right: 2px solid #fff; border-radius: 0 6px 6px 0; }
+.dock__badge.is-on { background: var(--current); animation: badge-pulse 1s ease-in-out infinite; }
+@keyframes badge-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(219,54,48,.35); } 50% { box-shadow: 0 0 0 6px rgba(219,54,48,0); } }
+.dock.is-listening .dock__mic { animation: mic-ring 1.4s ease-out infinite; }
+@keyframes mic-ring { 0% { box-shadow: 0 0 0 0 rgba(219,54,48,.45); } 100% { box-shadow: 0 0 0 16px rgba(219,54,48,0); } }
+
+/* ── live caption above the dock ────────────────────────── */
+.caption { position: absolute; left: 16px; right: 16px; bottom: calc(var(--bleed, 0px) + 100px); z-index: 5; padding: 10px 14px 11px; border-radius: 18px; background: rgba(43,43,43,.92); color: #fff; opacity: 0; transform: translateY(8px); transition: opacity .35s var(--paper-ease), transform .4s var(--paper-ease); pointer-events: none; }
+.caption.is-on { opacity: 1; transform: none; }
+.caption--pal { background: var(--paper); color: var(--ink); box-shadow: var(--sh-lift); }
+.caption__who { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; opacity: .7; margin-bottom: 2px; }
+.caption__text { margin: 0; font-size: 13.5px; line-height: 1.4; min-height: 1.4em; }
+.caption__caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; background: var(--current); vertical-align: -2px; animation: caret 1s steps(2, start) infinite; }
+@media (prefers-reduced-motion: reduce) { .portrait, .dock__badge.is-on, .dock.is-listening .dock__mic { animation: none; } .caption { transition: none; } }
+/* the open case keeps its last entry clear of the dock */
+.deck__card--open { padding-bottom: 84px; }
+@media (max-width: 640px) { .deck__card--open { padding-bottom: 10px; } }

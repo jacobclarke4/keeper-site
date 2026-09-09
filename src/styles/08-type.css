@@ -1,0 +1,28 @@
+/* ═══════════════════════════════════════════════════════════
+   TYPE — two families only. Helvetica for everything; Ledger
+   for the logo and headings alone. No italics anywhere, and no
+   words picked out in the accent colour.
+   ═══════════════════════════════════════════════════════════ */
+:root { --f-sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+body, button, input, .btn, .tab-pill, .check-chip, .chip-note, .category-chip, .note__status, .plan__price, .medallion__amt, .medallion__per, .seal__ring { font-family: var(--f-sans); }
+h1, h2, h3, h4, h5, .wordmark, .phone__brand, .seal__mono { font-family: var(--f-ledger); font-weight: 400; }
+body { line-height: 1.6; }
+.wordmark__strong, .wordmark__lock { font-weight: 400; font-style: normal; letter-spacing: -0.01em; }
+.wordmark__rule { display: none; }
+.wordmark { gap: 0; }
+
+/* no italics */
+em, i, .sheet__imprint, .ribbon__item, .foot__col-h, .medallion__per, .hero__stack-cap, .hero__stack-foot, .note__ticker, .bubble__who, .plan__tag, .plan__per, .heavy__note, .phone__brand, .journal__entry--you .journal__text, .journal__add.is-typing .journal__add-text, .seal__co { font-style: normal; }
+
+/* no accent-coloured words: emphasis inherits its parent's colour and weight */
+.hero__h1 em, .section-head__title em, .bridge__title em, .bridge__turn em, .promise__lead em, .heavy__h em, .catalog__count em, .support__quote em,
+p em, li em, .accent-ocean, .how__support em, .panel--navy em, .foot em { color: inherit; font-weight: inherit; }
+.medallion__per, .plan__per, .plan__tag, .hero__stack-cap, .bubble__who, .heavy__note, .promise__foot, .balance__label, .fn-ref, .btn--link { color: var(--ink-mute); }
+.mast__link:hover, .mast__link.is-active, .mast__login:hover, .sheet__row.is-active, .faq__item[open] .faq__q-text { color: var(--ink); }
+.medallion__amt, .plan__price { font-weight: 700; letter-spacing: -0.03em; }
+.note__line { font-family: var(--f-sans); }
+
+/* names and labels in the journal are quiet, not accent-coloured */
+.journal__entry--keeper .journal__who, .journal__entry--next .journal__who, .journal__who { color: var(--ink-mute); }
+.journal__entry--you .journal__text { color: var(--ink-mute); }
+.deck__peek-status { color: var(--ink-mute); }
