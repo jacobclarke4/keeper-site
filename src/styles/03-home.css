@@ -349,8 +349,8 @@
 .piece__signed { margin: 8px 0 0; font-size: 12px; font-weight: 500; color: var(--ocean-ink); }
 
 /* the member's capsule (the app's MemberControls): a frosted band, the text bar, the capsule */
-.band { position: absolute; left: 0; right: 0; bottom: var(--bleed, 0px); z-index: 6; display: flex; flex-direction: column; align-items: center; padding: 26px 14px 12px; pointer-events: none; }
-.band::before { content: ""; position: absolute; inset: 0; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); mask-image: linear-gradient(to top, black 30%, transparent 70%); -webkit-mask-image: linear-gradient(to top, black 30%, transparent 70%); }
+.band { position: absolute; left: 0; right: 0; bottom: var(--bleed, 0px); z-index: 6; display: flex; flex-direction: column; align-items: center; padding: 10px 14px 12px; pointer-events: none; }
+.band::before { content: ""; position: absolute; inset: 0; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); mask-image: linear-gradient(to top, black 35%, transparent 80%); -webkit-mask-image: linear-gradient(to top, black 35%, transparent 80%); }
 .textbar { position: absolute; left: 22px; right: 22px; bottom: calc(100% - 14px); display: flex; align-items: center; gap: 10px; width: 100%; height: 48px; padding: 0 6px 0 16px; border-radius: 999px; background: var(--surface); box-shadow: 0 14px 36px -10px rgba(13,27,42,.35), 0 2px 6px rgba(13,27,42,.10); opacity: 0; transform: translateY(8px); transition: opacity .3s var(--paper-ease), transform .35s var(--paper-ease); }
 .textbar.is-on { opacity: 1; transform: none; }
 .textbar__text { flex: 1; min-width: 0; font-size: 14px; color: var(--ink); white-space: nowrap; overflow: hidden; }
