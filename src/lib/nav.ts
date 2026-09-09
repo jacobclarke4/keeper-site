@@ -7,7 +7,7 @@ export const BASE_URL = import.meta.env.BASE_URL;
 /** The masthead's primary nav — each jumps to a section id on the page. */
 export const NAV_SECTIONS = [
   { id: "how", label: "How it works" },
-  { id: "catalog", label: "What we can do" },
+  { id: "catalog", label: "What we file" },
   { id: "pricing", label: "Pricing" },
   { id: "support", label: "Support" },
 ] as const;
@@ -16,7 +16,7 @@ export const NAV_SECTIONS = [
 export const ALL_SECTIONS = [
   { id: "bridge", label: "Who it's for" },
   { id: "how", label: "How it works" },
-  { id: "catalog", label: "What we can do" },
+  { id: "catalog", label: "What we file" },
   { id: "pricing", label: "Pricing" },
   { id: "support", label: "Support" },
   { id: "wallet", label: "The Wallet" },

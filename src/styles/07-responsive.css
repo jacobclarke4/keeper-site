@@ -89,3 +89,117 @@
 @media (max-width: 380px) {
   .hero__h1 { font-size: clamp(34px, 12vw, 46px); }
 }
+
+/* ── one viewport per section on small screens ─────────── */
+@media (max-width: 920px) {
+  .section { padding: 88px 0 28px; }
+  .hero { padding: 96px 0 28px; }
+  .hero__grid { gap: 22px; }
+  .hero__stack-cap, .hero__stack-foot { display: none; }
+  .note { padding: 14px 18px; margin: 0 0 8px 0 !important; }
+  .step { padding: 18px 20px; }
+  .step__bubble { width: 48px; height: 48px; font-size: 24px; margin-bottom: 10px; }
+  .step__d { font-size: 15px; }
+  .how__support { margin-top: 18px; }
+  .catalog { gap: 8px; }
+  .catalog .cat__sum { padding: 11px 16px; }
+  .catalog .cat__title { font-size: 16px; }
+  .catalog__also { margin-top: 12px; font-size: 14px; }
+  .plans { gap: 10px; margin-bottom: 12px; }
+  .plan { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 16px; row-gap: 4px; align-items: center; padding: 16px 18px; }
+  .plan__tag { grid-column: 1; grid-row: 1; }
+  .plan__price { grid-column: 1; grid-row: 2; font-size: 34px; }
+  .plan__price--hero { font-size: 40px; }
+  .plan__blurb { grid-column: 2; grid-row: 1 / span 2; font-size: 14px; margin: 0; }
+  .plan__cta, .chip-soon { grid-column: 1 / -1; justify-self: start; }
+  .faq { gap: 8px; }
+  .faq__q { padding: 12px 16px; }
+  .faq__q-text { font-size: 17px; }
+  .commonwealth__seal { display: none; }
+  .support__quote { margin-top: 14px; }
+}
+@media (max-width: 560px) {
+  .hide-phone { display: none; }
+  .hero__h1 { font-size: clamp(34px, 10vw, 48px); }
+  .note--1, .note--2 { display: none; }
+  .section-head--tight { margin-bottom: 14px; gap: 10px; }
+  .bridge__p, .support__p, .commonwealth__p { font-size: 15px; }
+  .balance__label { margin-bottom: 58px; }
+}
+
+/* ── phone: tighter still, so each section holds to one viewport ── */
+@media (max-width: 560px) {
+  .section { padding: 80px 0 20px; }
+  .hero { padding: 88px 0 20px; }
+  .hero__lede { font-size: 17px; line-height: 1.5; margin-bottom: 10px; }
+  .hero__say { font-size: 16px; margin-bottom: 18px; }
+  .hero__stack { display: none; }
+  .bridge__title { margin-bottom: 14px; }
+  .bridge__p { margin-bottom: 10px; line-height: 1.55; }
+  .bridge__turn { font-size: 24px; margin: 14px auto; }
+  .step { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; align-items: center; padding: 12px 14px; }
+  .step__bubble { width: 44px; height: 44px; font-size: 22px; margin: 0; }
+  .step__t { font-size: 17px; margin: 0; }
+  .step__d, .step__chip { display: none; }
+  .how__cards { gap: 10px; }
+  .how__support { font-size: 15px; margin-top: 14px; }
+  .catalog { gap: 6px; }
+  .catalog .cat__sum { padding: 9px 12px; gap: 10px; }
+  .catalog .category-chip { display: none; }
+  .catalog .cat__title { font-size: 15px; }
+  .catalog__also { margin-top: 10px; font-size: 13px; }
+  .support__title { margin-bottom: 12px; }
+  .support__p { margin-bottom: 10px; line-height: 1.55; }
+  .support__quote { font-size: 24px; padding-top: 0; padding-left: 0; margin-top: 12px; }
+  .support__bubble { display: none; }
+  .balance { padding-top: 32px; }
+  .balance__foot { margin-top: 16px; }
+}
+
+/* ── tablet and phone share the compact rows ───────────── */
+@media (max-width: 920px) {
+  .hide-phone { display: none; }
+  .note--1, .note--2 { display: none; }
+  .step { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; align-items: center; padding: 12px 16px; }
+  .step__bubble { width: 44px; height: 44px; font-size: 22px; margin: 0; }
+  .step__t { font-size: 17px; margin: 0 0 2px; }
+  .step__d { font-size: 14px; line-height: 1.45; }
+  .step__chip { display: none; }
+  .how__cards { gap: 10px; }
+  .catalog { gap: 6px; }
+  .catalog .cat__sum { padding: 10px 14px; gap: 10px; }
+  .catalog .category-chip { display: none; }
+  .catalog .cat__title { font-size: 15.5px; }
+  .plan { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "tag price" "blurb blurb" "cta cta"; row-gap: 6px; column-gap: 12px; align-items: baseline; padding: 12px 14px; }
+  .plan__tag { grid-area: tag; }
+  .plan__price { grid-area: price; font-size: 28px; }
+  .plan__price--hero { font-size: 34px; }
+  .plan__price--hero .plan__per, .plan__per { font-size: 14px; }
+  .plan__blurb { grid-area: blurb; font-size: 13.5px; line-height: 1.4; margin: 0; }
+  .plan__cta, .chip-soon { grid-area: cta; justify-self: start; }
+  .plan:not(.plan--feature) .plan__cta { display: none; }
+  .plan--soon .plan__blurb { display: none; }
+  .fineprint { font-size: 12.5px; margin-top: 12px; }
+}
+@media (max-width: 560px) {
+  .hero__h1 { margin-bottom: 12px; }
+  .hero__medallion { justify-content: flex-start; margin-bottom: 12px; }
+  .medallion { transform: none; padding: 8px 18px; }
+  .medallion__amt { font-size: 56px; }
+}
+
+/* ── step rows: bubble spans both rows, text stays in column 2 ── */
+@media (max-width: 920px) {
+  .step__bubble { grid-row: 1 / span 2; grid-column: 1; }
+  .step__t, .step__d { grid-column: 2; }
+  .step__t { grid-row: 1; }
+  .step__d { grid-row: 2; }
+}
+@media (max-width: 560px) {
+  .plan:not(.plan--feature) .plan__blurb { display: none; }
+  .plan--soon .chip-soon { display: none; }
+  .plan--soon .plan__price { font-size: 18px; }
+  .plans { gap: 8px; }
+  .fineprint { font-size: 12px; line-height: 1.4; }
+}
+@media (max-width: 560px) { .catalog .cat__sum { padding: 8px 12px; } }

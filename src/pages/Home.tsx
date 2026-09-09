@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { LINKS, goExternal } from "../lib/links";
-import { OUTCOMES_TICKER, CATALOG, TIERS, FAQ } from "../lib/outcomes";
+import { OUTCOMES_TICKER, CATALOG, ALSO, TIERS, FAQ } from "../lib/outcomes";
 import { Ink, useInView, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn, CheckChip, OMark, Seal, TabPill } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
-   Keeper — Sunlit Stationery.
-   One continuous sheet of warm morning paper, big rounded tinted
-   panels floating with soft shadows, and a giant friendly $14.
+   Keeper — one viewport per section.
+   Every section is min-height 100svh with its content centred,
+   on phones too, so the copy stays short and the layouts compact.
    ────────────────────────────────────────────────────────── */
 
 /* The hero's delivered outcomes — three received notes, each finished. */
 const DELIVERED = [
-  "A weekend trip, planned to the dollar.",
-  "A confusing bill, explained in plain words.",
-  "The dreaded form, filled out and filed.",
+  "A workers' comp claim, filed inside the deadline.",
+  "A denied pension benefit, appealed under ERISA.",
+  "A grievance written to the contract, step one filed.",
 ];
 
 /* A gentle fade rotator (no crossfade machinery — one line at a time). */
@@ -33,7 +33,7 @@ function FadeRotator({ items, interval = 3000 }: { items: string[]; interval?: n
   );
 }
 
-/* The dotted current arc that links the three step bubbles, drawn on enter. */
+/* The dotted arc that links the three step bubbles, drawn on enter. */
 function StepArc() {
   const { ref, inView } = useInView<HTMLDivElement>({ rootMargin: "0px 0px -20% 0px" });
   return (
@@ -58,7 +58,7 @@ function StepArc() {
 function DeliveredStack() {
   return (
     <div className="hero__stack" aria-label="Recently delivered">
-      <p className="hero__stack-cap">Today&apos;s wire · Delivered</p>
+      <p className="hero__stack-cap">Today&apos;s wire · Filed</p>
       <div className="hero__notes">
         {DELIVERED.map((line, i) => (
           <Ink
@@ -75,18 +75,17 @@ function DeliveredStack() {
             )}
             <p className="note__line">{line}</p>
             <CheckChip delay={820 + i * 90} className="note__chip">
-              Done
+              Filed
             </CheckChip>
           </Ink>
         ))}
       </div>
-      <p className="hero__stack-foot">You ask · we do it · you get the finished thing</p>
+      <p className="hero__stack-foot">You tell us · we draft and file · you get the paper trail</p>
     </div>
   );
 }
 
-/* Money & bills → current tint; everything else alternates on first sight,
-   for warm within-palette variety across the catalog groups. */
+/* Alternate the two chip tones across catalog groups on first sight. */
 const groupTone = (() => {
   const order: string[] = [];
   return (group: string) => {
@@ -135,30 +134,25 @@ export function HomePage() {
               Insurance for <em>your Insurance.</em>
             </Ink>
 
-            <Ink as="p" fx="rise" delay={300} className="hero__lede">
-              Planning the trip. Making sense of a confusing bill. Filling out the form you&apos;ve
-              been dreading.
-            </Ink>
-
-            <Ink as="p" fx="rise" delay={360} className="hero__say">
-              You ask, we do it, and hand you the finished thing.{" "}
-              <strong>No apps to learn. No tech to figure out.</strong>
-            </Ink>
-
-            <Ink as="div" fx="none" delay={440} className="hero__medallion">
+            <Ink as="div" fx="none" delay={300} className="hero__medallion">
               <span className="medallion">
                 <span className="medallion__amt">$14</span>
                 <span className="medallion__per">a month</span>
               </span>
             </Ink>
 
-            <Ink as="div" fx="rise" delay={540} className="hero__ctas">
+            <Ink as="p" fx="rise" delay={360} className="hero__lede">
+              Workers&apos; comp claims, ERISA appeals, and grievances, drafted and filed for union
+              members.<span className="hide-phone"> No forms to decode. No retainer.</span>
+            </Ink>
+
+            <Ink as="div" fx="rise" delay={440} className="hero__ctas">
               <Btn variant="accent" size="lg" href={LINKS.getStarted}>
                 Get started <Arrow />
               </Btn>
             </Ink>
 
-            <Ink as="p" fx="rise" delay={600} className="hero__micro">
+            <Ink as="p" fx="rise" delay={500} className="hero__micro hide-phone">
               Cancel anytime. We&apos;ll never charge you for anything you didn&apos;t say yes to.
             </Ink>
           </div>
@@ -167,7 +161,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── the bridge ──────────────────────────────────── */}
+      {/* ── who this is for ─────────────────────────────── */}
       <section className="section" id="bridge">
         <div className="wrap">
           <div className="panel panel--seafoam panel--ocorner bridge">
@@ -178,23 +172,19 @@ export function HomePage() {
               <TabPill>Who this is for</TabPill>
             </Ink>
             <Ink as="h2" fx="rise" delay={70} className="bridge__title">
-              Finally, technology built for you, <em>not against you.</em>
+              Built for the people who <em>keep everything running.</em>
             </Ink>
             <Ink as="p" fx="rise" delay={120} className="bridge__p">
-              For a long time, the best new tools were never made with you in mind. Or worse, they
-              were made to take advantage of you.
+              The paperwork that protects you was never written for you. Comp forms, benefit
+              appeals, grievance procedures: every one has a deadline, a format, and a way to get it
+              wrong.
             </Ink>
             <Ink as="p" fx="rise" delay={160} className="bridge__turn">
-              We&apos;re here to <em>change that.</em>
+              Keeper is here to <em>get it right.</em>
             </Ink>
-            <Ink as="p" fx="rise" delay={200} className="bridge__p">
-              It doesn&apos;t matter where you&apos;re starting from, how old you are, what language
-              you speak, or how much you know about any of this. You tell us what you need. We take
-              care of it.
-            </Ink>
-            <Ink as="p" fx="rise" delay={240} className="bridge__p">
-              That&apos;s the whole idea. We meet you exactly where you are, and we bring the good
-              parts of this new technology to you, without the noise, the confusion, or the catch.
+            <Ink as="p" fx="rise" delay={200} className="bridge__p hide-phone">
+              Whatever your trade, whatever your local, whatever language you speak. You tell us
+              what happened. We take it from there.
             </Ink>
           </div>
         </div>
@@ -211,9 +201,9 @@ export function HomePage() {
             <StepArc />
             <div className="how__cards">
               {[
-                { n: "1", t: "Tell us what you need.", d: "In your own words. Type it or say it, the way you'd ask a friend who's good at this stuff." },
-                { n: "2", t: "We do the work.", d: "The looking-up, the figuring-out, the back-and-forth. All of it, on our side." },
-                { n: "3", t: "You get the finished thing.", d: "A real result you can use. Done, and handed to you." },
+                { n: "1", t: "Tell us what happened.", d: "In your own words. The injury, the denial letter, the write-up. Type it, say it, or send a photo of the paper." },
+                { n: "2", t: "We draft and file.", d: "We ask a few questions, pull the deadlines and rules that apply, and write the claim, appeal, or grievance. You review it before it goes out." },
+                { n: "3", t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and a plain-words plan for what comes next." },
               ].map((s, i) => (
                 <Ink key={s.n} as="article" fx="rise" delay={i * 90} className={`step step--${i}`}>
                   <span className={`step__bubble step__bubble--${i % 2 === 0 ? "seafoam" : "current"}`}>
@@ -221,19 +211,14 @@ export function HomePage() {
                   </span>
                   <h3 className="step__t">{s.t}</h3>
                   <p className="step__d">{s.d}</p>
-                  {s.n === "3" && <CheckChip className="step__chip">Done</CheckChip>}
+                  {s.n === "3" && <CheckChip className="step__chip">Filed</CheckChip>}
                 </Ink>
               ))}
             </div>
           </div>
           <Ink as="p" fx="rise" delay={90} className="how__support">
-            And if you ever get stuck, our support line is open whenever you need it,{" "}
-            <em className="accent-ocean">with help in your language.</em>
-          </Ink>
-          <Ink as="div" fx="rise" delay={135} className="cta-row">
-            <Btn variant="accent" href={LINKS.getStarted}>
-              Get started <Arrow />
-            </Btn>
+            And when a case needs a person, a real one steps in,{" "}
+            <em className="accent-ocean">in your language.</em>
           </Ink>
         </div>
       </section>
@@ -241,15 +226,14 @@ export function HomePage() {
       {/* ── the catalog ─────────────────────────────────── */}
       <section className="section" id="catalog">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head">
-            <TabPill>What we can do</TabPill>
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>What we file</TabPill>
             <h2 className="section-head__title">
-              Real things, <em>done for you.</em>
+              Real filings, <em>done right.</em>
             </h2>
-            <p className="section-head__sub">
-              An outcome is just that: a real, finished result. Not a tool you have to learn. Not a
-              tab you have to keep open. The actual thing you wanted, done. Here are some of the
-              things people ask us for. Open any one to see exactly how it works.
+            <p className="section-head__sub hide-phone">
+              Every one ends the same way: written, reviewed by you, filed, and in your hands with
+              the deadline met. Open any one to see how it works.
             </p>
           </Ink>
 
@@ -260,7 +244,7 @@ export function HomePage() {
                 fx="rise"
                 delay={(i % 2) * 60}
                 key={o.title}
-                className={`catalog__cell${i === 0 ? " catalog__cell--feature" : ""}`}
+                className="catalog__cell"
               >
                 <details className="cat">
                   <summary className="cat__sum">
@@ -286,7 +270,7 @@ export function HomePage() {
                     <div className="cat__foot">
                       <a className="btn btn--accent btn--sm" href={LINKS.getStarted}>
                         <span className="btn__label">
-                          Get this done <span className="arrow" aria-hidden="true">→</span>
+                          Get this filed <span className="arrow" aria-hidden="true">→</span>
                         </span>
                       </a>
                       <CheckChip />
@@ -297,13 +281,8 @@ export function HomePage() {
             ))}
           </div>
 
-          <Ink as="div" fx="rise" className="catalog__foot">
-            <p className="catalog__count">
-              Over <em>100 things</em> we can do for you today, and more every week.
-            </p>
-            <Btn variant="ghost" href={LINKS.getStarted}>
-              Browse what we can do <Arrow />
-            </Btn>
+          <Ink as="p" fx="rise" className="catalog__also">
+            Also: {ALSO.join(", ")}.
           </Ink>
         </div>
       </section>
@@ -311,27 +290,11 @@ export function HomePage() {
       {/* ── pricing ─────────────────────────────────────── */}
       <section className="section" id="pricing">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Pricing</TabPill>
             <h2 className="section-head__title">
               Simple pricing. <em>No surprises.</em>
             </h2>
-          </Ink>
-
-          <Ink as="aside" fx="rise" className="panel panel--seafoam promise">
-            <span className="blob" aria-hidden="true" />
-            <p className="promise__lead">
-              We&apos;re just getting started, and so are <em>you.</em>
-            </p>
-            <p className="promise__body">
-              You&apos;re one of our first members, which means you&apos;re getting in early. Prices
-              may change as we grow, but here&apos;s our promise: we&apos;ll always tell you before
-              anything changes, and you&apos;ll never be charged for something you didn&apos;t say
-              yes to.
-            </p>
-            <p className="promise__foot">
-              <span className="chip-note">A beta promise</span> We tell you before anything changes.
-            </p>
           </Ink>
 
           <div className="plans">
@@ -362,32 +325,10 @@ export function HomePage() {
             ))}
           </div>
 
-          <Ink as="aside" fx="rise" className="panel panel--current heavy">
-            <span className="blob" aria-hidden="true" />
-            <h3 className="heavy__h">
-              Heavy jobs: only if you choose them, <em>only at cost.</em>
-            </h3>
-            <p className="heavy__p">
-              Once in a while, a request takes a lot of computing power to finish. When that happens,
-              we&apos;ll show you exactly what it costs <em className="accent-ocean">before</em> we
-              start, and we&apos;ll never charge you more than 14% on top, just enough to keep the
-              lights on. Nothing gets built and billed behind your back. You always say yes first.
-            </p>
-            <p className="heavy__note">
-              During beta, we&apos;re covering these ourselves while we learn what they really cost.
-            </p>
-          </Ink>
-
-          <Ink as="div" fx="rise" delay={90} className="cta-row">
-            <Btn variant="accent" size="lg" href={LINKS.getStarted}>
-              Get started: $14/mo<sup className="fn-ref">1</sup><Arrow />
-            </Btn>
-          </Ink>
-
           <Ink as="p" fx="rise" className="fineprint">
-            <sup className="fn-ref">1</sup> One membership, $14/month. A few heavy requests may cost
-            more to run, always shown and agreed before we begin. Cancel anytime. One button, no
-            retention loops.
+            One membership, cancel anytime.<span className="hide-phone"> A few heavy requests may cost
+            more to run, always shown and agreed before we begin, never more than 14% over cost.</span>{" "}
+            Keeper is not a law firm and does not give legal advice.
           </Ink>
         </div>
       </section>
@@ -405,12 +346,13 @@ export function HomePage() {
               Help whenever you need it.
             </Ink>
             <Ink as="p" fx="rise" delay={120} className="support__p">
-              Not everyone wants to hand everything to a machine, and you shouldn&apos;t have to.
+              A claim is stressful. A denial is worse. You shouldn&apos;t be doing this alone at
+              midnight.
             </Ink>
             <Ink as="p" fx="rise" delay={160} className="support__p">
-              That&apos;s why there&apos;s always a way to reach someone. Our support line is open
-              around the clock, in your language, ready to take your request in plain words and get
-              it done. And when something really needs a person, a real one steps in.
+              Our support line is open around the clock, in ten languages, ready to take what
+              happened in plain words. And when a case needs a person, a real one steps in and stays
+              on it.
             </Ink>
             <Ink as="blockquote" fx="rise" delay={200} className="support__quote">
               <span className="support__bubble" aria-hidden="true">
@@ -425,16 +367,14 @@ export function HomePage() {
       {/* ── the wallet ──────────────────────────────────── */}
       <section className="section" id="wallet">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>The Wallet</TabPill>
             <h2 className="section-head__title">
               Your money <em>stays yours.</em>
             </h2>
             <p className="section-head__sub">
-              Everything you spend comes from your own balance: money you&apos;ve put in, nothing
-              more. There&apos;s no credit, no hidden fees, and no way for a bill to quietly grow
-              while you&apos;re not looking. You&apos;ll always know what something costs before it
-              happens. Always.
+              Everything you spend comes from your own balance. No credit, no hidden fees, and no
+              way for a bill to grow while you&apos;re not looking.
             </p>
           </Ink>
           <div className="panel wallet">
@@ -457,12 +397,12 @@ export function HomePage() {
                 One part of <em>Commonwealth.</em>
               </Ink>
               <Ink as="p" fx="rise" delay={120} className="commonwealth__p">
-                Keeper is one part of Commonwealth, a community built on a simple
-                promise: bring everyone into this new world together, and leave no one behind.
+                Keeper is one part of Commonwealth, a community built on a simple promise: bring
+                everyone into this new world together, and leave no one behind.
               </Ink>
               <Ink as="p" fx="rise" delay={160} className="commonwealth__p">
-                Half of every dollar of profit goes back to the community. And that promise can never
-                be sold or taken away. It&apos;s written down, and it&apos;s binding.
+                Half of every dollar of profit goes back to the community. That promise can never be
+                sold or taken away. It&apos;s written down, and it&apos;s binding.
               </Ink>
               <Ink as="div" fx="rise" delay={200} className="commonwealth__cta">
                 <Btn variant="ghost-dark" onClick={goExternal(`${LINKS.commonwealth}charter`)}>
@@ -480,7 +420,7 @@ export function HomePage() {
       {/* ── FAQ ─────────────────────────────────────────── */}
       <section className="section" id="faq">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Questions</TabPill>
             <h2 className="section-head__title">
               Good questions, <em>straight answers.</em>

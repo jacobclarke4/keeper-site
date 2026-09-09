@@ -182,3 +182,60 @@
   .step--0, .step--1, .step--2 { transform: none; }
   .fade-rotator { animation: none; }
 }
+
+/* ── one viewport per section ───────────────────────────── */
+.hero, .section { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.hero { padding: 104px 0 40px; }
+.section { padding: 96px 0 40px; }
+.section > .wrap, .hero > .wrap { width: 100%; }
+.section-head--tight { margin-bottom: 24px; }
+.hero__lede { margin-bottom: 14px; }
+.hero__say { margin-bottom: 26px; }
+.catalog .cat__sum { padding: 16px 22px; }
+.catalog .cat__title { font-size: 19px; }
+.catalog__also { margin: 20px auto 0; text-align: center; font-size: 15px; color: var(--ink-mute); max-width: 62ch; }
+.faq { gap: 10px; }
+.faq__q { padding: 16px 22px; }
+.plan { gap: 10px; padding: 26px 26px; }
+.fineprint { margin-top: 18px; }
+
+/* desktop: shorter hero heading and price so a 720px-tall laptop holds each section */
+.hero__h1 { font-size: clamp(40px, 5.8vw, 78px); }
+.hero__lede { max-width: 38ch; }
+.hero__stack-foot { display: none; }
+.note { padding: 16px 20px; }
+.plan__price--hero { font-size: clamp(56px, 6vw, 88px); }
+.faq__q { padding: 13px 20px; }
+.section { padding: 84px 0 28px; }
+@media (min-width: 1081px) {
+  .catalog { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .catalog .cat__sum { padding: 13px 16px; }
+  .catalog .cat__title { font-size: 16.5px; }
+}
+
+/* the $14 leads: medallion sits right under the headline */
+.hero__h1 { margin-bottom: 18px; }
+.hero__medallion { margin-bottom: 18px; }
+.medallion { padding: 12px 26px; }
+.medallion__amt { font-size: clamp(56px, 6.4vw, 92px); line-height: 1; }
+
+/* desktop catalog + faq: a little tighter for short laptops */
+.section { padding: 76px 0 24px; }
+#catalog .section-head__sub { font-size: 17px; }
+@media (min-width: 1081px) {
+  .catalog .cat__sum { padding: 11px 14px; }
+  .catalog .cat__title { font-size: 16px; }
+  .catalog__also { margin-top: 12px; }
+}
+.faq { gap: 8px; }
+.faq__q { padding: 12px 18px; }
+
+/* last few pixels for a 700px-tall laptop */
+.section-head--tight { margin-bottom: 18px; gap: 12px; }
+.catalog__also { margin-top: 10px; font-size: 14px; }
+.plan { padding: 22px 24px; gap: 8px; }
+.fineprint { margin-top: 10px; font-size: 13px; }
+.faq { gap: 6px; }
+.faq__q { padding: 11px 18px; }
+.support__title { margin-bottom: 16px; }
+.support__quote { margin-top: 24px; }

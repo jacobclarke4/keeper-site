@@ -44,7 +44,7 @@ export function Colophon() {
           <button type="button" className="foot__brand-home" onClick={scrollTop} aria-label="Keeper — top">
             <Wordmark {...WORDMARK} variant="dark" />
           </button>
-          <p>Tell us what you need. Consider it handled.</p>
+          <p>Tell us what happened. We handle the paper.</p>
           <Btn className="foot__cta" variant="ghost-dark" href={LINKS.getStarted}>
             Get started <Arrow />
           </Btn>
