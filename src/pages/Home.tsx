@@ -28,11 +28,17 @@ const CASE = {
     { date: "Mar 3", who: "you", text: "Slipped on the loading dock. Right knee. Told my foreman before end of shift." },
     { date: "Mar 3", who: "keeper", text: "Injury reported to your employer in writing. Copy saved to this file.", compact: true },
     { date: "Mar 5", who: "keeper", text: "Claim filed with the insurer. Certified-mail receipt attached." },
-    { date: "Mar 6", who: "you", text: "Doctor says six weeks light duty. Photo of the note attached.", compact: true },
+    { date: "Mar 6", who: "you", text: "Doctor says six weeks light duty. Photo of the note attached." },
     { date: "Mar 6", who: "keeper", text: "Doctor's note added to the claim. Wage statement requested from payroll.", compact: true },
   ] as Entry[],
   next: "Accepted: checks start. Denied: we file the appeal that week.",
 };
+
+/* The other cases in the stack, peeking out beneath the open one. */
+const PEEKS = [
+  { title: "ERISA appeal", status: "Plan decides · 31 days" },
+  { title: "Grievance · Art. 12", status: "Step 1 · Tuesday" },
+];
 
 /* The dotted arc that links the three step bubbles, drawn on enter. */
 function StepArc() {
@@ -55,37 +61,55 @@ function StepArc() {
   );
 }
 
-/* The case journal card. */
-function CaseJournal() {
+/* The phone: Keeper on a handset, with the case deck stacked on screen. */
+function PhoneMock() {
   return (
-    <div className="hero__stack" aria-label="Example case journal">
-      <Ink as="article" fx="none" delay={640} className="note note--0 journal">
-        <header className="journal__head">
-          <div>
-            <p className="note__line">{CASE.title}</p>
-            <p className="journal__meta">{CASE.meta}</p>
+    <div className="hero__stack" aria-label="Keeper on your phone, example">
+      <Ink as="div" fx="none" delay={640} className="phone">
+        <div className="phone__screen">
+          <div className="phone__island" aria-hidden="true" />
+          <div className="phone__status" aria-hidden="true">
+            <span>9:41</span>
+            <span className="phone__signal" />
           </div>
-          <span className="note__status note__status--live">{CASE.status}</span>
-        </header>
-        <ol className="journal__list">
-          {CASE.entries.map((e, i) => (
-            <li key={i} className={`journal__entry journal__entry--${e.who}${e.compact ? " journal__entry--compact" : ""}`}>
-              <span className="journal__rail" aria-hidden="true" />
-              <span className="journal__date">{e.date}</span>
-              <span className="journal__who">{e.who === "you" ? "You" : "Keeper"}</span>
-              <p className="journal__text">{e.who === "you" ? `\u201C${e.text}\u201D` : e.text}</p>
-            </li>
-          ))}
-          <li className="journal__entry journal__entry--next">
-            <span className="journal__rail" aria-hidden="true" />
-            <span className="journal__date">Next</span>
-            <span className="journal__who">Keeper</span>
-            <p className="journal__text">{CASE.next}</p>
-          </li>
-        </ol>
-        <div className="journal__add" aria-hidden="true">
-          <span className="journal__add-text">Add a note to this case…</span>
-          <span className="journal__add-mic" />
+          <div className="phone__bar">
+            <span className="phone__brand">Keeper</span>
+            <span className="phone__title">Your cases</span>
+          </div>
+          <div className="deck">
+            <article className="deck__card deck__card--open">
+              <header className="journal__head">
+                <p className="note__line">{CASE.title}</p>
+                <span className="note__status note__status--live">{CASE.status}</span>
+              </header>
+              <ol className="journal__list">
+                {CASE.entries.map((e, i) => (
+                  <li key={i} className={`journal__entry journal__entry--${e.who}${e.compact ? " journal__entry--compact" : ""}`}>
+                    <span className="journal__rail" aria-hidden="true" />
+                    <span className="journal__date">{e.date}</span>
+                    <span className="journal__who">{e.who === "you" ? "You" : "Keeper"}</span>
+                    <p className="journal__text">{e.who === "you" ? `\u201C${e.text}\u201D` : e.text}</p>
+                  </li>
+                ))}
+                <li className="journal__entry journal__entry--next">
+                  <span className="journal__rail" aria-hidden="true" />
+                  <span className="journal__date">Next</span>
+                  <span className="journal__who">Keeper</span>
+                  <p className="journal__text">{CASE.next}</p>
+                </li>
+              </ol>
+              <div className="journal__add" aria-hidden="true">
+                <span className="journal__add-text">Add a note to this case…</span>
+                <span className="journal__add-mic" />
+              </div>
+            </article>
+            {PEEKS.map((p) => (
+              <article className="deck__card deck__card--peek" key={p.title}>
+                <p className="note__line">{p.title}</p>
+                <span className="deck__peek-status">{p.status}</span>
+              </article>
+            ))}
+          </div>
         </div>
       </Ink>
     </div>
@@ -162,7 +186,7 @@ export function HomePage() {
             </Ink>
           </div>
 
-          <CaseJournal />
+          <PhoneMock />
         </div>
       </section>
 

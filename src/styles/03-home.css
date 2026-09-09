@@ -240,35 +240,56 @@
 .support__title { margin-bottom: 16px; }
 .support__quote { margin-top: 24px; }
 
-/* ── hero case journal ──────────────────────────────────── */
-.note { padding: 16px 20px 14px; }
-.note__line { font-size: 17px; font-weight: 600; color: var(--ink); margin: 0; }
-.journal__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.journal__meta { font-size: 12px; color: var(--ink-fine); margin: 2px 0 0; }
-.note__status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--r-pill); background: var(--seafoam); color: var(--ink); font-weight: 600; font-size: 12px; white-space: nowrap; flex: none; }
-.note__status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--current); }
+/* ── hero phone: Keeper on a handset, the case deck stacked ── */
+.hero__stack { display: flex; justify-content: center; }
+.phone { position: relative; width: 300px; height: 560px; padding: 11px; border-radius: 46px; background: var(--navy); box-shadow: 0 30px 60px -28px rgba(43,43,43,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-2deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
+.phone.is-in { opacity: 1; transform: rotate(-2deg); }
+.phone__screen { position: relative; height: 100%; border-radius: 36px; background: var(--paper); overflow: hidden; display: flex; flex-direction: column; }
+.phone__island { position: absolute; left: 50%; top: 10px; width: 86px; height: 24px; margin-left: -43px; border-radius: 14px; background: var(--navy); z-index: 3; }
+.phone__status { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px 0; font-size: 12px; font-weight: 600; color: var(--ink); }
+.phone__signal { width: 34px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, var(--ink) 0 55%, var(--paper-dim) 55%); }
+.phone__bar { display: flex; align-items: baseline; justify-content: space-between; padding: 18px 18px 10px; }
+.phone__brand { font-style: italic; font-weight: 600; font-size: 15px; color: var(--ink); border-bottom: 2px solid var(--current); line-height: 1.1; }
+.phone__title { font-size: 12px; color: var(--ink-fine); }
+.deck { position: relative; flex: 1; padding: 0 12px 0; display: flex; flex-direction: column; }
+.deck__card { position: relative; background: var(--paper); border-radius: 20px; box-shadow: var(--sh-soft); border: 1px solid rgba(43,43,43,.06); }
+.deck__card--open { z-index: 3; padding: 12px 12px 10px; }
+.deck__card--peek { margin-top: -10px; padding: 18px 14px 6px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.deck__card--peek:nth-child(2) { z-index: 2; margin-left: 6px; margin-right: 6px; }
+.deck__card--peek:nth-child(3) { z-index: 1; margin-left: 12px; margin-right: 12px; }
+.deck__card--peek .note__line { font-size: 12px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.deck__peek-status { font-size: 10.5px; color: var(--ocean); white-space: nowrap; flex: none; }
+.note__line { font-size: 14px; font-weight: 600; color: var(--ink); margin: 0; line-height: 1.2; }
+.journal__head { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
+.note__status { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: var(--r-pill); background: var(--seafoam); color: var(--ink); font-weight: 600; font-size: 10.5px; white-space: nowrap; }
+.note__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--current); }
 .note__status--live::before { animation: journal-pulse 1.8s ease-in-out infinite; }
 .journal__list { list-style: none; margin: 0; padding: 0; }
-.journal__entry { position: relative; display: grid; grid-template-columns: 44px 1fr; column-gap: 10px; padding: 0 0 12px 22px; }
+.journal__entry { position: relative; display: grid; grid-template-columns: 34px 1fr; column-gap: 6px; padding: 0 0 8px 16px; }
 .journal__entry:last-child { padding-bottom: 0; }
-.journal__rail { position: absolute; left: 5px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink-fine); box-sizing: border-box; }
-.journal__entry::before { content: ""; position: absolute; left: 9px; top: 14px; bottom: -2px; width: 1.5px; background: var(--paper-dim); }
+.journal__rail { position: absolute; left: 3px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink-fine); box-sizing: border-box; }
+.journal__entry::before { content: ""; position: absolute; left: 6.5px; top: 12px; bottom: -2px; width: 1.5px; background: var(--paper-dim); }
 .journal__entry:last-child::before { display: none; }
 .journal__entry--keeper .journal__rail { background: var(--current); border-color: var(--current); }
 .journal__entry--next .journal__rail { background: var(--paper); border-color: var(--current); box-shadow: 0 0 0 3px rgba(219,54,48,.14); animation: journal-pulse 1.8s ease-in-out infinite; }
-.journal__date { grid-column: 1; font-size: 11px; color: var(--ink-fine); font-variant-numeric: tabular-nums; padding-top: 1px; white-space: nowrap; }
-.journal__who { grid-column: 2; font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; color: var(--ink-fine); }
+.journal__date { grid-column: 1; font-size: 9.5px; color: var(--ink-fine); font-variant-numeric: tabular-nums; padding-top: 1px; white-space: nowrap; }
+.journal__who { grid-column: 2; font-size: 9.5px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; color: var(--ink-fine); }
 .journal__entry--keeper .journal__who, .journal__entry--next .journal__who { color: var(--ocean); }
-.journal__text { grid-column: 2; margin: 1px 0 0; font-size: 13.5px; line-height: 1.4; color: var(--ink); }
+.journal__text { grid-column: 2; margin: 1px 0 0; font-size: 11.5px; line-height: 1.35; color: var(--ink); }
 .journal__entry--you .journal__text { font-style: italic; color: var(--ink-mute); }
 .journal__entry--next .journal__text { font-weight: 500; }
-.journal__add { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; padding: 8px 12px 8px 14px; border-radius: var(--r-pill); border: 1.5px solid var(--paper-dim); background: var(--paper); font-size: 12.5px; color: var(--ink-fine); }
-.journal__add-mic { width: 22px; height: 22px; border-radius: 50%; background: var(--current); position: relative; flex: none; }
-.journal__add-mic::before { content: ""; position: absolute; left: 8px; top: 5px; width: 6px; height: 9px; border-radius: 3px; background: #fff; }
-.journal__add-mic::after { content: ""; position: absolute; left: 6px; top: 8px; width: 8px; height: 8px; border: 1.5px solid #fff; border-top: 0; border-radius: 0 0 6px 6px; box-sizing: content-box; }
+.journal__add { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding: 6px 6px 6px 12px; border-radius: var(--r-pill); border: 1.5px solid var(--paper-dim); background: var(--paper); font-size: 11px; color: var(--ink-fine); }
+.journal__add-mic { width: 20px; height: 20px; border-radius: 50%; background: var(--current); position: relative; flex: none; }
+.journal__add-mic::before { content: ""; position: absolute; left: 7.5px; top: 4px; width: 5px; height: 8px; border-radius: 3px; background: #fff; }
+.journal__add-mic::after { content: ""; position: absolute; left: 5.5px; top: 7px; width: 7px; height: 7px; border: 1.5px solid #fff; border-top: 0; border-radius: 0 0 6px 6px; box-sizing: content-box; }
 @keyframes journal-pulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(219,54,48,.14); } 50% { box-shadow: 0 0 0 6px rgba(219,54,48,.06); } }
-@media (prefers-reduced-motion: reduce) { .journal__entry--next .journal__rail, .note__status--live::before { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .journal__entry--next .journal__rail, .note__status--live::before { animation: none; } .phone { transition: none; } }
+
+/* the price's unit sits upright */
+.medallion__per { font-style: normal; }
 
 /* the journal never widens the hero grid */
 .hero__grid > * { min-width: 0; }
 .hero__stack { min-width: 0; }
+/* the phone screen is small: the two quieter journal entries stay hidden */
+.journal__entry--compact { display: none; }

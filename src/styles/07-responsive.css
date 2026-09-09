@@ -206,20 +206,13 @@
 
 /* ── tracker: one case on tablets and phones, kept compact ── */
 @media (max-width: 920px) {
-  .note { padding: 14px 16px 12px; }
-  .journal__head { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
-  .journal__entry--compact, .journal__add { display: none; }
-  .journal__entry { padding-bottom: 8px; }
+  .phone { width: 280px; height: 380px; transform: none; }
+  .phone.is-in { transform: none; }
+  .phone__screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(248,247,244,0), var(--paper)); pointer-events: none; z-index: 4; }
 }
 @media (max-width: 560px) {
   .hero__stack { display: block; margin-top: 6px; }
   .note__next { display: none; }
-}
-
-/* ── phone: three journal entries, no add bar ─────────────── */
-@media (max-width: 560px) {
-  .journal__text { font-size: 13px; }
-  .note__status { font-size: 11px; padding: 3px 8px; }
 }
 
 /* ── narrow screens: compact hero so the journal fits beneath it ── */
@@ -234,11 +227,7 @@
   .hero__ctas { margin-bottom: 14px; }
   .hero__ctas .btn--lg { padding: 11px 22px; font-size: 15px; }
   .hero__stack { margin-top: 0; }
-  .note { padding: 12px 14px 10px; }
-  .note__line { font-size: 15px; }
-  .journal__meta { display: none; }
-  .journal__head { gap: 4px; margin-bottom: 6px; }
-  .journal__entry { padding-bottom: 6px; grid-template-columns: 38px 1fr; padding-left: 18px; }
-  .journal__text { font-size: 12.5px; line-height: 1.35; }
-  .journal__date, .journal__who { font-size: 10px; }
+  .phone { width: 250px; height: 250px; padding: 8px 8px 0; border-radius: 34px 34px 0 0; }
+  .phone__screen { border-radius: 28px 28px 0 0; }
+  .phone__screen::after { height: 70px; }
 }
