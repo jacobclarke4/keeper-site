@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { LINKS, goExternal } from "../lib/links";
 import { CATALOG, ALSO, TIERS, FAQ } from "../lib/outcomes";
-import { Ink, useInView } from "../lib/motion";
+import { Ink, useInView, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
@@ -11,28 +12,28 @@ import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
 
 /* The hero's example case: one workers' comp claim, told through its
    journal. Two voices: the member's own notes, in their words, and
-   Keeper's actions on the case. Illustrative, not live data. */
-type Entry = {
-  date: string;
-  who: "you" | "keeper";
-  text: string;
-  /** Hidden on phones, where the journal shows three entries. */
-  compact?: boolean;
-};
+   Keeper's actions on the case. The phone plays it as a loop.
+   Illustrative, not live data. */
+type Entry = { date: string; who: "you" | "keeper"; text: string };
 
 const CASE = {
   title: "Workers' comp claim",
-  meta: "Opened Mar 3 · Local 1245",
-  status: "Insurer decides by Mar 19",
+  statusBefore: "Opened Mar 3",
+  statusAfter: "Insurer decides by Mar 19",
   entries: [
     { date: "Mar 3", who: "you", text: "Slipped on the loading dock. Right knee. Told my foreman before end of shift." },
-    { date: "Mar 3", who: "keeper", text: "Injury reported to your employer in writing. Copy saved to this file.", compact: true },
     { date: "Mar 5", who: "keeper", text: "Claim filed with the insurer. Certified-mail receipt attached." },
     { date: "Mar 6", who: "you", text: "Doctor says six weeks light duty. Photo of the note attached." },
-    { date: "Mar 6", who: "keeper", text: "Doctor's note added to the claim. Wage statement requested from payroll.", compact: true },
   ] as Entry[],
   next: "Accepted: checks start. Denied: we file the appeal that week.",
 };
+
+/* The loop, in milliseconds from the start: when each step lands.
+   0 typing the first note · 1 note becomes an entry · 2 Keeper files ·
+   3 doctor's note · 4 what's next · 5 hold, then fade and restart. */
+const TIMELINE = [0, 3200, 4900, 6600, 8200, 12000];
+const RESTART_FADE = 500;
+const TYPE_MS = 34;
 
 /* The other cases in the stack, peeking out beneath the open one. */
 const PEEKS = [
@@ -61,8 +62,52 @@ function StepArc() {
   );
 }
 
-/* The phone: Keeper on a handset, with the case deck stacked on screen. */
+/* Steps the loop; resolves to the finished state when motion is reduced. */
+function useCaseLoop(reduced: boolean) {
+  const [step, setStep] = useState(reduced ? 4 : 0);
+  const [fading, setFading] = useState(false);
+  useEffect(() => {
+    if (reduced) return;
+    let timers: number[] = [];
+    const run = () => {
+      setFading(false);
+      setStep(0);
+      timers = TIMELINE.slice(1).map((at, i) => window.setTimeout(() => setStep(i + 1), at));
+      const total = TIMELINE[TIMELINE.length - 1];
+      timers.push(window.setTimeout(() => setFading(true), total));
+      timers.push(window.setTimeout(run, total + RESTART_FADE));
+    };
+    const first = window.setTimeout(run, 0);
+    return () => { window.clearTimeout(first); timers.forEach((t) => window.clearTimeout(t)); };
+  }, [reduced]);
+  return { step, fading };
+}
+
+/* Reveals text one character at a time while active. */
+function useTyped(text: string, active: boolean) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let i = 0;
+    const reset = window.setTimeout(() => setN(0), 0);
+    const id = window.setInterval(() => {
+      i += 1;
+      setN(i);
+      if (i >= text.length) window.clearInterval(id);
+    }, TYPE_MS);
+    return () => { window.clearTimeout(reset); window.clearInterval(id); };
+  }, [text, active]);
+  return active ? text.slice(0, n) : "";
+}
+
+/* The phone: Keeper on a handset, the case deck stacked, the journal
+   writing itself in a loop. */
 function PhoneMock() {
+  const reduced = usePrefersReducedMotion();
+  const { step, fading } = useCaseLoop(reduced);
+  const typing = !reduced && step === 0;
+  const typed = useTyped(CASE.entries[0].text, typing);
+  const filed = step >= 2;
   return (
     <div className="hero__stack" aria-label="Keeper on your phone, example">
       <Ink as="div" fx="none" delay={640} className="phone">
@@ -77,29 +122,34 @@ function PhoneMock() {
             <span className="phone__title">Your cases</span>
           </div>
           <div className="deck">
-            <article className="deck__card deck__card--open">
+            <article className={`deck__card deck__card--open${fading ? " is-fading" : ""}`}>
               <header className="journal__head">
                 <p className="note__line">{CASE.title}</p>
-                <span className="note__status note__status--live">{CASE.status}</span>
+                <span className={`note__status${filed ? " note__status--live" : ""}`} key={filed ? "after" : "before"}>
+                  {filed ? CASE.statusAfter : CASE.statusBefore}
+                </span>
               </header>
-              <ol className="journal__list">
+              <ol className="journal__list" aria-live="polite">
                 {CASE.entries.map((e, i) => (
-                  <li key={i} className={`journal__entry journal__entry--${e.who}${e.compact ? " journal__entry--compact" : ""}`}>
+                  <li key={i} className={`journal__entry journal__entry--${e.who}${step >= i + 1 ? " is-in" : ""}`}>
                     <span className="journal__rail" aria-hidden="true" />
                     <span className="journal__date">{e.date}</span>
                     <span className="journal__who">{e.who === "you" ? "You" : "Keeper"}</span>
                     <p className="journal__text">{e.who === "you" ? `\u201C${e.text}\u201D` : e.text}</p>
                   </li>
                 ))}
-                <li className="journal__entry journal__entry--next">
+                <li className={`journal__entry journal__entry--next${step >= 4 ? " is-in" : ""}`}>
                   <span className="journal__rail" aria-hidden="true" />
                   <span className="journal__date">Next</span>
                   <span className="journal__who">Keeper</span>
                   <p className="journal__text">{CASE.next}</p>
                 </li>
               </ol>
-              <div className="journal__add" aria-hidden="true">
-                <span className="journal__add-text">Add a note to this case…</span>
+              <div className={`journal__add${typing ? " is-typing" : ""}`} aria-hidden="true">
+                <span className="journal__add-text">
+                  {typing ? typed : "Add a note to this case…"}
+                  {typing && <span className="journal__add-caret" />}
+                </span>
                 <span className="journal__add-mic" />
               </div>
             </article>

@@ -291,5 +291,19 @@
 /* the journal never widens the hero grid */
 .hero__grid > * { min-width: 0; }
 .hero__stack { min-width: 0; }
-/* the phone screen is small: the two quieter journal entries stay hidden */
-.journal__entry--compact { display: none; }
+/* ── the journal writes itself ──────────────────────────── */
+.journal__list { min-height: 168px; }
+.journal__entry { opacity: 0; transform: translateY(8px); transition: opacity .45s var(--paper-ease), transform .5s var(--paper-ease); }
+.journal__entry.is-in { opacity: 1; transform: none; }
+.journal__entry::before { transform-origin: top; transform: scaleY(0); transition: transform .5s var(--paper-ease) .35s; }
+.journal__entry.is-in::before { transform: scaleY(1); }
+.note__status { animation: status-in .4s var(--paper-ease) both; }
+@keyframes status-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.journal__add-text { white-space: nowrap; overflow: hidden; text-overflow: clip; display: inline-block; max-width: 100%; }
+.journal__add.is-typing .journal__add-text { color: var(--ink); font-style: italic; }
+.journal__add-caret { display: inline-block; width: 1.5px; height: 12px; margin-left: 1px; background: var(--current); vertical-align: -2px; animation: caret 1s steps(2, start) infinite; }
+@keyframes caret { to { visibility: hidden; } }
+.journal__add.is-typing .journal__add-mic { animation: journal-pulse 1.2s ease-in-out infinite; }
+.deck__card--open { transition: opacity .5s var(--paper-ease); }
+.deck__card--open.is-fading { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .journal__entry, .journal__entry::before { transition: none; } .note__status { animation: none; } }
