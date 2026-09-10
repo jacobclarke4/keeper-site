@@ -119,3 +119,6 @@
 .polaroid.ink--rise.is-in.polaroid--2 { transform: rotate(-1.5deg); }
 .polaroid.ink--rise.is-in.polaroid--3 { transform: rotate(3deg) translateY(8px); }
 .polaroid.ink--rise.is-in:hover { transform: rotate(0) translateY(-4px); }
+
+/* the price block: even corners, no tilt */
+.medallion, .hero__medallion.is-in .medallion { border-radius: 22px; transform: none; }
