@@ -78,27 +78,6 @@ function Portrait({ pal, size, voice }: { pal: Pal; size: number; voice: "on" | 
   );
 }
 
-/* The dotted arc that links the three step bubbles, drawn on enter. */
-function StepArc() {
-  const { ref, inView } = useInView<HTMLDivElement>({ rootMargin: "0px 0px -20% 0px" });
-  return (
-    <div ref={ref} className={`how__arc${inView ? " is-drawn" : ""}`} aria-hidden="true">
-      <svg viewBox="0 0 1000 120" preserveAspectRatio="none">
-        <path
-          className="how__arc-path"
-          d="M60,84 C260,-6 740,-6 940,84"
-          fill="none"
-          stroke="var(--current)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeDasharray="0.004 0.02"
-          pathLength={1}
-        />
-      </svg>
-    </div>
-  );
-}
-
 /* Steps the loop; resolves to the finished state when motion is reduced.
    Each pass hands the member to the next assistant. */
 function useCaseLoop(reduced: boolean) {
@@ -245,19 +224,6 @@ function PhoneMock() {
   );
 }
 
-/* Alternate the two chip tones across catalog groups on first sight. */
-const groupTone = (() => {
-  const order: string[] = [];
-  return (group: string) => {
-    let idx = order.indexOf(group);
-    if (idx === -1) {
-      idx = order.length;
-      order.push(group);
-    }
-    return idx % 2 === 0 ? "seafoam" : "current";
-  };
-})();
-
 /* The Wallet balance panel — a plump track that fills and stops dead at the cap. */
 function BalancePanel() {
   const { ref, inView } = useInView<HTMLDivElement>({ rootMargin: "0px 0px -15% 0px" });
@@ -319,58 +285,43 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── who this is for ─────────────────────────────── */}
-      <section className="section" id="bridge">
+      {/* ── who this is for: one big statement ─────────── */}
+      <section className="section section--statement" id="bridge">
+        <span className="shape shape--blush shape--left" aria-hidden="true" />
         <div className="wrap">
-          <div className="panel panel--seafoam panel--ocorner bridge">
-            <span className="blob" aria-hidden="true" />
-            <Ink as="div" fx="rise" className="bridge__tab">
-              <TabPill>Who this is for</TabPill>
-            </Ink>
-            <Ink as="h2" fx="rise" delay={70} className="bridge__title">
-              Built for the people who <em>keep everything running.</em>
-            </Ink>
-            <Ink as="p" fx="rise" delay={120} className="bridge__p">
-              The paperwork that protects you was never written for you. Comp forms, benefit
-              appeals, grievance procedures: every one has a deadline, a format, and a way to get it
-              wrong.
-            </Ink>
-            <Ink as="p" fx="rise" delay={160} className="bridge__turn">
-              Keeper is here to <em>get it right.</em>
-            </Ink>
-            <Ink as="p" fx="rise" delay={200} className="bridge__p hide-phone">
-              Whatever your trade, whatever your local, whatever language you speak. You tell us
-              what happened. We take it from there.
-            </Ink>
-          </div>
+          <Ink as="p" fx="rise" className="eyebrow-caps">Who this is for</Ink>
+          <Ink as="h2" fx="rise" delay={70} className="statement">
+            Built for the people who keep everything running. The paperwork that protects you was
+            never written for you. Keeper is here to get it right.
+          </Ink>
+          <Ink as="p" fx="rise" delay={140} className="statement__sub hide-phone">
+            Whatever your trade, whatever your local, whatever language you speak. You tell us what
+            happened. We take it from there.
+          </Ink>
         </div>
       </section>
 
       {/* ── how it works ────────────────────────────────── */}
       <section className="section" id="how">
+        <span className="shape shape--coral shape--tr" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head">
             <TabPill>How it works</TabPill>
             <h2 className="section-head__title">Three steps. That&apos;s it.</h2>
           </Ink>
-          <div className="how">
-            <StepArc />
-            <div className="how__cards">
-              {[
-                { n: "1", t: "Tell us what happened.", d: "In your own words. The injury, the denial letter, the write-up. Type it, say it, or send a photo of the paper." },
-                { n: "2", t: "We draft and file.", d: "We ask a few questions, pull the deadlines and rules that apply, and write the claim, appeal, or grievance. You review it before it goes out." },
-                { n: "3", t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and a plain-words plan for what comes next." },
-              ].map((s, i) => (
-                <Ink key={s.n} as="article" fx="rise" delay={i * 90} className={`step step--${i}`}>
-                  <span className={`step__bubble step__bubble--${i % 2 === 0 ? "seafoam" : "current"}`}>
-                    {s.n}
-                  </span>
-                  <h3 className="step__t">{s.t}</h3>
-                  <p className="step__d">{s.d}</p>
-                  {s.n === "3" && <CheckChip className="step__chip">Filed</CheckChip>}
-                </Ink>
-              ))}
-            </div>
+          <div className="exps">
+            {[
+              { n: "1", t: "Tell us what happened.", d: "In your own words. The injury, the denial letter, the write-up. Type it, say it, or send a photo of the paper." },
+              { n: "2", t: "We draft and file.", d: "We ask a few questions, pull the deadlines and rules that apply, and write the claim, appeal, or grievance. You review it before it goes out." },
+              { n: "3", t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and a plain-words plan for what comes next." },
+            ].map((s, i) => (
+              <Ink key={s.n} as="article" fx="rise" delay={i * 90} className={`exp exp--${i}`}>
+                <span className="exp__pill">Step {s.n}</span>
+                <span className="exp__num" aria-hidden="true">{s.n}</span>
+                <h3 className="exp__t">{s.t}</h3>
+                <p className="exp__d">{s.d}</p>
+              </Ink>
+            ))}
           </div>
           <Ink as="p" fx="rise" delay={90} className="how__support">
             And when a case needs a person, a real one steps in,{" "}
@@ -381,6 +332,7 @@ export function HomePage() {
 
       {/* ── the catalog ─────────────────────────────────── */}
       <section className="section" id="catalog">
+        <span className="shape shape--red shape--bl" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>What we file</TabPill>
@@ -393,50 +345,18 @@ export function HomePage() {
             </p>
           </Ink>
 
-          <div className="catalog">
+          <div className="rail" role="list">
             {CATALOG.map((o, i) => (
-              <Ink
-                as="div"
-                fx="rise"
-                delay={(i % 2) * 60}
-                key={o.title}
-                className="catalog__cell"
-              >
-                <details className="cat">
-                  <summary className="cat__sum">
-                    <span className={`category-chip category-chip--${groupTone(o.group)}`}>
-                      {o.group}
-                    </span>
-                    <span className="cat__title">{o.title}</span>
-                    <span className="cat__toggle" aria-hidden="true">
-                      <span className="cat__toggle-icon" />
-                    </span>
-                  </summary>
-                  <div className="cat__open">
-                    <div className="cat__thread">
-                      <div className="bubble bubble--ask">
-                        <span className="bubble__who">You tell us</span>
-                        <p className="bubble__text">{o.ask}</p>
-                      </div>
-                      <div className="bubble bubble--answer">
-                        <span className="bubble__who">We hand you</span>
-                        <p className="bubble__text">{o.deliver}</p>
-                      </div>
-                    </div>
-                    <div className="cat__foot">
-                      <a className="btn btn--accent btn--sm" href={LINKS.getStarted}>
-                        <span className="btn__label">
-                          Get this filed <span className="arrow" aria-hidden="true">→</span>
-                        </span>
-                      </a>
-                      <CheckChip />
-                    </div>
-                  </div>
-                </details>
+              <Ink as="article" fx="rise" delay={(i % 4) * 60} key={o.title} className={`polaroid polaroid--${i % 4}`} role="listitem">
+                <span className="polaroid__art" aria-hidden="true">
+                  <span className="polaroid__glyph">{String(i + 1).padStart(2, "0")}</span>
+                </span>
+                <span className="polaroid__group">{o.group}</span>
+                <h3 className="polaroid__t">{o.title}</h3>
+                <p className="polaroid__d">{o.deliver}</p>
               </Ink>
             ))}
           </div>
-
           <Ink as="p" fx="rise" className="catalog__also">
             Also: {ALSO.join(", ")}.
           </Ink>
@@ -445,6 +365,7 @@ export function HomePage() {
 
       {/* ── pricing ─────────────────────────────────────── */}
       <section className="section" id="pricing">
+        <span className="shape shape--blush shape--right" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Pricing</TabPill>
@@ -489,31 +410,20 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── support ─────────────────────────────────────── */}
-      <section className="section" id="support">
+      {/* ── support: one big statement ───────────────── */}
+      <section className="section section--statement" id="support">
+        <span className="shape shape--red shape--right" aria-hidden="true" />
         <div className="wrap">
-          <div className="panel panel--current panel--ocorner support">
-            <span className="blob" aria-hidden="true" />
-            <span className="support__halo" aria-hidden="true" />
-            <Ink as="div" fx="rise" className="support__tab">
-              <TabPill>The human side</TabPill>
-            </Ink>
-            <Ink as="h2" fx="rise" delay={70} className="support__title">
-              Help whenever you need it.
-            </Ink>
-            <Ink as="p" fx="rise" delay={120} className="support__p">
-              A claim is stressful. A denial is worse. You shouldn&apos;t be doing this alone at
-              midnight.
-            </Ink>
-            <Ink as="p" fx="rise" delay={160} className="support__p">
-              Our support line is open around the clock, in ten languages, ready to take what
-              happened in plain words. And when a case needs a person, a real one steps in and stays
-              on it.
-            </Ink>
-            <Ink as="blockquote" fx="rise" delay={200} className="support__quote">
-              You&apos;re never stuck. You&apos;re <em>never alone</em> with it.
-            </Ink>
-          </div>
+          <Ink as="p" fx="rise" className="eyebrow-caps">The human side</Ink>
+          <Ink as="h2" fx="rise" delay={70} className="statement">
+            A claim is stressful. A denial is worse. You shouldn&apos;t be doing this alone at
+            midnight.
+          </Ink>
+          <Ink as="p" fx="rise" delay={140} className="statement__sub">
+            Our support line is open around the clock, in ten languages. And when a case needs a
+            person, a real one steps in and stays on it. You&apos;re never stuck. You&apos;re never
+            alone with it.
+          </Ink>
         </div>
       </section>
 
@@ -572,6 +482,7 @@ export function HomePage() {
 
       {/* ── FAQ ─────────────────────────────────────────── */}
       <section className="section" id="faq">
+        <span className="shape shape--coral shape--left" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Questions</TabPill>

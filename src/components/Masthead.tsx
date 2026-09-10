@@ -62,6 +62,16 @@ export function Masthead() {
 
   return (
     <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
+      {/* A progressive blur behind the bar (the Google Labs header): five
+          stacked backdrop blurs, each stronger than the last and each masked
+          to its own band, heaviest at the top edge and easing off below. */}
+      <div className="mast__blur" aria-hidden="true">
+        <span className="mast__blur-layer mast__blur-layer--1" />
+        <span className="mast__blur-layer mast__blur-layer--2" />
+        <span className="mast__blur-layer mast__blur-layer--3" />
+        <span className="mast__blur-layer mast__blur-layer--4" />
+        <span className="mast__blur-layer mast__blur-layer--5" />
+      </div>
       <div className="mast__capsule">
         <button type="button" className="mast__brand" onClick={goHome} aria-label="Keeper — home">
           <Wordmark {...WORDMARK} className="mast__wordmark" />

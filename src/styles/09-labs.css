@@ -1,0 +1,121 @@
+/* =========================================================
+   LABS — the header bar and the playful section language,
+   after labs.google. Loaded last so it wins.
+   ========================================================= */
+
+/* ── the header: a full-width bar, no capsule, a progressive blur behind ── */
+.mast { padding: 0; }
+.mast__capsule, .mast.is-condensed .mast__capsule {
+  position: relative; z-index: 1;
+  max-width: none; height: 76px; padding: 0 var(--gutter);
+  border-radius: 0; background: transparent; box-shadow: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  display: flex; align-items: center; gap: 24px;
+}
+.mast__blur { position: absolute; left: 0; right: 0; top: 0; height: 92px; pointer-events: none; z-index: 0; }
+.mast__blur-layer { position: absolute; inset: 0; }
+.mast__blur-layer--1 { backdrop-filter: blur(4px);  -webkit-backdrop-filter: blur(4px);  mask-image: linear-gradient(to bottom, transparent 0%, transparent 40%, #000 60%, #000 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 40%, #000 60%, #000 80%, transparent 100%); }
+.mast__blur-layer--2 { backdrop-filter: blur(6px);  -webkit-backdrop-filter: blur(6px);  mask-image: linear-gradient(to bottom, transparent 0%, transparent 20%, #000 40%, #000 60%, transparent 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 20%, #000 40%, #000 60%, transparent 80%, transparent 100%); }
+.mast__blur-layer--3 { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 40%, transparent 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 40%, transparent 60%, transparent 100%); }
+.mast__blur-layer--4 { backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 40%, transparent 100%); }
+.mast__blur-layer--5 { backdrop-filter: blur(34px); -webkit-backdrop-filter: blur(34px); mask-image: linear-gradient(to bottom, #000 0%, transparent 20%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 20%, transparent 100%); }
+
+/* brand left, links dead centre, actions right */
+.mast__brand { flex: none; }
+.mast__wordmark { font-size: 24px; }
+.mast__links { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; flex: none; gap: 8px; }
+.mast__link { font-size: 17px; font-weight: 500; color: var(--ink); padding: 8px 14px; }
+.mast__link::before { display: none; }
+.mast__link:hover, .mast__link.is-active { color: var(--current); }
+.mast__cta { margin-left: auto; gap: 20px; }
+.mast__login { font-size: 16px; font-weight: 500; color: var(--ink); }
+.mast__login:hover { color: var(--current); }
+@media (max-width: 920px) {
+  .mast__capsule, .mast.is-condensed .mast__capsule { height: 64px; }
+  .mast__blur { height: 80px; }
+}
+
+/* ── the playful language: big shapes, caps eyebrows, giant statements ── */
+.section { overflow: hidden; }
+.shape { position: absolute; z-index: 0; pointer-events: none; border-radius: 48% 52% 44% 56% / 55% 42% 58% 45%; }
+.shape--red { background: var(--current); }
+.shape--coral { background: #F6A08F; }
+.shape--blush { background: #F7DCD6; }
+.shape--left { left: -22vw; top: 18%; width: 46vw; height: 64%; }
+.shape--right { right: -22vw; top: 14%; width: 46vw; height: 68%; }
+.shape--tr { right: -14vw; top: -10%; width: 40vw; height: 52%; border-radius: 56% 44% 52% 48% / 44% 58% 42% 56%; }
+.shape--bl { left: -16vw; bottom: -8%; width: 44vw; height: 54%; border-radius: 44% 56% 48% 52% / 58% 44% 56% 42%; }
+.section > .wrap { position: relative; z-index: 1; }
+
+.eyebrow-caps { margin: 0 0 18px; text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.tab-pill { background: none; padding: 0; box-shadow: none; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.tab-pill--dark { background: none; color: var(--on-dark); }
+.section-head { gap: 14px; }
+
+.section--statement .wrap { text-align: center; }
+.statement { margin: 0 auto; max-width: 20ch; font-family: var(--f-ledger); font-weight: 400; font-size: clamp(30px, 4.6vw, 62px); line-height: 1.12; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+.statement__sub { margin: 26px auto 0; max-width: 56ch; font-size: 18px; line-height: 1.55; color: var(--ink-mute); }
+
+/* ── how it works: three dark cards, a pill label, a big numeral ── */
+.exps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.exp { position: relative; display: flex; flex-direction: column; min-height: 340px; padding: 22px; border-radius: 34px; background: var(--navy); color: var(--on-dark); overflow: hidden; }
+.exp--1 { background: var(--current); color: #fff; }
+.exp__pill { align-self: flex-start; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.16); color: inherit; font-size: 14px; font-weight: 600; }
+.exp__num { position: absolute; right: -6px; top: 4px; font-family: var(--f-ledger); font-size: 200px; line-height: 1; color: rgba(255,255,255,.08); }
+.exp__t { margin: auto 0 8px; font-family: var(--f-ledger); font-weight: 400; font-size: 32px; line-height: 1.08; letter-spacing: -0.015em; color: inherit; }
+.exp__d { margin: 0; font-size: 15.5px; line-height: 1.45; color: rgba(255,255,255,.78); }
+.exp--1 .exp__d { color: rgba(255,255,255,.9); }
+.how__support { margin-top: 22px; text-align: center; }
+
+/* ── the catalog: a rail of tilted polaroids ─────────────────────── */
+.rail { display: flex; gap: 22px; padding: 18px 8px 26px; margin: 0 calc(-1 * var(--gutter)); padding-left: var(--gutter); padding-right: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.polaroid { flex: 0 0 280px; scroll-snap-align: start; padding: 14px 14px 18px; border-radius: 22px; background: #fff; box-shadow: 0 18px 40px -22px rgba(43,43,43,.4), 0 2px 6px -3px rgba(43,43,43,.2); transition: transform .35s var(--paper-ease); }
+.polaroid--0 { transform: rotate(-3deg); }
+.polaroid--1 { transform: rotate(2deg) translateY(10px); }
+.polaroid--2 { transform: rotate(-1.5deg); }
+.polaroid--3 { transform: rotate(3deg) translateY(8px); }
+.polaroid:hover { transform: rotate(0) translateY(-4px); }
+.polaroid__art { display: grid; place-items: center; height: 170px; border-radius: 16px; background: linear-gradient(160deg, #F7DCD6, #F6A08F); }
+.polaroid--1 .polaroid__art, .polaroid--3 .polaroid__art { background: linear-gradient(160deg, var(--current), #B8302E); }
+.polaroid--2 .polaroid__art { background: linear-gradient(160deg, var(--navy), #4a4a4a); }
+.polaroid__glyph { font-family: var(--f-ledger); font-size: 84px; line-height: 1; color: rgba(255,255,255,.9); }
+.polaroid--0 .polaroid__glyph { color: var(--current); }
+.polaroid__group { display: block; margin-top: 12px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); }
+.polaroid__t { margin: 4px 0 6px; font-family: var(--f-ledger); font-weight: 400; font-size: 22px; line-height: 1.15; color: var(--ink); }
+.polaroid__d { margin: 0; font-size: 13.5px; line-height: 1.4; color: var(--ink-mute); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.catalog__also { margin-top: 6px; }
+
+@media (max-width: 920px) {
+  .exps { grid-template-columns: 1fr; gap: 10px; }
+  .exp { min-height: 0; padding: 16px 18px; border-radius: 22px; flex-direction: row; align-items: center; gap: 14px; }
+  .exp__pill { flex: none; font-size: 12px; padding: 5px 10px; }
+  .exp__num { display: none; }
+  .exp__t { margin: 0; font-size: 20px; }
+  .exp__d { display: none; }
+  .polaroid { flex-basis: 220px; }
+  .polaroid__art { height: 120px; }
+  .polaroid__glyph { font-size: 60px; }
+  .statement__sub { font-size: 16px; }
+}
+@media (max-width: 560px) {
+  .shape--left, .shape--right { width: 70vw; }
+  .polaroid { flex-basis: 200px; padding: 10px 10px 14px; }
+  .polaroid__art { height: 100px; }
+  .polaroid__t { font-size: 18px; }
+  .rail { gap: 14px; padding-top: 10px; padding-bottom: 16px; }
+  .statement { font-size: clamp(26px, 8.4vw, 34px); }
+}
+
+/* short laptops: the rail sits a little tighter */
+.polaroid__art { height: 150px; }
+.rail { padding-top: 14px; padding-bottom: 18px; }
+.polaroid__d { -webkit-line-clamp: 2; }
+#catalog .section-head__sub { display: none; }
+
+/* the tilt survives the reveal (the reveal's own transform rule outranks a lone class) */
+.polaroid.ink--rise.is-in.polaroid--0 { transform: rotate(-3deg); }
+.polaroid.ink--rise.is-in.polaroid--1 { transform: rotate(2deg) translateY(10px); }
+.polaroid.ink--rise.is-in.polaroid--2 { transform: rotate(-1.5deg); }
+.polaroid.ink--rise.is-in.polaroid--3 { transform: rotate(3deg) translateY(8px); }
+.polaroid.ink--rise.is-in:hover { transform: rotate(0) translateY(-4px); }
