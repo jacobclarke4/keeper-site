@@ -248,13 +248,17 @@
 .hero__stack { --bleed: 186px; min-width: 0; display: flex; justify-content: center; align-self: end; margin-bottom: calc(-1 * var(--bleed)); }
 .phone { position: relative; z-index: 1; width: 372px; height: 760px; padding: 13px; border-radius: 54px; background: #0d1b2a; box-shadow: 0 30px 60px -28px rgba(13,27,42,.55), 0 2px 0 rgba(255,255,255,.06) inset; transform: rotate(-1.5deg); opacity: 0; transition: opacity .5s var(--paper-ease), transform .6s var(--paper-ease); }
 .phone.is-in { opacity: 1; transform: rotate(-1.5deg); }
-/* A red aurora behind the phone: three soft lobes of Keeper red drifting slowly at different rates. */
-.hero__stack::before, .hero__stack::after { content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: blur(70px); -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 92%); mask-image: linear-gradient(to bottom, #000 55%, transparent 92%); }
-.hero__stack::before { left: 50%; top: 6%; width: 820px; height: 720px; margin-left: -410px; background:
+/* A red aurora behind the phone: soft lobes of Keeper red drifting slowly.
+   They belong to the hero, anchored to its bottom edge, and their mask
+   reaches full transparency exactly there, so the glow dissolves into the
+   page the way the phone does instead of being cut flat by the next
+   section. */
+.hero::before, .hero::after { content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: blur(70px); -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 100%); mask-image: linear-gradient(to bottom, #000 30%, transparent 100%); }
+.hero::before { left: 74%; bottom: 0; width: 820px; height: 720px; margin-left: -410px; background:
   radial-gradient(closest-side at 38% 40%, rgba(219,54,48,.95), rgba(219,54,48,0) 74%),
   radial-gradient(closest-side at 70% 65%, rgba(255,110,80,.8), rgba(255,110,80,0) 74%);
   animation: aurora-a 14s ease-in-out infinite alternate; }
-.hero__stack::after { left: 50%; top: 22%; width: 680px; height: 600px; margin-left: -300px; background:
+.hero::after { left: 74%; bottom: 0; width: 680px; height: 600px; margin-left: -300px; background:
   radial-gradient(closest-side at 50% 50%, rgba(205,30,80,.75), rgba(205,30,80,0) 74%);
   animation: aurora-b 19s ease-in-out infinite alternate; }
 @keyframes aurora-a { 0% { transform: translate(-6%, -4%) rotate(-8deg) scale(1); } 50% { transform: translate(5%, 3%) rotate(4deg) scale(1.08); } 100% { transform: translate(-3%, 6%) rotate(10deg) scale(.96); } }
@@ -374,7 +378,7 @@
 .capsule__mic.is-rec { background: var(--success); animation: rec-pulse 1.4s ease-out infinite; }
 @keyframes rec-pulse { 0% { box-shadow: 0 0 0 0 rgba(44,122,78,.45); } 100% { box-shadow: 0 0 0 14px rgba(44,122,78,0); } }
 .capsule__keys { background: var(--paper-dim); color: var(--ink-mute); }
-@media (prefers-reduced-motion: reduce) { .pw--speaking img, .pw-badge i, .capsule__mic.is-rec, .hero__stack::before, .hero__stack::after { animation: none; } .phone, .cases, .tracking, .textbar, .road { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .pw--speaking img, .pw-badge i, .capsule__mic.is-rec, .hero::before, .hero::after { animation: none; } .phone, .cases, .tracking, .textbar, .road { transition: none; } }
 
 /* the envelope, on the card: one line of proof */
 .deckcard__mail { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12.5px; color: var(--ink); opacity: 0; transition: opacity .5s var(--paper-ease); }
@@ -392,3 +396,16 @@
 
 /* one membership: a single centred card */
 .plans { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+
+/* Pin the phone's bottom to the hero's edge at every viewport: the hero's
+   grid stretches to the hero's height and the stack sits at its end, so
+   the phone always hangs exactly (--bleed minus the hero's bottom padding)
+   past the edge. The fade then ends 20px above the edge, wherever it is,
+   and the capsule sits above the fade. */
+.hero > .wrap { flex: 1; }
+.hero__stack { align-self: end; }
+.phone {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--bleed, 0px) - 46px), transparent calc(100% - var(--bleed, 0px) + 24px));
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--bleed, 0px) - 46px), transparent calc(100% - var(--bleed, 0px) + 24px));
+}
+.band { bottom: calc(var(--bleed, 0px) + 36px); }

@@ -210,7 +210,7 @@
   .hero__stack { --bleed: 176px; }
 }
 @media (max-width: 920px) {
-  .hero__stack { --bleed: 120px; align-self: center; }
+  .hero__stack { --bleed: 120px; }
   .phone { width: 320px; height: 560px; }
 }
 /* ── narrow screens: compact hero so the phone's top fits beneath it ── */
@@ -224,7 +224,7 @@
   .hero__lede { font-size: 15px; line-height: 1.45; margin-bottom: 12px; }
   .hero__ctas { margin-bottom: 14px; }
   .hero__ctas .btn--lg { padding: 11px 22px; font-size: 15px; }
-  .hero__stack { --bleed: 0px; margin-top: 0; display: flex; }
+  .hero__stack { --bleed: 30px; margin-top: 0; display: flex; }
   .phone { width: 270px; height: 288px; padding: 9px 9px 0; border-radius: 38px 38px 0 0; }
   .phone__screen { border-radius: 30px 30px 0 0; }
   .phone__status { padding: 12px 22px 0; font-size: 12px; }
@@ -235,4 +235,9 @@
   .npill__name { font-size: 18px; }
   .npill__line { font-size: 13px; }
   .band { display: none; }
+}
+
+/* the aurora follows the phone when it stacks under the copy */
+@media (max-width: 920px) {
+  .hero::before, .hero::after { left: 50%; }
 }
