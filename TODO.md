@@ -23,6 +23,11 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 - [ ] **No photography.** Stock photos and the scrolling ticker were removed on 2026-09-12 (the warehouse shot didn't land). If images come back, they need to be licence-free and should sit inside a section, not behind it.
 - [ ] **The hero map loop** (draw, red road, collapse to one line, seven stations, the red walk) is timed in `src/components/CompMap.tsx` (`T` and `STATION_STAGGER`). Only the hero is 100vh; every other section sizes to its content (`src/styles/12-round.css`).
 
+## Style
+
+- [x] **The style guide (2026-09-11) is applied in `src/styles/15-guide.css`**: the app's card shadow on every card with no borders, the four radii, the eight type steps, charcoal primary buttons at 44px, pills at 36px in cards, the keyboard focus ring. The $14 price tag stays red on purpose: it is a price mark, not a control.
+- [x] **Illinois and Indiana** are mentioned once, in the pricing fine print, and nowhere else.
+
 ## Assets to drop in
 
 - [x] **Assistant portraits** are in `public/portraits/` (Camille is the French `Untitled-2.webp`).

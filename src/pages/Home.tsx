@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { LINKS } from "../lib/links";
 import { scrollToId } from "../lib/nav";
 import { TIERS, FAQ } from "../lib/outcomes";
-import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES, STATES } from "../lib/site";
+import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { AppShot } from "../components/AppShot";
+import { Ribbon } from "../components/Ribbon";
 import { Ink, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn } from "../components/primitives";
 
@@ -231,7 +232,7 @@ export function HomePage() {
         <div className="wrap hero__grid">
         <div className="hero__copy">
           <Ink as="p" fx="rise" delay={60} className="hero__kicker">
-            For union members in Illinois and Indiana
+            For union members
           </Ink>
           <Ink as="h1" fx="rise" delay={120} className="hero__h1">
             Insurance for <em>your Insurance.</em>
@@ -256,15 +257,14 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── the challenge: charcoal, a red glow ─────────── */}
-      <section className="section section--dark sec" id="challenge">
-        <div className="wrap sec__grid">
-          <Ink as="div" fx="rise" className="sec__head">
-            <p className="sec__eyebrow">The challenge</p>
-            <h2 className="sec__title">The system loses people.</h2>
-            <p className="sec__blurb">A first denial is up 20% in five years. Most of the people it happens to are right.</p>
+      {/* ── the challenge: the ribbon ───────────────────── */}
+      <section className="section section--dark sec sec--ribbon" id="challenge">
+        <div className="wrap">
+          <Ink as="p" fx="rise" className="ribbon__lede">
+            <b>The system loses people.</b> A first denial is up 20% in five years. Most of the people it happens to are right, and most of them never find out.
           </Ink>
-          <div className="figures">
+          <Ribbon />
+          <div className="figures figures--row">
             {STATS.map((st, i) => (
               <Ink key={st.n} as="article" fx="rise" delay={i * 80} className="figure">
                 <CountUp value={st.n} className="figure__n" />
@@ -355,70 +355,59 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── services: a list of names ───────────────────── */}
+      {/* ── services: the shelf, in cards ───────────────── */}
       <section className="section sec" id="services">
-        <div className="wrap sec__grid">
-          <Ink as="div" fx="rise" className="sec__head">
-            <p className="sec__eyebrow">What we do</p>
-            <h2 className="sec__title">Every service, by name.</h2>
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="sec__head sec__head--row">
+            <div>
+              <p className="sec__eyebrow">What we do</p>
+              <h2 className="sec__title">Every service, by name.</h2>
+            </div>
             <p className="sec__blurb">Workers&apos; comp, ERISA, and grievances first. The rest of the shelf behind them.</p>
           </Ink>
-          <ol className="list">
+          <ul className="shelf">
             {SERVICES.map((sv, i) => (
-              <Ink key={sv.name} as="li" fx="rise" delay={(i % 8) * 40} className="list__row">
-                <span className="list__n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <span className="list__name">{sv.name}</span>
+              <Ink key={sv.name} as="li" fx="rise" delay={(i % 4) * 50 + Math.floor(i / 4) * 40} className={`shelf__card${i === 0 ? " shelf__card--lead" : ""}`}>
+                <span className="shelf__mark" aria-hidden="true" />
+                <span className="shelf__name">{sv.name}</span>
               </Ink>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
-      {/* ── where, and the price: two tiles ─────────────── */}
-      <section className="section sec" id="where">
-        <div className="wrap tiles">
-          <Ink as="article" fx="rise" className="tile tile--dark">
-            <p className="sec__eyebrow">Where it is available</p>
-            <h2 className="tile__title">Two states, every clock verified.</h2>
-            <div className="deadlines">
-              {STATES.map((st) => (
-                <div key={st.name} className="deadline">
-                  <span className="deadline__n">{st.days}<small>days</small></span>
-                  <div>
-                    <h3 className="deadline__h">{st.rule}</h3>
-                    <span className="deadline__chip">A deadline</span>
-                    <p className="deadline__from">From {st.cite}</p>
-                  </div>
-                  <span className="pill pill--hot">{st.name}</span>
-                </div>
-              ))}
-            </div>
-          </Ink>
-          <Ink as="article" fx="rise" delay={90} className="tile tile--warm tile--price" id="pricing">
+      {/* ── pricing: one card ───────────────────────────── */}
+      <section className="section sec" id="pricing">
+        <div className="wrap wrap--narrow">
+          <Ink as="div" fx="rise" className="sec__head sec__head--center">
             <p className="sec__eyebrow">Pricing</p>
-            {TIERS.map((t) => (
-              <div key={t.name}>
-                <span className="tile__price">
-                  {t.price}
-                  {t.per && <span className="tile__per">{t.per}</span>}
-                </span>
-                <p className="tile__line tile__line--ink">{t.blurb}</p>
-                <a className="btn btn--accent btn--sm" href={LINKS.getStarted}>
-                  <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
-                </a>
-                <p className="tile__fine">Cancel anytime. Certified mail at cost, agreed before we send. Not a law firm.</p>
-              </div>
-            ))}
+            <h2 className="sec__title">Simple pricing. No surprises.</h2>
           </Ink>
+          {TIERS.map((t) => (
+            <Ink key={t.name} as="article" fx="rise" delay={90} className="pcard">
+              <p className="sec__eyebrow">{t.name}</p>
+              <span className="pcard__price">
+                {t.price}
+                {t.per && <span className="pcard__per">{t.per}</span>}
+              </span>
+              <p className="pcard__line">{t.blurb}</p>
+              <a className="btn btn--accent" href={LINKS.getStarted}>
+                <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
+              </a>
+              <p className="pcard__fine">Cancel anytime. Certified mail at cost, agreed before we send. Keeper is not a law firm. Available today in Illinois and Indiana.</p>
+            </Ink>
+          ))}
         </div>
       </section>
 
       {/* ── FAQ ─────────────────────────────────────────── */}
       <section className="section sec" id="faq">
-        <div className="wrap sec__grid">
-          <Ink as="div" fx="rise" className="sec__head">
-            <p className="sec__eyebrow">Questions</p>
-            <h2 className="sec__title">Straight answers.</h2>
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="sec__head sec__head--row">
+            <div>
+              <p className="sec__eyebrow">Questions</p>
+              <h2 className="sec__title">Straight answers.</h2>
+            </div>
           </Ink>
           <script
             type="application/ld+json"

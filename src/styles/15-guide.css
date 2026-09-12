@@ -1,0 +1,154 @@
+/* =========================================================
+   GUIDE — the Keeper style guide (2026-09-11), applied last.
+   The ink is the primary, the red is the signal. No borders on a
+   card; its shadow separates it. Four radii, eight type steps, pills
+   for every control, 44px to press. Values are the app's own, read
+   from docs/design-tokens.json on the rebuild-ui branch.
+   ========================================================= */
+
+:root {
+  --ink: #2b2b2b; --ink-mute: #54524d; --ink-fine: #6c6a65;
+  --paper: #f5f0eb; --paper-dim: #eae8e4; --surface: #ffffff;
+  --hair: #e6e4e0; --hair-strong: #cecbc4;
+  --danger: #db3630; --danger-wash: #fdf3f2; --danger-hair: #e5c4bd;
+  --btn: #2b2b2b; --btn-deep: #4a4a4a; --on-btn: #ffffff;
+  --current: #2b2b2b; --navy: #2b2b2b; --ocean: #2b2b2b; --ocean-deep: #111111;
+  --on-dark: #ede7da; --on-dark-mute: #b3b1ac; --on-dark-fine: #8c8a85;
+  /* elevation */
+  --elev-card: 0 1px 2px rgba(43,43,43,.04);
+  --elev-float: 0 20px 44px -20px rgba(43,43,43,.24), 0 4px 12px -7px rgba(43,43,43,.12);
+  --elev-menu: 0 24px 56px -16px rgba(43,43,43,.38), 0 10px 24px -10px rgba(43,43,43,.26), 0 2px 6px -2px rgba(43,43,43,.14);
+  --card-shadow: 0 8px 24px -12px rgba(43,43,43,.35), 0 1px 3px rgba(43,43,43,.08);
+  --sh-soft: var(--card-shadow); --sh-lift: var(--elev-float); --sh-pill: var(--elev-card); --sh-chip: var(--elev-card);
+  /* radius */
+  --radius-field: 10px; --radius-inner: 12px; --radius-card: 16px; --radius-float: 20px;
+  --r-inset: var(--radius-inner); --r-card: var(--radius-card);
+  /* type steps */
+  --text-micro: 11px; --text-fine: 12px; --text-note: 13px; --text-body: 14px; --text-ui: 15px; --text-lead: 16px; --text-title: 19px; --text-head: 23px;
+}
+
+/* ── controls: the ink is the primary ───────────────────── */
+.btn { min-height: 44px; padding: 0 20px; border-radius: 999px; font-size: var(--text-ui); font-weight: 500; box-shadow: none; transition: background-color .2s, color .2s, border-color .2s; }
+.btn--sm, .btn--md, .btn--lg { min-height: 44px; padding: 0 20px; font-size: var(--text-ui); }
+.btn--lg { padding: 0 24px; }
+.btn--accent { background: var(--btn); color: var(--on-btn); box-shadow: none; }
+.btn--accent:hover { background: var(--btn-deep); transform: none; box-shadow: none; }
+.btn--accent:active { transform: none; box-shadow: none; }
+.btn--ghost, .btn--quiet { border: 1px solid var(--hair-strong); background: var(--surface); color: var(--ink); }
+.btn--ghost:hover, .btn--quiet:hover { background: var(--paper-dim); }
+.mast--on-dark .btn--accent { background: #ecebe7; color: #1c1c1b; }
+.mast--on-dark .btn--accent:hover { background: #fff; }
+/* the price tag keeps the red: it is the mark's own surface, not a control */
+.medallion { box-shadow: var(--elev-float); border-radius: var(--radius-card); }
+.tile__btn, .alert__btn, .ccard__open { font-weight: 500; }
+.tile__btn { min-height: 44px; padding: 0 20px; font-size: var(--text-ui); box-shadow: none; }
+.alert__btn, .ccard__open { display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; font-size: var(--text-note); }
+.pill, .badge { padding: 4px 10px; font-size: var(--text-micro); font-weight: 500; }
+.pill--hot, .badge--solid { font-weight: 600; }
+.step__n, .walk__n { font-weight: 600; }
+
+/* ── cards: no borders, the card shadow, the card radius ── */
+.tile, .ccard, .alert, .mcal, .bubble-say, .pcard, .faq__item, .service, .stat, .state, .exp { border: 0; }
+.tile { border-radius: var(--radius-card); box-shadow: var(--card-shadow); }
+.tile--red, .tile--dark { box-shadow: var(--elev-float); }
+.ccard { border-radius: var(--radius-card); box-shadow: var(--card-shadow); padding: 16px; }
+.alert { border-radius: var(--radius-card); box-shadow: var(--card-shadow); }
+.mcal { border-radius: var(--radius-card); box-shadow: var(--card-shadow); }
+.dateband { border-radius: var(--radius-card) var(--radius-card) 0 0; }
+.shot__panel { border-radius: 0 0 var(--radius-card) var(--radius-card); box-shadow: none; }
+.shot { border-radius: var(--radius-float); box-shadow: var(--elev-menu), 0 0 0 1px rgba(255,255,255,.06); }
+.bubble-say { border-radius: var(--radius-card) var(--radius-card) var(--radius-card) 4px; background: rgba(255,255,255,.08); box-shadow: none; }
+.pcard { position: relative; padding: 20px; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--card-shadow); }
+.pcard__price { display: inline-flex; align-items: baseline; gap: 4px; font-family: var(--f-sans); font-weight: 700; font-size: 52px; line-height: 1; letter-spacing: -0.03em; color: var(--ink); }
+.pcard__per { font-size: var(--text-title); font-weight: 600; color: var(--ink-mute); letter-spacing: 0; }
+.pcard__line { margin: 10px 0 16px; max-width: 40ch; font-size: var(--text-lead); line-height: 1.45; color: var(--ink-mute); }
+.pcard__fine { margin: 14px 0 0; font-size: var(--text-fine); line-height: 1.4; color: var(--ink-fine); }
+.pcard .sec__eyebrow { margin-bottom: 10px; }
+
+/* ── type: the steps, and the eyebrow as the app's mono ──── */
+.sec__eyebrow, .shot__caps { font-size: var(--text-fine); font-weight: 600; letter-spacing: .11em; }
+.sec__blurb, .tile__line { font-size: var(--text-lead); }
+.tile__fine { font-size: var(--text-fine); }
+.figure__label { font-size: var(--text-ui); }
+.figure__source { font-size: var(--text-fine); }
+.walk__d { font-size: var(--text-body); }
+.list__row { font-size: var(--text-ui); }
+.list__n { font-size: var(--text-micro); }
+.bubble-say__to { font-size: var(--text-micro); letter-spacing: .11em; }
+.ccard__h { font-size: var(--text-ui); }
+.ccard__status, .shot__row-top { font-size: var(--text-note); }
+.ccard__date, .shot__row-date, .alert__more { font-size: var(--text-fine); }
+.stepper__step { font-size: var(--text-micro); }
+.shot__h { font-size: var(--text-title); }
+.faq__q-text { font-size: var(--text-title); }
+.faq__a { font-size: var(--text-body); }
+.hero__micro { font-size: var(--text-body); }
+.hero__kicker { font-size: var(--text-body); font-weight: 600; }
+em, i { font-style: normal; font-weight: 600; }
+
+/* ── focus: for the keyboard ────────────────────────────── */
+:focus-visible { outline: 2px solid var(--current); outline-offset: 3px; border-radius: 0; }
+:focus:not(:focus-visible) { outline: none; }
+
+/* ── the button on a card is 36; on the page, 44 ────────── */
+@media (max-width: 560px) { .btn--lg { width: auto; } }
+
+/* ── services: the shelf, compact cards four across ─────── */
+.shelf { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.shelf__card { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 12px 14px; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--card-shadow); color: var(--ink); transition: box-shadow .2s, transform .2s; }
+.shelf__card:hover { box-shadow: var(--elev-float); }
+.shelf__mark { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--danger); box-shadow: inset 0 0 0 6px #fff, inset 0 0 0 7px var(--danger); }
+.shelf__card--lead { background: var(--ink); color: #fff; }
+.shelf__card--lead .shelf__mark { box-shadow: inset 0 0 0 6px var(--ink), inset 0 0 0 7px var(--danger); }
+.shelf__name { font-size: var(--text-ui); font-weight: 500; line-height: 1.25; }
+.shelf__card--lead .shelf__name { font-weight: 600; }
+@media (max-width: 920px) { .shelf { grid-template-columns: 1fr 1fr; gap: 8px; } .shelf__card { min-height: 52px; padding: 10px 12px; } }
+@media (max-width: 560px) { .shelf { grid-template-columns: 1fr; } }
+
+/* ── FAQ: one column, two across ────────────────────────── */
+#faq .faq { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+#faq .faq__item { border-top: 1px solid var(--hair); }
+#faq .faq__item:nth-last-child(-n+2) { border-bottom: 1px solid var(--hair); }
+@media (max-width: 920px) { #faq .faq { grid-template-columns: 1fr; } #faq .faq__item:nth-last-child(2) { border-bottom: 0; } }
+
+/* ── pricing: one column, the card centred ─────────────── */
+.sec__head--center { text-align: center; margin-bottom: 24px; }
+.sec__head--center .sec__blurb { margin-left: auto; margin-right: auto; }
+#pricing .pcard { max-width: 560px; margin: 0 auto; text-align: left; }
+#pricing .pcard__price { font-size: 60px; }
+
+/* ── the challenge: the ribbon section ──────────────────── */
+.sec--ribbon.section--dark.sec { background: #2b2b2b; background-image: radial-gradient(60% 80% at 100% 60%, rgba(219,54,48,.22), rgba(219,54,48,0) 70%); }
+.sec--ribbon > .wrap { padding-top: 56px; padding-bottom: 56px; }
+.ribbon__lede { margin: 0; max-width: 60ch; font-size: clamp(19px, 2vw, 26px); line-height: 1.35; color: rgba(255,255,255,.6); }
+.ribbon__lede b { font-weight: 600; color: #fff; }
+.ribbon { position: relative; height: clamp(220px, 34vw, 380px); margin: 8px -24px 8px; overflow: hidden; }
+.ribbon__canvas { display: block; width: 100%; height: 100%; }
+.figures--row { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.figures--row .figure { padding: 0; margin: 0; border: 0; }
+.figures--row .figure__n { font-family: var(--f-sans); font-weight: 600; font-size: clamp(40px, 4.4vw, 60px); letter-spacing: -0.03em; background: linear-gradient(90deg, #f5f0eb 0%, #ffb0ab 45%, #db3630 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.figures--row .figure__label { margin-top: 8px; }
+@media (max-width: 920px) {
+  .ribbon { height: 200px; margin: 0 -12px; }
+  .figures--row { grid-template-columns: 1fr; gap: 14px; }
+  .figures--row .figure { display: block; border: 0; padding: 0; }
+  .figures--row .figure__n { font-size: 36px; }
+  .figures--row .figure__label { margin-top: 2px; }
+}
+
+/* ── the footer: room at the top, columns level with the brand ── */
+.foot { padding: 72px var(--gutter) 40px; border-radius: var(--radius-float) var(--radius-float) 0 0; }
+.foot__top { padding-top: 0; align-items: start; gap: 48px; }
+.foot__brand-home { margin-bottom: 12px; }
+.foot__brand-home .wordmark { font-size: 28px; }
+.foot__brand p { font-size: var(--text-lead); line-height: 1.55; }
+.foot__cta { margin-top: 18px; }
+.foot__gnews { margin-top: 20px; }
+.foot__gnews:not(:has(button, a, iframe, [role="button"])) .foot__gnews-label { display: none; }
+.foot__cols { padding-top: 6px; }
+.foot__col-h { font-family: var(--f-ledger); font-style: normal; font-size: var(--text-lead); color: #fff; margin-bottom: 10px; }
+.foot__col li { font-size: var(--text-ui); line-height: 1.9; }
+.foot__col button:hover { color: #fff; }
+.foot__credo { margin-top: 40px; padding-top: 24px; }
+.foot__credo p { font-size: var(--text-note); }
+@media (max-width: 920px) { .foot { padding-top: 52px; } }

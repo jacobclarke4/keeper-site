@@ -22,7 +22,6 @@ export const ALL_SECTIONS = [
   { id: "scripts", label: "Scripts" },
   { id: "product", label: "The app" },
   { id: "services", label: "Services" },
-  { id: "where", label: "Where it is available" },
   { id: "pricing", label: "Pricing" },
   { id: "faq", label: "Questions" },
 ] as const;

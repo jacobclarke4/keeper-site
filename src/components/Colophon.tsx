@@ -45,7 +45,6 @@ export function Colophon() {
             { label: "How it works", onClick: () => scrollToId("how") },
             { label: "The app", onClick: () => scrollToId("product") },
             { label: "Services", onClick: () => scrollToId("services") },
-            { label: "Where it is available", onClick: () => scrollToId("where") },
             { label: "Pricing", onClick: () => scrollToId("pricing") },
           ])}
           {col("Commonwealth", [
