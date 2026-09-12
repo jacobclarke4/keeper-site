@@ -1,0 +1,137 @@
+/* =========================================================
+   FRAME — the page after the hero, laid out the way Stripe lays out
+   a front page: one ruled column, hairlines between sections, a head
+   on the left and the matter on the right, small tiles with gradient
+   corners. Charcoal and Keeper red, nothing else. Loaded last.
+   ========================================================= */
+
+:root {
+  --g-red: linear-gradient(135deg, #e5473f 0%, #db3630 38%, #b8302e 72%, #7a2320 100%);
+  --g-red-corner: linear-gradient(112deg, transparent 52%, rgba(219,54,48,.16) 72%, rgba(219,54,48,.55) 100%);
+  --g-dark: linear-gradient(160deg, #353535 0%, #2b2b2b 55%, #1f1f1f 100%);
+  --g-dark-glow: radial-gradient(70% 90% at 100% 100%, rgba(219,54,48,.38) 0%, rgba(219,54,48,0) 60%);
+  --g-warm: linear-gradient(180deg, #ffffff 0%, #f7f3ee 100%);
+  --g-warm-corner: linear-gradient(112deg, transparent 58%, rgba(219,54,48,.10) 78%, rgba(219,54,48,.42) 100%);
+}
+
+/* ── the column and its rules ───────────────────────────── */
+.page-home { position: relative; }
+.sec { position: relative; padding: 0; border-top: 1px solid var(--hair); }
+.sec > .wrap { position: relative; padding-top: 64px; padding-bottom: 64px; }
+.sec > .wrap::before, .sec > .wrap::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--hair); }
+.sec > .wrap::before { left: 0; } .sec > .wrap::after { right: 0; }
+.section--dark.sec { border-top-color: rgba(255,255,255,.1); background: var(--g-dark); }
+.section--dark.sec > .wrap::before, .section--dark.sec > .wrap::after { background: rgba(255,255,255,.08); }
+#challenge.sec::after { content: ""; position: absolute; inset: 0; background: var(--g-dark-glow); pointer-events: none; }
+#challenge.sec > .wrap { z-index: 1; }
+.hero--map { border-top: 0; }
+
+/* ── the head on the left, the matter on the right ─────── */
+.sec__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 64px; align-items: start; }
+.sec__head { display: block; text-align: left; margin: 0; max-width: none; }
+.sec__head--row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px 64px; align-items: end; margin-bottom: 28px; }
+.sec__eyebrow { margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--danger); }
+.sec__title { margin: 0; font-family: var(--f-ledger); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.12; letter-spacing: -0.015em; color: var(--ink); text-wrap: balance; }
+.sec__blurb { margin: 14px 0 0; max-width: 40ch; font-size: 16px; line-height: 1.5; color: var(--ink-mute); }
+.sec__head--row .sec__blurb { margin: 0 0 6px; }
+.section--dark .sec__title { color: #fff; }
+.section--dark .sec__blurb { color: rgba(255,255,255,.7); }
+
+/* ── the challenge: three figures in a ruled row ────────── */
+.figures { display: grid; grid-template-columns: repeat(3, 1fr); }
+.figure { padding: 6px 22px 8px 0; margin-right: 22px; border-right: 1px solid rgba(255,255,255,.12); }
+.figure:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.figure__n { display: block; font-family: var(--f-ledger); font-size: clamp(40px, 4.2vw, 60px); line-height: 1; letter-spacing: -0.02em; color: var(--danger); }
+.figure__label { margin: 10px 0 0; font-size: 15px; line-height: 1.4; color: #fff; }
+.figure__source { display: inline-block; margin-top: 8px; font-size: 12px; color: rgba(255,255,255,.5); text-decoration: underline; text-underline-offset: 3px; }
+.figure__source:hover { color: #fff; }
+
+/* ── tiles: two across, a gradient in the corner ────────── */
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tile { position: relative; overflow: hidden; padding: 24px 28px 22px; border-radius: 14px; border: 1px solid var(--hair); background: var(--g-warm); }
+.tile::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.tile--warm::after { background: var(--g-warm-corner); }
+.tile--red { border-color: transparent; background: var(--g-red); color: #fff; }
+.tile--red .sec__eyebrow { color: rgba(255,255,255,.85); }
+.tile--dark { border-color: transparent; background: var(--g-dark); color: #fff; }
+.tile--dark::after { background: var(--g-dark-glow); }
+.tile > *, .tile > div > * { position: relative; z-index: 1; }
+.tile__title { margin: 0; max-width: 34ch; font-family: var(--f-ledger); font-weight: 400; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.3; letter-spacing: -0.01em; color: var(--ink); }
+.tile--dark .tile__title { color: #fff; max-width: 18ch; }
+.tile__amt { display: block; font-family: var(--f-sans); font-weight: 700; font-size: clamp(44px, 5vw, 68px); line-height: 1; letter-spacing: -0.03em; color: #fff; }
+.tile__line { margin: 10px 0 0; max-width: 40ch; font-size: 16px; line-height: 1.45; color: rgba(255,255,255,.9); }
+.tile__line--ink { color: var(--ink-mute); margin: 8px 0 16px; }
+.tile__fine { margin: 12px 0 0; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.65); }
+.tile--warm .tile__fine { color: var(--ink-fine); margin-top: 14px; }
+.tile__states { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 6px; font-size: 15px; color: rgba(255,255,255,.75); }
+.tile__states b { display: inline-block; min-width: 76px; font-family: var(--f-ledger); font-weight: 400; font-size: 20px; color: #fff; }
+.tile__price { display: inline-flex; align-items: baseline; gap: 4px; font-family: var(--f-sans); font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.03em; color: var(--ink); }
+.tile__per { font-size: 20px; font-weight: 600; color: var(--ink-mute); letter-spacing: 0; }
+
+/* ── how it works: three numbered steps in a ruled row ──── */
+.walk { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.walk__item { padding-top: 14px; border-top: 2px solid var(--ink); }
+.walk__n { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: var(--danger); color: #fff; font-size: 14px; font-weight: 700; }
+.walk__t { margin: 14px 0 6px; font-family: var(--f-ledger); font-weight: 400; font-size: 21px; line-height: 1.2; color: var(--ink); }
+.walk__d { margin: 0; font-size: 14.5px; line-height: 1.45; color: var(--ink-mute); }
+
+/* ── scripts: smaller bubbles ───────────────────────────── */
+.bubbles { gap: 10px; }
+.bubble-say { padding: 14px 18px 12px; border-radius: 14px 14px 14px 4px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: #fff; }
+.bubble-say__text { font-size: 17px; }
+.bubble-say__to { margin-top: 6px; font-size: 11px; }
+
+/* ── the app: smaller devices ───────────────────────────── */
+.devices { grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: center; max-width: 980px; margin: 0 auto; }
+.tablet { padding: 10px; border-radius: 22px; background: #1f1f1f; box-shadow: 0 24px 50px -30px rgba(0,0,0,.5); }
+.tablet__screen { border-radius: 14px; min-height: 0; }
+.tablet__body { padding: 6px 12px 12px; }
+.product .phone { width: 250px; height: 516px; border-radius: 40px; padding: 9px; }
+.product .phone__screen { border-radius: 32px; }
+
+/* ── services: a ruled list of names, two columns ───────── */
+.list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+.list__row { display: flex; align-items: baseline; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--hair); font-size: 15.5px; color: var(--ink); }
+.list__row:first-child { color: var(--danger); font-weight: 600; }
+.list__n { flex: none; width: 22px; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--ink-fine); }
+.list__row:first-child .list__n { color: var(--danger); }
+
+/* ── FAQ: on the right, ruled rows ──────────────────────── */
+.faq { max-width: none; margin: 0; gap: 0; }
+.faq__item { background: transparent; border-radius: 0; box-shadow: none; border-top: 1px solid var(--hair); }
+.faq__item:last-child { border-bottom: 1px solid var(--hair); }
+.faq__item:hover { box-shadow: none; background: transparent; }
+.faq__q { padding: 16px 4px; }
+.faq__q-text { font-size: 17px; }
+.faq__a { font-size: 15px; }
+
+/* ── small screens ──────────────────────────────────────── */
+@media (max-width: 920px) {
+  .sec > .wrap { padding-top: 44px; padding-bottom: 44px; }
+  .sec__grid, .sec__head--row { grid-template-columns: 1fr; gap: 22px; }
+  .sec__head--row { margin-bottom: 22px; }
+  .figures { grid-template-columns: 1fr; }
+  .figure { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: center; padding: 12px 0; margin: 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+  .figure__n { font-size: 40px; }
+  .figure__label { margin: 0; font-size: 14px; }
+  .figure__source { grid-column: 2; margin-top: 0; }
+  .tiles { grid-template-columns: 1fr; }
+  .walk { grid-template-columns: 1fr; gap: 12px; }
+  .walk__item { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: baseline; }
+  .walk__n { grid-row: 1 / span 2; }
+  .walk__t { margin: 0; font-size: 18px; }
+  .walk__d { display: none; }
+  .list { grid-template-columns: 1fr; }
+  .devices { grid-template-columns: 1fr; }
+  .device--tablet { display: none; }
+}
+
+/* ── the hero: a kicker above the headline, a warm wash behind the map ── */
+.hero__kicker { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--ink-mute); }
+.hero__kicker::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%; background: var(--danger); vertical-align: 1px; }
+.hero--map { position: relative; overflow: hidden; }
+.hero__wash { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(52% 70% at 78% 52%, rgba(219,54,48,.13) 0%, rgba(219,54,48,.05) 45%, rgba(219,54,48,0) 72%); }
+.hero--map > .wrap { position: relative; z-index: 1; }
+.hero--map .hero__h1 { font-size: clamp(36px, 4.1vw, 58px); }
+.hero--map .hero__lede { max-width: 38ch; }
+@media (max-width: 920px) { .hero--map { padding-bottom: 24px; } .hero__wash { background: radial-gradient(70% 40% at 50% 80%, rgba(219,54,48,.12), rgba(219,54,48,0) 70%); } }

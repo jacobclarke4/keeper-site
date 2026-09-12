@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { LINKS } from "../lib/links";
 import { TIERS, FAQ } from "../lib/outcomes";
-import { STATS, MISSION, MAP, SCRIPTS, BRIDGES, GUARANTEE, SERVICES, STATES, STATES_LINE } from "../lib/site";
+import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES, STATES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { Ink, usePrefersReducedMotion } from "../lib/motion";
-import { Arrow, Btn, TabPill } from "../components/primitives";
+import { Arrow, Btn } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
    Keeper — one viewport per section.
@@ -225,14 +225,17 @@ export function HomePage() {
     <div className="page-home">
       {/* ── hero: the map is the visual ─────────────────── */}
       <section className="hero hero--map" id="top">
+        <div className="hero__wash" aria-hidden="true" />
         <div className="wrap hero__grid">
         <div className="hero__copy">
+          <Ink as="p" fx="rise" delay={60} className="hero__kicker">
+            For union members in Illinois and Indiana
+          </Ink>
           <Ink as="h1" fx="rise" delay={120} className="hero__h1">
             Insurance for <em>your Insurance.</em>
           </Ink>
           <Ink as="p" fx="rise" delay={220} className="hero__lede">
-            Hurt at work? A benefit denied? We track every deadline and keep every paper, so nothing
-            slips. For union members, in Illinois and Indiana.
+            Hurt at work? A benefit denied? We keep every deadline and every paper, so nothing slips.
           </Ink>
           <Ink as="div" fx="rise" delay={320} className="hero__row">
             <span className="medallion">
@@ -251,122 +254,94 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── the challenge: charcoal ─────────────────────── */}
-      <section className="section section--dark" id="challenge">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill onDark>The challenge</TabPill>
-            <h2 className="section-head__title">The system loses people.</h2>
+      {/* ── the challenge: charcoal, a red glow ─────────── */}
+      <section className="section section--dark sec" id="challenge">
+        <div className="wrap sec__grid">
+          <Ink as="div" fx="rise" className="sec__head">
+            <p className="sec__eyebrow">The challenge</p>
+            <h2 className="sec__title">The system loses people.</h2>
+            <p className="sec__blurb">A first denial is up 20% in five years. Most of the people it happens to are right.</p>
           </Ink>
-          <div className="stats">
+          <div className="figures">
             {STATS.map((st, i) => (
-              <Ink key={st.n} as="article" fx="rise" delay={i * 90} className="stat">
-                <CountUp value={st.n} className="stat__n" />
-                <p className="stat__label">{st.label}</p>
-                <a className="stat__source" href={st.href} target="_blank" rel="noopener noreferrer">{st.source}</a>
+              <Ink key={st.n} as="article" fx="rise" delay={i * 80} className="figure">
+                <CountUp value={st.n} className="figure__n" />
+                <p className="figure__label">{st.label}</p>
+                <a className="figure__source" href={st.href} target="_blank" rel="noopener noreferrer">{st.source}</a>
               </Ink>
             ))}
           </div>
-          <Ink as="p" fx="rise" delay={280} className="stats__foot">
-            A first denial rose 20% in five years. Most of the people it happens to are right, and most of them never find out.
+        </div>
+      </section>
+
+      {/* ── keeper, and the guarantee: two tiles ────────── */}
+      <section className="section sec" id="intro">
+        <div className="wrap tiles">
+          <Ink as="article" fx="rise" className="tile tile--warm">
+            <p className="sec__eyebrow">Introducing Keeper</p>
+            <h2 className="tile__title">{MISSION}</h2>
+          </Ink>
+          <Ink as="article" fx="rise" delay={90} className="tile tile--red" id="rebate">
+            <p className="sec__eyebrow">The guarantee</p>
+            <CountUp value={GUARANTEE.amount} duration={1600} className="tile__amt" />
+            <p className="tile__line">{GUARANTEE.line}</p>
+            <p className="tile__fine">{GUARANTEE.fine}</p>
           </Ink>
         </div>
       </section>
 
-      {/* ── introducing keeper ──────────────────────────── */}
-      <section className="section section--statement" id="intro">
-        <div className="wrap">
-          <Ink as="p" fx="rise" className="eyebrow-caps">Introducing Keeper</Ink>
-          <Ink as="h2" fx="rise" delay={70} className="statement">{MISSION}</Ink>
-          <Ink as="p" fx="rise" delay={140} className="statement__sub">
-            The worker, the employer, the carrier, the doctors, the steward, and the state. One place, in your pocket.
+      {/* ── how it works: three things you do ───────────── */}
+      <section className="section sec" id="how">
+        <div className="wrap sec__grid">
+          <Ink as="div" fx="rise" className="sec__head">
+            <p className="sec__eyebrow">How it works</p>
+            <h2 className="sec__title">{MAP.boxes} steps. Seven stations. Three things you do.</h2>
+            <p className="sec__blurb">We mapped every fork a claim can take. You walk one line.</p>
           </Ink>
-        </div>
-      </section>
-
-      {/* ── the guarantee: red ──────────────────────────── */}
-      <section className="section section--red section--statement" id="rebate">
-        <div className="wrap">
-          <Ink as="p" fx="rise" className="eyebrow-caps">The {GUARANTEE.amount} guarantee</Ink>
-          <Ink as="div" fx="none" delay={60} className="guarantee__amt-wrap">
-            <CountUp value={GUARANTEE.amount} duration={1800} className="guarantee__amt" />
-          </Ink>
-          <Ink as="h2" fx="rise" delay={120} className="statement statement--small">{GUARANTEE.line}</Ink>
-          <Ink as="p" fx="rise" delay={180} className="statement__sub">{GUARANTEE.fine}</Ink>
-        </div>
-      </section>
-
-      {/* ── how it works ────────────────────────────────── */}
-      <section className="section" id="how">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>How it works</TabPill>
-            <h2 className="section-head__title">{MAP.boxes} steps. Seven stations. Three things you do.</h2>
-            <p className="section-head__sub">
-              We mapped every box, every fork, and every road a claim can take. You walk one line, one step at a time, in the lane where it happens.
-            </p>
-          </Ink>
-          <div className="exps">
+          <ol className="walk">
             {[
-              { n: "1", t: "Tell us what happened.", d: "In your own words. The injury, the denial letter, the write-up. Type it, say it, or send a photo of the paper." },
-              { n: "2", t: "We draft and file.", d: "We ask a few questions, pull the deadlines and rules that apply, and write the claim, appeal, or grievance. You review it before it goes out." },
-              { n: "3", t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and a plain-words plan for what comes next." },
+              { t: "Tell us what happened.", d: "Type it, say it, or send a photo of the paper." },
+              { t: "We draft and file.", d: "The claim, appeal, or grievance, with the rule it relies on. You approve it first." },
+              { t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and what comes next." },
             ].map((st, i) => (
-              <Ink key={st.n} as="article" fx="rise" delay={i * 90} className={`exp exp--${i}`}>
-                <span className="exp__pill">Step {st.n}</span>
-                <span className="exp__num" aria-hidden="true">{st.n}</span>
-                <h3 className="exp__t">{st.t}</h3>
-                <p className="exp__d">{st.d}</p>
-              </Ink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── scripts and bridges: charcoal ───────────────── */}
-      <section className="section section--dark" id="scripts">
-        <div className="wrap">
-          <div className="split">
-            <div className="split__lead">
-              <Ink as="div" fx="rise" className="section-head section-head--left">
-                <TabPill onDark>Every situation, scripted</TabPill>
-                <h2 className="section-head__title">Say this. To them.</h2>
-                <p className="section-head__sub">
-                  Populated scripts and questionnaires for every situation the map knows about. The words, and who they&apos;re for.
-                </p>
-              </Ink>
-            </div>
-            <ul className="bubbles">
-              {SCRIPTS.map((sc, i) => (
-                <Ink key={sc.to} as="li" fx="rise" delay={i * 80} className="bubble-say">
-                  <p className="bubble-say__text">{sc.say}</p>
-                  <span className="bubble-say__to">To {sc.to}</span>
-                </Ink>
-              ))}
-            </ul>
-          </div>
-          <Ink as="h3" fx="rise" className="bridges__h">And the bridges to the real world.</Ink>
-          <ol className="bridges">
-            {BRIDGES.map((b, i) => (
-              <Ink key={b.name} as="li" fx="rise" delay={i * 60} className="bridge">
-                <span className="bridge__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <h4 className="bridge__name">{b.name}</h4>
-                <p className="bridge__line">{b.line}</p>
+              <Ink key={st.t} as="li" fx="rise" delay={i * 80} className="walk__item">
+                <span className="walk__n" aria-hidden="true">{i + 1}</span>
+                <h3 className="walk__t">{st.t}</h3>
+                <p className="walk__d">{st.d}</p>
               </Ink>
             ))}
           </ol>
         </div>
       </section>
 
+      {/* ── scripts: charcoal ───────────────────────────── */}
+      <section className="section section--dark sec" id="scripts">
+        <div className="wrap sec__grid">
+          <Ink as="div" fx="rise" className="sec__head">
+            <p className="sec__eyebrow">Every situation, scripted</p>
+            <h2 className="sec__title">Say this. To them.</h2>
+            <p className="sec__blurb">The words for every situation the map knows about, and who they are for.</p>
+          </Ink>
+          <ul className="bubbles">
+            {SCRIPTS.map((sc, i) => (
+              <Ink key={sc.to} as="li" fx="rise" delay={i * 80} className="bubble-say">
+                <p className="bubble-say__text">{sc.say}</p>
+                <span className="bubble-say__to">To {sc.to}</span>
+              </Ink>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── the product: phone and tablet ───────────────── */}
-      <section className="section" id="product">
+      <section className="section sec" id="product">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>The app</TabPill>
-            <h2 className="section-head__title">In your pocket, and on the kitchen table.</h2>
-            <p className="section-head__sub">
-              Talk to your assistant on the phone. See the whole map on the tablet. Same case, same record, everywhere.
-            </p>
+          <Ink as="div" fx="rise" className="sec__head sec__head--row">
+            <div>
+              <p className="sec__eyebrow">The app</p>
+              <h2 className="sec__title">In your pocket, and on the kitchen table.</h2>
+            </div>
+            <p className="sec__blurb">Talk to your assistant on the phone. See the whole map on the tablet. One record.</p>
           </Ink>
           <div className="devices">
             <div className="device device--tablet" aria-label="Keeper on a tablet, example">
@@ -389,85 +364,62 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── services: a clean grid ──────────────────────── */}
-      <section className="section" id="services">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>What we do</TabPill>
-            <h2 className="section-head__title">Every service, by name.</h2>
+      {/* ── services: a list of names ───────────────────── */}
+      <section className="section sec" id="services">
+        <div className="wrap sec__grid">
+          <Ink as="div" fx="rise" className="sec__head">
+            <p className="sec__eyebrow">What we do</p>
+            <h2 className="sec__title">Every service, by name.</h2>
+            <p className="sec__blurb">Workers&apos; comp, ERISA, and grievances first. The rest of the shelf behind them.</p>
           </Ink>
-          <ol className="services">
+          <ol className="list">
             {SERVICES.map((sv, i) => (
-              <Ink key={sv.name} as="li" fx="rise" delay={(i % 3) * 60} className={`service${i === 0 ? " service--lead" : ""}`}>
-                <span className="service__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="service__name">{sv.name}</h3>
-                <p className="service__line">{sv.line}</p>
+              <Ink key={sv.name} as="li" fx="rise" delay={(i % 8) * 40} className="list__row">
+                <span className="list__n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <span className="list__name">{sv.name}</span>
               </Ink>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* ── where ───────────────────────────────────────── */}
-      <section className="section section--dark" id="where">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill onDark>Where it is available</TabPill>
-            <h2 className="section-head__title">Two states, every clock verified.</h2>
+      {/* ── where, and the price: two tiles ─────────────── */}
+      <section className="section sec" id="where">
+        <div className="wrap tiles">
+          <Ink as="article" fx="rise" className="tile tile--dark">
+            <p className="sec__eyebrow">Where it is available</p>
+            <h2 className="tile__title">Two states, every clock verified.</h2>
+            <ul className="tile__states">
+              {STATES.map((st) => (
+                <li key={st.name}><b>{st.name}</b> {st.note}</li>
+              ))}
+            </ul>
           </Ink>
-          <div className="states">
-            {STATES.map((st, i) => (
-              <Ink key={st.name} as="article" fx="rise" delay={i * 90} className="state">
-                <span className="state__name">{st.name}</span>
-                <p className="state__note">{st.note}</p>
-              </Ink>
-            ))}
-          </div>
-          <Ink as="p" fx="rise" delay={200} className="states__line">{STATES_LINE}</Ink>
-        </div>
-      </section>
-
-      {/* ── pricing ─────────────────────────────────────── */}
-      <section className="section" id="pricing">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>Pricing</TabPill>
-            <h2 className="section-head__title">
-              Simple pricing. <em>No surprises.</em>
-            </h2>
-          </Ink>
-          <div className="plans">
-            {TIERS.map((t, i) => (
-              <Ink as="div" fx="rise" delay={i * 70} key={t.name} className={`plan${i === 0 ? " plan--feature" : ""}`}>
-                <span className="plan__tag">{t.name}</span>
-                <span className={`plan__price${i === 0 ? " plan__price--hero" : ""}`}>
+          <Ink as="article" fx="rise" delay={90} className="tile tile--warm tile--price" id="pricing">
+            <p className="sec__eyebrow">Pricing</p>
+            {TIERS.map((t) => (
+              <div key={t.name}>
+                <span className="tile__price">
                   {t.price}
-                  {t.per && <span className="plan__per">{t.per}</span>}
+                  {t.per && <span className="tile__per">{t.per}</span>}
                 </span>
-                <p className="plan__blurb">{t.blurb}</p>
-                <a className="btn btn--accent btn--sm plan__cta" href={LINKS.getStarted}>
-                  <span className="btn__label">
-                    Get started <span className="arrow" aria-hidden="true">→</span>
-                  </span>
+                <p className="tile__line tile__line--ink">{t.blurb}</p>
+                <a className="btn btn--accent btn--sm" href={LINKS.getStarted}>
+                  <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
                 </a>
-              </Ink>
+                <p className="tile__fine">Cancel anytime. Certified mail at cost, agreed before we send. Not a law firm.</p>
+              </div>
             ))}
-          </div>
-          <Ink as="p" fx="rise" className="fineprint">
-            One membership, cancel anytime. Certified mail is charged at cost, always shown and agreed before we send.{" "}
-            Keeper is not a law firm and does not give legal advice.
           </Ink>
         </div>
       </section>
 
       {/* ── FAQ ─────────────────────────────────────────── */}
-      <section className="section" id="faq">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>Questions</TabPill>
-            <h2 className="section-head__title">
-              Good questions, <em>straight answers.</em>
-            </h2>
+      <section className="section sec" id="faq">
+        <div className="wrap sec__grid">
+          <Ink as="div" fx="rise" className="sec__head">
+            <p className="sec__eyebrow">Questions</p>
+            <h2 className="sec__title">Straight answers.</h2>
           </Ink>
           <script
             type="application/ld+json"

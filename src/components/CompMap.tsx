@@ -87,12 +87,13 @@ const ROAD_PATH = ROAD.map((b, i) => `${i === 0 ? "M" : "L"}${b.x + BW / 2},${b.
 const STATION_X = MAP.stations.map((_, i) => 60 + i * ((W - 120) / (MAP.stations.length - 1)));
 const target = (b: Box) => STATION_X.reduce((best, x) => (Math.abs(x - (b.x + BW / 2)) < Math.abs(best - (b.x + BW / 2)) ? x : best), STATION_X[0]);
 
-/* The loop, in ms: the tangle draws, the road threads it, a hold, the
-   consolidation, the stations one by one, the walk, a hold, a fade to
-   nothing, a silent reset, and again. */
-const T = { tangle: 2400, road: 2500, hold: 5400, line: 6600, stations: 8200, walk: 10600, out: 15200, reset: 16000, end: 16150 };
-const STATION_STAGGER = 300;
-const WALK_STEP = 560;
+/* The loop, in ms. The tangle draws; the mark rides the red road
+   through it; a hold to read it; everything slides onto one line; the
+   stations appear left to right; the mark walks them; a hold; a fade;
+   a silent reset; and again. Each phase ends before the next begins. */
+const T = { tangle: 2200, ride: 2300, line: 6300, stations: 7600, walk: 9900, out: 15000, reset: 15700, end: 15850 };
+const STATION_STAGGER = 260;
+const WALK_STEP = 620;
 
 type Phase = "draw" | "road" | "hold" | "line" | "stations" | "walk" | "out" | "reset";
 
@@ -112,11 +113,11 @@ export function CompMap({ mode = "loop" }: { mode?: "loop" | "static" }) {
       setPhase("draw"); setHere(0);
       timers = [
         window.setTimeout(() => setPhase("road"), T.tangle),
-        window.setTimeout(() => setPhase("hold"), T.road + 2400),
-        window.setTimeout(() => setPhase("line"), T.hold),
-        window.setTimeout(() => setPhase("stations"), T.line),
-        window.setTimeout(() => setPhase("walk"), T.walk - 200),
-        ...MAP.stations.map((_, i) => window.setTimeout(() => setHere(i), T.walk + i * WALK_STEP)),
+        window.setTimeout(() => setPhase("hold"), T.tangle + T.ride),
+        window.setTimeout(() => setPhase("line"), T.line),
+        window.setTimeout(() => setPhase("stations"), T.stations),
+        window.setTimeout(() => setPhase("walk"), T.walk),
+        ...MAP.stations.map((_, i) => window.setTimeout(() => setHere(i), T.walk + 300 + i * WALK_STEP)),
         window.setTimeout(() => setPhase("out"), T.out),
         window.setTimeout(() => setPhase("reset"), T.reset),
         window.setTimeout(run, T.end),
@@ -152,11 +153,11 @@ export function CompMap({ mode = "loop" }: { mode?: "loop" | "static" }) {
         </g>
         {/* the mark rides the road through the tangle, then walks the line */}
         <circle r="9" className="cmap__you">
-          <animateMotion ref={motion} dur="2.4s" begin="indefinite" fill="freeze" path={ROAD_PATH} calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1" />
+          <animateMotion ref={motion} dur="2.3s" begin="indefinite" fill="freeze" path={ROAD_PATH} calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1" />
         </circle>
         <g className="cmap__line">
           <line x1={STATION_X[0]} y1={LINE_Y} x2={STATION_X[STATION_X.length - 1]} y2={LINE_Y} className="cmap__rail" pathLength={1} />
-          <line x1={STATION_X[0]} y1={LINE_Y} x2={STATION_X[Math.max(here, 0)]} y2={LINE_Y} className="cmap__rail cmap__rail--done" />
+          <line x1={STATION_X[0]} y1={LINE_Y} x2={STATION_X[STATION_X.length - 1]} y2={LINE_Y} className="cmap__rail cmap__rail--done" pathLength={1} style={{ strokeDashoffset: 1 - here / (STATION_X.length - 1) }} />
           {MAP.stations.map((s, i) => (
             <g key={s} className={`cmap__station${i < here ? " is-done" : ""}${i === here && phase === "walk" ? " is-here" : ""}`} style={{ ["--i" as string]: i, ["--st" as string]: `${i * STATION_STAGGER}ms` }}>
               <circle cx={STATION_X[i]} cy={LINE_Y} r="10" className="cmap__dot" />

@@ -17,7 +17,7 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 - [ ] **Mission statement** is a first draft: "Keeper keeps every deadline and every paper in your claim in one place, from the day you're hurt to the last check. You do the errands, we do the paperwork, and nothing slips." Tighten as you like in `src/lib/site.ts`.
 - [ ] **The step counts** come from the app's own comp map (348 boxes, 78 decisions, 539 paths, 7 stations; the walk is 77 steps in 9 phases). The outline's "132 steps to 7 actions and 8 approvals" had no source, so the site uses the app's numbers.
 - [ ] **The $1,000 guarantee.** The app calls it the "Keeper guarantee" and marks its terms as not final. The site says so in the fineprint. Right-size the amount per union when the stats exist.
-- [ ] **Transportation** is listed as a bridge because the outline asked for it; the app has no transportation bridge today (it has certified mail, records letters, filings, and handoff).
+- [x] **The bridges to the real world** (certified mail, notary, legal services, transportation) were removed from the site on 2026-09-12: they are the recipe, not the pitch.
 - [ ] **The Challenge stats** are cited inline: BLS 2024 (2.5M injuries), RAND / DOL (about 45% never file), Lockton via Risk & Insurance (two-thirds of denials paid within a year; first denials up 20% in five years). Re-check before launch.
 - [ ] **Services** are the app's portal items by name. Sub-trees (the five grievance kinds) are folded into one line.
 - [ ] **No photography.** Stock photos and the scrolling ticker were removed on 2026-09-12 (the warehouse shot didn't land). If images come back, they need to be licence-free and should sit inside a section, not behind it.

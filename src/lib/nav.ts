@@ -19,7 +19,7 @@ export const ALL_SECTIONS = [
   { id: "intro", label: "Introducing Keeper" },
   { id: "rebate", label: "The guarantee" },
   { id: "how", label: "How it works" },
-  { id: "scripts", label: "Scripts and bridges" },
+  { id: "scripts", label: "Scripts" },
   { id: "product", label: "The app" },
   { id: "services", label: "Services" },
   { id: "where", label: "Where it is available" },

@@ -32,21 +32,22 @@
 .cmap__box { opacity: 0; transform: scale(.7); transform-origin: center; transform-box: fill-box; transition: opacity .3s var(--paper-ease) calc(var(--c) * 170ms), transform .55s var(--spring) calc(var(--c) * 170ms); }
 .cmap--draw .cmap__box, .cmap--road .cmap__box, .cmap--hold .cmap__box { opacity: 1; transform: none; }
 /* the road threads the tangle in red, and the boxes on it turn red */
-.cmap__road { fill: none; stroke: var(--danger); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 2.4s cubic-bezier(.4,0,.2,1), opacity .2s linear; }
+.cmap__road { fill: none; stroke: var(--danger); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 2.3s cubic-bezier(.4,0,.2,1), opacity .2s linear; }
 .cmap--road .cmap__road, .cmap--hold .cmap__road { stroke-dashoffset: 0; opacity: 1; }
 .cmap__box--road rect { transition: fill .4s var(--paper-ease) calc(.3s + var(--c) * 260ms), stroke .4s var(--paper-ease) calc(.3s + var(--c) * 260ms); }
-.cmap--road .cmap__box--road rect, .cmap--hold .cmap__box--road rect { fill: var(--danger); stroke: var(--danger); }
+.cmap--road .cmap__box--road rect, .cmap--hold .cmap__box--road rect, .cmap--line .cmap__box--road rect, .cmap--stations .cmap__box--road rect, .cmap--walk .cmap__box--road rect, .cmap--out .cmap__box--road rect { fill: var(--danger); stroke: var(--danger); }
+.cmap--line .cmap__box--road rect, .cmap--stations .cmap__box--road rect, .cmap--walk .cmap__box--road rect, .cmap--out .cmap__box--road rect { transition: none; }
 .cmap__you { fill: var(--danger); stroke: var(--paper); stroke-width: 3; opacity: 0; transition: opacity .25s linear; }
 .cmap--road .cmap__you, .cmap--hold .cmap__you { opacity: 1; }
 /* consolidate: everything slides onto its station and dissolves */
-.cmap--line .cmap__box, .cmap--stations .cmap__box, .cmap--walk .cmap__box, .cmap--out .cmap__box { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.5); transition: opacity .9s var(--paper-ease) calc(.5s + var(--c) * 30ms), transform 1.2s cubic-bezier(.65,0,.25,1) calc(var(--c) * 30ms); }
-.cmap--line .cmap__edge, .cmap--walk .cmap__edge, .cmap--out .cmap__edge { opacity: 0; transition: opacity .5s linear; }
+.cmap--line .cmap__box, .cmap--stations .cmap__box, .cmap--walk .cmap__box, .cmap--out .cmap__box { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.4); transition: opacity .5s linear calc(.7s + var(--c) * 30ms), transform 1.1s cubic-bezier(.7,0,.2,1) calc(var(--c) * 30ms); }
+.cmap--line .cmap__edge, .cmap--stations .cmap__edge, .cmap--walk .cmap__edge, .cmap--out .cmap__edge { opacity: 0; stroke-dashoffset: 0; transition: opacity .4s linear; }
 .cmap--line .cmap__road, .cmap--stations .cmap__road, .cmap--walk .cmap__road, .cmap--out .cmap__road { opacity: 0; transition: opacity .6s linear .3s; }
 .cmap--line .cmap__you, .cmap--stations .cmap__you, .cmap--walk .cmap__you, .cmap--out .cmap__you { opacity: 0; }
-.cmap__rail { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.1s cubic-bezier(.65,0,.25,1) .35s; }
-.cmap__rail--done { stroke: var(--danger); stroke-dasharray: none; stroke-dashoffset: 0; opacity: 0; transition: opacity .3s linear, x2 .5s var(--paper-ease); }
+.cmap__rail { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s cubic-bezier(.65,0,.25,1) .25s; }
+.cmap__rail--done { stroke: var(--danger); stroke-dasharray: 1; opacity: 0; transition: opacity .3s linear, stroke-dashoffset .5s cubic-bezier(.65,0,.25,1); }
 .cmap--walk .cmap__rail--done { opacity: 1; }
-.cmap--line .cmap__rail, .cmap--stations .cmap__rail, .cmap--walk .cmap__rail, .cmap--out .cmap__rail { stroke-dashoffset: 0; }
+.cmap--line .cmap__rail:not(.cmap__rail--done), .cmap--stations .cmap__rail:not(.cmap__rail--done), .cmap--walk .cmap__rail:not(.cmap__rail--done), .cmap--out .cmap__rail:not(.cmap__rail--done) { stroke-dashoffset: 0; }
 .cmap__station { opacity: 0; transform: translateY(8px); transition: opacity .5s var(--paper-ease) var(--st, 0ms), transform .6s var(--spring) var(--st, 0ms); }
 .cmap--stations .cmap__station, .cmap--walk .cmap__station, .cmap--out .cmap__station { opacity: 1; transform: none; }
 .cmap__dot { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s, stroke .3s; }
@@ -63,7 +64,7 @@
 .cmap--out .cmap__line, .cmap--out .cmap__count { opacity: 0; }
 .cmap--reset *, .cmap--reset .cmap__line, .cmap--reset .cmap__count { transition: none !important; animation: none !important; }
 .cmap--reset .cmap__station, .cmap--reset .cmap__box, .cmap--reset .cmap__edge, .cmap--reset .cmap__road, .cmap--reset .cmap__you, .cmap--reset .cmap__here { opacity: 0; }
-.cmap--reset .cmap__rail { stroke-dashoffset: 1; }
+.cmap--reset .cmap__rail:not(.cmap__rail--done) { stroke-dashoffset: 1; }
 .cmap--reset .cmap__rail--done { opacity: 0; }
 .cmap--reset .cmap__line, .cmap--reset .cmap__count { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .cmap__edge, .cmap__box, .cmap__road, .cmap__rail, .cmap__station, .cmap__here, .cmap__n { transition: none; } .cmap__here-ring { animation: none; } }

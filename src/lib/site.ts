@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────────────────
    Site data for the Keeper microsite: the challenge, the mission,
-   the process figures, the scripts, the bridges, the services, the
+   the process figures, the scripts, the services, the
    states. Figures and services come from the Keeper app (the rebuild
    branch of the-outcome-company-app); the statistics are cited.
    ────────────────────────────────────────────────────────── */
@@ -8,19 +8,19 @@
 export const STATS = [
   {
     n: "2.5M",
-    label: "workplace injuries and illnesses reported by private employers in one year",
+    label: "workplace injuries reported in one year",
     source: "U.S. Bureau of Labor Statistics, 2024",
     href: "https://www.bls.gov/opub/ted/2026/2-5-million-workplace-injuries-and-illnesses-in-private-industry-in-2024-down-3-1-percent-from-2023.htm",
   },
   {
     n: "45%",
-    label: "of injured workers never file a workers' comp claim at all",
+    label: "of injured workers never file a claim",
     source: "RAND Corporation; U.S. Department of Labor",
     href: "https://www.dol.gov/sites/dolgov/files/OASP/files/WorkersCompensationSystemReport.pdf",
   },
   {
     n: "2 in 3",
-    label: "claims denied at first are paid within a year anyway. They should never have been denied.",
+    label: "denied claims are paid within a year anyway",
     source: "Lockton Analytics, 273,000 claims",
     href: "https://riskandinsurance.com/70-percent-denied-comp-claims-converted-and-paid/",
   },
@@ -47,24 +47,15 @@ export const MAP = {
 
 /* Populated scripts: what to say, and to whom. Verbatim from the app. */
 export const SCRIPTS = [
-  { say: "This happened at work today. Please put that in my chart.", to: "the first doctor or nurse who treats you" },
-  { say: "I was hurt at work today, here is what happened, and I am writing it down.", to: "your steward" },
-  { say: "Pursuant to NLRB v. J. Weingarten, Inc., I reasonably believe this interview could lead to discipline, and I am requesting that my union representative be present before it continues.", to: "the boss who calls you in" },
+  { say: "This happened at work today. Please put that in my chart.", to: "the first doctor who treats you" },
+  { say: "I reasonably believe this interview could lead to discipline, and I am requesting my union representative before it continues.", to: "the boss who calls you in" },
   { say: "Under Section 8(a) of the Illinois Workers' Compensation Act, this is my first choice of physician.", to: "the adjuster" },
-] as const;
-
-/* The bridges to the real world. */
-export const BRIDGES = [
-  { name: "Certified mail", line: "We pack the envelope, print the table of contents on the front, and send nothing until you approve it. The tracking, the signature, and a hash of every page stay on your record." },
-  { name: "Notary", line: "When a paper needs a witness and a notary, we tell you which, book the appointment, and mark it done when it's signed." },
-  { name: "Legal services", line: "The free state line first, then a lawyer. You walk in prepared, with the record in hand and the brief already written." },
-  { name: "Transportation", line: "A ride to the exam, the clinic, or the hearing, booked around the deadline so the date is never the reason you missed it." },
 ] as const;
 
 export const GUARANTEE = {
   amount: "$1,000",
   line: "Do every required step on Keeper and, if your claim is wrongly denied anyway, Keeper pays you $1,000.",
-  fine: "The guarantee's terms are not final. The required steps are marked in the app as you go.",
+  fine: "Terms not final. The required steps are marked in the app as you go.",
 };
 
 /* Every service, specifically named, as the app names them. */
