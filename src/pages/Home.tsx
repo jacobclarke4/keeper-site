@@ -329,7 +329,7 @@ export function HomePage() {
           </Ink>
           <Ink as="div" fx="rise" delay={60}>
             <Carousel
-              className="scripts"
+              className="scripts-carousel"
               slides={SCRIPTS.map((sc) => (
                 <figure className="script" key={sc.to}>
                   <blockquote className="script__say">{sc.say}</blockquote>
