@@ -27,7 +27,7 @@ export const STATS = [
 ] as const;
 
 export const MISSION =
-  "Keeper keeps every deadline and every paper in your claim in one place, from the day you're hurt to the last check. You do the errands, we do the paperwork, and nothing slips.";
+  "Keeper has every deadline and every paper in your claim, from the day you're hurt to the last check. You do the errands. We do the paperwork. Nothing slips.";
 
 /* The workers' comp map, by the app's own count. */
 export const MAP = {
