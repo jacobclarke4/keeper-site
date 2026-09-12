@@ -130,7 +130,7 @@
 .sec--rebate.sec > .wrap::before, .sec--rebate.sec > .wrap::after { background: rgba(255,255,255,.14); }
 .rebate { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px 64px; align-items: center; }
 .rebate__amt { display: block; font-family: var(--f-sans); font-weight: 700; font-size: clamp(88px, 11vw, 168px); line-height: .95; letter-spacing: -0.045em; color: #fff; }
-.rebate__tag { display: block; margin-top: 14px; font-size: var(--text-lead); font-weight: 600; color: rgba(255,255,255,.85); }
+.rebate__tag { display: block; margin: 0 0 12px 6px; font-size: var(--text-lead); font-weight: 600; color: rgba(255,255,255,.85); }
 .rebate__line { margin: 0; max-width: 34ch; font-family: var(--f-ledger); font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; color: #fff; }
 .rebate .tile__btn { margin-top: 20px; }
 .rebate__fine { margin: 14px 0 0; font-size: var(--text-fine); color: rgba(255,255,255,.7); }
@@ -146,3 +146,25 @@
 #scripts .bubble-say__text { font-size: var(--text-title); }
 #scripts .bubble-say__to { margin-top: 14px; }
 @media (max-width: 920px) { #scripts .bubbles { grid-template-columns: 1fr; } }
+
+/* ── the home shot's chrome: icon nav, the capsule, the safety net ── */
+.shot { position: relative; }
+.shot__nav-item { display: inline-flex; align-items: center; gap: 6px; }
+.shot__home { display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.shot__panel { padding-bottom: 64px; }
+.shot__capsule { position: absolute; left: calc(200px + (100% - 200px) / 2); bottom: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 999px; background: var(--surface); box-shadow: var(--elev-menu); }
+.shot__ctl { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--btn); color: #fff; }
+.shot__ctl--light { background: var(--paper-dim); color: var(--ink); }
+.shot__pw { width: 40px; height: 40px; }
+.shot__net { position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: var(--surface); box-shadow: var(--elev-menu); }
+.shot__net-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--btn); color: #fff; }
+.shot__net-text { display: flex; align-items: baseline; gap: 8px; font-size: var(--text-note); color: var(--ink-mute); }
+.shot__net-text b { color: var(--ink); font-weight: 700; }
+.shot__alpha { display: none; }
+
+/* ── the assistant phone in its tile ────────────────────── */
+.assistant { --bleed: 0px; align-self: auto; margin: 0; display: flex; justify-content: center; }
+.assistant .phone { width: 250px; height: 500px; border-radius: 40px; padding: 9px; opacity: 1; transform: none; -webkit-mask-image: none; mask-image: none; }
+.assistant .phone__screen { border-radius: 32px; }
+.assistant .band { bottom: 0; display: flex; }
+.assistant .app__body { padding-top: 2px; }

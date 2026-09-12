@@ -5,7 +5,8 @@ import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { AppShot } from "../components/AppShot";
-import { CompTile, TrackingPhone, CalendarTile, Fit, COMP_W } from "../components/AppTiles";
+import { CompTile, CalendarTile, Fit, COMP_W } from "../components/AppTiles";
+import { AssistantPhone } from "../components/AssistantPhone";
 import { Ribbon } from "../components/Ribbon";
 import { Ink } from "../lib/motion";
 import { Arrow, Btn } from "../components/primitives";
@@ -80,8 +81,8 @@ export function HomePage() {
       <section className="section section--dark sec sec--rebate" id="rebate">
         <div className="wrap rebate">
           <Ink as="div" fx="rise" className="rebate__amt-wrap">
-            <CountUp value={GUARANTEE.amount} duration={1800} className="rebate__amt" />
             <span className="rebate__tag">The Keeper guarantee</span>
+            <CountUp value={GUARANTEE.amount} duration={1800} className="rebate__amt" />
           </Ink>
           <Ink as="div" fx="rise" delay={120} className="rebate__words">
             <p className="rebate__line">{GUARANTEE.line}</p>
@@ -151,8 +152,8 @@ export function HomePage() {
               <div className="bento__art"><Fit width={COMP_W}><CompTile /></Fit></div>
             </Ink>
             <Ink as="article" fx="rise" delay={60} className="bento__tile bento__tile--phone bento__tile--dark">
-              <h3 className="bento__h">Every letter, tracked to the signature.</h3>
-              <div className="bento__art"><TrackingPhone /></div>
+              <h3 className="bento__h">Say what happened. The assistant does the rest.</h3>
+              <div className="bento__art"><AssistantPhone /></div>
             </Ink>
             <Ink as="article" fx="rise" delay={150} className="bento__tile bento__tile--cal">
               <h3 className="bento__h">Every deadline, with the law it comes from.</h3>

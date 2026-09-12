@@ -1,5 +1,7 @@
 import { Ink } from "../lib/motion";
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 /* ──────────────────────────────────────────────────────────
    The Keeper app's home, redrawn for the site from the app itself:
    the alert card and the small calendar in the rail, the red date band,
@@ -27,6 +29,14 @@ const CAL_DAYS = 30;
 const CAL_TODAY = 12;
 const CAL_DUE = [16, 18];
 
+const I = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+const CalendarIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" {...I}><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>;
+const HouseIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" {...I}><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>;
+const LibraryIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" {...I}><path d="m16 6 4 14M12 6v14M8 8v12M4 4v16" /></svg>;
+const MicOffIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" {...I}><path d="M2 2l20 20" /><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2M5 10v2a7 7 0 0 0 12 5" /><path d="M15 9.34V5a3 3 0 0 0-5.68-1.33M9 9v3a3 3 0 0 0 5.12 2.12" /><path d="M12 19v3" /></svg>;
+const KeyboardIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" {...I}><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10" /></svg>;
+const LifeBuoyIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" {...I}><circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24" /><circle cx="12" cy="12" r="4" /></svg>;
+
 function Check() {
   return (
     <svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true">
@@ -53,9 +63,7 @@ export function AppShot() {
   return (
     <div className="shot" aria-label="Keeper on a laptop, example">
       <aside className="shot__rail">
-        <div className="shot__brand">
-          Keeper <span className="shot__alpha">Alpha</span>
-        </div>
+        <div className="shot__brand">Keeper</div>
         <Ink as="div" fx="rise" delay={80} className="alert">
           <div className="alert__bar">
             <span>1 of 2</span>
@@ -101,9 +109,9 @@ export function AppShot() {
 
       <main className="shot__main">
         <nav className="shot__nav" aria-hidden="true">
-          <span>Calendar</span>
-          <span className="shot__home" />
-          <span>Library</span>
+          <span className="shot__nav-item"><CalendarIcon />Calendar</span>
+          <span className="shot__home"><HouseIcon /></span>
+          <span className="shot__nav-item"><LibraryIcon />Library</span>
         </nav>
         <Ink as="div" fx="rise" className="dateband">
           <div className="dateband__day">
@@ -143,6 +151,17 @@ export function AppShot() {
           </div>
         </div>
       </main>
+      <div className="shot__capsule" aria-hidden="true">
+        <span className="shot__ctl"><MicOffIcon /></span>
+        <span className="pw shot__pw" style={{ ["--pal-a" as string]: "#f59e0b", ["--pal-grad" as string]: "linear-gradient(165deg, #f59e0b, #ef4444 62%, #f59e0b)" }}>
+          <img src={`${BASE_URL}portraits/nora.webp`} alt="" width={40} height={40} draggable={false} />
+        </span>
+        <span className="shot__ctl shot__ctl--light"><KeyboardIcon /></span>
+      </div>
+      <div className="shot__net" aria-hidden="true">
+        <span className="shot__net-icon"><LifeBuoyIcon /></span>
+        <span className="shot__net-text"><b>Your safety net</b><span>2 of 13 done</span></span>
+      </div>
     </div>
   );
 }
