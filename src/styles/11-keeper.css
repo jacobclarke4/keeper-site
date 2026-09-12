@@ -13,37 +13,55 @@
 
 /* ── the map ────────────────────────────────────────────── */
 .cmap { position: relative; }
-.cmap__count { position: relative; height: 24px; margin-bottom: 4px; text-align: center; font-size: 14px; font-weight: 600; letter-spacing: .04em; color: var(--ink-mute); }
+.cmap__count { position: relative; height: 26px; margin-bottom: 2px; text-align: center; font-size: 15px; color: var(--ink-mute); }
+.cmap__count b { color: var(--danger); font-weight: 700; }
 .cmap__n { position: absolute; left: 0; right: 0; opacity: 0; transition: opacity .5s var(--paper-ease); }
 .cmap__n.is-on { opacity: 1; }
-.cmap__svg { display: block; width: 100%; max-height: 46vh; color: var(--ink-fine); overflow: visible; }
-.cmap__edge { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 1400; stroke-dashoffset: 1400; opacity: .55; transition: stroke-dashoffset 1.1s var(--paper-ease) calc(var(--i) * 9ms), opacity .5s var(--paper-ease); }
-.cmap__edge--back { stroke-dasharray: 5 4; stroke-dashoffset: 0; opacity: 0; transition: opacity .5s var(--paper-ease) calc(1.6s + var(--i) * 6ms); }
-.cmap--tangle .cmap__edge, .cmap--draw .cmap__edge { stroke-dashoffset: 0; }
-.cmap--tangle .cmap__edge--back { opacity: .7; }
-.cmap--draw .cmap__edge--back { opacity: .7; }
-.cmap__box rect { fill: var(--surface); stroke: var(--hair-strong); stroke-width: 1; }
-.cmap__box--decision rect { fill: color-mix(in srgb, var(--ink) 20%, var(--surface)); }
+.cmap__svg { display: block; width: 100%; max-height: 54vh; color: var(--hair-strong); overflow: visible; }
+/* edges draw in column by column */
+.cmap__edge { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 600; stroke-dashoffset: 600; opacity: 0; transition: stroke-dashoffset .8s var(--paper-ease) calc(var(--c) * 170ms + 120ms), opacity .3s linear calc(var(--c) * 170ms + 120ms); }
+.cmap__edge--back { stroke-dasharray: 5 5; stroke-dashoffset: 0; transition: opacity .5s linear calc(1.9s + var(--c) * 40ms); }
+.cmap__edge--road { display: none; }
+.cmap--draw .cmap__edge, .cmap--road .cmap__edge, .cmap--hold .cmap__edge { stroke-dashoffset: 0; opacity: 1; }
+/* boxes pop in with their column */
+.cmap__box rect { fill: var(--surface); stroke: var(--hair-strong); stroke-width: 1.2; }
+.cmap__box--decision rect { fill: color-mix(in srgb, var(--ink) 18%, var(--surface)); stroke: none; }
 .cmap__box--mine rect { fill: var(--ink); stroke: var(--ink); }
-.cmap__box--bad rect { fill: color-mix(in srgb, var(--danger) 14%, var(--surface)); }
+.cmap__box--bad rect { fill: color-mix(in srgb, var(--danger) 14%, var(--surface)); stroke: none; }
 .cmap__box .cmap__rule { fill: var(--danger); stroke: none; }
-.cmap__box { opacity: 0; transform: scale(.6); transform-origin: center; transform-box: fill-box; transition: opacity .35s var(--paper-ease) calc(var(--i) * 14ms), transform .5s var(--paper-ease) calc(var(--i) * 14ms); }
-.cmap--draw .cmap__box, .cmap--tangle .cmap__box { opacity: 1; transform: none; }
-/* consolidate: every box slides onto its station and dissolves; the edges go with it */
-.cmap--line .cmap__box, .cmap--walk .cmap__box { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.4); transition: opacity .9s var(--paper-ease) calc(.4s + var(--i) * 4ms), transform 1.1s var(--paper-ease) calc(var(--i) * 4ms); }
-.cmap--line .cmap__edge, .cmap--walk .cmap__edge, .cmap--line .cmap__edge--back, .cmap--walk .cmap__edge--back { opacity: 0; transition: opacity .6s var(--paper-ease); }
-.cmap__rail { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s var(--paper-ease) .5s; }
-.cmap--line .cmap__rail, .cmap--walk .cmap__rail { stroke-dashoffset: 0; }
-.cmap__station { opacity: 0; transition: opacity .4s var(--paper-ease) calc(.7s + var(--i) * 120ms); }
-.cmap--line .cmap__station, .cmap--walk .cmap__station { opacity: 1; }
-.cmap__dot { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s; }
-.cmap__station.is-done .cmap__dot { fill: var(--ink); }
+.cmap__box { opacity: 0; transform: scale(.7); transform-origin: center; transform-box: fill-box; transition: opacity .3s var(--paper-ease) calc(var(--c) * 170ms), transform .55s var(--spring) calc(var(--c) * 170ms); }
+.cmap--draw .cmap__box, .cmap--road .cmap__box, .cmap--hold .cmap__box { opacity: 1; transform: none; }
+/* the road threads the tangle in red, and the boxes on it turn red */
+.cmap__road { fill: none; stroke: var(--danger); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 2.4s cubic-bezier(.4,0,.2,1), opacity .2s linear; }
+.cmap--road .cmap__road, .cmap--hold .cmap__road { stroke-dashoffset: 0; opacity: 1; }
+.cmap__box--road rect { transition: fill .4s var(--paper-ease) calc(.3s + var(--c) * 260ms), stroke .4s var(--paper-ease) calc(.3s + var(--c) * 260ms); }
+.cmap--road .cmap__box--road rect, .cmap--hold .cmap__box--road rect { fill: var(--danger); stroke: var(--danger); }
+.cmap__you { fill: var(--danger); stroke: var(--paper); stroke-width: 3; opacity: 0; transition: opacity .25s linear; }
+.cmap--road .cmap__you, .cmap--hold .cmap__you { opacity: 1; }
+/* consolidate: everything slides onto its station and dissolves */
+.cmap--line .cmap__box, .cmap--walk .cmap__box, .cmap--out .cmap__box { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.5); transition: opacity .9s var(--paper-ease) calc(.5s + var(--c) * 30ms), transform 1.2s cubic-bezier(.65,0,.25,1) calc(var(--c) * 30ms); }
+.cmap--line .cmap__edge, .cmap--walk .cmap__edge, .cmap--out .cmap__edge { opacity: 0; transition: opacity .5s linear; }
+.cmap--line .cmap__road, .cmap--walk .cmap__road, .cmap--out .cmap__road { opacity: 0; transition: opacity .6s linear .3s; }
+.cmap--line .cmap__you, .cmap--walk .cmap__you, .cmap--out .cmap__you { opacity: 0; }
+.cmap__rail { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.1s cubic-bezier(.65,0,.25,1) .35s; }
+.cmap__rail--done { stroke: var(--danger); stroke-dasharray: none; stroke-dashoffset: 0; opacity: 0; transition: opacity .3s linear, x2 .5s var(--paper-ease); }
+.cmap--walk .cmap__rail--done { opacity: 1; }
+.cmap--line .cmap__rail, .cmap--walk .cmap__rail, .cmap--out .cmap__rail { stroke-dashoffset: 0; }
+.cmap__station { opacity: 0; transform: translateY(6px); transition: opacity .4s var(--paper-ease) calc(1.2s + var(--i) * 110ms), transform .5s var(--spring) calc(1.2s + var(--i) * 110ms); }
+.cmap--line .cmap__station, .cmap--walk .cmap__station, .cmap--out .cmap__station { opacity: 1; transform: none; }
+.cmap__dot { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s, stroke .3s; }
+.cmap__station.is-done .cmap__dot { fill: var(--danger); stroke: var(--danger); }
 .cmap__label { font-family: var(--f-sans); font-size: 15px; font-weight: 500; fill: var(--ink-mute); }
-.cmap__station.is-here .cmap__label { fill: var(--ink); font-weight: 700; }
-.cmap__here { fill: var(--danger); stroke: var(--paper); stroke-width: 3; opacity: 0; transition: cx .55s var(--paper-ease), opacity .3s var(--paper-ease) 1.4s; }
+.cmap__station.is-here .cmap__label { fill: var(--danger); font-weight: 700; }
+.cmap__here { fill: var(--danger); stroke: var(--paper); stroke-width: 3; opacity: 0; transition: cx .5s cubic-bezier(.65,0,.25,1), opacity .3s linear; }
+.cmap__here-ring { fill: none; stroke: var(--danger); stroke-width: 2; opacity: 0; transition: cx .5s cubic-bezier(.65,0,.25,1); }
 .cmap--walk .cmap__here { opacity: 1; }
-.cmap__foot { margin: 8px auto 0; max-width: 64ch; text-align: center; font-size: 13.5px; color: var(--ink-fine); }
-@media (prefers-reduced-motion: reduce) { .cmap__edge, .cmap__box, .cmap__rail, .cmap__station, .cmap__here, .cmap__n { transition: none; } }
+.cmap--walk .cmap__here-ring { animation: here-ring 1.6s ease-out infinite; }
+@keyframes here-ring { 0% { r: 9; opacity: .8; } 100% { r: 26; opacity: 0; } }
+/* fade out, then again */
+.cmap--out .cmap__line, .cmap--out .cmap__count { opacity: 0; transition: opacity .5s linear; }
+.cmap__line, .cmap__count { transition: opacity .5s linear; }
+@media (prefers-reduced-motion: reduce) { .cmap__edge, .cmap__box, .cmap__road, .cmap__rail, .cmap__station, .cmap__here, .cmap__n { transition: none; } .cmap__here-ring { animation: none; } }
 
 /* ── scripts and bridges ────────────────────────────────── */
 .scripts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
@@ -142,4 +160,72 @@
   .stat__n { font-size: 34px; }
   .stat__label { font-size: 13px; line-height: 1.3; }
   .stat__source { display: none; }
+}
+
+/* ── photo sections: a full-bleed photo under a charcoal scrim with a red cast ── */
+.section--photo { color: var(--on-dark); }
+.section__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: grayscale(.35) contrast(1.05); }
+.section__scrim { position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(43,43,43,.86), rgba(43,43,43,.78) 60%, rgba(219,54,48,.55)); }
+.section--photo-light .section__scrim { background: linear-gradient(180deg, rgba(43,43,43,.82), rgba(43,43,43,.86)); }
+.on-photo .section-head__title { color: #fff; }
+.section--photo .stat { background: rgba(255,255,255,.06); box-shadow: none; border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.section--photo .stat__n { color: #fff; }
+.section--photo .stat__label { color: rgba(255,255,255,.92); }
+.section--photo .stat__source { color: rgba(255,255,255,.6); }
+.section--photo .stats__foot { color: rgba(255,255,255,.85); }
+.section--photo .state { background: rgba(255,255,255,.08); box-shadow: none; border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.section--photo .state__name { color: #fff; }
+.section--photo .state__note, .section--photo .states__line { color: rgba(255,255,255,.85); }
+.section--photo .stat__n.stat__n, .section--photo .state__name { color: #fff; }
+
+/* ── the ticker under the mission ───────────────────────── */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee__track { display: flex; width: max-content; animation: marquee var(--speed, 40s) linear infinite; }
+.marquee--reverse .marquee__track { animation-direction: reverse; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__group { display: flex; flex: none; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.ticker { margin-top: 34px; }
+.ticker__item { display: inline-flex; align-items: center; gap: 14px; padding: 0 28px; font-family: var(--f-ledger); font-size: clamp(26px, 3vw, 40px); color: var(--ink); white-space: nowrap; }
+.ticker__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--danger); }
+
+/* ── the script carousel ────────────────────────────────── */
+.carousel { position: relative; max-width: 860px; margin: 0 auto; }
+.carousel__stage { position: relative; min-height: 220px; }
+.carousel__slide { position: absolute; inset: 0; opacity: 0; transform: translateY(10px) scale(.985); transition: opacity .55s var(--paper-ease), transform .6s var(--paper-ease); pointer-events: none; }
+.carousel__slide.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.carousel__bar { height: 3px; margin-top: 14px; border-radius: 3px; background: var(--paper-dim); overflow: hidden; }
+.carousel__fill { display: block; height: 100%; width: 100%; background: var(--danger); transform-origin: left; transform: scaleX(0); animation: carousel-fill var(--t, 4200ms) linear forwards; }
+.carousel__fill.is-paused { animation-play-state: paused; }
+@keyframes carousel-fill { to { transform: scaleX(1); } }
+.carousel__dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.carousel__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hair-strong); padding: 0; border: 0; cursor: pointer; transition: background .2s, transform .2s; }
+.carousel__dot.is-on { background: var(--danger); transform: scale(1.3); }
+.scripts .script { height: 100%; padding: 30px 34px; border-radius: 24px; }
+.scripts .script__say { font-size: clamp(22px, 2.6vw, 34px); line-height: 1.25; }
+.scripts .script__say::before, .scripts .script__say::after { color: var(--danger); }
+.scripts .script__to { font-size: 13px; color: var(--danger); margin-top: 18px; }
+.bridge { border-top: 3px solid var(--danger); }
+
+/* ── the services marquee rows ─────────────────────────── */
+.services-row { margin-top: 10px; }
+.services-row .service { flex: 0 0 300px; margin-right: 10px; }
+.service--lead { display: block; margin-bottom: 4px; }
+.service--lead .service__name::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--danger); margin-right: 10px; vertical-align: middle; }
+
+/* ── the guarantee glows ────────────────────────────────── */
+#rebate { background: radial-gradient(60% 50% at 50% 45%, rgba(219,54,48,.14), transparent 70%); }
+.guarantee__amt { box-shadow: 0 24px 60px -24px rgba(219,54,48,.6); }
+
+@media (max-width: 920px) {
+  .carousel__stage { min-height: 200px; }
+  .scripts .script { padding: 20px 22px; }
+  .services-row .service { flex-basis: 220px; }
+  .services-row .service__line { display: none; }
+  .ticker { margin-top: 18px; }
+  .ticker__item { font-size: 22px; padding: 0 18px; }
+}
+@media (max-width: 560px) {
+  .carousel__stage { min-height: 230px; }
+  .section__scrim { background: linear-gradient(180deg, rgba(43,43,43,.9), rgba(43,43,43,.85) 60%, rgba(219,54,48,.6)); }
 }

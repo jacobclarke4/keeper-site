@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { LINKS } from "../lib/links";
 import { TIERS, FAQ } from "../lib/outcomes";
-import { STATS, MISSION, MAP, SCRIPTS, BRIDGES, GUARANTEE, SERVICES, STATES, STATES_LINE } from "../lib/site";
+import { STATS, MISSION, MAP, SCRIPTS, BRIDGES, GUARANTEE, SERVICES, STATES, STATES_LINE, PHOTOS, PARTIES } from "../lib/site";
+import { CountUp, Marquee, Carousel } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { Ink, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn, TabPill } from "../components/primitives";
@@ -266,17 +267,18 @@ export function HomePage() {
       </section>
 
       {/* ── the challenge ───────────────────────────────── */}
-      <section className="section" id="challenge">
-        <span className="shape shape--blush shape--left" aria-hidden="true" />
+      <section className="section section--photo" id="challenge">
+        <img className="section__photo" src={PHOTOS.aisle.src} alt="" loading="lazy" />
+        <span className="section__scrim" aria-hidden="true" />
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>The challenge</TabPill>
+          <Ink as="div" fx="rise" className="section-head section-head--tight on-photo">
+            <TabPill onDark>The challenge</TabPill>
             <h2 className="section-head__title">The system loses people.</h2>
           </Ink>
           <div className="stats">
             {STATS.map((st, i) => (
               <Ink key={st.n} as="article" fx="rise" delay={i * 90} className="stat">
-                <span className="stat__n">{st.n}</span>
+                <CountUp value={st.n} className="stat__n" />
                 <p className="stat__label">{st.label}</p>
                 <a className="stat__source" href={st.href} target="_blank" rel="noopener noreferrer">{st.source}</a>
               </Ink>
@@ -290,14 +292,18 @@ export function HomePage() {
 
       {/* ── introducing keeper ──────────────────────────── */}
       <section className="section section--statement" id="intro">
-        <span className="shape shape--coral shape--right" aria-hidden="true" />
         <div className="wrap">
           <Ink as="p" fx="rise" className="eyebrow-caps">Introducing Keeper</Ink>
           <Ink as="h2" fx="rise" delay={70} className="statement">{MISSION}</Ink>
           <Ink as="p" fx="rise" delay={140} className="statement__sub hide-phone">
-            The worker, the employer, the carrier, the doctors, and the state. One place, in your pocket.
+            Everyone in your claim, in one place, in your pocket.
           </Ink>
         </div>
+        <Marquee speed={28} className="ticker">
+          {PARTIES.map((p) => (
+            <span className="ticker__item" key={p}><span className="ticker__dot" aria-hidden="true" />{p}</span>
+          ))}
+        </Marquee>
       </section>
 
       {/* ── how it works: the map ───────────────────────── */}
@@ -316,20 +322,22 @@ export function HomePage() {
 
       {/* ── scripts and bridges ─────────────────────────── */}
       <section className="section" id="scripts">
-        <span className="shape shape--blush shape--tr" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Every situation, scripted</TabPill>
             <h2 className="section-head__title">Say this. To them.</h2>
           </Ink>
-          <div className="scripts">
-            {SCRIPTS.map((sc, i) => (
-              <Ink key={sc.to} as="figure" fx="rise" delay={i * 70} className="script">
-                <blockquote className="script__say">{sc.say}</blockquote>
-                <figcaption className="script__to">To {sc.to}</figcaption>
-              </Ink>
-            ))}
-          </div>
+          <Ink as="div" fx="rise" delay={60}>
+            <Carousel
+              className="scripts"
+              slides={SCRIPTS.map((sc) => (
+                <figure className="script" key={sc.to}>
+                  <blockquote className="script__say">{sc.say}</blockquote>
+                  <figcaption className="script__to">To {sc.to}</figcaption>
+                </figure>
+              ))}
+            />
+          </Ink>
           <Ink as="h3" fx="rise" delay={120} className="bridges__h">And the bridges to the real world.</Ink>
           <div className="bridges">
             {BRIDGES.map((b, i) => (
@@ -344,11 +352,10 @@ export function HomePage() {
 
       {/* ── the guarantee ───────────────────────────────── */}
       <section className="section section--statement" id="rebate">
-        <span className="shape shape--red shape--left" aria-hidden="true" />
         <div className="wrap">
           <Ink as="p" fx="rise" className="eyebrow-caps">The {GUARANTEE.amount} guarantee</Ink>
           <Ink as="div" fx="none" delay={60} className="guarantee__amt-wrap">
-            <span className="guarantee__amt">{GUARANTEE.amount}</span>
+            <CountUp value={GUARANTEE.amount} duration={1800} className="guarantee__amt" />
           </Ink>
           <Ink as="h2" fx="rise" delay={120} className="statement statement--small">{GUARANTEE.line}</Ink>
           <Ink as="p" fx="rise" delay={180} className="statement__sub">{GUARANTEE.fine}</Ink>
@@ -362,23 +369,30 @@ export function HomePage() {
             <TabPill>What we do</TabPill>
             <h2 className="section-head__title">Every service, by name.</h2>
           </Ink>
-          <ul className="services">
-            {SERVICES.map((sv, i) => (
-              <Ink key={sv.name} as="li" fx="rise" delay={(i % 4) * 50} className={`service${i === 0 ? " service--lead" : ""}`}>
-                <h3 className="service__name">{sv.name}</h3>
-                <p className="service__line">{sv.line}</p>
-              </Ink>
+          <Ink as="article" fx="rise" className="service service--lead">
+            <h3 className="service__name">{SERVICES[0].name}</h3>
+            <p className="service__line">{SERVICES[0].line}</p>
+          </Ink>
+          <Marquee speed={46} className="services-row">
+            {SERVICES.slice(1, 9).map((sv) => (
+              <article className="service" key={sv.name}><h3 className="service__name">{sv.name}</h3><p className="service__line">{sv.line}</p></article>
             ))}
-          </ul>
+          </Marquee>
+          <Marquee speed={52} reverse className="services-row">
+            {SERVICES.slice(9).map((sv) => (
+              <article className="service" key={sv.name}><h3 className="service__name">{sv.name}</h3><p className="service__line">{sv.line}</p></article>
+            ))}
+          </Marquee>
         </div>
       </section>
 
       {/* ── where ───────────────────────────────────────── */}
-      <section className="section" id="where">
-        <span className="shape shape--coral shape--bl" aria-hidden="true" />
+      <section className="section section--photo section--photo-light" id="where">
+        <img className="section__photo" src={PHOTOS.frame.src} alt="" loading="lazy" />
+        <span className="section__scrim" aria-hidden="true" />
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>Where it is available</TabPill>
+          <Ink as="div" fx="rise" className="section-head section-head--tight on-photo">
+            <TabPill onDark>Where it is available</TabPill>
             <h2 className="section-head__title">Two states, every clock verified.</h2>
           </Ink>
           <div className="states">
@@ -395,7 +409,6 @@ export function HomePage() {
 
       {/* ── pricing ─────────────────────────────────────── */}
       <section className="section" id="pricing">
-        <span className="shape shape--blush shape--right" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Pricing</TabPill>
@@ -441,7 +454,6 @@ export function HomePage() {
 
       {/* ── FAQ ─────────────────────────────────────────── */}
       <section className="section" id="faq">
-        <span className="shape shape--coral shape--left" aria-hidden="true" />
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>Questions</TabPill>

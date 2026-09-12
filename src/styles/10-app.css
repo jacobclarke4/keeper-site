@@ -14,8 +14,8 @@
   --surface: #ffffff;
   --hair: #e6e4e0;
   --hair-strong: #cecbc4;
-  --current: #2b2b2b;      /* --btn: every primary fill is charcoal */
-  --btn-deep: #4a4a4a;
+  --current: #db3630;      /* Keeper red: the accent and the primary button */
+  --btn-deep: #b8302e;
   --ocean: #2b2b2b;        /* accents that must be read: charcoal */
   --ocean-fill: #2b2b2b;
   --seafoam: #e3dfd8;      /* --current-soft: chips and pills */
@@ -42,15 +42,15 @@
 }
 html, body, #root { background: var(--paper); }
 .btn--accent { background: var(--current); color: #fff; }
-.btn--accent:hover { background: var(--btn-deep); box-shadow: 0 12px 30px -10px rgba(43,43,43,.45); }
+.btn--accent:hover { background: var(--btn-deep); box-shadow: 0 12px 30px -10px rgba(219,54,48,.45); }
 .btn--ghost { border-color: rgba(43,43,43,.24); }
-.medallion { background: var(--current); box-shadow: 0 8px 22px -10px rgba(43,43,43,.5); }
-.mast__link:hover, .mast__link.is-active, .mast__login:hover { color: var(--ink); opacity: .6; }
+.medallion { background: var(--current); box-shadow: 0 8px 22px -10px rgba(219,54,48,.5); }
+.mast__link:hover, .mast__link.is-active, .mast__login:hover { color: var(--danger); }
 .shape--red { background: var(--teal); }
 .shape--coral { background: var(--current-soft, #e3dfd8); }
 .shape--blush { background: var(--wash-ocean); }
 .exp { background: var(--navy); }
-.exp--1 { background: var(--current); color: #fff; }
+.exp--1 { background: var(--danger); color: #fff; }
 .polaroid__art { background: linear-gradient(160deg, #eeebe6, #e3dfd8); }
 .polaroid--1 .polaroid__art, .polaroid--3 .polaroid__art { background: linear-gradient(160deg, #4a4a4a, var(--navy)); }
 .polaroid--2 .polaroid__art { background: linear-gradient(160deg, var(--teal), #8fd0cf); }
@@ -76,3 +76,12 @@ html, body, #root { background: var(--paper); }
 .app .bar__fill { background: var(--btn); }
 .app .road__dot--here { background: var(--danger); box-shadow: 0 0 0 3px var(--paper); }
 .app .road__line--done { background: var(--ink); }
+
+/* red as the accent through the page */
+.tab-pill, .eyebrow-caps { color: var(--danger); }
+.stat__n { color: var(--danger); }
+.guarantee__amt { background: var(--danger); }
+.polaroid__glyph { color: var(--danger); }
+.faq__item[open] .faq__toggle { background: var(--danger); }
+.state__name { color: var(--danger); }
+.section-head__title em { color: inherit; }

@@ -1,5 +1,6 @@
 import { scrollToId, scrollTop } from "../lib/nav";
 import { LINKS, goExternal } from "../lib/links";
+import { PHOTOS } from "../lib/site";
 import { Seal, Btn, Arrow } from "./primitives";
 import { Wordmark, WORDMARK } from "./Wordmark";
 
@@ -61,7 +62,10 @@ export function Colophon() {
       <div className="foot__credo wrap">
         <Seal size={72} animate={false} className="foot__seal" />
         <p>
-          © {year} Keeper ·{" "}
+          Photos by{" "}
+          {Object.values(PHOTOS).map((ph, i, arr) => (
+            <span key={ph.href}><a className="foot__inline-link" href={ph.href} target="_blank" rel="noopener noreferrer">{ph.by}</a>{i < arr.length - 1 ? ", " : ""}</span>
+          ))}{" "}on Unsplash · © {year} Keeper ·{" "}
           <button type="button" className="foot__inline-link" onClick={goExternal(LINKS.commonwealth)}>A Commonwealth Company</button>
         </p>
       </div>

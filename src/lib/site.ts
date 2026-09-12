@@ -93,3 +93,11 @@ export const STATES = [
 ] as const;
 export const STATES_LINE =
   "We hold verified clocks and the state's own forms for Illinois and Indiana. Anywhere else, we tell you we cannot verify a date rather than showing you one.";
+
+/* Photos: free under the Unsplash License, credited in the footer. */
+export const PHOTOS = {
+  aisle: { src: "https://images.unsplash.com/photo-1664382953403-fc1ac77073a0?q=70&w=2000&auto=format&fit=crop", by: "Centre for Ageing Better", href: "https://unsplash.com/photos/women-walking-through-warehouse-aisle-ZlOlRnWk8zU" },
+  frame: { src: "https://images.unsplash.com/photo-1587582423116-ec07293f0395?q=70&w=2000&auto=format&fit=crop", by: "Josh Olalde", href: "https://unsplash.com/photos/construction-worker-in-hard-hat-on-building-frame-X1P1_EDNnok" },
+  worker: { src: "https://images.unsplash.com/photo-1762073574572-31cf6d0ebba4?q=70&w=1600&auto=format&fit=crop", by: "Josh Marty", href: "https://unsplash.com/photos/construction-worker-in-orange-jumpsuit-and-hard-hat-CIzpIYEA130" },
+} as const;
+export const PARTIES = ["The worker", "The employer", "The carrier", "The doctors", "The steward", "The state"] as const;
