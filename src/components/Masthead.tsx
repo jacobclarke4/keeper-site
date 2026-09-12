@@ -6,6 +6,7 @@ import { Wordmark, WORDMARK } from "./Wordmark";
 
 export function Masthead() {
   const [condensed, setCondensed] = useState(false);
+  const [onDark, setOnDark] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useScrollSpy(SECTION_IDS);
 
@@ -16,6 +17,11 @@ export function Masthead() {
       raf = 0;
       const y = window.scrollY;
       setCondensed(y > 40);
+      // The section under the bar decides the bar's colour: light over charcoal or red.
+      const under = document
+        .elementsFromPoint(Math.max(8, window.innerWidth / 2), 84)
+        .find((el) => !el.closest(".mast"));
+      setOnDark(!!under?.closest(".section--dark, .section--red, .foot"));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(measure);
@@ -61,7 +67,7 @@ export function Masthead() {
 
 
   return (
-    <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
+    <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}${onDark ? " mast--on-dark" : ""}`}>
       {/* A progressive blur behind the bar (the Google Labs header): five
           stacked backdrop blurs, each stronger than the last and each masked
           to its own band, heaviest at the top edge and easing off below. */}

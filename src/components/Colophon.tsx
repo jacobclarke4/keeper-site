@@ -1,7 +1,6 @@
 import { scrollToId, scrollTop } from "../lib/nav";
 import { LINKS, goExternal } from "../lib/links";
-import { PHOTOS } from "../lib/site";
-import { Seal, Btn, Arrow } from "./primitives";
+import { Btn, Arrow } from "./primitives";
 import { Wordmark, WORDMARK } from "./Wordmark";
 
 export function Colophon() {
@@ -44,6 +43,7 @@ export function Colophon() {
           {col("Keeper", [
             { label: "The challenge", onClick: () => scrollToId("challenge") },
             { label: "How it works", onClick: () => scrollToId("how") },
+            { label: "The app", onClick: () => scrollToId("product") },
             { label: "Services", onClick: () => scrollToId("services") },
             { label: "Where it is available", onClick: () => scrollToId("where") },
             { label: "Pricing", onClick: () => scrollToId("pricing") },
@@ -60,12 +60,8 @@ export function Colophon() {
       </div>
 
       <div className="foot__credo wrap">
-        <Seal size={72} animate={false} className="foot__seal" />
         <p>
-          Photos by{" "}
-          {Object.values(PHOTOS).map((ph, i, arr) => (
-            <span key={ph.href}><a className="foot__inline-link" href={ph.href} target="_blank" rel="noopener noreferrer">{ph.by}</a>{i < arr.length - 1 ? ", " : ""}</span>
-          ))}{" "}on Unsplash · © {year} Keeper ·{" "}
+          © {year} Keeper ·{" "}
           <button type="button" className="foot__inline-link" onClick={goExternal(LINKS.commonwealth)}>A Commonwealth Company</button>
         </p>
       </div>

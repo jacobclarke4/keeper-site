@@ -88,16 +88,19 @@ const STATION_X = MAP.stations.map((_, i) => 60 + i * ((W - 120) / (MAP.stations
 const target = (b: Box) => STATION_X.reduce((best, x) => (Math.abs(x - (b.x + BW / 2)) < Math.abs(best - (b.x + BW / 2)) ? x : best), STATION_X[0]);
 
 /* The loop, in ms: the tangle draws, the road threads it, a hold, the
-   consolidation, the stations, the walk, a hold, a fade, again. */
-const T = { tangle: 2200, road: 2600, hold: 5200, line: 6600, walk: 7200, out: 11200, end: 11800 };
+   consolidation, the stations one by one, the walk, a hold, a fade to
+   nothing, a silent reset, and again. */
+const T = { tangle: 2400, road: 2500, hold: 5400, line: 6600, stations: 8200, walk: 10600, out: 15200, reset: 16000, end: 16150 };
+const STATION_STAGGER = 300;
+const WALK_STEP = 560;
 
-type Phase = "draw" | "road" | "hold" | "line" | "walk" | "out";
+type Phase = "draw" | "road" | "hold" | "line" | "stations" | "walk" | "out" | "reset";
 
-export function CompMap() {
-  const reduced = usePrefersReducedMotion();
+export function CompMap({ mode = "loop" }: { mode?: "loop" | "static" }) {
+  const reduced = usePrefersReducedMotion() || mode === "static";
   const { ref, inView } = useInView<HTMLDivElement>({ rootMargin: "0px 0px -10% 0px" });
-  const [phase, setPhase] = useState<Phase>(reduced ? "walk" : "draw");
-  const [here, setHere] = useState(reduced ? 6 : 0);
+  const [phase, setPhase] = useState<Phase>(mode === "static" ? "hold" : reduced ? "walk" : "draw");
+  const [here, setHere] = useState(reduced && mode !== "static" ? 6 : 0);
   const motion = useRef<SVGAnimateMotionElement | null>(null);
   useEffect(() => {
     if (phase === "road") motion.current?.beginElement();
@@ -109,18 +112,20 @@ export function CompMap() {
       setPhase("draw"); setHere(0);
       timers = [
         window.setTimeout(() => setPhase("road"), T.tangle),
-        window.setTimeout(() => setPhase("hold"), T.road),
+        window.setTimeout(() => setPhase("hold"), T.road + 2400),
         window.setTimeout(() => setPhase("line"), T.hold),
-        window.setTimeout(() => setPhase("walk"), T.line),
-        ...MAP.stations.map((_, i) => window.setTimeout(() => setHere(i), T.walk + i * 520)),
+        window.setTimeout(() => setPhase("stations"), T.line),
+        window.setTimeout(() => setPhase("walk"), T.walk - 200),
+        ...MAP.stations.map((_, i) => window.setTimeout(() => setHere(i), T.walk + i * WALK_STEP)),
         window.setTimeout(() => setPhase("out"), T.out),
+        window.setTimeout(() => setPhase("reset"), T.reset),
         window.setTimeout(run, T.end),
       ];
     };
     run();
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [reduced, inView]);
-  const consolidated = phase === "line" || phase === "walk" || phase === "out";
+  const consolidated = phase === "line" || phase === "stations" || phase === "walk" || phase === "out";
   return (
     <div ref={ref} className={`cmap cmap--${phase}`} aria-label={`The workers' comp process: ${MAP.boxes} boxes and ${MAP.decisions} decisions, walked as seven stations.`}>
       <div className="cmap__count" aria-hidden="true">
@@ -153,7 +158,7 @@ export function CompMap() {
           <line x1={STATION_X[0]} y1={LINE_Y} x2={STATION_X[STATION_X.length - 1]} y2={LINE_Y} className="cmap__rail" pathLength={1} />
           <line x1={STATION_X[0]} y1={LINE_Y} x2={STATION_X[Math.max(here, 0)]} y2={LINE_Y} className="cmap__rail cmap__rail--done" />
           {MAP.stations.map((s, i) => (
-            <g key={s} className={`cmap__station${i < here ? " is-done" : ""}${i === here ? " is-here" : ""}`} style={{ ["--i" as string]: i }}>
+            <g key={s} className={`cmap__station${i < here ? " is-done" : ""}${i === here && phase === "walk" ? " is-here" : ""}`} style={{ ["--i" as string]: i, ["--st" as string]: `${i * STATION_STAGGER}ms` }}>
               <circle cx={STATION_X[i]} cy={LINE_Y} r="10" className="cmap__dot" />
               <text x={STATION_X[i]} y={LINE_Y + (i % 2 ? -28 : 38)} textAnchor="middle" className="cmap__label">{s}</text>
             </g>

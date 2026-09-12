@@ -8,8 +8,8 @@ export const BASE_URL = import.meta.env.BASE_URL;
 export const NAV_SECTIONS = [
   { id: "challenge", label: "The challenge" },
   { id: "how", label: "How it works" },
+  { id: "product", label: "The app" },
   { id: "services", label: "Services" },
-  { id: "where", label: "Where" },
   { id: "pricing", label: "Pricing" },
 ] as const;
 
@@ -17,9 +17,10 @@ export const NAV_SECTIONS = [
 export const ALL_SECTIONS = [
   { id: "challenge", label: "The challenge" },
   { id: "intro", label: "Introducing Keeper" },
+  { id: "rebate", label: "The guarantee" },
   { id: "how", label: "How it works" },
   { id: "scripts", label: "Scripts and bridges" },
-  { id: "rebate", label: "The guarantee" },
+  { id: "product", label: "The app" },
   { id: "services", label: "Services" },
   { id: "where", label: "Where it is available" },
   { id: "pricing", label: "Pricing" },

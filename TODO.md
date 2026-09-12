@@ -20,11 +20,13 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 - [ ] **Transportation** is listed as a bridge because the outline asked for it; the app has no transportation bridge today (it has certified mail, records letters, filings, and handoff).
 - [ ] **The Challenge stats** are cited inline: BLS 2024 (2.5M injuries), RAND / DOL (about 45% never file), Lockton via Risk & Insurance (two-thirds of denials paid within a year; first denials up 20% in five years). Re-check before launch.
 - [ ] **Services** are the app's portal items by name. Sub-trees (the five grievance kinds) are folded into one line.
+- [ ] **No photography.** Stock photos and the scrolling ticker were removed on 2026-09-12 (the warehouse shot didn't land). If images come back, they need to be licence-free and should sit inside a section, not behind it.
+- [ ] **The hero map loop** (draw, red road, collapse to one line, seven stations, the red walk) is timed in `src/components/CompMap.tsx` (`T` and `STATION_STAGGER`). Only the hero is 100vh; every other section sizes to its content (`src/styles/12-round.css`).
 
 ## Assets to drop in
 
 - [x] **Assistant portraits** are in `public/portraits/` (Camille is the French `Untitled-2.webp`).
-- [ ] **The hero phone mirrors the app's rebuild-ui branch** (member pill, case deck card, badge/chip system, road strip, member capsule, `.pw` portrait). When those components change in the-outcome-company-app, this mock will drift; it is hand-copied CSS, not shared code.
+- [ ] **The product-section phone and tablet mirror the app's rebuild-ui branch** (member pill, case deck card, badge/chip system, road strip, member capsule, `.pw` portrait). When those components change in the-outcome-company-app, this mock will drift; it is hand-copied CSS, not shared code.
 
 ## Ship
 

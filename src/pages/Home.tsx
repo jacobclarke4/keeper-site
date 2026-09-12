@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { LINKS } from "../lib/links";
 import { TIERS, FAQ } from "../lib/outcomes";
-import { STATS, MISSION, MAP, SCRIPTS, BRIDGES, GUARANTEE, SERVICES, STATES, STATES_LINE, PHOTOS, PARTIES } from "../lib/site";
-import { CountUp, Marquee, Carousel } from "../components/motion-bits";
+import { STATS, MISSION, MAP, SCRIPTS, BRIDGES, GUARANTEE, SERVICES, STATES, STATES_LINE } from "../lib/site";
+import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { Ink, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn, TabPill } from "../components/primitives";
@@ -230,48 +230,36 @@ function PhoneMock() {
 export function HomePage() {
   return (
     <div className="page-home">
-      {/* ── hero ────────────────────────────────────────── */}
-      <section className="hero" id="top">
-        <div className="hero__sun" aria-hidden="true" />
-        <div className="wrap hero__grid">
-          <div className="hero__lead">
-            <Ink as="h1" fx="rise" delay={220} className="hero__h1">
-              Insurance for <em>your Insurance.</em>
-            </Ink>
-
-            <Ink as="div" fx="none" delay={300} className="hero__medallion">
-              <span className="medallion">
-                <span className="medallion__amt">$14</span>
-                <span className="medallion__per">/month</span>
-              </span>
-            </Ink>
-
-            <Ink as="p" fx="rise" delay={360} className="hero__lede">
-              Hurt at work? A benefit denied? We track every deadline and keep every paper, so
-              nothing slips.<span className="hide-laptop"> For union members, in Illinois and Indiana.</span>
-            </Ink>
-
-            <Ink as="div" fx="rise" delay={440} className="hero__ctas">
-              <Btn variant="accent" size="lg" href={LINKS.getStarted}>
-                Get started <Arrow />
-              </Btn>
-            </Ink>
-
-            <Ink as="p" fx="rise" delay={500} className="hero__micro hide-phone">
-              Cancel anytime. We&apos;ll never charge you for anything you didn&apos;t say yes to.
-            </Ink>
-          </div>
-
-          <PhoneMock />
+      {/* ── hero: the map is the visual ─────────────────── */}
+      <section className="hero hero--map" id="top">
+        <div className="wrap hero__top">
+          <Ink as="h1" fx="rise" delay={120} className="hero__h1">
+            Insurance for <em>your Insurance.</em>
+          </Ink>
+          <Ink as="p" fx="rise" delay={220} className="hero__lede">
+            Hurt at work? A benefit denied? We track every deadline and keep every paper, so nothing
+            slips. For union members, in Illinois and Indiana.
+          </Ink>
+          <Ink as="div" fx="rise" delay={320} className="hero__row">
+            <span className="medallion">
+              <span className="medallion__amt">$14</span>
+              <span className="medallion__per">/month</span>
+            </span>
+            <Btn variant="accent" size="lg" href={LINKS.getStarted}>
+              Get started <Arrow />
+            </Btn>
+            <span className="hero__micro">Cancel anytime.</span>
+          </Ink>
+        </div>
+        <div className="wrap hero__map">
+          <CompMap />
         </div>
       </section>
 
-      {/* ── the challenge ───────────────────────────────── */}
-      <section className="section section--photo" id="challenge">
-        <img className="section__photo" src={PHOTOS.aisle.src} alt="" loading="lazy" />
-        <span className="section__scrim" aria-hidden="true" />
+      {/* ── the challenge: charcoal ─────────────────────── */}
+      <section className="section section--dark" id="challenge">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight on-photo">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill onDark>The challenge</TabPill>
             <h2 className="section-head__title">The system loses people.</h2>
           </Ink>
@@ -295,63 +283,14 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="p" fx="rise" className="eyebrow-caps">Introducing Keeper</Ink>
           <Ink as="h2" fx="rise" delay={70} className="statement">{MISSION}</Ink>
-          <Ink as="p" fx="rise" delay={140} className="statement__sub hide-phone">
-            Everyone in your claim, in one place, in your pocket.
+          <Ink as="p" fx="rise" delay={140} className="statement__sub">
+            The worker, the employer, the carrier, the doctors, the steward, and the state. One place, in your pocket.
           </Ink>
-        </div>
-        <Marquee speed={28} className="ticker">
-          {PARTIES.map((p) => (
-            <span className="ticker__item" key={p}><span className="ticker__dot" aria-hidden="true" />{p}</span>
-          ))}
-        </Marquee>
-      </section>
-
-      {/* ── how it works: the map ───────────────────────── */}
-      <section className="section" id="how">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>How it works</TabPill>
-            <h2 className="section-head__title">{MAP.boxes} steps. Seven stations. One line.</h2>
-            <p className="section-head__sub hide-phone">
-              We mapped every box, every fork, and every road a claim can take. Then we walk you down one line, one step at a time, in the lane where it happens.
-            </p>
-          </Ink>
-          <CompMap />
         </div>
       </section>
 
-      {/* ── scripts and bridges ─────────────────────────── */}
-      <section className="section" id="scripts">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>Every situation, scripted</TabPill>
-            <h2 className="section-head__title">Say this. To them.</h2>
-          </Ink>
-          <Ink as="div" fx="rise" delay={60}>
-            <Carousel
-              className="scripts-carousel"
-              slides={SCRIPTS.map((sc) => (
-                <figure className="script" key={sc.to}>
-                  <blockquote className="script__say">{sc.say}</blockquote>
-                  <figcaption className="script__to">To {sc.to}</figcaption>
-                </figure>
-              ))}
-            />
-          </Ink>
-          <Ink as="h3" fx="rise" delay={120} className="bridges__h">And the bridges to the real world.</Ink>
-          <div className="bridges">
-            {BRIDGES.map((b, i) => (
-              <Ink key={b.name} as="article" fx="rise" delay={140 + i * 60} className="bridge">
-                <h4 className="bridge__name">{b.name}</h4>
-                <p className="bridge__line">{b.line}</p>
-              </Ink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── the guarantee ───────────────────────────────── */}
-      <section className="section section--statement" id="rebate">
+      {/* ── the guarantee: red ──────────────────────────── */}
+      <section className="section section--red section--statement" id="rebate">
         <div className="wrap">
           <Ink as="p" fx="rise" className="eyebrow-caps">The {GUARANTEE.amount} guarantee</Ink>
           <Ink as="div" fx="none" delay={60} className="guarantee__amt-wrap">
@@ -362,36 +301,122 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── services ────────────────────────────────────── */}
+      {/* ── how it works ────────────────────────────────── */}
+      <section className="section" id="how">
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>How it works</TabPill>
+            <h2 className="section-head__title">{MAP.boxes} steps. Seven stations. Three things you do.</h2>
+            <p className="section-head__sub">
+              We mapped every box, every fork, and every road a claim can take. You walk one line, one step at a time, in the lane where it happens.
+            </p>
+          </Ink>
+          <div className="exps">
+            {[
+              { n: "1", t: "Tell us what happened.", d: "In your own words. The injury, the denial letter, the write-up. Type it, say it, or send a photo of the paper." },
+              { n: "2", t: "We draft and file.", d: "We ask a few questions, pull the deadlines and rules that apply, and write the claim, appeal, or grievance. You review it before it goes out." },
+              { n: "3", t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and a plain-words plan for what comes next." },
+            ].map((st, i) => (
+              <Ink key={st.n} as="article" fx="rise" delay={i * 90} className={`exp exp--${i}`}>
+                <span className="exp__pill">Step {st.n}</span>
+                <span className="exp__num" aria-hidden="true">{st.n}</span>
+                <h3 className="exp__t">{st.t}</h3>
+                <p className="exp__d">{st.d}</p>
+              </Ink>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── scripts and bridges: charcoal ───────────────── */}
+      <section className="section section--dark" id="scripts">
+        <div className="wrap">
+          <div className="split">
+            <div className="split__lead">
+              <Ink as="div" fx="rise" className="section-head section-head--left">
+                <TabPill onDark>Every situation, scripted</TabPill>
+                <h2 className="section-head__title">Say this. To them.</h2>
+                <p className="section-head__sub">
+                  Populated scripts and questionnaires for every situation the map knows about. The words, and who they&apos;re for.
+                </p>
+              </Ink>
+            </div>
+            <ul className="bubbles">
+              {SCRIPTS.map((sc, i) => (
+                <Ink key={sc.to} as="li" fx="rise" delay={i * 80} className="bubble-say">
+                  <p className="bubble-say__text">{sc.say}</p>
+                  <span className="bubble-say__to">To {sc.to}</span>
+                </Ink>
+              ))}
+            </ul>
+          </div>
+          <Ink as="h3" fx="rise" className="bridges__h">And the bridges to the real world.</Ink>
+          <ol className="bridges">
+            {BRIDGES.map((b, i) => (
+              <Ink key={b.name} as="li" fx="rise" delay={i * 60} className="bridge">
+                <span className="bridge__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <h4 className="bridge__name">{b.name}</h4>
+                <p className="bridge__line">{b.line}</p>
+              </Ink>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── the product: phone and tablet ───────────────── */}
+      <section className="section" id="product">
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>The app</TabPill>
+            <h2 className="section-head__title">In your pocket, and on the kitchen table.</h2>
+            <p className="section-head__sub">
+              Talk to your assistant on the phone. See the whole map on the tablet. Same case, same record, everywhere.
+            </p>
+          </Ink>
+          <div className="devices">
+            <div className="device device--tablet" aria-label="Keeper on a tablet, example">
+              <div className="tablet">
+                <div className="tablet__screen app">
+                  <header className="app__bar">
+                    <span className="app__brand">Keeper</span>
+                    <span className="app__bar-title">Workers&apos; comp claim · the map</span>
+                  </header>
+                  <div className="tablet__body">
+                    <CompMap mode="static" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="device device--phone product">
+              <PhoneMock />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── services: a clean grid ──────────────────────── */}
       <section className="section" id="services">
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill>What we do</TabPill>
             <h2 className="section-head__title">Every service, by name.</h2>
           </Ink>
-          <Ink as="article" fx="rise" className="service service--lead">
-            <h3 className="service__name">{SERVICES[0].name}</h3>
-            <p className="service__line">{SERVICES[0].line}</p>
-          </Ink>
-          <Marquee speed={46} className="services-row">
-            {SERVICES.slice(1, 9).map((sv) => (
-              <article className="service" key={sv.name}><h3 className="service__name">{sv.name}</h3><p className="service__line">{sv.line}</p></article>
+          <ol className="services">
+            {SERVICES.map((sv, i) => (
+              <Ink key={sv.name} as="li" fx="rise" delay={(i % 3) * 60} className={`service${i === 0 ? " service--lead" : ""}`}>
+                <span className="service__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="service__name">{sv.name}</h3>
+                <p className="service__line">{sv.line}</p>
+              </Ink>
             ))}
-          </Marquee>
-          <Marquee speed={52} reverse className="services-row">
-            {SERVICES.slice(9).map((sv) => (
-              <article className="service" key={sv.name}><h3 className="service__name">{sv.name}</h3><p className="service__line">{sv.line}</p></article>
-            ))}
-          </Marquee>
+          </ol>
         </div>
       </section>
 
       {/* ── where ───────────────────────────────────────── */}
-      <section className="section section--photo section--photo-light" id="where">
-        <img className="section__photo" src={PHOTOS.frame.src} alt="" loading="lazy" />
-        <span className="section__scrim" aria-hidden="true" />
+      <section className="section section--dark" id="where">
         <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight on-photo">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
             <TabPill onDark>Where it is available</TabPill>
             <h2 className="section-head__title">Two states, every clock verified.</h2>
           </Ink>
@@ -416,37 +441,25 @@ export function HomePage() {
               Simple pricing. <em>No surprises.</em>
             </h2>
           </Ink>
-
           <div className="plans">
             {TIERS.map((t, i) => (
-              <Ink
-                as="div"
-                fx="rise"
-                delay={i * 70}
-                key={t.name}
-                className={`plan${t.soon ? " plan--soon" : ""}${i === 0 ? " plan--feature" : ""}`}
-              >
+              <Ink as="div" fx="rise" delay={i * 70} key={t.name} className={`plan${i === 0 ? " plan--feature" : ""}`}>
                 <span className="plan__tag">{t.name}</span>
                 <span className={`plan__price${i === 0 ? " plan__price--hero" : ""}`}>
                   {t.price}
                   {t.per && <span className="plan__per">{t.per}</span>}
                 </span>
                 <p className="plan__blurb">{t.blurb}</p>
-                {t.soon ? (
-                  <span className="chip-soon">Coming soon</span>
-                ) : (
-                  <a className="btn btn--accent btn--sm plan__cta" href={LINKS.getStarted}>
-                    <span className="btn__label">
-                      Get started <span className="arrow" aria-hidden="true">→</span>
-                    </span>
-                  </a>
-                )}
+                <a className="btn btn--accent btn--sm plan__cta" href={LINKS.getStarted}>
+                  <span className="btn__label">
+                    Get started <span className="arrow" aria-hidden="true">→</span>
+                  </span>
+                </a>
               </Ink>
             ))}
           </div>
-
           <Ink as="p" fx="rise" className="fineprint">
-            One membership, cancel anytime.<span className="hide-phone"> Certified mail is charged at cost, always shown and agreed before we send.</span>{" "}
+            One membership, cancel anytime. Certified mail is charged at cost, always shown and agreed before we send.{" "}
             Keeper is not a law firm and does not give legal advice.
           </Ink>
         </div>
@@ -467,11 +480,7 @@ export function HomePage() {
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "FAQPage",
-                mainEntity: FAQ.map((f) => ({
-                  "@type": "Question",
-                  name: f.q,
-                  acceptedAnswer: { "@type": "Answer", text: f.a },
-                })),
+                mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
               }),
             }}
           />
@@ -480,13 +489,9 @@ export function HomePage() {
               <details className="faq__item" key={f.q}>
                 <summary className="faq__q">
                   <span className="faq__q-text">{f.q}</span>
-                  <span className="faq__toggle" aria-hidden="true">
-                    <span className="faq__toggle-icon" />
-                  </span>
+                  <span className="faq__toggle" aria-hidden="true"><span className="faq__toggle-icon" /></span>
                 </summary>
-                <div className="faq__open">
-                  <div className="faq__a">{f.a}</div>
-                </div>
+                <div className="faq__open"><div className="faq__a">{f.a}</div></div>
               </details>
             ))}
           </div>
