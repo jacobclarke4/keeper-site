@@ -280,11 +280,9 @@ export function HomePage() {
       <section className="section sec" id="intro">
         <div className="wrap tiles">
           <Ink as="article" fx="rise" className="tile tile--warm">
-            <p className="sec__eyebrow">Introducing Keeper</p>
             <h2 className="tile__title">{MISSION}</h2>
           </Ink>
           <Ink as="article" fx="rise" delay={90} className="tile tile--red" id="rebate">
-            <p className="sec__eyebrow">The guarantee</p>
             <CountUp value={GUARANTEE.amount} duration={1600} className="tile__amt" />
             <p className="tile__line">{GUARANTEE.line}</p>
             <button type="button" className="tile__btn" onClick={() => scrollToId("how")}>How it works</button>
@@ -297,7 +295,6 @@ export function HomePage() {
       <section className="section sec" id="how">
         <div className="wrap sec__grid">
           <Ink as="div" fx="rise" className="sec__head">
-            <p className="sec__eyebrow">How it works</p>
             <h2 className="sec__title">{MAP.boxes} steps. Seven stations. Three things you do.</h2>
             <p className="sec__blurb">We mapped every fork a claim can take. You walk one line.</p>
           </Ink>
@@ -318,10 +315,9 @@ export function HomePage() {
       </section>
 
       {/* ── scripts: charcoal ───────────────────────────── */}
-      <section className="section section--dark sec" id="scripts">
+      <section className="section sec" id="scripts">
         <div className="wrap sec__grid">
           <Ink as="div" fx="rise" className="sec__head">
-            <p className="sec__eyebrow">Every situation, scripted</p>
             <h2 className="sec__title">Say this. To them.</h2>
             <p className="sec__blurb">The words for every situation the map knows about, and who they are for.</p>
           </Ink>
@@ -341,7 +337,6 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
-              <p className="sec__eyebrow">The app</p>
               <h2 className="sec__title">Every case, every letter, every clock. One screen.</h2>
             </div>
             <p className="sec__blurb">The deck of your cases, where each letter is, and the days left on every deadline. On the phone too.</p>
@@ -360,7 +355,6 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
-              <p className="sec__eyebrow">What we do</p>
               <h2 className="sec__title">Every service, by name.</h2>
             </div>
             <p className="sec__blurb">Workers&apos; comp, ERISA, and grievances first. The rest of the shelf behind them.</p>
@@ -380,12 +374,10 @@ export function HomePage() {
       <section className="section sec" id="pricing">
         <div className="wrap wrap--narrow">
           <Ink as="div" fx="rise" className="sec__head sec__head--center">
-            <p className="sec__eyebrow">Pricing</p>
             <h2 className="sec__title">Simple pricing. No surprises.</h2>
           </Ink>
           {TIERS.map((t) => (
             <Ink key={t.name} as="article" fx="rise" delay={90} className="pcard">
-              <p className="sec__eyebrow">{t.name}</p>
               <span className="pcard__price">
                 {t.price}
                 {t.per && <span className="pcard__per">{t.per}</span>}
@@ -405,7 +397,6 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
-              <p className="sec__eyebrow">Questions</p>
               <h2 className="sec__title">Straight answers.</h2>
             </div>
           </Ink>
