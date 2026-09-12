@@ -41,10 +41,11 @@ export function Colophon() {
         </div>
         <div className="foot__cols">
           {col("Keeper", [
+            { label: "The challenge", onClick: () => scrollToId("challenge") },
             { label: "How it works", onClick: () => scrollToId("how") },
-            { label: "What we file", onClick: () => scrollToId("catalog") },
+            { label: "Services", onClick: () => scrollToId("services") },
+            { label: "Where it is available", onClick: () => scrollToId("where") },
             { label: "Pricing", onClick: () => scrollToId("pricing") },
-            { label: "Support", onClick: () => scrollToId("support") },
           ])}
           {col("Commonwealth", [
             { label: "The Charter", onClick: goExternal(`${LINKS.commonwealth}charter`) },

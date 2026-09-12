@@ -1,0 +1,78 @@
+/* =========================================================
+   APP — the microsite wears the Keeper app's own design system
+   (the-outcome-company-app, rebuild branch): charcoal ink and
+   buttons, warm paper, Keeper red as a SIGNAL only (a denial, the
+   you-are-here mark), never a button or a link. Loaded last so it wins.
+   ========================================================= */
+:root {
+  --navy: #2b2b2b;
+  --ink: #2b2b2b;
+  --ink-mute: #54524d;
+  --ink-fine: #6c6a65;
+  --paper: #f5f0eb;
+  --paper-dim: #eae8e4;
+  --surface: #ffffff;
+  --hair: #e6e4e0;
+  --hair-strong: #cecbc4;
+  --current: #2b2b2b;      /* --btn: every primary fill is charcoal */
+  --btn-deep: #4a4a4a;
+  --ocean: #2b2b2b;        /* accents that must be read: charcoal */
+  --ocean-fill: #2b2b2b;
+  --seafoam: #e3dfd8;      /* --current-soft: chips and pills */
+  --wash-ocean: #eeebe6;
+  --teal: #bee9e8;         /* the app's seafoam, one soft tint */
+  --danger: #db3630;       /* Keeper red: signal only */
+  --danger-wash: #fdf3f2;
+  --danger-hair: #e5c4bd;
+  --success: #2c7a4e;
+  --warning: #8a6410;
+  --info: #34718f;
+  --stale: #a8431c;
+  --on-dark: #ede7da;
+  --on-dark-mute: #a9b7c4;
+  --on-dark-fine: #7a8996;
+  --wash-sun: radial-gradient(120% 130% at 80% -12%, rgba(238,235,230,.9), rgba(43,43,43,.05) 32%, rgba(245,240,235,0) 66%);
+  --blob: radial-gradient(circle, rgba(43,43,43,.08), transparent 70%);
+  --tint-seafoam: linear-gradient(155deg, rgba(227,223,216,.7), rgba(227,223,216,.2));
+  --tint-current: linear-gradient(155deg, rgba(43,43,43,.08), rgba(43,43,43,.02));
+  --sh-soft: 0 1px 2px rgba(43,43,43,.04), 0 20px 44px -26px rgba(43,43,43,.24);
+  --sh-lift: 0 20px 44px -20px rgba(43,43,43,.24), 0 4px 12px -7px rgba(43,43,43,.12);
+  --sh-chip: inset 0 1px 0 rgba(255,255,255,.55), 0 6px 16px -8px rgba(43,43,43,.24);
+  --sh-pill: 0 8px 22px -10px rgba(43,43,43,.4);
+}
+html, body, #root { background: var(--paper); }
+.btn--accent { background: var(--current); color: #fff; }
+.btn--accent:hover { background: var(--btn-deep); box-shadow: 0 12px 30px -10px rgba(43,43,43,.45); }
+.btn--ghost { border-color: rgba(43,43,43,.24); }
+.medallion { background: var(--current); box-shadow: 0 8px 22px -10px rgba(43,43,43,.5); }
+.mast__link:hover, .mast__link.is-active, .mast__login:hover { color: var(--ink); opacity: .6; }
+.shape--red { background: var(--teal); }
+.shape--coral { background: var(--current-soft, #e3dfd8); }
+.shape--blush { background: var(--wash-ocean); }
+.exp { background: var(--navy); }
+.exp--1 { background: var(--current); color: #fff; }
+.polaroid__art { background: linear-gradient(160deg, #eeebe6, #e3dfd8); }
+.polaroid--1 .polaroid__art, .polaroid--3 .polaroid__art { background: linear-gradient(160deg, #4a4a4a, var(--navy)); }
+.polaroid--2 .polaroid__art { background: linear-gradient(160deg, var(--teal), #8fd0cf); }
+.polaroid--0 .polaroid__glyph, .polaroid--2 .polaroid__glyph { color: var(--ink); }
+.hero::before { background:
+  radial-gradient(closest-side at 38% 40%, rgba(190,233,232,.95), rgba(190,233,232,0) 74%),
+  radial-gradient(closest-side at 70% 65%, rgba(227,223,216,.9), rgba(227,223,216,0) 74%); }
+.hero::after { background: radial-gradient(closest-side at 50% 50%, rgba(219,54,48,.35), rgba(219,54,48,0) 74%); }
+.phone { background: #0d1b2a; }
+.phone__island { background: #0d1b2a; }
+.note__status::before, .status-dot { background: var(--danger); }
+.check-chip__mark { background: var(--current); }
+.foot { background: var(--navy); }
+.seal { color: var(--on-dark); }
+/* the app screen: the Keeper tokens */
+.app { --btn: #2b2b2b; --btn-deep: #4a4a4a; --ocean: #2b2b2b; --ocean-deep: #111111; --ocean-ink: #2b2b2b; --current-soft: #e3dfd8; --wash-ocean: #eeebe6; --ink: #2b2b2b; --navy: #2b2b2b; --danger: #db3630; }
+.app .deckcard__phase { color: var(--ink-mute); }
+.app .badge--info { --badge-ink: #34718f; }
+.app .timeline__dot.is-done { background: var(--btn); border-color: var(--btn); }
+.app .pw-badge--on { background: var(--btn); }
+.app .textbar__send, .app .capsule__mic { background: var(--btn); }
+.app .capsule__mic.is-rec { background: var(--success); }
+.app .bar__fill { background: var(--btn); }
+.app .road__dot--here { background: var(--danger); box-shadow: 0 0 0 3px var(--paper); }
+.app .road__line--done { background: var(--ink); }

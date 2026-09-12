@@ -1,0 +1,145 @@
+/* =========================================================
+   KEEPER — the new sections: the challenge, the mission, the map,
+   the scripts and bridges, the guarantee, the services, the states.
+   ========================================================= */
+
+/* ── the challenge: three figures ───────────────────────── */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.stat { padding: 26px 24px 22px; border-radius: 22px; background: var(--surface); box-shadow: var(--sh-lift); }
+.stat__n { display: block; font-family: var(--f-ledger); font-size: clamp(56px, 6.6vw, 96px); line-height: .95; letter-spacing: -0.03em; color: var(--ink); }
+.stat__label { margin: 12px 0 0; font-size: 16px; line-height: 1.4; color: var(--ink); }
+.stat__source { display: inline-block; margin-top: 12px; font-size: 12px; color: var(--ink-fine); text-decoration: underline; text-underline-offset: 3px; }
+.stats__foot { margin: 22px auto 0; max-width: 62ch; text-align: center; font-size: 17px; color: var(--ink-mute); }
+
+/* ── the map ────────────────────────────────────────────── */
+.cmap { position: relative; }
+.cmap__count { position: relative; height: 24px; margin-bottom: 4px; text-align: center; font-size: 14px; font-weight: 600; letter-spacing: .04em; color: var(--ink-mute); }
+.cmap__n { position: absolute; left: 0; right: 0; opacity: 0; transition: opacity .5s var(--paper-ease); }
+.cmap__n.is-on { opacity: 1; }
+.cmap__svg { display: block; width: 100%; max-height: 46vh; color: var(--ink-fine); overflow: visible; }
+.cmap__edge { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 1400; stroke-dashoffset: 1400; opacity: .55; transition: stroke-dashoffset 1.1s var(--paper-ease) calc(var(--i) * 9ms), opacity .5s var(--paper-ease); }
+.cmap__edge--back { stroke-dasharray: 5 4; stroke-dashoffset: 0; opacity: 0; transition: opacity .5s var(--paper-ease) calc(1.6s + var(--i) * 6ms); }
+.cmap--tangle .cmap__edge, .cmap--draw .cmap__edge { stroke-dashoffset: 0; }
+.cmap--tangle .cmap__edge--back { opacity: .7; }
+.cmap--draw .cmap__edge--back { opacity: .7; }
+.cmap__box rect { fill: var(--surface); stroke: var(--hair-strong); stroke-width: 1; }
+.cmap__box--decision rect { fill: color-mix(in srgb, var(--ink) 20%, var(--surface)); }
+.cmap__box--mine rect { fill: var(--ink); stroke: var(--ink); }
+.cmap__box--bad rect { fill: color-mix(in srgb, var(--danger) 14%, var(--surface)); }
+.cmap__box .cmap__rule { fill: var(--danger); stroke: none; }
+.cmap__box { opacity: 0; transform: scale(.6); transform-origin: center; transform-box: fill-box; transition: opacity .35s var(--paper-ease) calc(var(--i) * 14ms), transform .5s var(--paper-ease) calc(var(--i) * 14ms); }
+.cmap--draw .cmap__box, .cmap--tangle .cmap__box { opacity: 1; transform: none; }
+/* consolidate: every box slides onto its station and dissolves; the edges go with it */
+.cmap--line .cmap__box, .cmap--walk .cmap__box { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.4); transition: opacity .9s var(--paper-ease) calc(.4s + var(--i) * 4ms), transform 1.1s var(--paper-ease) calc(var(--i) * 4ms); }
+.cmap--line .cmap__edge, .cmap--walk .cmap__edge, .cmap--line .cmap__edge--back, .cmap--walk .cmap__edge--back { opacity: 0; transition: opacity .6s var(--paper-ease); }
+.cmap__rail { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s var(--paper-ease) .5s; }
+.cmap--line .cmap__rail, .cmap--walk .cmap__rail { stroke-dashoffset: 0; }
+.cmap__station { opacity: 0; transition: opacity .4s var(--paper-ease) calc(.7s + var(--i) * 120ms); }
+.cmap--line .cmap__station, .cmap--walk .cmap__station { opacity: 1; }
+.cmap__dot { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s; }
+.cmap__station.is-done .cmap__dot { fill: var(--ink); }
+.cmap__label { font-family: var(--f-sans); font-size: 15px; font-weight: 500; fill: var(--ink-mute); }
+.cmap__station.is-here .cmap__label { fill: var(--ink); font-weight: 700; }
+.cmap__here { fill: var(--danger); stroke: var(--paper); stroke-width: 3; opacity: 0; transition: cx .55s var(--paper-ease), opacity .3s var(--paper-ease) 1.4s; }
+.cmap--walk .cmap__here { opacity: 1; }
+.cmap__foot { margin: 8px auto 0; max-width: 64ch; text-align: center; font-size: 13.5px; color: var(--ink-fine); }
+@media (prefers-reduced-motion: reduce) { .cmap__edge, .cmap__box, .cmap__rail, .cmap__station, .cmap__here, .cmap__n { transition: none; } }
+
+/* ── scripts and bridges ────────────────────────────────── */
+.scripts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.script { margin: 0; padding: 18px 18px 16px; border-radius: 18px; background: var(--surface); box-shadow: var(--sh-soft); display: flex; flex-direction: column; }
+.script__say { margin: 0; font-family: var(--f-ledger); font-size: 17px; line-height: 1.3; color: var(--ink); flex: 1; }
+.script__say::before { content: "“"; } .script__say::after { content: "”"; }
+.script__to { margin-top: 12px; font-size: 12.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-fine); }
+.bridges__h { margin: 26px 0 12px; text-align: center; font-family: var(--f-ledger); font-weight: 400; font-size: 26px; color: var(--ink); }
+.bridges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.bridge { padding: 16px 18px; border-radius: 18px; background: var(--navy); color: var(--on-dark); }
+.bridge__name { margin: 0 0 6px; font-family: var(--f-sans); font-size: 15px; font-weight: 700; color: #fff; }
+.bridge__line { margin: 0; font-size: 13.5px; line-height: 1.42; color: rgba(255,255,255,.78); }
+
+/* ── the guarantee ──────────────────────────────────────── */
+.guarantee__amt-wrap { margin: 0 0 14px; }
+.guarantee__amt { display: inline-block; padding: 8px 26px; border-radius: 22px; background: var(--current); color: #fff; font-family: var(--f-sans); font-weight: 700; font-size: clamp(56px, 8vw, 112px); line-height: 1.05; letter-spacing: -0.03em; }
+.statement--small { font-size: clamp(26px, 3.4vw, 44px); max-width: 26ch; }
+
+/* ── services ───────────────────────────────────────────── */
+.services { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.service { padding: 14px 16px; border-radius: 16px; background: var(--surface); box-shadow: var(--sh-soft); }
+.service--lead { grid-column: span 2; background: var(--navy); color: var(--on-dark); }
+.service__name { margin: 0 0 4px; font-family: var(--f-sans); font-size: 15px; font-weight: 700; color: inherit; }
+.service--lead .service__name { font-family: var(--f-ledger); font-weight: 400; font-size: 24px; color: #fff; }
+.service__line { margin: 0; font-size: 13px; line-height: 1.38; color: var(--ink-mute); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.service--lead .service__line { color: rgba(255,255,255,.8); font-size: 14px; -webkit-line-clamp: 3; }
+
+/* ── where ──────────────────────────────────────────────── */
+.states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 760px; margin: 0 auto; }
+.state { padding: 30px 28px; border-radius: 26px; background: var(--surface); box-shadow: var(--sh-lift); text-align: center; }
+.state__name { display: block; font-family: var(--f-ledger); font-size: clamp(38px, 4.4vw, 56px); line-height: 1; color: var(--ink); }
+.state__note { margin: 10px 0 0; font-size: 15px; color: var(--ink-mute); }
+.states__line { margin: 22px auto 0; max-width: 60ch; text-align: center; font-size: 16px; color: var(--ink-mute); }
+
+/* ── smaller screens ────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .scripts, .bridges { grid-template-columns: repeat(2, 1fr); }
+  .services { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 920px) {
+  .stats { grid-template-columns: 1fr; gap: 8px; }
+  .stat { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: center; padding: 12px 16px; }
+  .stat__n { font-size: 40px; }
+  .stat__label { margin: 0; font-size: 14px; }
+  .stat__source { grid-column: 2; margin-top: 2px; font-size: 11px; }
+  .stats__foot { margin-top: 12px; font-size: 14px; }
+  .cmap__svg { max-height: 34vh; }
+  .cmap__label { font-size: 22px; }
+  .cmap__count { font-size: 12px; }
+  .cmap__foot { display: none; }
+  .scripts { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .script { padding: 12px; }
+  .script__say { font-size: 14px; }
+  .script__to { font-size: 11px; margin-top: 8px; }
+  .bridges__h { margin: 14px 0 8px; font-size: 20px; }
+  .bridges { gap: 8px; }
+  .bridge { padding: 12px 14px; }
+  .bridge__line { display: none; }
+  .services { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .service { padding: 10px 12px; }
+  .service--lead { grid-column: span 2; }
+  .service__line { display: none; }
+  .service--lead .service__line { display: -webkit-box; -webkit-line-clamp: 2; }
+  .service__name { font-size: 13.5px; }
+  .states { gap: 10px; }
+  .state { padding: 18px; }
+  .states__line { margin-top: 12px; font-size: 14px; }
+}
+@media (max-width: 560px) {
+  .scripts { grid-template-columns: 1fr; }
+  .script:nth-child(n+3) { display: none; }
+  .bridges { grid-template-columns: 1fr 1fr; }
+  .services { grid-template-columns: 1fr 1fr; }
+  .service:nth-child(n+10) { display: none; }
+  .cmap__label { font-size: 30px; }
+  .cmap__count { display: none; }
+  .guarantee__amt { font-size: 52px; }
+}
+
+/* the map section: a short head so the map itself owns the viewport */
+#how .section-head__sub { display: none; }
+#how .section-head--tight { margin-bottom: 8px; }
+#how .section-head__title { font-size: clamp(30px, 3.6vw, 48px); }
+.cmap__svg { max-height: 52vh; }
+
+/* last pixels: a shorter mission on laptops, a tighter challenge on phones */
+#intro .statement { font-size: clamp(28px, 3.7vw, 52px); max-width: 24ch; }
+@media (max-width: 1300px) {
+  .hide-laptop { display: none; }
+  #intro .statement__sub { display: none; }
+  .hero { padding-top: 96px; }
+}
+@media (max-width: 560px) {
+  .stats__foot { display: none; }
+  .stat { padding: 10px 14px; }
+  .stat__n { font-size: 34px; }
+  .stat__label { font-size: 13px; line-height: 1.3; }
+  .stat__source { display: none; }
+}

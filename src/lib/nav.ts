@@ -6,21 +6,23 @@ export const BASE_URL = import.meta.env.BASE_URL;
 
 /** The masthead's primary nav — each jumps to a section id on the page. */
 export const NAV_SECTIONS = [
+  { id: "challenge", label: "The challenge" },
   { id: "how", label: "How it works" },
-  { id: "catalog", label: "What we file" },
+  { id: "services", label: "Services" },
+  { id: "where", label: "Where" },
   { id: "pricing", label: "Pricing" },
-  { id: "support", label: "Support" },
 ] as const;
 
 /** Every real section on the page — the CONTENTS index + scrollspy source. */
 export const ALL_SECTIONS = [
-  { id: "bridge", label: "Who it's for" },
+  { id: "challenge", label: "The challenge" },
+  { id: "intro", label: "Introducing Keeper" },
   { id: "how", label: "How it works" },
-  { id: "catalog", label: "What we file" },
+  { id: "scripts", label: "Scripts and bridges" },
+  { id: "rebate", label: "The guarantee" },
+  { id: "services", label: "Services" },
+  { id: "where", label: "Where it is available" },
   { id: "pricing", label: "Pricing" },
-  { id: "support", label: "Support" },
-  { id: "wallet", label: "The Wallet" },
-  { id: "commonwealth", label: "Commonwealth" },
   { id: "faq", label: "Questions" },
 ] as const;
 

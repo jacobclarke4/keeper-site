@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { LINKS, goExternal } from "../lib/links";
-import { CATALOG, ALSO, TIERS, FAQ } from "../lib/outcomes";
-import { Ink, useInView, usePrefersReducedMotion } from "../lib/motion";
-import { Arrow, Btn, CheckChip, Seal, TabPill } from "../components/primitives";
+import { LINKS } from "../lib/links";
+import { TIERS, FAQ } from "../lib/outcomes";
+import { STATS, MISSION, MAP, SCRIPTS, BRIDGES, GUARANTEE, SERVICES, STATES, STATES_LINE } from "../lib/site";
+import { CompMap } from "../components/CompMap";
+import { Ink, usePrefersReducedMotion } from "../lib/motion";
+import { Arrow, Btn, TabPill } from "../components/primitives";
 
 /* ──────────────────────────────────────────────────────────
    Keeper — one viewport per section.
@@ -224,28 +226,6 @@ function PhoneMock() {
   );
 }
 
-/* The Wallet balance panel — a plump track that fills and stops dead at the cap. */
-function BalancePanel() {
-  const { ref, inView } = useInView<HTMLDivElement>({ rootMargin: "0px 0px -15% 0px" });
-  return (
-    <div ref={ref} className={`balance${inView ? " is-filled" : ""}`}>
-      <p className="balance__label">This month&apos;s spend</p>
-      <div className="balance__track">
-        <span className="balance__fill" />
-        <span className="balance__cap" aria-hidden="true">
-          <span className="balance__cap-dot" />
-          <span className="balance__cap-label">Your balance</span>
-        </span>
-        <span className="balance__beyond" aria-hidden="true" />
-      </div>
-      <div className="balance__foot">
-        <CheckChip className="balance__chip">Nothing runs past your balance.</CheckChip>
-        <p className="balance__fine">Your balance is the only limit. No credit · no hidden fees · no meters.</p>
-      </div>
-    </div>
-  );
-}
-
 export function HomePage() {
   return (
     <div className="page-home">
@@ -266,8 +246,8 @@ export function HomePage() {
             </Ink>
 
             <Ink as="p" fx="rise" delay={360} className="hero__lede">
-              Workers&apos; comp claims, ERISA appeals, and grievances, drafted and filed for union
-              members.<span className="hide-phone"> No forms to decode. No retainer.</span>
+              Hurt at work? A benefit denied? We track every deadline and keep every paper, so
+              nothing slips.<span className="hide-laptop"> For union members, in Illinois and Indiana.</span>
             </Ink>
 
             <Ink as="div" fx="rise" delay={440} className="hero__ctas">
@@ -285,81 +265,131 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── who this is for: one big statement ─────────── */}
-      <section className="section section--statement" id="bridge">
+      {/* ── the challenge ───────────────────────────────── */}
+      <section className="section" id="challenge">
         <span className="shape shape--blush shape--left" aria-hidden="true" />
         <div className="wrap">
-          <Ink as="p" fx="rise" className="eyebrow-caps">Who this is for</Ink>
-          <Ink as="h2" fx="rise" delay={70} className="statement">
-            Built for the people who keep everything running. The paperwork that protects you was
-            never written for you. Keeper is here to get it right.
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>The challenge</TabPill>
+            <h2 className="section-head__title">The system loses people.</h2>
           </Ink>
-          <Ink as="p" fx="rise" delay={140} className="statement__sub hide-phone">
-            Whatever your trade, whatever your local, whatever language you speak. You tell us what
-            happened. We take it from there.
-          </Ink>
-        </div>
-      </section>
-
-      {/* ── how it works ────────────────────────────────── */}
-      <section className="section" id="how">
-        <span className="shape shape--coral shape--tr" aria-hidden="true" />
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head">
-            <TabPill>How it works</TabPill>
-            <h2 className="section-head__title">Three steps. That&apos;s it.</h2>
-          </Ink>
-          <div className="exps">
-            {[
-              { n: "1", t: "Tell us what happened.", d: "In your own words. The injury, the denial letter, the write-up. Type it, say it, or send a photo of the paper." },
-              { n: "2", t: "We draft and file.", d: "We ask a few questions, pull the deadlines and rules that apply, and write the claim, appeal, or grievance. You review it before it goes out." },
-              { n: "3", t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and a plain-words plan for what comes next." },
-            ].map((s, i) => (
-              <Ink key={s.n} as="article" fx="rise" delay={i * 90} className={`exp exp--${i}`}>
-                <span className="exp__pill">Step {s.n}</span>
-                <span className="exp__num" aria-hidden="true">{s.n}</span>
-                <h3 className="exp__t">{s.t}</h3>
-                <p className="exp__d">{s.d}</p>
+          <div className="stats">
+            {STATS.map((st, i) => (
+              <Ink key={st.n} as="article" fx="rise" delay={i * 90} className="stat">
+                <span className="stat__n">{st.n}</span>
+                <p className="stat__label">{st.label}</p>
+                <a className="stat__source" href={st.href} target="_blank" rel="noopener noreferrer">{st.source}</a>
               </Ink>
             ))}
           </div>
-          <Ink as="p" fx="rise" delay={90} className="how__support">
-            And when a case needs a person, a real one steps in,{" "}
-            <em className="accent-ocean">in your language.</em>
+          <Ink as="p" fx="rise" delay={280} className="stats__foot">
+            A first denial rose 20% in five years. Most of the people it happens to are right, and most of them never find out.
           </Ink>
         </div>
       </section>
 
-      {/* ── the catalog ─────────────────────────────────── */}
-      <section className="section" id="catalog">
-        <span className="shape shape--red shape--bl" aria-hidden="true" />
+      {/* ── introducing keeper ──────────────────────────── */}
+      <section className="section section--statement" id="intro">
+        <span className="shape shape--coral shape--right" aria-hidden="true" />
+        <div className="wrap">
+          <Ink as="p" fx="rise" className="eyebrow-caps">Introducing Keeper</Ink>
+          <Ink as="h2" fx="rise" delay={70} className="statement">{MISSION}</Ink>
+          <Ink as="p" fx="rise" delay={140} className="statement__sub hide-phone">
+            The worker, the employer, the carrier, the doctors, and the state. One place, in your pocket.
+          </Ink>
+        </div>
+      </section>
+
+      {/* ── how it works: the map ───────────────────────── */}
+      <section className="section" id="how">
         <div className="wrap">
           <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>What we file</TabPill>
-            <h2 className="section-head__title">
-              Real filings, <em>done right.</em>
-            </h2>
+            <TabPill>How it works</TabPill>
+            <h2 className="section-head__title">{MAP.boxes} steps. Seven stations. One line.</h2>
             <p className="section-head__sub hide-phone">
-              Every one ends the same way: written, reviewed by you, filed, and in your hands with
-              the deadline met. Open any one to see how it works.
+              We mapped every box, every fork, and every road a claim can take. Then we walk you down one line, one step at a time, in the lane where it happens.
             </p>
           </Ink>
+          <CompMap />
+        </div>
+      </section>
 
-          <div className="rail" role="list">
-            {CATALOG.map((o, i) => (
-              <Ink as="article" fx="rise" delay={(i % 4) * 60} key={o.title} className={`polaroid polaroid--${i % 4}`} role="listitem">
-                <span className="polaroid__art" aria-hidden="true">
-                  <span className="polaroid__glyph">{String(i + 1).padStart(2, "0")}</span>
-                </span>
-                <span className="polaroid__group">{o.group}</span>
-                <h3 className="polaroid__t">{o.title}</h3>
-                <p className="polaroid__d">{o.deliver}</p>
+      {/* ── scripts and bridges ─────────────────────────── */}
+      <section className="section" id="scripts">
+        <span className="shape shape--blush shape--tr" aria-hidden="true" />
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>Every situation, scripted</TabPill>
+            <h2 className="section-head__title">Say this. To them.</h2>
+          </Ink>
+          <div className="scripts">
+            {SCRIPTS.map((sc, i) => (
+              <Ink key={sc.to} as="figure" fx="rise" delay={i * 70} className="script">
+                <blockquote className="script__say">{sc.say}</blockquote>
+                <figcaption className="script__to">To {sc.to}</figcaption>
               </Ink>
             ))}
           </div>
-          <Ink as="p" fx="rise" className="catalog__also">
-            Also: {ALSO.join(", ")}.
+          <Ink as="h3" fx="rise" delay={120} className="bridges__h">And the bridges to the real world.</Ink>
+          <div className="bridges">
+            {BRIDGES.map((b, i) => (
+              <Ink key={b.name} as="article" fx="rise" delay={140 + i * 60} className="bridge">
+                <h4 className="bridge__name">{b.name}</h4>
+                <p className="bridge__line">{b.line}</p>
+              </Ink>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── the guarantee ───────────────────────────────── */}
+      <section className="section section--statement" id="rebate">
+        <span className="shape shape--red shape--left" aria-hidden="true" />
+        <div className="wrap">
+          <Ink as="p" fx="rise" className="eyebrow-caps">The {GUARANTEE.amount} guarantee</Ink>
+          <Ink as="div" fx="none" delay={60} className="guarantee__amt-wrap">
+            <span className="guarantee__amt">{GUARANTEE.amount}</span>
           </Ink>
+          <Ink as="h2" fx="rise" delay={120} className="statement statement--small">{GUARANTEE.line}</Ink>
+          <Ink as="p" fx="rise" delay={180} className="statement__sub">{GUARANTEE.fine}</Ink>
+        </div>
+      </section>
+
+      {/* ── services ────────────────────────────────────── */}
+      <section className="section" id="services">
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>What we do</TabPill>
+            <h2 className="section-head__title">Every service, by name.</h2>
+          </Ink>
+          <ul className="services">
+            {SERVICES.map((sv, i) => (
+              <Ink key={sv.name} as="li" fx="rise" delay={(i % 4) * 50} className={`service${i === 0 ? " service--lead" : ""}`}>
+                <h3 className="service__name">{sv.name}</h3>
+                <p className="service__line">{sv.line}</p>
+              </Ink>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── where ───────────────────────────────────────── */}
+      <section className="section" id="where">
+        <span className="shape shape--coral shape--bl" aria-hidden="true" />
+        <div className="wrap">
+          <Ink as="div" fx="rise" className="section-head section-head--tight">
+            <TabPill>Where it is available</TabPill>
+            <h2 className="section-head__title">Two states, every clock verified.</h2>
+          </Ink>
+          <div className="states">
+            {STATES.map((st, i) => (
+              <Ink key={st.name} as="article" fx="rise" delay={i * 90} className="state">
+                <span className="state__name">{st.name}</span>
+                <p className="state__note">{st.note}</p>
+              </Ink>
+            ))}
+          </div>
+          <Ink as="p" fx="rise" delay={200} className="states__line">{STATES_LINE}</Ink>
         </div>
       </section>
 
@@ -403,80 +433,9 @@ export function HomePage() {
           </div>
 
           <Ink as="p" fx="rise" className="fineprint">
-            One membership, cancel anytime.<span className="hide-phone"> A few heavy requests may cost
-            more to run, always shown and agreed before we begin, never more than 14% over cost.</span>{" "}
+            One membership, cancel anytime.<span className="hide-phone"> Certified mail is charged at cost, always shown and agreed before we send.</span>{" "}
             Keeper is not a law firm and does not give legal advice.
           </Ink>
-        </div>
-      </section>
-
-      {/* ── support: one big statement ───────────────── */}
-      <section className="section section--statement" id="support">
-        <span className="shape shape--red shape--right" aria-hidden="true" />
-        <div className="wrap">
-          <Ink as="p" fx="rise" className="eyebrow-caps">The human side</Ink>
-          <Ink as="h2" fx="rise" delay={70} className="statement">
-            A claim is stressful. A denial is worse. You shouldn&apos;t be doing this alone at
-            midnight.
-          </Ink>
-          <Ink as="p" fx="rise" delay={140} className="statement__sub">
-            Our support line is open around the clock, in ten languages. And when a case needs a
-            person, a real one steps in and stays on it. You&apos;re never stuck. You&apos;re never
-            alone with it.
-          </Ink>
-        </div>
-      </section>
-
-      {/* ── the wallet ──────────────────────────────────── */}
-      <section className="section" id="wallet">
-        <div className="wrap">
-          <Ink as="div" fx="rise" className="section-head section-head--tight">
-            <TabPill>The Wallet</TabPill>
-            <h2 className="section-head__title">
-              Your money <em>stays yours.</em>
-            </h2>
-            <p className="section-head__sub">
-              Everything you spend comes from your own balance. No credit, no hidden fees, and no
-              way for a bill to grow while you&apos;re not looking.
-            </p>
-          </Ink>
-          <div className="panel wallet">
-            <span className="blob" aria-hidden="true" />
-            <BalancePanel />
-          </div>
-        </div>
-      </section>
-
-      {/* ── part of something bigger ────────────────────── */}
-      <section className="section" id="commonwealth">
-        <div className="wrap">
-          <div className="panel panel--navy commonwealth">
-            <span className="commonwealth__halo" aria-hidden="true" />
-            <div className="commonwealth__copy">
-              <Ink as="div" fx="rise">
-                <TabPill onDark>Part of something bigger</TabPill>
-              </Ink>
-              <Ink as="h2" fx="rise" delay={70} className="commonwealth__h">
-                One part of <em>Commonwealth.</em>
-              </Ink>
-              <Ink as="p" fx="rise" delay={120} className="commonwealth__p">
-                Keeper is one part of Commonwealth, a community built on a simple promise: bring
-                everyone into this new world together, and leave no one behind.
-              </Ink>
-              <Ink as="p" fx="rise" delay={160} className="commonwealth__p">
-                Half of every dollar of profit goes back to the community. That promise can never be
-                sold or taken away. It&apos;s written down, and it&apos;s binding.
-              </Ink>
-              <Ink as="div" fx="rise" delay={200} className="commonwealth__cta">
-                <Btn variant="ghost-dark" onClick={goExternal(`${LINKS.commonwealth}charter`)}>
-                  Read the Charter <Arrow />
-                </Btn>
-              </Ink>
-            </div>
-            <div className="commonwealth__seal">
-              <Seal size={180} />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -490,10 +449,6 @@ export function HomePage() {
               Good questions, <em>straight answers.</em>
             </h2>
           </Ink>
-          {/* FAQPage structured data, generated from the same FAQ source that
-             renders below so the markup can never drift from the visible text
-             (Google requires an exact match). Baked into the static HTML by the
-             prerender step, so crawlers and AI systems read it without JS. */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{

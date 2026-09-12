@@ -12,10 +12,14 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 - [ ] **Social card.** `public/og.png` is the TOC card. Regenerate for Keeper.
 - [ ] **Commonwealth.** Copy, footer, and structured data still say Keeper is a Commonwealth company. Confirm that's still true.
 
-## Product gap the site is now ahead of
+## The page, after the 2026-09-12 outline
 
-- [ ] **Workers' comp, ERISA appeals, and grievances do not exist in the app yet.** The site promises all three. the-outcome-company-app has the machinery (plain-language intake, clarifying questions, letter drafting with statute citations, "review before sending" drafts, certified mail via Lob, Sam concierge, human escalation, ten languages) and nearby outcomes (`wage_theft_recovery`, `workplace_issue` with an FMLA path, `appeal_anything`, an ERISA-citing insurance appeal template), but no workers' comp product, no grievance/arbitration/just-cause flow, and no ERISA pension/disability appeal product. Build those before launch, or soften the catalog.
-- [ ] **One viewport per section**: on phones and tablets some copy is hidden to fit (step descriptions on phones, plan blurbs on non-featured tiers, the hero notes, the catalog intro). Confirm that is the intended trade.
+- [ ] **Mission statement** is a first draft: "Keeper keeps every deadline and every paper in your claim in one place, from the day you're hurt to the last check. You do the errands, we do the paperwork, and nothing slips." Tighten as you like in `src/lib/site.ts`.
+- [ ] **The step counts** come from the app's own comp map (348 boxes, 78 decisions, 539 paths, 7 stations; the walk is 77 steps in 9 phases). The outline's "132 steps to 7 actions and 8 approvals" had no source, so the site uses the app's numbers.
+- [ ] **The $1,000 guarantee.** The app calls it the "Keeper guarantee" and marks its terms as not final. The site says so in the fineprint. Right-size the amount per union when the stats exist.
+- [ ] **Transportation** is listed as a bridge because the outline asked for it; the app has no transportation bridge today (it has certified mail, records letters, filings, and handoff).
+- [ ] **The Challenge stats** are cited inline: BLS 2024 (2.5M injuries), RAND / DOL (about 45% never file), Lockton via Risk & Insurance (two-thirds of denials paid within a year; first denials up 20% in five years). Re-check before launch.
+- [ ] **Services** are the app's portal items by name. Sub-trees (the five grievance kinds) are folded into one line.
 
 ## Assets to drop in
 
