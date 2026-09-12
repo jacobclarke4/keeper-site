@@ -26,7 +26,7 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 ## Assets to drop in
 
 - [x] **Assistant portraits** are in `public/portraits/` (Camille is the French `Untitled-2.webp`).
-- [ ] **The product-section phone and tablet mirror the app's rebuild-ui branch** (member pill, case deck card, badge/chip system, road strip, member capsule, `.pw` portrait). When those components change in the-outcome-company-app, this mock will drift; it is hand-copied CSS, not shared code.
+- [ ] **The app shot (`src/components/AppShot.tsx`) and the phone mirror the app's rebuild-ui branch** (member pill, case deck card, badge/chip system, road strip, member capsule, `.pw` portrait). When those components change in the-outcome-company-app, this mock will drift; it is hand-copied CSS, not shared code.
 
 ## Ship
 

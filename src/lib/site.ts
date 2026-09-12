@@ -79,9 +79,6 @@ export const SERVICES = [
 ] as const;
 
 export const STATES = [
-  { name: "Illinois", note: "Notice within 45 days. Every clock verified." },
-  { name: "Indiana", note: "Notice within 30 days. Every clock verified." },
+  { name: "Illinois", days: 45, rule: "Tell your employer, in writing", cite: "820 ILCS 305/6(c)", note: "Notice within 45 days. Every clock verified." },
+  { name: "Indiana", days: 30, rule: "Tell your employer, in writing", cite: "IC 22-3-3-1", note: "Notice within 30 days. Every clock verified." },
 ] as const;
-export const STATES_LINE =
-  "We hold verified clocks and the state's own forms for Illinois and Indiana. Anywhere else, we tell you we cannot verify a date rather than showing you one.";
-

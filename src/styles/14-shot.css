@@ -1,0 +1,164 @@
+/* =========================================================
+   SHOT — the Keeper app's own parts, drawn on the site: the alert
+   card, the small calendar, the red date band, the case cards with
+   their days-left pills, mail steppers, and red progress bars, and the
+   deadline cards from the calendar page. Loaded after the frame.
+   ========================================================= */
+
+/* ── the bands: charcoal to red ─────────────────────────── */
+:root {
+  --g-band: linear-gradient(112deg, #2b2b2b 0%, #2b2b2b 42%, #6e1f1c 74%, #db3630 100%);
+  --g-band-rev: linear-gradient(248deg, #2b2b2b 0%, #2b2b2b 42%, #6e1f1c 74%, #db3630 100%);
+  --g-stage: linear-gradient(160deg, #2b2b2b 0%, #3a2422 45%, #db3630 100%);
+}
+.section--dark.sec { background: var(--g-band); }
+#scripts.section--dark.sec { background: var(--g-band-rev); }
+#challenge.sec::after { display: none; }
+.tile--dark { background: var(--g-stage); }
+.tile--dark::after { display: none; }
+
+/* on charcoal, the words are white; red is for the marks */
+.section--dark .sec__eyebrow, .tile--dark .sec__eyebrow { color: rgba(255,255,255,.85); }
+.section--dark .sec__eyebrow::before, .tile--dark .sec__eyebrow::before, .tile--red .sec__eyebrow::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: #fff; vertical-align: 1px; }
+.section--dark .sec__eyebrow::before { background: var(--danger); box-shadow: 0 0 0 3px rgba(219,54,48,.25); }
+.figure__n { color: #fff; }
+.figure { border-right-color: rgba(255,255,255,.16); }
+.bubble-say__to { color: rgba(255,255,255,.62); }
+.bubble-say__text::before, .bubble-say__text::after { color: #ffb0ab; }
+
+/* ── the app section: a stage, the shot on it ───────────── */
+#product.sec { background: var(--g-stage); border-top: 0; }
+#product.sec > .wrap::before, #product.sec > .wrap::after { background: rgba(255,255,255,.1); }
+#product .sec__title { color: #fff; }
+#product .sec__blurb { color: rgba(255,255,255,.75); }
+#product .sec__eyebrow { color: rgba(255,255,255,.85); }
+.composite { position: relative; }
+.composite .phone-slot { position: absolute; right: 28px; bottom: -26px; z-index: 2; transform: scale(.84); transform-origin: bottom right; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35)); }
+#product.sec > .wrap { padding-bottom: 96px; }
+
+/* ── the shot: the app's home ───────────────────────────── */
+.shot { display: grid; grid-template-columns: 224px 1fr; min-height: 0; border-radius: 16px; overflow: hidden; background: var(--paper); color: var(--ink); box-shadow: 0 40px 80px -40px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); font-family: var(--f-sans); text-align: left; }
+.shot__rail { padding: 14px 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+.shot__brand { display: flex; align-items: center; gap: 8px; padding: 2px 4px 6px; font-family: var(--f-ledger); font-size: 20px; color: var(--ink); }
+.shot__alpha { padding: 2px 8px; border-radius: 999px; background: var(--danger); color: #fff; font-family: var(--f-sans); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.shot__caps { margin: 6px 4px 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-mute); }
+.shot__list { display: flex; flex-direction: column; gap: 10px; }
+.shot__row { padding: 0 4px; }
+.shot__row-top { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--ink); }
+.shot__row-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.shot__row-date { flex: none; color: var(--ink-mute); font-size: 11.5px; }
+.shot__main { padding: 12px 14px 16px; min-width: 0; }
+.shot__nav { display: flex; align-items: center; justify-content: center; gap: 22px; margin-bottom: 12px; font-size: 13px; color: var(--ink); }
+.shot__home { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); box-shadow: 0 6px 14px -6px rgba(0,0,0,.5); }
+.shot__panel { margin-top: 0; border-radius: 0 0 14px 14px; background: var(--surface); padding: 16px 18px 18px; box-shadow: 0 10px 30px -22px rgba(43,43,43,.35); }
+.shot__panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.shot__h { margin: 0; font-family: var(--f-ledger); font-weight: 400; font-size: 20px; color: var(--ink); }
+.shot__toggle { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--paper-dim); font-size: 12px; }
+.shot__toggle b, .shot__toggle span { padding: 6px 14px; border-radius: 999px; }
+.shot__toggle b { background: var(--ink); color: #fff; font-weight: 600; }
+
+/* the alert card: red, a white button */
+.alert { padding: 12px 12px 14px; border-radius: 14px; background: var(--danger); color: #fff; box-shadow: 0 14px 30px -18px rgba(219,54,48,.7); }
+.alert__bar { display: flex; justify-content: space-between; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+.alert__nav { letter-spacing: 0; font-size: 13px; }
+.alert__h { margin: 10px 0 6px; font-size: 14.5px; font-weight: 700; }
+.alert__more { display: block; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; opacity: .95; }
+.alert__btn { display: inline-block; margin-top: 10px; padding: 8px 14px; border-radius: 999px; background: #fff; color: var(--danger); font-size: 12.5px; font-weight: 700; }
+
+/* the small calendar */
+.mcal { border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--sh-soft); }
+.mcal__head { display: flex; justify-content: space-between; padding: 8px 12px; background: var(--danger); color: #fff; font-size: 12.5px; font-weight: 700; }
+.mcal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px 0; padding: 8px 8px 10px; text-align: center; font-size: 11px; }
+.mcal__dow { font-size: 9.5px; font-weight: 600; color: var(--ink-fine); padding-bottom: 2px; }
+.mcal__day { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; margin: 0 auto; border-radius: 50%; color: var(--ink); }
+.mcal__day.is-due { background: var(--danger-wash); color: var(--danger); font-weight: 700; }
+.mcal__day.is-today { background: var(--danger); color: #fff; font-weight: 700; }
+
+/* the red date band */
+.dateband { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 20px; border-radius: 14px 14px 0 0; background: var(--danger); color: #fff; }
+.dateband__day { display: flex; flex-direction: column; }
+.dateband__dow { font-family: var(--f-ledger); font-size: 24px; line-height: 1.05; }
+.dateband__date { font-size: 13px; opacity: .95; margin-top: 4px; }
+.dateband__wx { display: flex; align-items: center; gap: 12px; }
+.dateband__temp { font-family: var(--f-ledger); font-size: 34px; line-height: 1; }
+.dateband__wx-text { display: flex; flex-direction: column; font-size: 12px; line-height: 1.35; opacity: .95; }
+.dateband__wx-text b { font-size: 13px; }
+
+/* the case cards */
+.deck { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ccard { display: flex; flex-direction: column; min-width: 0; padding: 14px 14px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--hair); box-shadow: 0 16px 34px -26px rgba(43,43,43,.4); }
+.ccard__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--ink-mute); }
+.ccard__h { margin: 10px 0 12px; font-size: 14.5px; font-weight: 700; line-height: 1.25; color: var(--ink); }
+.ccard__status { display: flex; gap: 8px; margin: 0 0 8px; font-size: 12px; color: var(--ink-mute); white-space: nowrap; overflow: hidden; }
+.ccard__status b { color: var(--ink); flex: none; }
+.ccard__status span { overflow: hidden; text-overflow: ellipsis; }
+.ccard__open { align-self: flex-start; margin-top: 12px; padding: 9px 14px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 12.5px; font-weight: 600; }
+.pill { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; background: #efe9d9; color: #7a6416; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.pill--hot { background: var(--danger); color: #fff; }
+.pbar { display: block; height: 7px; margin-top: 8px; border-radius: 999px; background: var(--danger-wash); overflow: hidden; }
+.pbar__fill { display: block; height: 100%; border-radius: 999px; background: var(--danger); transform-origin: left; transform: scaleX(0); transition: transform 1.1s cubic-bezier(.65,0,.25,1) .5s; }
+.is-in .pbar__fill, .is-in .pbar .pbar__fill { transform: none; }
+
+/* the mail stepper */
+.stepper { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; position: relative; }
+.stepper__step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10.5px; color: var(--ink-mute); }
+.stepper__step::before { content: ""; position: absolute; top: 9px; left: -50%; right: 50%; height: 3px; background: var(--hair); }
+.stepper__step:first-child::before { display: none; }
+.stepper__step.is-done::before { background: var(--ink); }
+.stepper__dot { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--hair); color: transparent; }
+.stepper__step.is-done .stepper__dot { background: var(--ink); color: #fff; }
+.stepper__step.is-here .stepper__label { color: var(--ink); font-weight: 700; }
+.stepper--lg .stepper__step { font-size: 13px; gap: 8px; }
+.stepper--lg .stepper__step::before { top: 13px; height: 4px; }
+.stepper--lg .stepper__dot { width: 28px; height: 28px; }
+.stepper--lg .stepper__dot svg { width: 14px; height: 14px; }
+
+/* ── how it works: the app's stepper, three steps ───────── */
+.walk { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.walk__item { position: relative; padding: 0 22px 0 0; border-top: 0; }
+.walk__item::before { content: ""; position: absolute; top: 15px; left: 34px; right: 0; height: 4px; background: var(--ink); }
+.walk__item:last-child::before { background: linear-gradient(90deg, var(--ink), var(--hair)); }
+.walk__n { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 13px; }
+.walk__t { margin: 16px 0 6px; font-size: 20px; }
+.walk__d { font-size: 14px; }
+
+/* ── where: the calendar page's deadline cards ──────────── */
+.deadlines { display: grid; gap: 12px; margin-top: 16px; }
+.deadline { display: grid; grid-template-columns: 52px 1fr auto; column-gap: 14px; align-items: start; padding: 14px 16px; border-radius: 14px; background: var(--surface); color: var(--ink); box-shadow: 0 16px 34px -26px rgba(0,0,0,.5); }
+.deadline__n { font-family: var(--f-ledger); font-size: 30px; line-height: 1; color: var(--danger); }
+.deadline__n small { display: block; margin-top: 2px; font-family: var(--f-sans); font-size: 11px; color: var(--ink-mute); }
+.deadline__h { margin: 0; font-size: 14.5px; font-weight: 700; line-height: 1.25; }
+.deadline__chip { display: inline-block; margin-top: 6px; padding: 3px 9px; border-radius: 999px; background: var(--paper-dim); font-size: 11px; font-weight: 600; color: var(--ink); }
+.deadline__from { margin: 6px 0 0; font-size: 12.5px; color: var(--ink-mute); }
+.deadline .pill { margin-top: 2px; }
+
+/* ── the price, as a case card ──────────────────────────── */
+.tile--price .btn { background: var(--ink); }
+.tile--price .btn:hover { background: #111; }
+
+/* ── small screens ──────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .shot { grid-template-columns: 1fr; }
+  .shot__rail { display: none; }
+  .deck { grid-template-columns: 1fr 1fr; }
+  .ccard:nth-child(3) { display: none; }
+  .composite .phone-slot { display: none; }
+  #product.sec > .wrap { padding-bottom: 44px; }
+}
+@media (max-width: 920px) {
+  .walk { grid-template-columns: 1fr; gap: 14px; }
+  .walk__item::before { display: none; }
+  .walk__item { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; padding: 0; }
+  .walk__t { margin: 0; font-size: 18px; }
+}
+@media (max-width: 560px) {
+  .deck { grid-template-columns: 1fr; }
+  .ccard:nth-child(2) { display: none; }
+  .dateband__wx { display: none; }
+  .deadline { grid-template-columns: 44px 1fr; }
+  .deadline .pill { display: none; }
+}
+
+/* the guarantee tile's white button, as the alert card's */
+.tile__btn { display: inline-block; margin-top: 14px; padding: 10px 18px; border: 0; border-radius: 999px; background: #fff; color: var(--danger); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 24px -14px rgba(0,0,0,.4); }
+.tile__btn:hover { background: #fff3f2; }

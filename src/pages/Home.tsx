@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { LINKS } from "../lib/links";
+import { scrollToId } from "../lib/nav";
 import { TIERS, FAQ } from "../lib/outcomes";
 import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES, STATES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
+import { AppShot } from "../components/AppShot";
 import { Ink, usePrefersReducedMotion } from "../lib/motion";
 import { Arrow, Btn } from "../components/primitives";
 
@@ -285,6 +287,7 @@ export function HomePage() {
             <p className="sec__eyebrow">The guarantee</p>
             <CountUp value={GUARANTEE.amount} duration={1600} className="tile__amt" />
             <p className="tile__line">{GUARANTEE.line}</p>
+            <button type="button" className="tile__btn" onClick={() => scrollToId("how")}>How it works</button>
             <p className="tile__fine">{GUARANTEE.fine}</p>
           </Ink>
         </div>
@@ -334,30 +337,18 @@ export function HomePage() {
       </section>
 
       {/* ── the product: phone and tablet ───────────────── */}
-      <section className="section sec" id="product">
+      <section className="section section--dark sec" id="product">
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
               <p className="sec__eyebrow">The app</p>
-              <h2 className="sec__title">In your pocket, and on the kitchen table.</h2>
+              <h2 className="sec__title">Every case, every letter, every clock. One screen.</h2>
             </div>
-            <p className="sec__blurb">Talk to your assistant on the phone. See the whole map on the tablet. One record.</p>
+            <p className="sec__blurb">The deck of your cases, where each letter is, and the days left on every deadline. On the phone too.</p>
           </Ink>
-          <div className="devices">
-            <div className="device device--tablet" aria-label="Keeper on a tablet, example">
-              <div className="tablet">
-                <div className="tablet__screen app">
-                  <header className="app__bar">
-                    <span className="app__brand">Keeper</span>
-                    <span className="app__bar-title">Workers&apos; comp claim · the map</span>
-                  </header>
-                  <div className="tablet__body">
-                    <CompMap mode="static" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="device device--phone product">
+          <div className="composite">
+            <AppShot />
+            <div className="phone-slot product" aria-label="Keeper on your phone, example">
               <PhoneMock />
             </div>
           </div>
@@ -389,11 +380,19 @@ export function HomePage() {
           <Ink as="article" fx="rise" className="tile tile--dark">
             <p className="sec__eyebrow">Where it is available</p>
             <h2 className="tile__title">Two states, every clock verified.</h2>
-            <ul className="tile__states">
+            <div className="deadlines">
               {STATES.map((st) => (
-                <li key={st.name}><b>{st.name}</b> {st.note}</li>
+                <div key={st.name} className="deadline">
+                  <span className="deadline__n">{st.days}<small>days</small></span>
+                  <div>
+                    <h3 className="deadline__h">{st.rule}</h3>
+                    <span className="deadline__chip">A deadline</span>
+                    <p className="deadline__from">From {st.cite}</p>
+                  </div>
+                  <span className="pill pill--hot">{st.name}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </Ink>
           <Ink as="article" fx="rise" delay={90} className="tile tile--warm tile--price" id="pricing">
             <p className="sec__eyebrow">Pricing</p>
