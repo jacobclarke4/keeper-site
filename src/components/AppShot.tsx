@@ -35,6 +35,25 @@ const HouseIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" {...I}><
 const LibraryIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" {...I}><path d="m16 6 4 14M12 6v14M8 8v12M4 4v16" /></svg>;
 const MicOffIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" {...I}><path d="M2 2l20 20" /><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2M5 10v2a7 7 0 0 0 12 5" /><path d="M15 9.34V5a3 3 0 0 0-5.68-1.33M9 9v3a3 3 0 0 0 5.12 2.12" /><path d="M12 19v3" /></svg>;
 const KeyboardIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" {...I}><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10" /></svg>;
+const Sun = ({ size = 44 }: { size?: number }) => (
+  <svg viewBox="0 0 44 44" width={size} height={size} aria-hidden="true">
+    <g stroke="#F2B84B" strokeWidth="3" strokeLinecap="round">
+      <path d="M22 4v6M22 34v6M4 22h6M34 22h6M9.3 9.3l4.2 4.2M30.5 30.5l4.2 4.2M9.3 34.7l4.2-4.2M30.5 13.5l4.2-4.2" />
+    </g>
+    <circle cx="22" cy="22" r="8" fill="#F2B84B" />
+  </svg>
+);
+const SunCloud = ({ size = 18 }: { size?: number }) => (
+  <svg viewBox="0 0 44 44" width={size} height={size} aria-hidden="true">
+    <circle cx="17" cy="16" r="8" fill="#F2B84B" />
+    <path d="M14 34h17a6 6 0 0 0 0-12 8 8 0 0 0-15.5-2A7 7 0 0 0 14 34z" fill="#fff" />
+    <path d="M14 34h17a6 6 0 0 0 0-12" fill="none" stroke="#B9C4CE" strokeWidth="1.5" />
+  </svg>
+);
+const HOURS = [
+  { t: "Now", d: 84, k: "sun" }, { t: "7 pm", d: 80, k: "sun" }, { t: "8 pm", d: 77, k: "cloud" },
+  { t: "9 pm", d: 76, k: "cloud" }, { t: "10 pm", d: 73, k: "sun" }, { t: "11 pm", d: 71, k: "sun" },
+] as const;
 const LifeBuoyIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" {...I}><circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24" /><circle cx="12" cy="12" r="4" /></svg>;
 
 function Check() {
@@ -119,12 +138,22 @@ export function AppShot() {
             <span className="dateband__date">September 12</span>
           </div>
           <div className="dateband__wx">
-            <span className="dateband__temp">86°</span>
+            <Sun />
+            <span className="dateband__temp">82°</span>
             <span className="dateband__wx-text">
-              <b>Cloudy, Chicago</b>
-              High 86°, low 63°.
+              <b>Clear, Chicago</b>
+              High 87°, low 63°.
             </span>
           </div>
+          <ol className="dateband__hours" aria-hidden="true">
+            {HOURS.map((h) => (
+              <li key={h.t}>
+                <span className="dateband__hour">{h.t}</span>
+                <span className="dateband__hour-temp">{h.d}°</span>
+                {h.k === "sun" ? <Sun size={18} /> : <SunCloud />}
+              </li>
+            ))}
+          </ol>
         </Ink>
         <div className="shot__panel">
           <div className="shot__panel-head">

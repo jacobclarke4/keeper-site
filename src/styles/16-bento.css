@@ -168,3 +168,16 @@
 .assistant .phone__screen { border-radius: 32px; }
 .assistant .band { bottom: 0; display: flex; }
 .assistant .app__body { padding-top: 2px; }
+
+/* ── the day band, as the app draws it ──────────────────── */
+.dateband { justify-content: flex-start; gap: 32px; padding: 18px 20px; }
+.dateband__day { min-width: 9rem; }
+.dateband__wx { gap: 12px; }
+.dateband__temp { font-size: 40px; }
+.dateband__hours { list-style: none; margin: 0 0 0 auto; padding: 8px 12px; display: flex; gap: 12px; border-radius: 16px; background: #2b2b2b; flex: none; }
+.dateband__wx-text { white-space: nowrap; }
+.dateband__wx-text b { white-space: nowrap; }
+.dateband__hours li { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.dateband__hour { font-size: 10px; font-weight: 600; letter-spacing: .06em; color: rgba(255,255,255,.6); white-space: nowrap; }
+.dateband__hour-temp { font-size: 13px; font-weight: 600; color: #fff; }
+@media (max-width: 1080px) { .dateband__hours { display: none; } }

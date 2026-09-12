@@ -27,8 +27,8 @@ function tangle(k: number, i: number, p: number, t: number, h: number) {
   return k * h * 0.8 * (0.55 + 0.45 * s2) + s1 * h * 0.18 + s3 * h * 0.05;
 }
 
-const LOOP = 10.5; // seconds per pass
-const DRAW = 3.4; // seconds a strand takes to cross
+const LOOP = 11; // seconds per pass
+const DRAW = 3.0; // seconds a strand takes to cross
 const STAGGER = 2.2; // the spread of start times
 const hash = (i: number) => ((i * 2654435761) >>> 0) / 4294967296;
 
@@ -49,12 +49,14 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
   ctx.lineWidth = 1;
   ctx.lineCap = "round";
   let furthest = still ? 1 : 0;
+  let slowest = 1; // the line forms only once the last road has arrived
   for (let i = 0; i < LINES; i++) {
     const k = i / (LINES - 1) - 0.5;
     // every strand sets out on its own moment and at its own pace
     const delay = hash(i) * STAGGER;
-    const speed = 0.85 + hash(i + 97) * 0.3;
+    const speed = 0.9 + hash(i + 97) * 0.25;
     const reach = still ? 1 : smooth((u - delay) / (DRAW / speed));
+    slowest = Math.min(slowest, reach);
     if (reach <= 0) continue;
     furthest = Math.max(furthest, reach);
     ctx.beginPath();
@@ -98,10 +100,11 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
   }
   // the rail forms as the strands arrive, and the stations light in turn
   const railFrom = TWIST + 0.2;
-  if (furthest > railFrom) {
+  const joined = still ? 1 : slowest; // how far the whole bundle has come
+  if (joined > railFrom) {
     ctx.beginPath();
     ctx.moveTo(railFrom * w, cy);
-    ctx.lineTo(Math.min(1, furthest) * w, cy);
+    ctx.lineTo(Math.min(1, joined) * w, cy);
     ctx.lineWidth = 3;
     ctx.strokeStyle = "rgba(219,54,48,.95)";
     ctx.stroke();
@@ -110,7 +113,7 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
   const x0 = (TWIST + 0.22), x1 = 0.985;
   for (let i = 0; i < STATIONS; i++) {
     const p = x0 + (i / (STATIONS - 1)) * (x1 - x0);
-    const on = still ? 1 : smooth((furthest - p) / 0.04);
+    const on = still ? 1 : smooth((joined - p) / 0.04);
     if (on <= 0) continue;
     const x = p * w;
     ctx.beginPath();
@@ -121,7 +124,7 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
     ctx.strokeStyle = `rgba(43,43,43,${on})`;
     ctx.stroke();
     ctx.lineWidth = 1;
-    const d = furthest - p;
+    const d = joined - p;
     if (!still && d > 0 && d < 0.14) {
       const ring = 1 - d / 0.14;
       ctx.beginPath();
