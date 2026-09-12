@@ -125,6 +125,16 @@ const Check = () => (
 );
 
 /* The phone: the member home, as the app draws it. */
+const CalIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>;
+const HouseIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>;
+const BuoyIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24" /><circle cx="12" cy="12" r="4" /></svg>;
+const MapIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14.1 6 9 3 3 6v15l6-3 5.1 3L21 18V3z" /><path d="M9 3v15M15 6v15" /></svg>;
+const SunIcon = () => <svg viewBox="0 0 44 44" width="30" height="30" aria-hidden="true"><g stroke="#F2B84B" strokeWidth="3" strokeLinecap="round"><path d="M22 4v6M22 34v6M4 22h6M34 22h6M9.3 9.3l4.2 4.2M30.5 30.5l4.2 4.2M9.3 34.7l4.2-4.2M30.5 13.5l4.2-4.2" /></g><circle cx="22" cy="22" r="8" fill="#F2B84B" /></svg>;
+
+/* The Keeper home on a phone, as the app draws it: the wordmark in the
+   header, the red day band, the deck with one card on the table, the
+   tab bar, and over it the capsule with Nora's caption. The loop: the
+   member talks, Nora answers in her caption, the case lands in the deck. */
 export function AssistantPhone() {
   const reduced = usePrefersReducedMotion();
   const { step, fading, pass } = useCaseLoop(reduced);
@@ -134,71 +144,50 @@ export function AssistantPhone() {
   const speaking = !reduced && step === 2;
   const said = useTyped(CASE.said, listening);
   const caseStep = step >= 4 ? 3 : step >= 3 ? 2 : step >= 2 ? 1 : 0;
-  const phase = caseStep > 0 ? CASE.steps[caseStep - 1] : null;
   const pct = Math.round((caseStep / CASE.total) * 100);
+  const caption = thinking ? CASE.thinking : speaking || step >= 3 ? CASE.reply : listening ? "Listening…" : CASE.welcome;
   return (
     <div className="hero__stack assistant" aria-label="Keeper on your phone, example">
       <Ink as="div" fx="none" delay={300} className="phone phone--tile">
-        <div className={`phone__screen app${fading ? " is-fading" : ""}`}>
+        <div className={`phone__screen app mhome${fading ? " is-fading" : ""}`}>
           <div className="phone__island" aria-hidden="true" />
           <div className="phone__status" aria-hidden="true">
             <span>9:41</span>
             <span className="phone__signal" />
           </div>
-          <header className="app__bar">
-            <span className="app__brand">Keeper</span>
-            <span className="app__bar-title">Home</span>
+          <header className="mhome__bar">
+            <span className="mhome__brand">Keeper</span>
+            <span className="mhome__menu" aria-hidden="true"><i /><i /><i /></span>
           </header>
-
-          <div className="app__body">
-            <section className="npill">
-              <Portrait pal={pal} size={56} voice={speaking ? "speaking" : "on"} />
-              <div className="npill__copy">
-                <span className="npill__name">{pal.name}</span>
-                <p className="npill__line">{thinking ? CASE.thinking : step >= 2 ? CASE.reply : CASE.welcome}</p>
+          <div className="mhome__body">
+            <section className="mhome__block">
+              <div className="mhome__band">
+                <div className="mhome__day"><span className="mhome__dow">Saturday</span><span className="mhome__date">September 12</span></div>
+                <div className="mhome__wx"><SunIcon /><span className="mhome__temp">82°</span><span className="mhome__wxt"><b>Clear, Chicago</b>High 87°, low 63°</span></div>
               </div>
-            </section>
-
-            <section className={`cases${caseStep > 0 ? " is-in" : ""}`}>
-              <div className="cases__head">
-                <h2 className="cases__title">Your cases</h2>
-                <span className="cases__count">1 / 3</span>
+              <div className="mhome__head">
+                <h2 className="mhome__h">Your cases</h2>
+                <span className="mhome__toggle" aria-hidden="true"><b>Cases</b><span>Dates</span></span>
               </div>
-              <article className="deckcard">
-                <span className="badge badge--solid badge--info">In progress</span>
-                <h3 className="deckcard__h">{CASE.headline}</h3>
-                <div className="deckcard__chips">
-                  {caseStep >= 2 ? (
-                    <span className="badge badge--solid badge--warning">{CASE.daysLeft} days left</span>
-                  ) : (
-                    <span className="badge badge--neutral">No rush</span>
-                  )}
+              <article className={`mcard${caseStep > 0 ? " is-in" : ""}`}>
+                <div className="mcard__top">
+                  <span className="mcard__date">09/12/26</span>
+                  <span className={`pill${caseStep >= 2 ? " pill--hot" : ""}`}>{caseStep >= 2 ? `${CASE.daysLeft} days left` : "No rush on this one"}</span>
                 </div>
-                <div className="deckcard__track">
-                  <span className="deckcard__step">Step {caseStep || 1} of {CASE.total}</span>
-                  <span className="deckcard__phase">{phase ? phase.label : CASE.steps[0].label}</span>
-                  <span className="bar"><span className="bar__fill" style={{ width: `${Math.max(pct, 20)}%` }} /></span>
-                </div>
-                <span className={`deckcard__mail${caseStep >= 2 ? " is-in" : ""}`}>
+                <h3 className="mcard__h">Workers&apos; compensation, A to Z</h3>
+                <span className={`mcard__mail${caseStep >= 2 ? " is-in" : ""}`}>
                   <span className="timeline__dot is-done"><Check /></span>
-                  <span className="deckcard__mail-text">{CASE.mail.kind} · {caseStep >= 3 ? `Delivered ${CASE.mail.steps[2][1]} · ${CASE.mail.signed}` : `Sent ${CASE.mail.steps[1][1]}`}</span>
+                  <span className="mcard__mail-text">{CASE.mail.kind} · {caseStep >= 3 ? `Delivered ${CASE.mail.steps[2][1]}` : `Sent ${CASE.mail.steps[1][1]}`}</span>
                 </span>
-                <span className={`road${caseStep >= 3 ? " is-in" : ""}`} aria-hidden="true">
-                  {[1, 2, 3].map((n) => (
-                    <span className="road__seg" key={n}>
-                      <span className={`road__dot${n === caseStep ? " road__dot--here" : n < caseStep ? " road__dot--done" : ""}`} />
-                      <span className={`road__line${n < caseStep ? " road__line--done" : ""}`} />
-                    </span>
-                  ))}
-                  <span className="road__fork" />
-                  <span className="road__branches"><span className="road__pay" /><span className="road__no" /></span>
-                </span>
+                <span className="pbar"><span className="pbar__fill is-set" style={{ width: `${Math.max(pct, 12)}%` }} /></span>
+                <span className="mcard__open">Open the case <span aria-hidden="true">→</span></span>
               </article>
+              <p className={`mhome__empty${caseStep > 0 ? "" : " is-on"}`}>Nothing open yet. Say what happened.</p>
             </section>
-
           </div>
 
-          <div className="band" aria-hidden="true">
+          <div className="mband" aria-hidden="true">
+            <span className={`mcaption${caption ? " is-on" : ""}`}>{caption}</span>
             <div className={`textbar${listening ? " is-on" : ""}`}>
               <span className="textbar__text">{said}{listening && <span className="textbar__caret" />}</span>
               <span className="textbar__send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h18M13 5l8 7-8 7" /></svg></span>
@@ -209,6 +198,12 @@ export function AssistantPhone() {
               <span className="capsule__keys"><KeyboardIcon /></span>
             </div>
           </div>
+          <nav className="mnav" aria-hidden="true">
+            <span className="mnav__tab"><MapIcon />Journeys</span>
+            <span className="mnav__tab"><CalIcon />Calendar</span>
+            <span className="mnav__home"><HouseIcon /></span>
+            <span className="mnav__tab"><BuoyIcon />Safety net</span>
+          </nav>
         </div>
       </Ink>
     </div>

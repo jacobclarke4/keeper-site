@@ -6,7 +6,6 @@ import { Wordmark, WORDMARK } from "./Wordmark";
 
 export function Masthead() {
   const [condensed, setCondensed] = useState(false);
-  const [onDark, setOnDark] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useScrollSpy(SECTION_IDS);
 
@@ -17,11 +16,6 @@ export function Masthead() {
       raf = 0;
       const y = window.scrollY;
       setCondensed(y > 40);
-      // The section under the bar decides the bar's colour: light over charcoal or red.
-      const under = document
-        .elementsFromPoint(Math.max(8, window.innerWidth / 2), 84)
-        .find((el) => !el.closest(".mast"));
-      setOnDark(!!under?.closest(".section--dark, .section--red, .foot"));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(measure);
@@ -67,17 +61,7 @@ export function Masthead() {
 
 
   return (
-    <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}${onDark ? " mast--on-dark" : ""}`}>
-      {/* A progressive blur behind the bar (the Google Labs header): five
-          stacked backdrop blurs, each stronger than the last and each masked
-          to its own band, heaviest at the top edge and easing off below. */}
-      <div className="mast__blur" aria-hidden="true">
-        <span className="mast__blur-layer mast__blur-layer--1" />
-        <span className="mast__blur-layer mast__blur-layer--2" />
-        <span className="mast__blur-layer mast__blur-layer--3" />
-        <span className="mast__blur-layer mast__blur-layer--4" />
-        <span className="mast__blur-layer mast__blur-layer--5" />
-      </div>
+    <header className={`mast${condensed ? " is-condensed" : ""}${open ? " is-open" : ""}`}>
       <div className="mast__capsule">
         <button type="button" className="mast__brand" onClick={goHome} aria-label="Keeper — home">
           <Wordmark {...WORDMARK} className="mast__wordmark" />
