@@ -143,3 +143,35 @@
 .mast--on-dark .mast__link:hover, .mast--on-dark .mast__link.is-active, .mast--on-dark .mast__login:hover { color: rgba(255,255,255,.7); }
 .mast--on-dark .mast__burger span { background: #fff; }
 .mast .wordmark__lock, .mast__link, .mast__login { transition: color .3s var(--paper-ease); }
+
+/* ── the hero, two columns: the copy left, the map right ── */
+.hero--map { padding: 96px 0 40px; justify-content: center; }
+.hero--map > .wrap { flex: 0 0 auto; }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 56px; align-items: center; }
+.hero__copy { text-align: left; max-width: 540px; }
+.hero--map .hero__h1 { font-size: clamp(38px, 4.4vw, 64px); margin-bottom: 16px; }
+.hero--map .hero__lede { margin: 0 0 22px; max-width: 44ch; font-size: 18px; }
+.hero__row { justify-content: flex-start; }
+.hero__map { margin-top: 0; min-width: 0; }
+.hero--map .cmap__svg { max-height: 62vh; }
+.hero--map .cmap__count { text-align: left; height: 24px; font-size: 14px; }
+.hero--map .cmap__label { font-size: 24px; }
+.hero--map .cmap__dot { r: 12; }
+.hero--map .hero__micro { flex-basis: 100%; margin-top: 2px; }
+@media (max-width: 920px) {
+  .hero--map { padding: 88px 0 32px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero__copy { max-width: none; }
+  .hero--map .cmap__svg { max-height: 40vh; }
+  .hero--map .cmap__label { font-size: 24px; }
+}
+@media (max-width: 560px) {
+  .hero--map { padding: 80px 0 16px; }
+  .hero--map .hero__h1 { margin-bottom: 10px; }
+  .hero--map .hero__lede { margin-bottom: 14px; }
+  .hero--map .cmap__svg { max-height: 32vh; }
+  /* on a phone the seven names would collide: keep the one that matters */
+  .hero--map .cmap__label { font-size: 34px; display: none; }
+  .hero--map .cmap__station.is-here .cmap__label { display: block; }
+  .hero--map .cmap__dot { r: 14; }
+}

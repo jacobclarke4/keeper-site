@@ -225,7 +225,8 @@ export function HomePage() {
     <div className="page-home">
       {/* ── hero: the map is the visual ─────────────────── */}
       <section className="hero hero--map" id="top">
-        <div className="wrap hero__top">
+        <div className="wrap hero__grid">
+        <div className="hero__copy">
           <Ink as="h1" fx="rise" delay={120} className="hero__h1">
             Insurance for <em>your Insurance.</em>
           </Ink>
@@ -244,8 +245,9 @@ export function HomePage() {
             <span className="hero__micro">Cancel anytime.</span>
           </Ink>
         </div>
-        <div className="wrap hero__map">
+        <div className="hero__map">
           <CompMap />
+        </div>
         </div>
       </section>
 
