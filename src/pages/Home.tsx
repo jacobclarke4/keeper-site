@@ -59,8 +59,8 @@ const TIMELINE = [0, 3600, 4400, 8400, 10400, 14500];
 const RESTART_FADE = 500;
 const TYPE_MS = 34;
 
-/* The portrait with the voice badge: the app's NoraPortrait, on the
-   assistant's own gradient. Badge: speaker while ready, bars while speaking. */
+/* The portrait: the app's NoraPortrait, on the assistant's own gradient.
+   No mute or speaker badge; voice and captions are simply always on. */
 function Portrait({ pal, size, voice }: { pal: Pal; size: number; voice: "on" | "speaking" }) {
   const [a, b] = pal.colors;
   return (
@@ -70,13 +70,6 @@ function Portrait({ pal, size, voice }: { pal: Pal; size: number; voice: "on" | 
       aria-label={pal.name}
     >
       <img src={`${BASE_URL}portraits/${pal.id}.webp`} alt="" width={size} height={size} draggable={false} />
-      {voice === "speaking" ? (
-        <span className="pw-badge pw-badge--speaking" aria-hidden="true"><i /><i /><i /></span>
-      ) : (
-        <span className="pw-badge pw-badge--on" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M4 9v6h4l5 4V5L8 9z" /><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" /></svg>
-        </span>
-      )}
     </span>
   );
 }
