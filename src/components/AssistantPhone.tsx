@@ -177,11 +177,11 @@ export function AssistantPhone() {
           </div>
 
           <div className="mband" aria-hidden="true">
-            <span className={`mcaption${caption ? " is-on" : ""}`}>{caption}</span>
             <div className={`textbar${listening ? " is-on" : ""}`}>
               <span className="textbar__text">{said}{listening && <span className="textbar__caret" />}</span>
               <span className="textbar__send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h18M13 5l8 7-8 7" /></svg></span>
             </div>
+            <span className={`mcaption${caption ? " is-on" : ""}`}>{caption}</span>
             <div className="capsule">
               <span className={`capsule__mic${listening ? " is-rec" : ""}`}><MicIcon /></span>
               <Portrait pal={pal} size={40} voice={speaking ? "speaking" : "on"} />

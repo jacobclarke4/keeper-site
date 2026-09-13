@@ -315,3 +315,20 @@
 .sec--ribbon .ribbon__tags { position: static; display: flex; gap: 18px; margin: 4px 0 18px; }
 @media (max-width: 920px) { .hero__tablet { width: 118vw; } }
 @media (max-width: 560px) { .hero__tablet { width: 135vw; } }
+
+/* ── the caption: a paper pill just above the capsule ───── */
+.mcaption { background: var(--surface); color: var(--ink); box-shadow: var(--elev-float); font-size: 11px; padding: 7px 14px; }
+.assistant .textbar:not(.is-on) { display: none; }
+.mband { gap: 8px; }
+
+/* ── the day band: room for the hours strip ─────────────── */
+.dateband { gap: 18px; padding: 14px 16px; }
+.dateband__day { min-width: 7rem; }
+.dateband__wx { gap: 8px; min-width: 0; }
+.dateband__temp { font-size: 34px; }
+.dateband__wx-text { white-space: normal; max-width: 110px; font-size: 11px; }
+.dateband__wx-text b { font-size: 12px; white-space: normal; }
+.dateband__hours { gap: 8px; padding: 6px 10px; }
+.dateband__hour { font-size: 9px; }
+.dateband__hour-temp { font-size: 12px; }
+.dateband .dateband__hours svg { width: 15px; height: 15px; }
