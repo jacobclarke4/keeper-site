@@ -13,7 +13,7 @@ import { useInView, usePrefersReducedMotion } from "../lib/motion";
 
 const LINES = 22;
 const TAU = Math.PI * 2;
-const TWIST = 0.5; // where Keeper takes over
+const TWIST = 0.28; // the gather begins here and is complete at the middle of the band
 const STATIONS = MAP.stations.length;
 
 const smooth = (x: number) => { const c = Math.min(1, Math.max(0, x)); return c * c * (3 - 2 * c); };

@@ -434,3 +434,9 @@
 /* ── the hero glow, brighter ────────────────────────────── */
 .hero__wash::before { opacity: .95; filter: blur(60px); background: linear-gradient(118deg, rgba(219,54,48,0) 6%, rgba(219,54,48,.85) 34%, rgba(43,43,43,.8) 60%, rgba(219,54,48,.5) 82%, rgba(43,43,43,0) 100%); }
 .hero__wash::after { opacity: .85; filter: blur(60px); background: radial-gradient(closest-side, rgba(219,54,48,.75), rgba(219,54,48,0) 72%); }
+
+/* ── the hero glow on the diagonal: paper at the lower left, red then charcoal toward the upper right ── */
+.hero__wash::before { left: -10%; top: -10%; width: 120%; height: 120%; border-radius: 0; transform: none; filter: blur(48px); opacity: 1; background: linear-gradient(56deg, rgba(219,54,48,0) 36%, rgba(219,54,48,.42) 50%, rgba(219,54,48,.78) 62%, rgba(122,35,32,.85) 76%, rgba(43,43,43,.95) 100%); animation: hero-glow-c 14s ease-in-out infinite alternate; }
+.hero__wash::after { left: 40%; top: -20%; width: 80%; height: 120%; opacity: .7; background: radial-gradient(closest-side, rgba(219,54,48,.6), rgba(219,54,48,0) 72%); animation: hero-glow-b 11s ease-in-out infinite alternate; }
+@keyframes hero-glow-c { 0% { transform: translate3d(-3%, 2%, 0); } 100% { transform: translate3d(3%, -2%, 0); } }
+@media (max-width: 920px) { .hero__wash::before { left: -10%; top: -10%; width: 120%; height: 120%; } }
