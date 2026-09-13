@@ -30,7 +30,7 @@ export function HomePage() {
             Insurance for <em>your Insurance.</em>
           </Ink>
           <Ink as="p" fx="rise" delay={220} className="hero__lede">
-            Hurt at work? A benefit denied? We keep every deadline and every paper, so nothing slips.
+            For union members who get hurt at work, denied a benefit, or written up. Say what happened, and Keeper files the claim, the appeal, or the grievance, tracks every deadline, and keeps every paper.
           </Ink>
           <Ink as="div" fx="rise" delay={320} className="hero__row">
             <span className="medallion">
@@ -63,7 +63,7 @@ export function HomePage() {
       <section className="section section--dark sec sec--ribbon" id="challenge">
         <div className="wrap">
           <Ink as="p" fx="rise" className="ribbon__lede">
-            <b>The system loses people.</b> A first denial is up 20% in five years. Most of the people it happens to are right, and most of them never find out.
+            <b>The paperwork is built to lose you.</b> Get hurt, get denied, get written up, and the forms, clocks, and letters start. Miss one and the case is over. Most people miss one, and most of them were right.
           </Ink>
           <Ribbon />
           <div className="figures figures--row">
@@ -82,7 +82,7 @@ export function HomePage() {
       <section className="section section--dark sec sec--rebate" id="rebate">
         <div className="wrap rebate">
           <Ink as="div" fx="rise" className="rebate__amt-wrap">
-            <span className="rebate__tag">The Keeper guarantee</span>
+            <span className="rebate__tag">The Keeper guarantee: we stand behind the paperwork.</span>
             <CountUp value={GUARANTEE.amount} duration={1800} className="rebate__amt" />
           </Ink>
           <Ink as="div" fx="rise" delay={120} className="rebate__words">
@@ -97,14 +97,14 @@ export function HomePage() {
       <section className="section sec" id="how">
         <div className="wrap sec__grid">
           <Ink as="div" fx="rise" className="sec__head">
-            <h2 className="sec__title">{MAP.boxes} steps. Seven stations. Three things you do.</h2>
-            <p className="sec__blurb">We mapped every fork a claim can take. You walk one line.</p>
+            <h2 className="sec__title">Say what happened. Keeper does the paperwork.</h2>
+            <p className="sec__blurb">A workers&apos; comp claim alone is {MAP.boxes} boxes and dozens of clocks. Keeper knows the whole map. You do three things.</p>
           </Ink>
           <ol className="walk">
             {[
-              { t: "Tell us what happened.", d: "Type it, say it, or send a photo of the paper." },
-              { t: "We draft and file.", d: "The claim, appeal, or grievance, with the rule it relies on. You approve it first." },
-              { t: "You get the paper trail.", d: "The filed document, the certified-mail receipt, and what comes next." },
+              { t: "Tell your assistant what happened.", d: "In your own words, typed or spoken. A photo of the letter works too." },
+              { t: "Keeper drafts and files.", d: "The claim, the appeal, or the grievance, written to the rule it relies on and sent certified. You approve every page first." },
+              { t: "You keep the paper trail.", d: "Every letter tracked to the signature, every deadline on your calendar, every receipt in your Wallet." },
             ].map((st, i) => (
               <Ink key={st.t} as="li" fx="rise" delay={i * 80} className="walk__item">
                 <span className="walk__n" aria-hidden="true">{i + 1}</span>
@@ -121,7 +121,7 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
-              <h2 className="sec__title">Say this. To them.</h2>
+              <h2 className="sec__title">It tells you what to say, and who to say it to.</h2>
             </div>
           </Ink>
           <ul className="bubbles">
@@ -140,25 +140,25 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
-              <h2 className="sec__title">The app, page by page.</h2>
+              <h2 className="sec__title">One app. Every case, every letter, every clock.</h2>
             </div>
           </Ink>
           <AssistantProvider>
           <div className="bento">
             <Ink as="article" fx="rise" className="bento__tile bento__tile--home">
-              <h3 className="bento__h">Your home. Every case, every clock.</h3>
+              <h3 className="bento__h">Your home: every open case, and how many days are left on each.</h3>
               <div className="bento__art"><Fit width={920} narrow={{ at: 560, width: 600 }}><AppShot /></Fit></div>
             </Ink>
             <Ink as="article" fx="rise" delay={90} className="bento__tile bento__tile--roster">
-              <h3 className="bento__h">Pick your assistant.</h3>
+              <h3 className="bento__h">Pick your assistant. It writes, files, and reminds you.</h3>
               <div className="bento__art"><AssistantCarousel /></div>
             </Ink>
             <Ink as="article" fx="rise" delay={60} className="bento__tile bento__tile--phone bento__tile--dark">
-              <h3 className="bento__h">Say what happened. The assistant does the rest.</h3>
+              <h3 className="bento__h">Say what happened. A case opens, and the first letter goes out.</h3>
               <div className="bento__art"><AssistantPhone /></div>
             </Ink>
             <Ink as="article" fx="rise" delay={150} className="bento__tile bento__tile--cal">
-              <h3 className="bento__h">Every deadline, with the law it comes from.</h3>
+              <h3 className="bento__h">Every deadline on one calendar, with the law it comes from.</h3>
               <div className="bento__art bento__art--fill"><CalendarTile /></div>
             </Ink>
           </div>
@@ -171,7 +171,7 @@ export function HomePage() {
         <div className="wrap">
           <Ink as="div" fx="rise" className="sec__head sec__head--row">
             <div>
-              <h2 className="sec__title">Every service, by name.</h2>
+              <h2 className="sec__title">What Keeper files for you.</h2>
             </div>
           </Ink>
           <ul className="shelf">
@@ -189,14 +189,14 @@ export function HomePage() {
       <section className="section section--dark sec sec--price" id="pricing">
         <div className="wrap rebate">
           <Ink as="div" fx="rise" className="rebate__amt-wrap">
-            <span className="rebate__tag">One membership</span>
+            <span className="rebate__tag">One membership. Every case you ever need.</span>
             <span className="rebate__amt price__amt">$14<span className="price__per">/month</span></span>
           </Ink>
           <Ink as="div" fx="rise" delay={120} className="rebate__words">
             <ul className="price__list">
-              <li>Every claim, appeal, and grievance you need, drafted and filed.</li>
-              <li>A real person when a case needs one.</li>
-              <li>Your Wallet: every paper, receipt, and deadline in one place.</li>
+              <li>Every workers&apos; comp claim, ERISA appeal, and grievance, drafted, filed, and sent certified.</li>
+              <li>An assistant who knows the deadlines and tells you what to say.</li>
+              <li>A real person when a case needs one, and $1,000 if you do every step and are wrongly denied anyway.</li>
             </ul>
             <a className="btn btn--accent btn--lg price__btn" href={LINKS.getStarted}>
               <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>

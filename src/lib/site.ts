@@ -54,7 +54,7 @@ export const SCRIPTS = [
 
 export const GUARANTEE = {
   amount: "$1,000",
-  line: "Do every required step on Keeper and, if your claim is wrongly denied anyway, Keeper pays you $1,000.",
+  line: "Do every required step in Keeper and, if your claim is wrongly denied anyway, Keeper pays you $1,000.",
   fine: "Terms not final. The required steps are marked in the app as you go.",
 };
 
