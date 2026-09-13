@@ -1,7 +1,7 @@
 import { LINKS } from "../lib/links";
 import { scrollToId } from "../lib/nav";
 import { TIERS, FAQ } from "../lib/outcomes";
-import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
+import { STATS, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { AppShot } from "../components/AppShot";
@@ -69,13 +69,6 @@ export function HomePage() {
               </Ink>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── introducing keeper: one statement ───────────── */}
-      <section className="section sec" id="intro">
-        <div className="wrap">
-          <Ink as="h2" fx="rise" className="mission">{MISSION}</Ink>
         </div>
       </section>
 

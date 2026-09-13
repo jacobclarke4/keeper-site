@@ -16,7 +16,6 @@ export const NAV_SECTIONS = [
 /** Every real section on the page — the CONTENTS index + scrollspy source. */
 export const ALL_SECTIONS = [
   { id: "challenge", label: "The challenge" },
-  { id: "intro", label: "Introducing Keeper" },
   { id: "rebate", label: "The guarantee" },
   { id: "how", label: "How it works" },
   { id: "scripts", label: "Scripts" },
