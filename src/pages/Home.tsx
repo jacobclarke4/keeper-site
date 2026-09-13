@@ -63,7 +63,7 @@ export function HomePage() {
       <section className="section section--dark sec sec--ribbon" id="challenge">
         <div className="wrap">
           <Ink as="p" fx="rise" className="ribbon__lede">
-            <b>Getting hurt is the easy part.</b> What follows is a claim with hundreds of steps and clocks that never pause. Miss one date and the case is over, whether or not you were right.
+            <b>The system counts on you missing something.</b> A form, a date, a letter that never comes back. One slip and a good claim is gone.
           </Ink>
           <Ribbon />
           <div className="figures figures--row">
