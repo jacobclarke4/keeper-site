@@ -1,9 +1,8 @@
 import { LINKS } from "../lib/links";
 import { scrollToId } from "../lib/nav";
-import { TIERS, FAQ } from "../lib/outcomes";
+import { FAQ } from "../lib/outcomes";
 import { STATS, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
-import { CompMap } from "../components/CompMap";
 import { AppShot } from "../components/AppShot";
 import { CalendarTile, Fit } from "../components/AppTiles";
 import { AssistantCarousel } from "../components/AssistantCarousel";
@@ -47,15 +46,11 @@ export function HomePage() {
           </Ink>
         </div>
         <div className="hero__map">
-          <Ink as="div" fx="rise" delay={200} className="hero__tablet" aria-label="The workers' comp map on a tablet, example">
+          <Ink as="div" fx="rise" delay={200} className="hero__tablet" aria-label="The Keeper home on a tablet, example">
             <div className="tablet">
               <div className="tablet__screen app">
-                <header className="app__bar">
-                  <span className="app__brand">Keeper</span>
-                  <span className="app__bar-title">Workers&apos; comp claim · the map</span>
-                </header>
                 <div className="tablet__body">
-                  <CompMap />
+                  <Fit width={960}><AppShot /></Fit>
                 </div>
               </div>
             </div>
@@ -191,25 +186,24 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── pricing: one card ───────────────────────────── */}
-      <section className="section sec" id="pricing">
-        <div className="wrap wrap--narrow">
-          <Ink as="div" fx="rise" className="sec__head sec__head--center">
-            <h2 className="sec__title">Simple pricing. No surprises.</h2>
+      {/* ── pricing: a charcoal band, the price first ───── */}
+      <section className="section section--dark sec sec--price" id="pricing">
+        <div className="wrap rebate">
+          <Ink as="div" fx="rise" className="rebate__amt-wrap">
+            <span className="rebate__tag">One membership</span>
+            <span className="rebate__amt price__amt">$14<span className="price__per">/month</span></span>
           </Ink>
-          {TIERS.map((t) => (
-            <Ink key={t.name} as="article" fx="rise" delay={90} className="pcard">
-              <span className="pcard__price">
-                {t.price}
-                {t.per && <span className="pcard__per">{t.per}</span>}
-              </span>
-              <p className="pcard__line">{t.blurb}</p>
-              <a className="btn btn--accent" href={LINKS.getStarted}>
-                <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
-              </a>
-              <p className="pcard__fine">Cancel anytime. Certified mail at cost, agreed before we send. Keeper is not a law firm. Available today in Illinois and Indiana.</p>
-            </Ink>
-          ))}
+          <Ink as="div" fx="rise" delay={120} className="rebate__words">
+            <ul className="price__list">
+              <li>Every claim, appeal, and grievance you need, drafted and filed.</li>
+              <li>A real person when a case needs one.</li>
+              <li>Your Wallet: every paper, receipt, and deadline in one place.</li>
+            </ul>
+            <a className="btn btn--accent btn--lg price__btn" href={LINKS.getStarted}>
+              <span className="btn__label">Get started <span className="arrow" aria-hidden="true">→</span></span>
+            </a>
+            <p className="rebate__fine">Cancel anytime. Certified mail at cost, agreed before we send. Keeper is not a law firm. Available today in Illinois and Indiana.</p>
+          </Ink>
         </div>
       </section>
 
