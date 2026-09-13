@@ -456,3 +456,14 @@
 .faq__item::details-content { display: flow-root; transition: block-size .42s cubic-bezier(.4, 0, .2, 1), opacity .32s ease, content-visibility .42s allow-discrete; }
 .faq__open { padding: 0 4px 18px; }
 .faq__a { margin: 0; }
+
+/* ── phones: one card on the table, full width; a lighter glow ── */
+@media (max-width: 560px) {
+  .fit--narrow .deck { grid-template-columns: 1fr; }
+  .fit--narrow .ccard:nth-child(2) { display: none; }
+}
+@media (max-width: 920px) {
+  .hero__wash { opacity: .55; }
+  .hero__wash::before { background: linear-gradient(160deg, rgba(219,54,48,0) 30%, rgba(219,54,48,.5) 55%, rgba(122,35,32,.75) 78%, rgba(43,43,43,.9) 100%); }
+}
+.hero__row--cta .hero__micro { display: block; width: 100%; flex-basis: 100%; margin: 4px 0 0; }
