@@ -347,3 +347,4 @@
 .hero__row--cta { margin-top: 18px; gap: 16px; align-items: center; }
 .hero__row--cta .hero__micro { flex-basis: auto; margin: 0; }
 .mast__link, .mast__login { font-size: 15px; }
+.hero__row--cta .hero__micro { flex-basis: 100%; margin-top: 4px; }
