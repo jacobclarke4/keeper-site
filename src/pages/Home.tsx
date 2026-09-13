@@ -69,10 +69,6 @@ export function HomePage() {
             <b>The system loses people.</b> A first denial is up 20% in five years. Most of the people it happens to are right, and most of them never find out.
           </Ink>
           <Ribbon />
-          <div className="ribbon__tags" aria-hidden="true">
-            <span className="ribbon__tag">{MAP.paths} roads</span>
-            <span className="ribbon__tag is-on">One line, seven stations</span>
-          </div>
           <div className="figures figures--row">
             {STATS.map((st, i) => (
               <Ink key={st.n} as="article" fx="rise" delay={i * 80} className="figure">

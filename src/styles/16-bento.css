@@ -332,3 +332,8 @@
 .dateband__hour { font-size: 9px; }
 .dateband__hour-temp { font-size: 12px; }
 .dateband .dateband__hours svg { width: 15px; height: 15px; }
+
+/* ── the page column and the header: 1260px ─────────────── */
+:root { --maxw: 1260px; }
+.mast__capsule, .mast.is-condensed .mast__capsule { max-width: 1260px; margin-left: auto; margin-right: auto; }
+.sec--ribbon .ribbon { margin-bottom: 20px; }
