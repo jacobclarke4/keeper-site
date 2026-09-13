@@ -173,7 +173,6 @@ export function HomePage() {
             <div>
               <h2 className="sec__title">Every service, by name.</h2>
             </div>
-            <p className="sec__blurb">Workers&apos; comp, ERISA, and grievances first. The rest of the shelf behind them.</p>
           </Ink>
           <ul className="shelf">
             {SERVICES.map((sv, i) => (
