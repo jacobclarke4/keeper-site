@@ -24,7 +24,8 @@ function tangle(k: number, i: number, p: number, t: number, h: number) {
   const s1 = Math.sin(p * TAU * 1.1 + a * 7 + t * 0.35);
   const s2 = Math.sin(p * TAU * 0.6 + a * 13 - t * 0.22);
   const s3 = Math.sin(p * TAU * 2.2 + a * 3 + t * 0.5);
-  return k * h * 0.8 * (0.55 + 0.45 * s2) + s1 * h * 0.18 + s3 * h * 0.05;
+  // stays inside the band: at most about 0.42h from the centre line
+  return k * h * 0.54 * (0.55 + 0.45 * s2) + s1 * h * 0.11 + s3 * h * 0.04;
 }
 
 const LOOP = 11; // seconds per pass
