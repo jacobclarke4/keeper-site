@@ -127,8 +127,8 @@ const Check = () => (
 /* The phone: the member home, as the app draws it. */
 const CalIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>;
 const HouseIcon = () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>;
-const BuoyIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24" /><circle cx="12" cy="12" r="4" /></svg>;
-const MapIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14.1 6 9 3 3 6v15l6-3 5.1 3L21 18V3z" /><path d="M9 3v15M15 6v15" /></svg>;
+const LibraryIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m16 6 4 14M12 6v14M8 8v12M4 4v16" /></svg>;
+const CasesIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" /></svg>;
 const SunIcon = () => <svg viewBox="0 0 44 44" width="30" height="30" aria-hidden="true"><g stroke="#F2B84B" strokeWidth="3" strokeLinecap="round"><path d="M22 4v6M22 34v6M4 22h6M34 22h6M9.3 9.3l4.2 4.2M30.5 30.5l4.2 4.2M9.3 34.7l4.2-4.2M30.5 13.5l4.2-4.2" /></g><circle cx="22" cy="22" r="8" fill="#F2B84B" /></svg>;
 
 /* The Keeper home on a phone, as the app draws it: the wordmark in the
@@ -157,7 +157,6 @@ export function AssistantPhone() {
           </div>
           <header className="mhome__bar">
             <span className="mhome__brand">Keeper</span>
-            <span className="mhome__menu" aria-hidden="true"><i /><i /><i /></span>
           </header>
           <div className="mhome__body">
             <section className="mhome__block">
@@ -199,10 +198,11 @@ export function AssistantPhone() {
             </div>
           </div>
           <nav className="mnav" aria-hidden="true">
-            <span className="mnav__tab"><MapIcon />Journeys</span>
+            <span className="mnav__tab"><CasesIcon />Cases</span>
             <span className="mnav__tab"><CalIcon />Calendar</span>
             <span className="mnav__home"><HouseIcon /></span>
-            <span className="mnav__tab"><BuoyIcon />Safety net</span>
+            <span className="mnav__tab"><LibraryIcon />Library</span>
+            <span className="mnav__tab mnav__tab--me"><span className="mnav__avatar">S</span>Profile</span>
           </nav>
         </div>
       </Ink>
