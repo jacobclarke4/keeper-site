@@ -11,7 +11,7 @@ import { useInView, usePrefersReducedMotion } from "../lib/motion";
    again. Still under reduced motion.
    ────────────────────────────────────────────────────────── */
 
-const LINES = 64;
+const LINES = 22;
 const TAU = Math.PI * 2;
 const TWIST = 0.5; // where Keeper takes over
 const STATIONS = MAP.stations.length;
@@ -46,7 +46,7 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
   // the pass fades out at its end, then begins again
   const fade = still ? 1 : 1 - smooth((u - (LOOP - 1.2)) / 0.7);
   ctx.globalAlpha = fade;
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 2.2;
   ctx.lineCap = "round";
   let furthest = still ? 1 : 0;
   let slowest = 1; // the line forms only once the last road has arrived
@@ -67,7 +67,7 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
       const y = strandPoint(k, i, p, still ? 0 : t, h, cy);
       if (s === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
-    const a = 0.14 + 0.36 * (1 - Math.abs(k) * 1.3);
+    const a = 0.22 + 0.5 * (1 - Math.abs(k) * 1.1);
     const g = ctx.createLinearGradient(0, 0, w, 0);
     const stop = (q: number, c: string) => g.addColorStop(Math.min(1, Math.max(0, q)), c);
     stop(0, `rgba(245,240,235,${a * 0.8})`);
@@ -93,9 +93,9 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
       gl.addColorStop(0.7, `rgba(${bright},${0.7 * (1 - Math.abs(k) * 1.2)})`);
       gl.addColorStop(1, `rgba(${bright},0)`);
       ctx.strokeStyle = gl;
-      ctx.lineWidth = 1.6;
+      ctx.lineWidth = 3;
       ctx.stroke();
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 2.2;
     }
   }
   // the rail forms as the strands arrive, and the stations light in turn
@@ -105,10 +105,10 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
     ctx.beginPath();
     ctx.moveTo(railFrom * w, cy);
     ctx.lineTo(Math.min(1, joined) * w, cy);
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 3.5;
     ctx.strokeStyle = "rgba(219,54,48,.95)";
     ctx.stroke();
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 2.2;
   }
   const x0 = (TWIST + 0.22), x1 = 0.985;
   for (let i = 0; i < STATIONS; i++) {
@@ -123,7 +123,7 @@ function draw(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, st
     ctx.lineWidth = 2;
     ctx.strokeStyle = `rgba(43,43,43,${on})`;
     ctx.stroke();
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 2.2;
     const d = joined - p;
     if (!still && d > 0 && d < 0.14) {
       const ring = 1 - d / 0.14;
