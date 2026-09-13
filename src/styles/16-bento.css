@@ -411,3 +411,14 @@
 }
 .hero__tablet .deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .hero__tablet .ccard:nth-child(3) { display: none; }
+
+/* ── the hero: an angled glow, red and charcoal, drifting ── */
+.hero--map { background: var(--paper); }
+.hero__wash { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: none; }
+.hero__wash::before, .hero__wash::after { content: ""; position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
+.hero__wash::before { left: 34%; top: -30%; width: 90%; height: 160%; background: linear-gradient(118deg, rgba(219,54,48,0) 8%, rgba(219,54,48,.62) 36%, rgba(43,43,43,.7) 62%, rgba(219,54,48,.28) 84%, rgba(43,43,43,0) 100%); transform: rotate(-14deg); opacity: .62; animation: hero-glow-a 16s ease-in-out infinite alternate; }
+.hero__wash::after { left: 52%; top: 10%; width: 70%; height: 120%; background: radial-gradient(closest-side, rgba(219,54,48,.5), rgba(219,54,48,0) 72%); opacity: .55; animation: hero-glow-b 11s ease-in-out infinite alternate; }
+@keyframes hero-glow-a { 0% { transform: rotate(-16deg) translate3d(-3%, -2%, 0); } 100% { transform: rotate(-10deg) translate3d(4%, 5%, 0); } }
+@keyframes hero-glow-b { 0% { transform: translate3d(-6%, 6%, 0) scale(.95); } 100% { transform: translate3d(8%, -6%, 0) scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .hero__wash::before, .hero__wash::after { animation: none; } }
+@media (max-width: 920px) { .hero__wash::before { left: -20%; top: 30%; width: 140%; height: 90%; } .hero__wash::after { left: 10%; top: 40%; } }
