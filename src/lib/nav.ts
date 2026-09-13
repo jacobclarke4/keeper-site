@@ -39,7 +39,7 @@ export const scrollToId = (id: string) => {
   if (typeof document === "undefined") return;
   const el = document.getElementById(id);
   if (!el) return;
-  if (window.__lenis) window.__lenis.scrollTo(el, { offset: -72 });
+  if (window.__lenis) window.__lenis.scrollTo(el, { offset: -24 });
   else el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
