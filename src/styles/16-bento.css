@@ -526,3 +526,25 @@
 }
 .skip-link:focus { transform: translate(-50%, -140%); }
 .skip-link:focus-visible { transform: translateX(-50%); }
+
+/* ── phones: the home screen without its rail, laptop layout otherwise ── */
+@media (max-width: 560px) {
+  .fit--narrow .shot { grid-template-columns: 1fr; }
+  .fit--narrow .shot__rail { display: none; }
+  .fit--narrow .shot__main { padding: 12px 14px 16px; }
+  .fit--narrow .shot__nav { gap: 22px; margin-bottom: 12px; font-size: 13px; }
+  .fit--narrow .shot__home { width: 34px; height: 34px; }
+  .fit--narrow .dateband { flex-wrap: nowrap; gap: 18px; padding: 14px 16px; }
+  .fit--narrow .dateband__day { min-width: 7rem; }
+  .fit--narrow .dateband__dow { font-size: 24px; }
+  .fit--narrow .dateband__temp { font-size: 34px; }
+  .fit--narrow .dateband__hours { display: flex; }
+  .fit--narrow .shot__panel { padding: 16px 18px 64px; }
+  .fit--narrow .shot__h { font-size: 19px; }
+  .fit--narrow .deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fit--narrow .ccard { padding: 16px; }
+  .fit--narrow .ccard:nth-child(2) { display: flex; }
+  .fit--narrow .ccard__h { font-size: 15px; }
+  .fit--narrow .shot__capsule { left: 50%; bottom: 10px; }
+  .fit--narrow .shot__net { display: flex; }
+}
