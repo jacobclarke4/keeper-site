@@ -447,3 +447,12 @@
 /* ── the phone at a real phone's proportions (about 9:19.5) ── */
 .assistant .phone { width: 280px; height: 580px; }
 .bento__tile--phone .bento__art { width: 280px; }
+
+/* ── pricing checks: a real check glyph in a red disc ────── */
+.price__list li::before { top: 3px; width: 20px; height: 20px; background-color: var(--danger); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size: 12px 12px; background-position: center; background-repeat: no-repeat; }
+.price__list li::after { display: none; }
+
+/* ── FAQ: the open animation ends without a snap ─────────── */
+.faq__item::details-content { display: flow-root; transition: block-size .42s cubic-bezier(.4, 0, .2, 1), opacity .32s ease, content-visibility .42s allow-discrete; }
+.faq__open { padding: 0 4px 18px; }
+.faq__a { margin: 0; }
