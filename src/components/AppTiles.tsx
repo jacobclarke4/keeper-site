@@ -11,26 +11,30 @@ import { Stepper, Capsule } from "./AppShot";
 
 /** Scales a fixed-width drawing down to the width it is given, so a page
  *  drawn at its natural size fits inside a tile with nothing cut off. */
-export function Fit({ width, children }: { width: number; children: ReactNode }) {
+export function Fit({ width, narrow, children }: { width: number; narrow?: { at: number; width: number }; children: ReactNode }) {
   const host = useRef<HTMLDivElement | null>(null);
   const inner = useRef<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
+  const [natural, setNatural] = useState(width);
   const [height, setHeight] = useState<number | undefined>(undefined);
   useEffect(() => {
     const el = host.current, box = inner.current;
     if (!el || !box) return;
     const ro = new ResizeObserver(() => {
-      const s = Math.min(1, el.clientWidth / width);
+      // on a narrow host the drawing is laid out narrower first, then scaled
+      const w = narrow && window.innerWidth <= narrow.at ? narrow.width : width;
+      const s = Math.min(1, el.clientWidth / w);
+      setNatural(w);
       setScale(s);
       setHeight(box.offsetHeight * s);
     });
     ro.observe(el);
     ro.observe(box);
     return () => ro.disconnect();
-  }, [width]);
+  }, [width, narrow]);
   return (
-    <div ref={host} className="fit" style={{ height }}>
-      <div ref={inner} className="fit__inner" style={{ width, transform: `scale(${scale})` }}>{children}</div>
+    <div ref={host} className={`fit${natural !== width ? " fit--narrow" : ""}`} style={{ height }}>
+      <div ref={inner} className="fit__inner" style={{ width: natural, transform: `scale(${scale})` }}>{children}</div>
     </div>
   );
 }

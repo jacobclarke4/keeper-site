@@ -50,7 +50,7 @@ export function HomePage() {
             <div className="tablet">
               <div className="tablet__screen app">
                 <div className="tablet__body">
-                  <Fit width={960}><AppShot /></Fit>
+                  <Fit width={960} narrow={{ at: 560, width: 600 }}><AppShot /></Fit>
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@ export function HomePage() {
           <div className="bento">
             <Ink as="article" fx="rise" className="bento__tile bento__tile--home">
               <h3 className="bento__h">Your home. Every case, every clock.</h3>
-              <div className="bento__art"><Fit width={920}><AppShot /></Fit></div>
+              <div className="bento__art"><Fit width={920} narrow={{ at: 560, width: 600 }}><AppShot /></Fit></div>
             </Ink>
             <Ink as="article" fx="rise" delay={90} className="bento__tile bento__tile--roster">
               <h3 className="bento__h">Pick your assistant.</h3>

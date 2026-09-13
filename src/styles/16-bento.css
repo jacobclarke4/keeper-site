@@ -110,7 +110,7 @@
 #product.sec > .wrap { padding-bottom: 64px; }
 
 @media (max-width: 1080px) {
-  .bento__tile--home, .bento__tile--comp, .bento__tile--phone, .bento__tile--cal { grid-column: span 12; }
+  .bento__tile--home, .bento__tile--comp, .bento__tile--roster, .bento__tile--phone, .bento__tile--cal { grid-column: span 12; }
   .month__body { grid-template-columns: 1fr; }
   .month__side { padding-left: 0; border-left: 0; }
 }
@@ -372,3 +372,42 @@
 .price__btn { margin-top: 22px; background: #ecebe7; color: #1c1c1b; }
 .price__btn:hover { background: #fff; }
 .sec--price .rebate__fine { color: rgba(255,255,255,.55); max-width: 48ch; }
+
+/* ── small screens: the hero stacks, the shot drops its rail ── */
+@media (max-width: 920px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 24px; }
+  .hero__copy { max-width: none; }
+  .hero__tablet { width: 112vw; }
+  .rebate { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .hero__tablet { width: 100%; }
+  .hero__tablet .tablet { padding: 8px; border-radius: 22px; }
+  .hero__tablet .tablet__screen { border-radius: 16px; }
+  .fit--narrow .shot { grid-template-columns: 1fr; }
+  .fit--narrow .shot__rail { display: none; }
+  .fit--narrow .deck { grid-template-columns: 1fr 1fr; }
+  .fit--narrow .ccard:nth-child(3) { display: none; }
+  .fit--narrow .shot__capsule { left: 50%; }
+  .fit--narrow .shot__net { display: none; }
+}
+
+@media (max-width: 560px) {
+  .calpage .month__body { padding-bottom: 88px; }
+  .roster__stage { min-height: 250px; }
+}
+
+/* ── a scaled shot keeps its rail on tablets; phones drop it ── */
+@media (max-width: 1080px) {
+  .fit .shot { grid-template-columns: 200px 1fr; }
+  .fit .shot__rail { display: flex; }
+  .fit .dateband__hours { display: flex; }
+  .fit .deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .fit--narrow .shot { grid-template-columns: 1fr; }
+  .fit--narrow .shot__rail { display: none; }
+  .fit--narrow .dateband__hours { display: none; }
+}
+.hero__tablet .deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hero__tablet .ccard:nth-child(3) { display: none; }
