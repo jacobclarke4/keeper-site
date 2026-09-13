@@ -548,3 +548,12 @@
   .fit--narrow .shot__capsule { left: 50%; bottom: 10px; }
   .fit--narrow .shot__net { display: flex; }
 }
+
+/* ── the phone menu: the header pins while it is open, and the sheet scrolls ── */
+.mast.is-open { position: fixed; background: var(--paper); }
+.sheet { top: 0; bottom: 0; padding: 84px var(--gutter) 28px; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y; }
+.sheet__list { gap: 4px; }
+.sheet__row { padding: 12px 14px; font-size: 22px; line-height: 1.2; }
+.sheet__cta { padding-top: 20px; }
+@media (max-height: 700px) { .sheet__row { padding: 9px 14px; font-size: 19px; } }
+.mast.is-open .mast__capsule { position: relative; z-index: 101; }

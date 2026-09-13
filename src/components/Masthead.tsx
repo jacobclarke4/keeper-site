@@ -101,7 +101,7 @@ export function Masthead() {
       </div>
 
       {open && (
-        <div className="sheet" role="dialog" aria-label="Menu">
+        <div className="sheet" role="dialog" aria-label="Menu" data-lenis-prevent="">
           <nav className="sheet__list" aria-label="Sections">
             {ALL_SECTIONS.map((item) => (
               <button
