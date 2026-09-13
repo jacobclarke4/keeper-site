@@ -430,3 +430,7 @@
 .mast { position: absolute; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
 .mast__link.is-active, .mast__link:hover, .mast__login:hover { color: var(--ink); }
 .mast__link.is-active::after { display: none; }
+
+/* ── the hero glow, brighter ────────────────────────────── */
+.hero__wash::before { opacity: .95; filter: blur(60px); background: linear-gradient(118deg, rgba(219,54,48,0) 6%, rgba(219,54,48,.85) 34%, rgba(43,43,43,.8) 60%, rgba(219,54,48,.5) 82%, rgba(43,43,43,0) 100%); }
+.hero__wash::after { opacity: .85; filter: blur(60px); background: radial-gradient(closest-side, rgba(219,54,48,.75), rgba(219,54,48,0) 72%); }
