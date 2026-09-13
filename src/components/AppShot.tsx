@@ -1,4 +1,5 @@
 import { Ink } from "../lib/motion";
+import { useAssistant } from "../lib/assistant";
 
 const BASE_URL = import.meta.env.BASE_URL;
 
@@ -75,6 +76,21 @@ export function Stepper({ done, size = "md" }: { done: number; size?: "md" | "lg
         </li>
       ))}
     </ol>
+  );
+}
+
+/** The member capsule: mic, the assistant, keyboard. Floats over every page. */
+export function Capsule() {
+  const { current } = useAssistant();
+  const [c1, c2] = current.colors;
+  return (
+    <div className="shot__capsule" aria-hidden="true">
+      <span className="shot__ctl"><MicOffIcon /></span>
+      <span className="pw shot__pw" style={{ ["--pal-a" as string]: c1, ["--pal-grad" as string]: `linear-gradient(165deg, ${c1}, ${c2} 62%, ${c1})` }}>
+        <img src={`${BASE_URL}portraits/${current.id}.webp`} alt="" width={40} height={40} draggable={false} />
+      </span>
+      <span className="shot__ctl shot__ctl--light"><KeyboardIcon /></span>
+    </div>
   );
 }
 
@@ -180,13 +196,7 @@ export function AppShot() {
           </div>
         </div>
       </main>
-      <div className="shot__capsule" aria-hidden="true">
-        <span className="shot__ctl"><MicOffIcon /></span>
-        <span className="pw shot__pw" style={{ ["--pal-a" as string]: "#f59e0b", ["--pal-grad" as string]: "linear-gradient(165deg, #f59e0b, #ef4444 62%, #f59e0b)" }}>
-          <img src={`${BASE_URL}portraits/nora.webp`} alt="" width={40} height={40} draggable={false} />
-        </span>
-        <span className="shot__ctl shot__ctl--light"><KeyboardIcon /></span>
-      </div>
+      <Capsule />
       <div className="shot__net" aria-hidden="true">
         <span className="shot__net-icon"><LifeBuoyIcon /></span>
         <span className="shot__net-text"><b>Your safety net</b><span>2 of 13 done</span></span>

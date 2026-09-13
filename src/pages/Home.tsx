@@ -7,6 +7,7 @@ import { CompMap } from "../components/CompMap";
 import { AppShot } from "../components/AppShot";
 import { CalendarTile, Fit } from "../components/AppTiles";
 import { AssistantCarousel } from "../components/AssistantCarousel";
+import { AssistantProvider } from "../components/AssistantProvider";
 import { AssistantPhone } from "../components/AssistantPhone";
 import { Ribbon } from "../components/Ribbon";
 import { Ink } from "../lib/motion";
@@ -143,13 +144,14 @@ export function HomePage() {
               <h2 className="sec__title">The app, page by page.</h2>
             </div>
           </Ink>
+          <AssistantProvider>
           <div className="bento">
             <Ink as="article" fx="rise" className="bento__tile bento__tile--home">
               <h3 className="bento__h">Your home. Every case, every clock.</h3>
               <div className="bento__art"><Fit width={920}><AppShot /></Fit></div>
             </Ink>
             <Ink as="article" fx="rise" delay={90} className="bento__tile bento__tile--roster">
-              <h3 className="bento__h">An assistant who speaks your language.</h3>
+              <h3 className="bento__h">Pick your assistant.</h3>
               <div className="bento__art"><AssistantCarousel /></div>
             </Ink>
             <Ink as="article" fx="rise" delay={60} className="bento__tile bento__tile--phone bento__tile--dark">
@@ -158,9 +160,10 @@ export function HomePage() {
             </Ink>
             <Ink as="article" fx="rise" delay={150} className="bento__tile bento__tile--cal">
               <h3 className="bento__h">Every deadline, with the law it comes from.</h3>
-              <div className="bento__art"><Fit width={860}><CalendarTile /></Fit></div>
+              <div className="bento__art bento__art--fill"><CalendarTile /></div>
             </Ink>
           </div>
+          </AssistantProvider>
         </div>
       </section>
 

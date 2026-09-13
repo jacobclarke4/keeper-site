@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Ink, usePrefersReducedMotion } from "../lib/motion";
+import { useAssistant } from "../lib/assistant";
 
 /* ──────────────────────────────────────────────────────────
    The assistant in action, on a phone: the member says what happened,
@@ -16,16 +17,6 @@ import { Ink, usePrefersReducedMotion } from "../lib/motion";
 /* The assistants. Portraits in public/portraits/<id>.webp; two neighbouring
    accents each, the same scheme as the Pal Company portraits. */
 type Pal = { id: string; name: string; colors: [string, string] };
-const PALS: Pal[] = [
-  { id: "nora", name: "Nora", colors: ["#f59e0b", "#ef4444"] },
-  { id: "frankie", name: "Frankie", colors: ["#3b82f6", "#a855f7"] },
-  { id: "lin", name: "Lin", colors: ["#ec4899", "#8b5cf6"] },
-  { id: "ben", name: "Ben", colors: ["#10b981", "#22d3ee"] },
-  { id: "camille", name: "Camille", colors: ["#0ea5e9", "#6366f1"] },
-  { id: "hanna", name: "Hanna", colors: ["#f97316", "#e11d48"] },
-  { id: "charlie", name: "Charlie", colors: ["#ff3d8f", "#ffb020"] },
-  { id: "vivian", name: "Vivian", colors: ["#22c55e", "#a3e635"] },
-];
 const BASE_URL = import.meta.env.BASE_URL;
 
 const CASE = {
@@ -137,8 +128,8 @@ const SunIcon = () => <svg viewBox="0 0 44 44" width="30" height="30" aria-hidde
    member talks, Nora answers in her caption, the case lands in the deck. */
 export function AssistantPhone() {
   const reduced = usePrefersReducedMotion();
-  const { step, fading, pass } = useCaseLoop(reduced);
-  const pal = PALS[pass % PALS.length];
+  const { step, fading } = useCaseLoop(reduced);
+  const pal = useAssistant().current;
   const listening = !reduced && step === 0;
   const thinking = !reduced && step === 1;
   const speaking = !reduced && step === 2;

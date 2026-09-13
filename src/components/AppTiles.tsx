@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Stepper } from "./AppShot";
+import { Stepper, Capsule } from "./AppShot";
 
 /* ──────────────────────────────────────────────────────────
    Three of the Keeper app's pages, redrawn from the app itself for
@@ -188,6 +188,15 @@ const DATES = [
 ];
 
 export function CalendarTile() {
+  return (
+    <div className="calpage">
+      <MonthBlock />
+      <div className="calpage__controls"><Capsule /></div>
+    </div>
+  );
+}
+
+function MonthBlock() {
   const cells: (number | null)[] = [...Array.from({ length: LEAD }, () => null), ...Array.from({ length: DAYS }, (_, i) => i + 1)];
   while (cells.length % 7) cells.push(null);
   return (

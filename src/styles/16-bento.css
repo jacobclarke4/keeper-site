@@ -9,8 +9,8 @@
 .bento__tile { position: relative; overflow: hidden; padding: 26px 28px 28px; border-radius: var(--radius-float); background: var(--paper); color: var(--ink); box-shadow: var(--elev-menu); }
 .bento__tile--home { grid-column: span 7; }
 .bento__tile--comp, .bento__tile--roster { grid-column: span 5; }
-.bento__tile--phone { grid-column: span 4; }
-.bento__tile--cal { grid-column: span 8; }
+.bento__tile--phone { grid-column: span 5; }
+.bento__tile--cal { grid-column: span 7; }
 .fit { width: 100%; overflow: hidden; }
 .fit__inner { transform-origin: top left; }
 .bento__tile--dark { background: linear-gradient(160deg, #2b2b2b 0%, #232323 100%); color: #fff; }
@@ -240,16 +240,39 @@
 
 /* ── the assistants: a carousel, one per language ───────── */
 .roster { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.roster__stage { position: relative; width: 100%; min-height: 250px; }
-.roster__slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(8px) scale(.98); transition: opacity .55s var(--paper-ease), transform .55s var(--paper-ease); pointer-events: none; }
+.roster__stage { position: relative; width: 100%; min-height: 236px; }
+.roster__slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; transform: translateY(8px) scale(.98); transition: opacity .35s var(--paper-ease), transform .35s var(--paper-ease); pointer-events: none; }
 .roster__slide.is-on { opacity: 1; transform: none; pointer-events: auto; }
 .roster__who { display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .roster__name { font-family: var(--f-ledger); font-size: 28px; line-height: 1.1; color: var(--ink); }
 .roster__lang { font-size: var(--text-note); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-mute); }
 .roster__hello { margin: 0; max-width: 26ch; font-size: var(--text-lead); line-height: 1.4; color: var(--ink); }
-.roster__strip { list-style: none; margin: 18px 0 0; padding: 4px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-.roster__dot { border-radius: 50%; padding: 2px; cursor: pointer; opacity: .55; transition: opacity .3s, box-shadow .3s; }
+.roster__strip { list-style: none; margin: 18px 0 0; padding: 4px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.roster__dot { display: block; border: 0; background: none; border-radius: 50%; padding: 3px; cursor: pointer; opacity: .55; transition: opacity .3s, box-shadow .3s, transform .3s; }
+.roster__dot:hover { opacity: 1; transform: translateY(-2px); }
+.roster__strip li { list-style: none; }
 .roster__dot .pw img { box-shadow: none; }
 .roster__dot.is-on { opacity: 1; box-shadow: 0 0 0 2px var(--danger); }
 .roster__count { margin: 14px 0 0; font-size: var(--text-note); color: var(--ink-mute); }
 @media (prefers-reduced-motion: reduce) { .roster__slide { transition: none; } }
+
+/* ── the calendar page with the capsule over it ─────────── */
+.calpage { position: relative; padding-bottom: 46px; }
+.calpage__controls { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; }
+.calpage .shot__capsule { position: static; transform: none; }
+.month__body { grid-template-columns: 1fr 250px; gap: 14px; padding: 14px 14px 16px; }
+.month__cell { min-height: 58px; }
+.month__side { padding-left: 14px; }
+.calrow { padding: 10px 12px; }
+
+/* ── the calendar fills its tile ────────────────────────── */
+.bento__tile--cal { display: flex; flex-direction: column; }
+.bento__art--fill { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.calpage { flex: 1; display: flex; flex-direction: column; padding-bottom: 0; }
+.calpage .month { flex: 1; display: flex; flex-direction: column; }
+.calpage .month__body { flex: 1; grid-template-columns: minmax(0, 1fr) 236px; padding: 14px 14px 64px; }
+.calpage .month__grid { grid-auto-rows: minmax(44px, 1fr); align-content: stretch; }
+.calpage .month__cell { min-height: 0; }
+.calpage__controls { bottom: 14px; }
+.calpage .month__h { font-size: 20px; }
+@media (max-width: 1080px) { .calpage .month__body { grid-template-columns: 1fr; } }
