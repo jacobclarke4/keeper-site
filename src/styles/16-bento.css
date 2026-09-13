@@ -428,3 +428,5 @@
 
 /* ── the header: transparent, and it scrolls away with the page ── */
 .mast { position: absolute; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+.mast__link.is-active, .mast__link:hover, .mast__login:hover { color: var(--ink); }
+.mast__link.is-active::after { display: none; }
