@@ -30,7 +30,8 @@ outcome-os/outcome-site, the live outcomeco.ai front page.
 
 ## Assets to drop in
 
-- [x] **Assistant portraits** are in `public/portraits/` (Camille is the French `Untitled-2.webp`).
+- [ ] **Assistant portraits**: eleven are in `public/portraits/`, one per language. The eight originals have transparent backgrounds on their gradients; the seven added on 2026-09-12 (Sofía, Carmen, Mai, Layla, Anna, Jiwoo, Hana) were converted from the JPEGs in Documents/outcome-assistant-headshots and keep their own backdrops, so they read a little flatter in the strip. Cut them out if you want them to match.
+- [x] The original eight (Camille is the French `Untitled-2.webp`).
 - [ ] **The app tiles (`src/components/AppShot.tsx`, `src/components/AppTiles.tsx`) mirror the app's rebuild-ui branch** (member pill, case deck card, badge/chip system, road strip, member capsule, `.pw` portrait). When those components change in the-outcome-company-app, this mock will drift; it is hand-copied CSS, not shared code.
 
 ## Ship

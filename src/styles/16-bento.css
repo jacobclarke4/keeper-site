@@ -8,7 +8,7 @@
 .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
 .bento__tile { position: relative; overflow: hidden; padding: 26px 28px 28px; border-radius: var(--radius-float); background: var(--paper); color: var(--ink); box-shadow: var(--elev-menu); }
 .bento__tile--home { grid-column: span 7; }
-.bento__tile--comp { grid-column: span 5; }
+.bento__tile--comp, .bento__tile--roster { grid-column: span 5; }
 .bento__tile--phone { grid-column: span 4; }
 .bento__tile--cal { grid-column: span 8; }
 .fit { width: 100%; overflow: hidden; }
@@ -237,3 +237,19 @@
 .mnav__avatar { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 9px; font-weight: 700; }
 .mnav { padding: 6px 6px 10px; }
 .mnav__home { margin: 0 2px -2px; width: 40px; height: 40px; }
+
+/* ── the assistants: a carousel, one per language ───────── */
+.roster { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.roster__stage { position: relative; width: 100%; min-height: 250px; }
+.roster__slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(8px) scale(.98); transition: opacity .55s var(--paper-ease), transform .55s var(--paper-ease); pointer-events: none; }
+.roster__slide.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.roster__who { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.roster__name { font-family: var(--f-ledger); font-size: 28px; line-height: 1.1; color: var(--ink); }
+.roster__lang { font-size: var(--text-note); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-mute); }
+.roster__hello { margin: 0; max-width: 26ch; font-size: var(--text-lead); line-height: 1.4; color: var(--ink); }
+.roster__strip { list-style: none; margin: 18px 0 0; padding: 4px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.roster__dot { border-radius: 50%; padding: 2px; cursor: pointer; opacity: .55; transition: opacity .3s, box-shadow .3s; }
+.roster__dot .pw img { box-shadow: none; }
+.roster__dot.is-on { opacity: 1; box-shadow: 0 0 0 2px var(--danger); }
+.roster__count { margin: 14px 0 0; font-size: var(--text-note); color: var(--ink-mute); }
+@media (prefers-reduced-motion: reduce) { .roster__slide { transition: none; } }

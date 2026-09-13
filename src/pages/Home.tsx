@@ -5,7 +5,8 @@ import { STATS, MISSION, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { CompMap } from "../components/CompMap";
 import { AppShot } from "../components/AppShot";
-import { CompTile, CalendarTile, Fit, COMP_W } from "../components/AppTiles";
+import { CalendarTile, Fit } from "../components/AppTiles";
+import { AssistantCarousel } from "../components/AssistantCarousel";
 import { AssistantPhone } from "../components/AssistantPhone";
 import { Ribbon } from "../components/Ribbon";
 import { Ink } from "../lib/motion";
@@ -147,9 +148,9 @@ export function HomePage() {
               <h3 className="bento__h">Your home. Every case, every clock.</h3>
               <div className="bento__art"><Fit width={920}><AppShot /></Fit></div>
             </Ink>
-            <Ink as="article" fx="rise" delay={90} className="bento__tile bento__tile--comp">
-              <h3 className="bento__h">Workers&apos; comp, box by box.</h3>
-              <div className="bento__art"><Fit width={COMP_W}><CompTile /></Fit></div>
+            <Ink as="article" fx="rise" delay={90} className="bento__tile bento__tile--roster">
+              <h3 className="bento__h">An assistant who speaks your language.</h3>
+              <div className="bento__art"><AssistantCarousel /></div>
             </Ink>
             <Ink as="article" fx="rise" delay={60} className="bento__tile bento__tile--phone bento__tile--dark">
               <h3 className="bento__h">Say what happened. The assistant does the rest.</h3>
