@@ -1,7 +1,7 @@
 import { LINKS } from "../lib/links";
 import { scrollToId } from "../lib/nav";
 import { FAQ } from "../lib/outcomes";
-import { STATS, MAP, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
+import { STATS, SCRIPTS, GUARANTEE, SERVICES } from "../lib/site";
 import { CountUp } from "../components/motion-bits";
 import { AppShot } from "../components/AppShot";
 import { CalendarTile, Fit } from "../components/AppTiles";
@@ -98,7 +98,6 @@ export function HomePage() {
         <div className="wrap sec__grid">
           <Ink as="div" fx="rise" className="sec__head">
             <h2 className="sec__title">Say what happened. Keeper does the paperwork.</h2>
-            <p className="sec__blurb">A workers&apos; comp claim alone is {MAP.boxes} boxes and dozens of clocks. Keeper knows the whole map. You do three things.</p>
           </Ink>
           <ol className="walk">
             {[
