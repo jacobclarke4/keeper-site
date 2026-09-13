@@ -422,3 +422,6 @@
 @keyframes hero-glow-b { 0% { transform: translate3d(-6%, 6%, 0) scale(.95); } 100% { transform: translate3d(8%, -6%, 0) scale(1.08); } }
 @media (prefers-reduced-motion: reduce) { .hero__wash::before, .hero__wash::after { animation: none; } }
 @media (max-width: 920px) { .hero__wash::before { left: -20%; top: 30%; width: 140%; height: 90%; } .hero__wash::after { left: 10%; top: 40%; } }
+
+/* ── the header: more glass, less paper ─────────────────── */
+.mast { background: rgba(245,240,235,.5); -webkit-backdrop-filter: blur(24px) saturate(1.5); backdrop-filter: blur(24px) saturate(1.5); box-shadow: 0 1px 0 rgba(43,43,43,.05), inset 0 -1px 0 rgba(255,255,255,.35); }
