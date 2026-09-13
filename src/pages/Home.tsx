@@ -27,9 +27,6 @@ export function HomePage() {
         <div className="hero__wash" aria-hidden="true" />
         <div className="wrap hero__grid">
         <div className="hero__copy">
-          <Ink as="p" fx="rise" delay={60} className="hero__kicker">
-            For union members
-          </Ink>
           <Ink as="h1" fx="rise" delay={120} className="hero__h1">
             Insurance for <em>your Insurance.</em>
           </Ink>
@@ -48,7 +45,19 @@ export function HomePage() {
           </Ink>
         </div>
         <div className="hero__map">
-          <CompMap />
+          <Ink as="div" fx="rise" delay={200} className="hero__tablet" aria-label="The workers' comp map on a tablet, example">
+            <div className="tablet">
+              <div className="tablet__screen app">
+                <header className="app__bar">
+                  <span className="app__brand">Keeper</span>
+                  <span className="app__bar-title">Workers&apos; comp claim · the map</span>
+                </header>
+                <div className="tablet__body">
+                  <CompMap />
+                </div>
+              </div>
+            </div>
+          </Ink>
         </div>
         </div>
       </section>
@@ -60,6 +69,10 @@ export function HomePage() {
             <b>The system loses people.</b> A first denial is up 20% in five years. Most of the people it happens to are right, and most of them never find out.
           </Ink>
           <Ribbon />
+          <div className="ribbon__tags" aria-hidden="true">
+            <span className="ribbon__tag">{MAP.paths} roads</span>
+            <span className="ribbon__tag is-on">One line, seven stations</span>
+          </div>
           <div className="figures figures--row">
             {STATS.map((st, i) => (
               <Ink key={st.n} as="article" fx="rise" delay={i * 80} className="figure">

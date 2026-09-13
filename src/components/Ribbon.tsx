@@ -174,10 +174,6 @@ export function Ribbon() {
   return (
     <div ref={ref} className="ribbon" aria-hidden="true">
       <canvas ref={canvas} className="ribbon__canvas" />
-      <div className="ribbon__tags">
-        <span className="ribbon__tag">{MAP.paths} roads</span>
-        <span className="ribbon__tag is-on">One line, seven stations</span>
-      </div>
     </div>
   );
 }

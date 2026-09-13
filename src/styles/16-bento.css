@@ -279,3 +279,39 @@
 .calpage__controls { bottom: 14px; }
 .calpage .month__h { font-size: 20px; }
 @media (max-width: 1080px) { .calpage .month__body { grid-template-columns: 1fr; } }
+
+/* ── the hero: a red price, the map on a tablet running off the edge ── */
+.hero__kicker { display: none; }
+.hero__grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 40px; }
+.hero--map .hero__h1 { font-size: clamp(40px, 4.8vw, 66px); }
+.hero--map .medallion { background: var(--danger); color: #fff; padding: 12px 28px 14px; border-radius: 22px; box-shadow: 0 18px 40px -18px rgba(219,54,48,.55); }
+.hero--map .medallion__amt { font-size: 68px; line-height: 1; letter-spacing: -0.04em; color: #fff; }
+.hero--map .medallion__per { font-size: 22px; color: rgba(255,255,255,.9); }
+.hero__row { gap: 22px; }
+.hero__map { position: relative; min-width: 0; }
+.hero__tablet { width: clamp(860px, min(80vw, 118vh), 1400px); max-width: none; }
+.hero__tablet .tablet { padding: 14px; border-radius: 36px; background: #1f1f1f; box-shadow: 0 40px 80px -36px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06); }
+.hero__tablet .tablet__screen { border-radius: 24px; min-height: 0; background: var(--paper); }
+.hero__tablet .tablet__body { padding: 8px 20px 18px; }
+.hero__tablet .cmap__svg { max-height: none; }
+.hero__tablet .cmap__count { text-align: left; height: 24px; font-size: 14px; }
+.hero__tablet .cmap__label { font-size: 17px; }
+.hero__tablet .cmap__dot { r: 10; }
+@media (max-width: 920px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__tablet { width: 128vw; }
+  .hero--map .medallion__amt { font-size: 52px; }
+}
+@media (max-width: 560px) {
+  .hero__tablet { width: 150vw; }
+  .hero__tablet .cmap__label { font-size: 30px; display: none; }
+  .hero__tablet .cmap__station.is-here .cmap__label { display: block; }
+}
+
+/* ── the challenge: no rules, the ribbon runs the full width ── */
+.sec--ribbon { overflow-x: clip; }
+.sec--ribbon > .wrap::before, .sec--ribbon > .wrap::after { display: none; }
+.sec--ribbon .ribbon { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+.sec--ribbon .ribbon__tags { position: static; display: flex; gap: 18px; margin: 4px 0 18px; }
+@media (max-width: 920px) { .hero__tablet { width: 118vw; } }
+@media (max-width: 560px) { .hero__tablet { width: 135vw; } }
