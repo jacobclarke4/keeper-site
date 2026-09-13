@@ -342,3 +342,8 @@
 .mast { padding-top: 6px; padding-bottom: 6px; }
 .mast__capsule, .mast.is-condensed .mast__capsule { height: 52px; }
 .mast .btn { min-height: 40px; }
+
+/* ── the hero: the button under the price ───────────────── */
+.hero__row--cta { margin-top: 18px; gap: 16px; align-items: center; }
+.hero__row--cta .hero__micro { flex-basis: auto; margin: 0; }
+.mast__link, .mast__login { font-size: 15px; }

@@ -38,6 +38,8 @@ export function HomePage() {
               <span className="medallion__amt">$14</span>
               <span className="medallion__per">/month</span>
             </span>
+          </Ink>
+          <Ink as="div" fx="rise" delay={400} className="hero__row hero__row--cta">
             <Btn variant="accent" size="lg" href={LINKS.getStarted}>
               Get started <Arrow />
             </Btn>
