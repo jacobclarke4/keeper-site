@@ -337,3 +337,8 @@
 :root { --maxw: 1260px; }
 .mast__capsule, .mast.is-condensed .mast__capsule { max-width: 1260px; margin-left: auto; margin-right: auto; }
 .sec--ribbon .ribbon { margin-bottom: 20px; }
+
+/* ── the header: tighter ────────────────────────────────── */
+.mast { padding-top: 6px; padding-bottom: 6px; }
+.mast__capsule, .mast.is-condensed .mast__capsule { height: 52px; }
+.mast .btn { min-height: 40px; }
